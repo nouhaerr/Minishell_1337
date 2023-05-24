@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 13:38:39 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/24 10:52:31 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/19 11:33:37 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 
-t_env	*ft_lstnew_env(char *env, char *value)
+t_env *ft_lstnew_env(char *env, char *value)
 {
 	t_env	*p;
 
@@ -41,7 +41,7 @@ void	ft_lstaddback_env(t_env **lst, t_env *new)
 		p = p -> next;
 	p -> next = new;
 }
-t_env	*save_my_env(char **env)
+t_env *save_my_env(char **env)
 {
 	t_env	*my_env;
 	int		i;
@@ -68,7 +68,7 @@ t_env	*save_my_env(char **env)
 	}
 	return(my_env);
 }
-char	*check_env(char *env, t_env *my_envs)
+char *check_env(char *env, t_env *my_envs)
 {
 	t_env *e;
 
@@ -81,3 +81,4 @@ char	*check_env(char *env, t_env *my_envs)
 	}
 	return (NULL);
 }
+

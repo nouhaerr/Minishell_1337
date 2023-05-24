@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/24 11:16:58 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/24 11:37:54 by nerrakeb         ###   ########.fr       */
+/*   Created: 2023/05/23 21:17:37 by hobenaba          #+#    #+#             */
+/*   Updated: 2023/05/23 21:17:56 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "includes/minishell.h"
 
-void	sh_cd(char **arg)
+void lexer_init(t_lexer *lexer)
 {
-	int	i;
-
-	i = 1;
-	while (arg[i])
-	{}
-	// cd /
-	// cd . or cd ..
-	// cd filename or cd foldername
-	// cd path_name
-	// cd name lsjd (erreur)
+	lexer -> base = 0;
+	lexer -> her = 0;
+	lexer -> str = NULL;
+	lexer -> base2 = lexer -> base;
+	lexer -> c = 0;
+	lexer -> a = 0;
 }

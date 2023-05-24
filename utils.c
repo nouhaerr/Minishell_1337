@@ -3,27 +3,86 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:18:35 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/24 10:55:22 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/23 21:25:36 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 
-int	ft_ignore_spaces(char *input, int i)
+int ft_ignore_spaces(char *input, int i)
 {
 	while (input[i] && input[i] == ' ')
 		i++; 
 	return (i);
 }
-
-void	free_my_struct(t_token *tokens)
+void free_my_struct(t_token *tokens)
 {
 	while (tokens)
 	{
 		free(tokens);
 		tokens = tokens -> next;
+	}
+}
+
+
+// those are funstions that helped me to check on my code and debugg it and nothing else
+
+//this function is just to guide me// no need of it in the code itself
+int	ft_lstsize_parse(t_parser *parse)
+{
+	int	i;
+
+	i = 0;
+	if (!parse)
+		return (0);
+	while (parse)
+	{
+		i++;
+		parse = parse -> next;
+	}
+	return (i);
+}
+// this one to check the output of my main struct
+void check_struct(t_parser *parser)
+{
+	int i = 0;
+	while (parser)
+	{
+		t_data2 *out = parser -> outfiles;
+		t_data *her = parser -> heredoc;
+		t_data *in = parser -> infiles;
+		t_data *args = parser -> args;
+		t_data *cmd = parser -> cmd;
+		printf("struct number %d\n", ++i);
+		while(out)
+		{
+			printf("[out : %s, type : %d]\n", (out) -> value, (out) -> type);
+			(out) = (out) -> next;
+		}
+		while (her)
+		{
+			printf("here : [%s]\n ", (her) -> value);
+			(her) = (her) -> next;
+		}
+		while (in)
+		{
+			printf("input : [%s]\n ", (in) -> value);
+			(in) = (in) -> next;
+		}
+		while (cmd)
+		{
+			printf("cmd: [%s]\n", (cmd) -> value);
+			(cmd) = (cmd) -> next;
+		}
+		while (args)
+		{
+			printf("args : [%s]\n", (args) -> value);
+			(args) = (args) -> next;
+		}
+		parser = parser -> next;
+		
 	}
 }

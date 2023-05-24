@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 13:00:55 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/24 10:30:40 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/02/11 17:46:33 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-long	ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
 	int				signe;
 	unsigned long	res;
@@ -32,11 +32,10 @@ long	ft_atoi(const char *str)
 		res = res * 10 + *str - '0';
 		str++;
 	}
-	if ((signe > 0 && res > 9223372036854775807)
-	|| (signe < 0 && res > 9223372036854775807))
+	if ((res > 2147483648 && signe == -1) || (res > INT_MAX && signe == 1))
 	{
-		printf("minishell: exit: %s: numeric argument required\n", str);
-		exit(255);
+		ft_printf("Error\nOne of the number is not an integer");
+		exit (1);
 	}
 	return (signe * res);
 }

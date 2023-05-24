@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:14:51 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/24 11:02:43 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/23 21:33:07 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 
-void	create_node(t_parser *parser, char *next_value, int type, int i)
+void create_node(t_parser *parser, char *next_value, int type, int i)
 {
 	
-	if ((i == 0 || (i == 1 && next_value[0] == '-' )) && (type == word))
+	if (i == 0 && (type == word))
 		ft_lstaddback2(&(parser ->cmd), ft_lstnew2(next_value));
 	else if (type == word)
-		ft_lstaddback4(&(parser ->args), ft_lstnew4(next_value, type));
+		ft_lstaddback2(&(parser ->args), ft_lstnew2(next_value));
 	else if (type == l_rdr)
 		ft_lstaddback2(&(parser ->infiles), ft_lstnew2(next_value));
 	else if (type == r_rdr)
@@ -28,12 +28,12 @@ void	create_node(t_parser *parser, char *next_value, int type, int i)
 	else if (type == heredoc)
 		ft_lstaddback2(&(parser ->heredoc), ft_lstnew2(next_value));
 }
-void	parse(t_token **tokens, t_parser **parser)
+void parse(t_token **tokens, t_parser **parser)
 {
-	t_parser	*t;
-	t_token		*tok;
-	t_token		*tokens2;
-	int			i;
+	t_parser *t;
+	t_token *tok;
+	t_token *tokens2;
+	int i;
 
 	tokens2 = *tokens;
 	if ((tokens2) != NULL)
@@ -59,11 +59,12 @@ void	parse(t_token **tokens, t_parser **parser)
 	}
 	// just to check on if my parsing is doing alright.
 	check_struct(*parser);
+	
 }
 
-t_token	*my_next_word(t_token *tokens)
+t_token *my_next_word(t_token *tokens)
 {
-	t_token	*t;
+	t_token *t;
 
 	t = tokens;
 	while (tokens)

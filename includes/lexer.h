@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:54:28 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/24 10:39:05 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/23 21:22:47 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,18 @@ enum t_type
 	quotes // 1
 }	t_type;
 
+typedef struct t_lexer
+{
+	t_env *my_env;
+	int exit_status;
+	int base;
+	int base2;
+	int her;
+	char *str;
+	char c;
+	int a;
+}	t_lexer;
+
 typedef struct t_token
 {
 	char *value;
@@ -42,10 +54,21 @@ typedef struct t_token
 
 t_token *ft_lstnew(char *value, enum t_enum type, enum t_type arten);
 void	ft_lstaddback(t_token **lst, t_token *new);
-int     ft_ignore_spaces(char *input, int i);
+
 
 // funstions related to tokens
-int token(char *input, t_token **tokens, t_env *my_envs, int exit_status);
+int lex(char *input, t_token **tokens, t_lexer *lexer);
 int check_which_special_char(char c, char next_c, t_token **tokens);
+int ft_ignore_spaces(char *input, int i);
+int other_tokens(t_lexer *lexer, int i, char *input);
+int partition_tokens(t_lexer *lexer, char *input, int i);
+int token_word(char *input, int start, int base);
+int token_env2(char *input, int i, t_lexer *lexer);
+int token_env(char *input, int i, t_lexer *lexer);
+int normal_word(char *input, int start);
+int quotes_word(char *input, int start, int base);
+int env_word(char *input, int start);
 
+// to initiaize 
+void lexer_init(t_lexer *lexer);
 #endif
