@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 14:38:05 by hobenaba          #+#    #+#             */
-/*   Updated: 2022/11/06 23:36:44 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/24 14:40:01 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	ft_putstr_fd(char *s, int fd)
 
 	i = 0;
 	if (!s)
+		return ;
+	if (fd == -1)
 		return ;
 	while (s[i])
 	{

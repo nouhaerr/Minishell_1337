@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 13:32:33 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/11 16:41:21 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/24 14:43:55 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_H
-#define ENV_H
+# define ENV_H
 
 typedef struct t_env
 {
-	char *env;
-	char *value;
-	struct t_env *next;
+	char			*env;
+	char			*value;
+	struct t_env	*next;
 }	t_env;
 
 // hier im gonna have functions that is related to env.

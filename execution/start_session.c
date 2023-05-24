@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   start_session.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/24 11:16:58 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/24 16:41:04 by nerrakeb         ###   ########.fr       */
+/*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
+/*   Updated: 2023/05/24 16:47:18 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../includes/minishell.h"
 
-void	sh_cd(char **arg)
+void	exec_cmd(t_parser *parser)
 {
-	int	i;
-
-	i = 1;
-	while (arg[i])
-	{}
-	// cd /
-	// cd . or cd ..
-	// cd filename or cd foldername
-	// cd path_name
-	// cd name lsjd (erreur)
+	while (parser != NULL)
+	{
+		if (!ft_strcmp(parser->cmd->value, "pwd"))
+			sh_pwd();
+		else if (!ft_strcmp(parser->cmd->value, "echo"))
+			sh_echo(&parser);
+		parser = parser->next;
+	}
 }

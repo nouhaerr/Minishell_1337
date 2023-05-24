@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/24 16:47:43 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/24 16:50:52 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,33 +35,59 @@ int	syntax_error(int base, t_token **tokens)
 	}
 	return (0);
 }
+
+char	*get_prompt(char *s)
+{
+	char	*workingdirectory_path;
+	char	*cwd;
+
+	cwd = NULL;
+	if (s)
+	{
+		workingdirectory_path = ft_strrchr(s, '/');
+		workingdirectory_path = ft_strjoin2("\e[1;95m->", workingdirectory_path);
+		cwd = ft_strjoin2(workingdirectory_path, "\e[0m\e[1;95m=> \e[0m ");
+		free(workingdirectory_path);
+		free(s);
+	}
+	else
+		cwd = ft_strdup("\e[1;95m!!->/minishell => \e[0m ");
+	return (cwd);
+}
+
 int main(int ac, char **av, char **env)
 {
 	(void)ac;
 	(void)av;
-	char *input;
-	t_token *tokens;
-	t_lexer *lexer;
-	t_parser *parser;
-	t_env *my_envs;	
-	int		base;
+	char		*input;
+	const char	*prompt;
+	t_token		*tokens;
+	t_lexer		*lexer;
+	t_parser	*parser;
+	t_env		*my_envs;	
+	int			base;
 	
 	lexer = malloc(sizeof(t_lexer));
 	my_envs = save_my_env(env);
+	glb_var.exit_status = 0;
 	lexer -> my_env = my_envs;
 	lexer -> exit_status = 0;
 	while (1)
 	{
 		tokens = NULL;
 		parser = NULL;
-		input = readline("Your command : ");
+		prompt = get_prompt(getcwd(NULL, 0));
+		input = readline(prompt);
+		free((void *)prompt);
+		if (input == NULL)
+			break ;
 		add_history(input);
 		base = lex(input, &tokens, lexer);
 		if (!syntax_error(base, &tokens))
 		{
 			parse(&tokens, &parser, lexer);
 			free_mylist(parser, 1);
-			lexer -> exit_status = 0;
+			lexer -> exit_status = 0; // tu dois changer ça exit status est une variable gobale
 		}
 		else
 			lexer -> exit_status = 1;
