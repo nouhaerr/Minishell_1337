@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 06:25:08 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/24 18:37:00 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/24 20:34:27 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ static void	ex_stat(char *arg)
 	int	res;
 
 	res = ft_atoi2(arg);
+	if (res == 2)
+		exit(255);
+	else if (res == 3)
+		exit (1);
 	if (res < 0)
 		exit(256 - ((res * -1) % 256));
 	exit(res % 256);
@@ -57,19 +61,33 @@ void	sh_exit(t_parser *tmp)
 	{
 		if (check_ex_av(ex->args->value))
 			av_not_num(ex->args->value);
-		else if (ex->args->next && !check_ex_av(ex->args->value))
-		{
-			printf("minishell: exit: too many arguments\n");
-			s = ft_atoi(ex->args->value);
-			glb_var.exit_status = 1;
-			return ;
-		}
-		// else if (ex->args->next->value || (ex->args->next->value && !check_ex_av(ex->args->value)))
+		// else if (ex->args->next && !check_ex_av(ex->args->value))
 		// {
 		// 	printf("minishell: exit: too many arguments\n");
+		// 	s = ft_atoi(ex->args->value);
 		// 	glb_var.exit_status = 1;
 		// 	return ;
 		// }
+		else if (ex->args->next || (ex->args->next && !check_ex_av(ex->args->value)))
+		{
+			if (ex->args->next->value && !check_ex_av(ex->args->value))
+			{
+				s = ft_atoi2(ex->args->value);
+				if (s == 2)
+				{
+					printf("minishell: exit: too many arguments\n");
+					glb_var.exit_status = 1;
+				}
+				else if (s == 3)
+					exit (1);
+			}
+			else if (ex->args->next->value)
+			{
+				printf("minishell: exit: too many arguments\n");
+				glb_var.exit_status = 1;
+				return ;
+			}
+		}
 		else if (!check_ex_av(ex->args->value)) //we have one arg numeric we check if it's positive or negative
 			ex_stat(ex->args->value);
 	}

@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 10:11:55 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/24 18:31:04 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/24 18:47:19 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	sh_unset(t_env *myenv, char **arg)
 		{
 			printf("minishell: unset: %s: invalid option\n", arg[1]);
 			printf("unset: usage: unset [-f] [-v] [name ...]\n");
-			exit_status = 2;
+			glb_var.exit_status = 2;
 			return ;
 		}
 	while (arg[i])
@@ -75,5 +75,5 @@ void	sh_unset(t_env *myenv, char **arg)
 		}
 		i++;
 	}
-	.exit_status = 0;
+	glb_var.exit_status = 0;
 }

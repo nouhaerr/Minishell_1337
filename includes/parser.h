@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:54:36 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/24 18:36:44 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/24 20:05:49 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,8 @@ typedef struct t_parser
 	t_data2			*outfiles;
 	t_data			*infiles;
 	t_data			*heredoc;
-	int				exit_status;
 	struct t_parser	*next;
 } t_parser;
-
-t_parser	glb_var;
 
 // functions im gonna work with in the parsing part
 void parse(t_token **tokens, t_parser **parser, t_lexer *lexer);

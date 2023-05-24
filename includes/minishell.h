@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:53:18 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/24 18:40:21 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/24 20:06:48 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 
-int exit_status;
+typedef struct s_glb
+{
+    int exit_status;
+} t_glb;
+
+t_glb glb_var;
 
 #endif
