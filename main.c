@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/24 16:50:52 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/24 16:56:39 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int main(int ac, char **av, char **env)
 		if (!syntax_error(base, &tokens))
 		{
 			parse(&tokens, &parser, lexer);
+			exec_cmd(parser);
 			free_mylist(parser, 1);
 			lexer -> exit_status = 0; // tu dois changer ça exit status est une variable gobale
 		}

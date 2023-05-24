@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+         #
+#    By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 02:48:29 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/05/24 14:39:33 by nerrakeb         ###   ########.fr        #
+#    Updated: 2023/05/24 17:00:17 by hobenaba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ all	: $(NAME)
 
 $(NAME) : $(OBJ)
 	ar -rc $(NAME) $(OBJ)
-
+	
 clean :
 	rm -rf $(OBJ)
 
