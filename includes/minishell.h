@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:53:18 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/24 18:37:09 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/24 18:40:21 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 
-// int				exit_status;
+int exit_status;
 
 #endif

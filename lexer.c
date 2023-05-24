@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:53:34 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/23 21:19:57 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/24 18:14:10 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void build_list(t_lexer *lexer, t_token **tokens)
 	lexer -> base2 = 0;
 }
 
-int lex(char *input, t_token **tokens, t_lexer *lexer)
+int lex(char *input, t_token **tokens, t_lexer *lexer, int exit_status)
 {
 	int i;
 
@@ -63,7 +63,7 @@ int lex(char *input, t_token **tokens, t_lexer *lexer)
 		else
 			i = partition_tokens(lexer, input, i);
 		if (input[i] == '$')
-            i = token_env(input, i, lexer);
+            i = token_env(input, i, lexer, exit_status);
 		if (lexer -> str != NULL && (input [i] == '\0' || ft_strchr(" |><", input[i]) != NULL))
 			build_list(lexer, tokens);
 	}

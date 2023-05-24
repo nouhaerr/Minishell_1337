@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:54:28 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/24 16:35:05 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/24 18:14:51 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ typedef struct t_token
 typedef struct t_lexer
 {
 	t_env *my_env;
-	int exit_status;
 	int base;
 	int base2;
 	int her;
@@ -61,14 +60,14 @@ void	ft_lstaddback(t_token **lst, t_token *new);
 
 
 // funstions related to tokens
-int lex(char *input, t_token **tokens, t_lexer *lexer);
+int lex(char *input, t_token **tokens, t_lexer *lexer, int exit_status);
 int check_which_special_char(char c, char next_c, t_token **tokens);
 int ft_ignore_spaces(char *input, int i);
 int other_tokens(t_lexer *lexer, int i, char *input);
 int partition_tokens(t_lexer *lexer, char *input, int i);
 int token_word(char *input, int start, int base);
 int token_env2(char *input, int i, t_lexer *lexer);
-int token_env(char *input, int i, t_lexer *lexer);
+int token_env(char *input, int i, t_lexer *lexer, int exit_status);
 int normal_word(char *input, int start);
 int quotes_word(char *input, int start, int base);
 int env_word(char *input, int start);
