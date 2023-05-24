@@ -6,7 +6,7 @@
 #    By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 02:49:56 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/05/24 14:18:17 by nerrakeb         ###   ########.fr        #
+#    Updated: 2023/05/24 14:23:38 by nerrakeb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 # RDFLAGS = -L/Users/nerrakeb/goinfre/homebrew/opt/readline/include/readline -lreadline
 SRCS =	main.c ft_lst_lex.c utils.c parse.c ft_lst_parse.c ft_lst_parse.c \
-		ft_lst_lex.c env.c tokens.c vrg\
+		ft_lst_lex.c env.c tokens.c init.c\
 		my_free.c execution/builtins/echo.c execution/builtins/pwd.c \
 		execution/builtins/env.c execution/builtins/exit.c
 OBJS = $(SRCS:.c=.o)
