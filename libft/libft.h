@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 09:14:11 by mac               #+#    #+#             */
-/*   Updated: 2023/04/30 17:07:14 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/24 14:49:23 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h> 
+# include <limits.h>
 # include <fcntl.h>
-# include "ft_printf/ft_printf.h"
 # include "get_next_line/get_next_line.h"
 
 typedef struct s_list
@@ -29,7 +30,7 @@ typedef struct s_list
 void	ft_lstadd_front(t_list **lst, t_list *new);
 t_list	*ft_lstlast(t_list *lst);
 int		ft_lstsize(t_list *lst);
-int		ft_atoi(const char *str);
+long	ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 int		ft_isalnum(int c);
@@ -43,7 +44,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_memmove(void *dst, const void *src, size_t len);
 void	*ft_memset(void *b, int a, size_t len);
 char	*ft_strchr(const char *str, int c);
-char	*ft_strdup(char *s1);
+char	*ft_strdup(const char *s1);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlen(const char *s);
@@ -66,4 +67,7 @@ void	ft_putnbr_fd(int n, int fd);
 int		ft_dostrlen(char **str);
 size_t	my_countnbr(int n);
 int		ft_strcmp(char *s1, char *s2);
+long	ft_atoi2(const char *str);
+char	*ft_strjoin2(char const *s1, char const *s2);
+
 #endif

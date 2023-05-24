@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:54:36 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/23 16:43:20 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/24 14:56:23 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
-#define PARSER_H
+# define PARSER_H
 
 enum t_e
 {
@@ -21,28 +21,31 @@ enum t_e
 
 typedef struct t_data
 {
-	char *value;
-	struct t_data *next;
+	char			*value;
+	struct t_data	*next;
 }	t_data;
 
 typedef struct t_data2
 {
-	char *value;
-	enum t_e type;
-	struct t_data2 *next;
+	char			*value;
+	enum t_e		type;
+	struct t_data2	*next;
 } t_data2;
 
 
 // this represent the main struct that i will send to my teammate
 typedef struct t_parser
 {
-	t_data *cmd;
-	t_data *args;
-	t_data2 *outfiles;
-	t_data *infiles;
-	t_data *heredoc;
-	struct t_parser *next;
+	t_data			*cmd;
+	t_data			*args;
+	t_data2			*outfiles;
+	t_data			*infiles;
+	t_data			*heredoc;
+	int				exit_status;
+	struct t_parser	*next;
 } t_parser;
+
+t_parser	glb_var;
 
 // functions im gonna work with in the parsing part
 void parse(t_token **tokens, t_parser **parser);
