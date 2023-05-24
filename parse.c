@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:14:51 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/24 16:49:55 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/24 17:08:26 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void create_node(t_parser *parser, char *next_value, int type, int i)
 	else if (type == heredoc)
 		ft_lstaddback2(&(parser ->heredoc), ft_lstnew2(next_value));
 }
+
 t_parser *build_list_parser(t_parser **parser, t_lexer *lexer, t_parser *t)
 {
 	if (((lexer ->tokens2) -> type) == the_pipe)
@@ -40,6 +41,7 @@ t_parser *build_list_parser(t_parser **parser, t_lexer *lexer, t_parser *t)
 	create_node(t, lexer -> tok -> value, (lexer -> tokens2) -> type, lexer ->i);
 	return (t);
 }
+
 void parse(t_token **tokens, t_parser **parser, t_lexer *lexer)
 {
 	t_parser *t;
@@ -61,7 +63,6 @@ void parse(t_token **tokens, t_parser **parser, t_lexer *lexer)
 	}
 	// just to check on if my parsing is doing alright.
 	//check_struct(*parser);
-	
 }
 
 t_token *my_next_word(t_token *tokens)

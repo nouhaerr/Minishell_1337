@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:54:36 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/24 16:49:39 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/24 18:36:44 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct t_data2
 // this represent the main struct that i will send to my teammate
 typedef struct t_parser
 {
-	t_data			*cmd;
+	t_data			*cmd; //this should be char *cmd
 	t_data			*args;
 	t_data2			*outfiles;
 	t_data			*infiles;

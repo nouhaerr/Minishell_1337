@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 04:57:29 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/24 15:51:44 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/24 18:31:14 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	path_not_found(void)
 {
 	ft_putstr_fd("minishell: env: No such file or directory\n", 2);
-		glb_var.exit_status = 127;
+		exit_status = 127;
 	return ;
 }
 

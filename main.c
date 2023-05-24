@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/24 16:56:39 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/24 18:38:27 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ int main(int ac, char **av, char **env)
 	
 	lexer = malloc(sizeof(t_lexer));
 	my_envs = save_my_env(env);
-	glb_var.exit_status = 0;
 	lexer -> my_env = my_envs;
-	lexer -> exit_status = 0;
+	glb_var.exit_status = 0;
+	lexer -> exit_status = glb_var.exit_status;
 	while (1)
 	{
 		tokens = NULL;

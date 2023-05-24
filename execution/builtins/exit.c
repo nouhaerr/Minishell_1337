@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 06:25:08 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/24 10:04:52 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/24 18:37:00 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,25 +46,32 @@ static void	ex_stat(char *arg)
 	exit(res % 256);
 }
 
-void	sh_exit(char **argv)
+void	sh_exit(t_parser *tmp)
 {
 	int	s;
+	t_parser *ex;
 
+	ex = tmp;
 	printf("exit\n");
-	if (argv[1])
+	if (ex->args)
 	{
-		if (check_ex_av(argv[1]))
-			av_not_num(argv[1]);
-		else if (argv[2] && !check_ex_av(argv[1]))
-			s = ft_atoi(argv[1]);
-		else if (argv[2] || (argv[2] && !check_ex_av(argv[1])))
+		if (check_ex_av(ex->args->value))
+			av_not_num(ex->args->value);
+		else if (ex->args->next && !check_ex_av(ex->args->value))
 		{
 			printf("minishell: exit: too many arguments\n");
+			s = ft_atoi(ex->args->value);
 			glb_var.exit_status = 1;
 			return ;
 		}
-		else if (!check_ex_av(argv[1])) //we have one arg numeric we check if it's positive or negative
-			ex_stat(argv[1]);
+		// else if (ex->args->next->value || (ex->args->next->value && !check_ex_av(ex->args->value)))
+		// {
+		// 	printf("minishell: exit: too many arguments\n");
+		// 	glb_var.exit_status = 1;
+		// 	return ;
+		// }
+		else if (!check_ex_av(ex->args->value)) //we have one arg numeric we check if it's positive or negative
+			ex_stat(ex->args->value);
 	}
 	else
 		exit(glb_var.exit_status);
