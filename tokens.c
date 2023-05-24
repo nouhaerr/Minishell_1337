@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 21:15:28 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/24 12:36:51 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/24 18:14:38 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,14 @@ int token_env2(char *input, int i, t_lexer *lexer)
 	i += len + 1;
 	return (i);
 }
-int token_env(char *input, int i, t_lexer *lexer)
+int token_env(char *input, int i, t_lexer *lexer, int exit_status)
 {
     char *itoa;
     char *str_env;
     
     if (input[i + 1] == '?')
     {
-        itoa = ft_itoa(lexer -> exit_status);
+        itoa = ft_itoa(exit_status);
         str_env = ft_strdup(itoa);
         lexer -> str = ft_strjoin(lexer -> str, str_env);
         free(itoa);
