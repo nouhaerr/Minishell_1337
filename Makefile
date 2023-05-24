@@ -3,15 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+         #
+#    By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 02:49:56 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/05/24 14:14:19 by nerrakeb         ###   ########.fr        #
+#    Updated: 2023/05/24 14:18:05 by hobenaba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+lhbdisuhijcjhjfkhfljnxkhfkuhfhdkjd
 # RDFLAGS = -L/Users/nerrakeb/goinfre/homebrew/opt/readline/include/readline -lreadline
 SRCS =	main.c ft_lst_lex.c utils.c parse.c ft_lst_parse.c ft_lst_parse.c \
 		ft_lst_lex.c env.c tokens.c \
