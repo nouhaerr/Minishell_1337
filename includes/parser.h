@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:54:36 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/23 16:43:20 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/24 16:42:52 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct t_parser
 } t_parser;
 
 // functions im gonna work with in the parsing part
-void parse(t_token **tokens, t_parser **parser);
+void parse(t_token **tokens, t_parser **parser, t_lexer *lexer);
 void create_node(t_parser *parser, char *next_value, int type, int i);
 t_token *my_next_word(t_token *tokens);
 int	ft_lstsize_parse(t_parser *parse);

@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/23 21:26:49 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/24 16:47:43 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int main(int ac, char **av, char **env)
 	my_envs = save_my_env(env);
 	lexer -> my_env = my_envs;
 	lexer -> exit_status = 0;
-	//later on im gonna crteate an init function where i will initialize all variables im  gonna use.
 	while (1)
 	{
 		tokens = NULL;
@@ -60,7 +59,7 @@ int main(int ac, char **av, char **env)
 		base = lex(input, &tokens, lexer);
 		if (!syntax_error(base, &tokens))
 		{
-			parse(&tokens, &parser);
+			parse(&tokens, &parser, lexer);
 			free_mylist(parser, 1);
 			lexer -> exit_status = 0;
 		}

@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:54:28 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/23 21:22:47 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/24 16:35:05 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,15 @@ enum t_type
 	quotes // 1
 }	t_type;
 
+
+typedef struct t_token
+{
+	char *value;
+	enum t_enum type;
+	enum t_type arten;
+	struct t_token *next;
+}	t_token;
+
 typedef struct t_lexer
 {
 	t_env *my_env;
@@ -40,15 +49,10 @@ typedef struct t_lexer
 	char *str;
 	char c;
 	int a;
+	int i;
+	t_token *tokens2;
+	t_token *tok;
 }	t_lexer;
-
-typedef struct t_token
-{
-	char *value;
-	enum t_enum type;
-	enum t_type arten;
-	struct t_token *next;
-}	t_token;
 
 // utils i would be in need for my linked list.
 
