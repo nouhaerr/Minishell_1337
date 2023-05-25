@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 13:38:39 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/19 11:33:37 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/25 18:07:45 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,3 +82,17 @@ char *check_env(char *env, t_env *my_envs)
 	return (NULL);
 }
 
+size_t	env_list_size(t_env *env)
+{
+	size_t	len;
+
+	len = 0;
+	if (!env)
+		return (0);
+	while (env)
+	{
+		len++;
+		env = env->next;
+	}
+	return (len);
+}

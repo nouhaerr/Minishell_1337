@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 01:45:15 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/23 13:09:01 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:05:45 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)env;
 
-	sh_echo(av);
+	sh_pwd();
 	return (0);
 }

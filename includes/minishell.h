@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:53:18 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/25 13:45:35 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/25 17:43:41 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@ typedef struct s_glb
 } t_glb;
 
 t_glb glb_var;
+
+size_t	env_list_size(t_env *env);
 
 #endif
