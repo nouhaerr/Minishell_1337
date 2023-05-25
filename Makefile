@@ -6,7 +6,7 @@
 #    By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 02:49:56 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/05/24 17:00:32 by hobenaba         ###   ########.fr        #
+#    Updated: 2023/05/24 19:05:08 by hobenaba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRCS =	main.c ft_lst_lex.c utils.c parse.c ft_lst_parse.c \
 		env.c tokens.c init.c lexer.c words.c \
 		my_free.c execution/builtins/echo.c execution/builtins/pwd.c \
 		execution/builtins/env.c execution/builtins/exit.c \
-		execution/start_session.c
+		execution/start_session.c execution/redirections/her.c
 OBJS = $(SRCS:.c=.o)
 LIBFT= libft.a
 LIBFT_DIR= libft/

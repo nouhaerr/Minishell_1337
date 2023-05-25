@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:14:51 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/24 17:43:52 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/24 19:05:59 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,12 @@ void	parse(t_token **tokens, t_parser **parser, t_lexer *lexer)
 	if ((lexer->tokens2) != NULL)
 		t = ft_lstaddback3(parser, ft_lstnew3());
 	lexer->i = 0;
+	
 	while (lexer->tokens2)
 	{
+		//printf("before seg\n");
 		t = build_list_parser(parser, lexer, t);
+		
 		if ((lexer->tokens2)->type == l_rdr || (lexer->tokens2)->type == r_rdr \
 		|| (lexer->tokens2)->type == dr_rdr \
 		|| (lexer->tokens2)->type == heredoc)
@@ -61,11 +64,12 @@ void	parse(t_token **tokens, t_parser **parser, t_lexer *lexer)
 			lexer->tokens2 = (lexer->tokens2)->next;
 			lexer->i++;
 		}
+		
 	}
-	check_struct(*parser);
+	//printf("before seg\n");
 }
 	// just to check on if my parsing is doing alright.
-
+	//check_struct(*parser);
 t_token	*my_next_word(t_token *tokens)
 {
 	t_token	*t;

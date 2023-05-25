@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   start_session.c                                    :+:      :+:    :+:   */
+/*   her.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/24 19:00:10 by hobenaba         ###   ########.fr       */
+/*   Created: 2023/05/24 18:46:12 by hobenaba          #+#    #+#             */
+/*   Updated: 2023/05/24 18:59:26 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-void	exec_cmd(t_parser *parser)
+void her(t_data *heredoc)
 {
-	printf("before segfault");
-	while (parser != NULL)
-	{
-		if (!ft_strcmp(parser->cmd->value, "pwd"))
-			sh_pwd();
-		else if (!ft_strcmp(parser->cmd->value, "echo"))
-			sh_echo(&parser);
-		else if (parser -> heredoc != NULL)
-			her(parser -> heredoc);
-		parser = parser->next;
-	}
+    if (heredoc != NULL)
+        printf("hello\n");
+    printf("before segfault");
 }

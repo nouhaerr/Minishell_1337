@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   start_session.c                                    :+:      :+:    :+:   */
+/*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/24 19:00:10 by hobenaba         ###   ########.fr       */
+/*   Created: 2023/05/24 18:53:39 by hobenaba          #+#    #+#             */
+/*   Updated: 2023/05/24 18:58:10 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#ifndef EXECUTION_H
+#define EXECUTION_H
 
-void	exec_cmd(t_parser *parser)
-{
-	printf("before segfault");
-	while (parser != NULL)
-	{
-		if (!ft_strcmp(parser->cmd->value, "pwd"))
-			sh_pwd();
-		else if (!ft_strcmp(parser->cmd->value, "echo"))
-			sh_echo(&parser);
-		else if (parser -> heredoc != NULL)
-			her(parser -> heredoc);
-		parser = parser->next;
-	}
-}
+// those functions are related to heredoc execution.
+void her(t_data *heredoc);
+
+#endif
