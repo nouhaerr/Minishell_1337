@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 04:57:29 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/24 18:47:30 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/25 17:25:51 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,32 @@ static void	path_not_found(void)
 	return ;
 }
 
-void	sh_env(t_env *env_cmd)
+void	sh_env(void)
 {
 	int	path_found;
 	t_env	*cur;
 
-	cur = env_cmd;
+	cur = glb_var.list;
 	path_found = 0;
 	while (cur)
 	{
-		if (ft_strncmp(cur->env, "PATH=", 5))
+		if (!ft_strcmp(cur->env, "PATH"))
 		{
 			path_found = 1;
 			break ;
 		}
 		cur = cur->next;
 	}
-	if (path_found)
+	if (!path_found)
+	{
 		path_not_found();
-	cur = env_cmd;
+		return ;
+	}
+	cur = glb_var.list;
 	while (cur)
 	{
-		printf("%s=%s\n", cur->env, cur->value);
+		if (cur->value[0] != 0)
+			printf("%s=%s\n", cur->env, cur->value);
 		cur = cur->next;
-	}	
+	}
 }

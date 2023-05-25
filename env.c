@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 13:38:39 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/25 17:44:17 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/25 18:50:15 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,3 +82,17 @@ char *check_env(char *env, t_env *my_envs)
 	return (NULL);
 }
 
+size_t	env_list_size(t_env *env)
+{
+	size_t	len;
+
+	len = 0;
+	if (!env)
+		return (0);
+	while (env)
+	{
+		len++;
+		env = env->next;
+	}
+	return (len);
+}

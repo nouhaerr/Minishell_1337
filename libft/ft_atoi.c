@@ -6,11 +6,16 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 13:00:55 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/24 14:37:15 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/25 14:03:38 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+// void	ff_atoi(const char *str, int signe, long res)
+// {
+	
+// }
 
 long	ft_atoi(const char *str)
 {
@@ -32,6 +37,10 @@ long	ft_atoi(const char *str)
 		res = res * 10 + *str - '0';
 		str++;
 	}
+	if (signe > 0 && res == 9223372036854775807)
+		return (2);
+	if (signe < 0 && res == 9223372036854775807)
+		return (3);
 	if ((signe > 0 && res > 9223372036854775807)
 	|| (signe < 0 && res > 9223372036854775807))
 	{

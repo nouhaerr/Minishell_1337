@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/25 16:31:22 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/25 18:50:36 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,12 @@ int main(int ac, char **av, char **env)
 	t_token		*tokens;
 	t_lexer		*lexer;
 	t_parser	*parser;
-	t_env		*my_envs;	
+	// t_env		*my_envs;	
 	int			base;
 	
 	lexer = malloc(sizeof(t_lexer));
-	my_envs = save_my_env(env);
-	lexer -> my_env = my_envs;
-	glb_var.exit_status = 0;
+	glb_var.list = save_my_env(env);
+	lexer -> my_env = glb_var.list;
 	while (1)
 	{
 		tokens = NULL;
@@ -84,7 +83,6 @@ int main(int ac, char **av, char **env)
 		base = lex(input, &tokens, lexer);
 		if (!syntax_error(base, &tokens))
 		{
-			glb_var.exit_status = 0;
 			parse(&tokens, &parser, lexer);
 			exec_cmd(parser, lexer);
 			free_mylist(parser, 1);
