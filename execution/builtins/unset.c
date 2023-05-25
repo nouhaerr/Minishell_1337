@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 10:11:55 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/24 18:47:19 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/25 15:14:43 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ static int	unset_arg(char *av)
 	i = 0;
 	while (av[i])
 	{
-		if (!ft_isalpha(av[i]) || !ft_isdigit(av[i]) || av[i] != '_')
-			return (1);
+		if (!(ft_isalpha(av[i]) || ft_isdigit(av[i]) || av[i] == '_'))
+			return (0);
 		i++;
 	}
-	return (0);
+	return (1);
 }
 
-void	ft_list_remove_if(t_env **head, void *data, int *(cmp)())
+void	ft_list_remove_if(t_env **head, void *data, int (*cmp)())
 {
 	t_env	*tmp;
 
@@ -42,38 +42,40 @@ void	ft_list_remove_if(t_env **head, void *data, int *(cmp)())
 		ft_list_remove_if(head, data, cmp);
 	}
 	tmp = *head;
-	ft_list_remove_if(&tmp->env, data, cmp);
+	ft_list_remove_if(&tmp, data, cmp);
 }
 
-void	sh_unset(t_env *myenv, char **arg)
+void	sh_unset(t_data *arg)
 {
 	int		i;
 	t_env	*tmp;
+	t_data	*cur;
 
-	i = 1;
-	tmp = myenv;
-	if (arg[1][0] == '-' && arg[1][1])
+	i = 0;
+	tmp = glb_var.list;
+	cur = arg;
+	if (cur->value[i] == '-' && cur->value[i + 1])
 		{
-			printf("minishell: unset: %s: invalid option\n", arg[1]);
+			printf("minishell: unset: %s: invalid option\n", arg->value);
 			printf("unset: usage: unset [-f] [-v] [name ...]\n");
 			glb_var.exit_status = 2;
 			return ;
 		}
-	while (arg[i])
+	while (cur)
 	{
-		if (unset_arg(arg[i]))
+		if (!unset_arg(cur->value) || ft_isdigit(cur->value[0]))
 		{
-			printf("minishell: unset: `%s': not a valid identifier\n", arg[i]);
+			printf("minishell: unset: `%s': not a valid identifier\n", cur->value);
 			glb_var.exit_status = 1;
 			return ;
 		}
 		while (tmp)
 		{
-			if (ft_strncmp(tmp->env, arg[i], ft_strlen(arg[i])) == 0)
-				ft_list_remove_if(&tmp, arg[i], ft_strcmp);
+			if (ft_strncmp(tmp->env, cur->value, ft_strlen(cur->value)) == 0)
+				ft_list_remove_if(&tmp, cur->value, ft_strcmp);
 			tmp = tmp->next;
 		}
-		i++;
+		cur = cur->next;
 	}
 	glb_var.exit_status = 0;
 }
