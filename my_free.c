@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:56:47 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/23 16:47:27 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:07:13 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void free_parser(t_parser *list)
             free_data1(list -> cmd);
             free_data1(list -> args);
             free_data1(list -> infiles);
-            free_data1(list -> heredoc);
+            free_data2(list -> heredoc);
 			free(list);
 			list = list2;
 		}

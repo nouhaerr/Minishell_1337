@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:53:18 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/24 18:56:07 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/25 11:45:08 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@
 # include <sys/wait.h>
 # include "../includes/execution.h"
 
-int exit_status;
+typedef struct s_glb
+{
+    int exit_status;
+} t_glb;
+
+t_glb glb_var;
 
 #endif
