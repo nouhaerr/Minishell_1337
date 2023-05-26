@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:46:12 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/26 15:52:33 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/26 16:01:01 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	env_expansion_for_heredoc2(char *input, int i, t_env *my_env, char **str)
 
 int	env_expansion_for_heredoc(char *input, int i, t_env *my_env, char **str)
 {
-	char	itoa;
+	char	*itoa;
 	char	*str_env;
 
 	if (input[i + 1] == '?')
