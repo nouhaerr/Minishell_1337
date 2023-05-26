@@ -6,13 +6,13 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 13:38:39 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/25 18:50:15 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/26 15:43:39 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 
-t_env *ft_lstnew_env(char *env, char *value)
+t_env	*ft_lstnew_env(char *env, char *value)
 {
 	t_env	*p;
 
@@ -41,7 +41,8 @@ void	ft_lstaddback_env(t_env **lst, t_env *new)
 		p = p -> next;
 	p -> next = new;
 }
-t_env *save_my_env(char **env)
+
+t_env	*save_my_env(char **env)
 {
 	t_env	*my_env;
 	int		i;
@@ -59,25 +60,26 @@ t_env *save_my_env(char **env)
 			if (env[i][len] == '=')
 			{
 				start = len + 1;
-				break;
+				break ;
 			}
 			len++;
 		}
 		ft_lstaddback_env(&my_env, ft_lstnew_env(ft_substr(env[i], 0, len), ft_substr(env[i], start, ft_strlen(env[i]) - 1)));
 		i++;
 	}
-	return(my_env);
+	return (my_env);
 }
-char *check_env(char *env, t_env *my_envs)
+
+char	*check_env(char *env, t_env *my_envs)
 {
-	t_env *e;
+	t_env	*e;
 
 	e = my_envs;
 	while (e)
 	{
 		if (!ft_strcmp(env, e->env))
 			return (ft_strdup(e -> value));
-		e = e -> next;	
+		e = e -> next;
 	}
 	return (NULL);
 }

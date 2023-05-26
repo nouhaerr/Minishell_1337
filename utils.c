@@ -6,19 +6,20 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:18:35 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/25 16:08:38 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/26 15:35:15 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 
-int ft_ignore_spaces(char *input, int i)
+int	ft_ignore_spaces(char *input, int i)
 {
 	while (input[i] && input[i] == ' ')
-		i++; 
+		i++;
 	return (i);
 }
-void free_my_struct(t_token *tokens)
+
+void	free_my_struct(t_token *tokens)
 {
 	while (tokens)
 	{
@@ -27,9 +28,7 @@ void free_my_struct(t_token *tokens)
 	}
 }
 
-
 // those are funstions that helped me to check on my code and debugg it and nothing else
-
 //this function is just to guide me// no need of it in the code itself
 int	ft_lstsize_parse(t_parser *parse)
 {

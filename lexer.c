@@ -3,39 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:53:34 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/24 18:56:29 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/26 15:41:58 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 
-int check_which_special_char(char c, char next_c, t_token **tokens)
+int	check_which_special_char(char c, char next_c, t_token **tokens)
 {
 	if (c == '|')
-		return (ft_lstaddback(tokens, ft_lstnew(ft_strdup("|"), the_pipe, general)), 1);
+		return (ft_lstaddback(tokens, ft_lstnew(ft_strdup("|"),
+					the_pipe, general)), 1);
 	else if (c == '>')
 	{
 		if (next_c == '>')
-			return (ft_lstaddback(tokens, ft_lstnew(ft_strdup(">>"), dr_rdr, general)), 2);
-		return (ft_lstaddback(tokens, ft_lstnew(ft_strdup(">"), r_rdr, general)), 1);
+			return (ft_lstaddback(tokens,
+					ft_lstnew(ft_strdup(">>"), dr_rdr, general)), 2);
+		return (ft_lstaddback(tokens,
+				ft_lstnew(ft_strdup(">"), r_rdr, general)), 1);
 	}
-	else if(c == '<')
+	else if (c == '<')
 	{
 		if (next_c == '<')
-			return (ft_lstaddback(tokens, ft_lstnew(ft_strdup("<<"), heredoc, general)), 2);
-		return (ft_lstaddback(tokens, ft_lstnew(ft_strdup("<"), l_rdr, general)), 1);
+			return (ft_lstaddback(tokens,
+					ft_lstnew(ft_strdup("<<"), heredoc, general)), 2);
+		return (ft_lstaddback(tokens,
+				ft_lstnew(ft_strdup("<"), l_rdr, general)), 1);
 	}	
-	return(0);	
+	return (0);
 }
 
-void build_list(t_lexer *lexer, t_token **tokens)
+void	build_list(t_lexer *lexer, t_token **tokens)
 {
-	int arten;
-	
-	if(lexer -> base2 != 0)
+	int	arten;
+
+	if (lexer -> base2 != 0)
 		arten = quotes;
 	else
 		arten = general;
@@ -44,9 +49,9 @@ void build_list(t_lexer *lexer, t_token **tokens)
 	lexer -> base2 = 0;
 }
 
-int lex(char *input, t_token **tokens, t_lexer *lexer)
+int	lex(char *input, t_token **tokens, t_lexer *lexer)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	lexer_init(lexer);
@@ -58,13 +63,14 @@ int lex(char *input, t_token **tokens, t_lexer *lexer)
 		{
 			if (input[i] == '<' && input[i + 1] == '<')
 				lexer -> her = 1;
-			i += check_which_special_char(input[i],input[i + 1], tokens);
+			i += check_which_special_char(input[i], input[i + 1], tokens);
 		}
 		else
 			i = partition_tokens(lexer, input, i);
 		if (input[i] == '$')
-            i = token_env(input, i, lexer);
-		if (lexer -> str != NULL && (input [i] == '\0' || ft_strchr(" |><", input[i]) != NULL))
+			i = token_env(input, i, lexer);
+		if (lexer -> str != NULL && (input [i] == '\0'
+				|| ft_strchr(" |><", input[i]) != NULL))
 			build_list(lexer, tokens);
 	}
 	return (lexer -> base);

@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/25 18:50:36 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/26 15:20:40 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	syntax_error(int base, t_token **tokens)
 {
-	t_token *tokens2;
-	t_token *previous; 
+	t_token	*tokens2;
+	t_token	*previous;
 
-	previous = NULL;	
-	if(*tokens == NULL)
+	previous = NULL;
+	if (*tokens == NULL)
 		tokens2 = NULL;
 	else
 		tokens2 = *tokens;
@@ -26,10 +26,12 @@ int	syntax_error(int base, t_token **tokens)
 		return (printf("Error : unclosed quotes\n"), 1);
 	while (tokens2)
 	{
-		if (tokens2 -> type == the_pipe && (previous == NULL || tokens2 -> next == NULL))
+		if (tokens2 -> type == the_pipe
+			&& (previous == NULL || tokens2 -> next == NULL))
 			return (printf("Error : syntax error\n"), 1);
-		if ((tokens2 -> type != the_pipe && tokens2 -> type != word) && (tokens2 -> next == NULL || (tokens2 -> next) -> type != word))
-				return (printf("Error : syntax error\n"), 1);
+		if ((tokens2 -> type != the_pipe && tokens2 -> type != word)
+			&& (tokens2 -> next == NULL || (tokens2 -> next)-> type != word))
+			return (printf("Error : syntax error\n"), 1);
 		previous = tokens2;
 		tokens2 = tokens2 -> next;
 	}
@@ -55,21 +57,19 @@ char	*get_prompt(char *s)
 	return (cwd);
 }
 
-int main(int ac, char **av, char **env)
+int	main(int ac, char **av, char **env)
 {
-	(void)ac;
-	(void)av;
 	char		*input;
 	const char	*prompt;
 	t_token		*tokens;
 	t_lexer		*lexer;
 	t_parser	*parser;
-	// t_env		*my_envs;	
 	int			base;
-	
+
+	(void)ac;
+	(void)av;
 	lexer = malloc(sizeof(t_lexer));
 	glb_var.list = save_my_env(env);
-	lexer -> my_env = glb_var.list;
 	while (1)
 	{
 		tokens = NULL;
@@ -84,10 +84,10 @@ int main(int ac, char **av, char **env)
 		if (!syntax_error(base, &tokens))
 		{
 			parse(&tokens, &parser, lexer);
-			exec_cmd(parser, lexer);
+			exec_cmd(parser);
 			free_mylist(parser, 1);
 		}
-		else 
+		else
 			glb_var.exit_status = 1;
 		free_mylist(tokens, 0);
 		free(input);

@@ -6,12 +6,12 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:53:18 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/25 18:48:53 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/26 15:45:50 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
-#define MINISHELL_H
+# define MINISHELL_H
 
 # include "../libft/libft.h"
 # include "../includes/lexer.h"
@@ -29,9 +29,9 @@ typedef struct s_glb
 {
 	t_env	*list;
 	int		exit_status;
-} t_glb;
+}	t_glb;
 
-t_glb glb_var;
+t_glb	glb_var;
 
 size_t	env_list_size(t_env *env);
 

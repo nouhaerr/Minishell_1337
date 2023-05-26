@@ -6,13 +6,13 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 21:17:37 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/23 21:17:56 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/26 15:42:11 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 
-void lexer_init(t_lexer *lexer)
+void	lexer_init(t_lexer *lexer)
 {
 	lexer -> base = 0;
 	lexer -> her = 0;
