@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:54:28 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/24 18:54:27 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/25 15:22:16 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct t_lexer
 	char c;
 	int a;
 	int i;
+	int arten;
 	t_token *tokens2;
 	t_token *tok;
 }	t_lexer;

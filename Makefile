@@ -3,12 +3,13 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+         #
+#    By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 02:49:56 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/05/25 14:37:55 by nerrakeb         ###   ########.fr        #
+#    Updated: 2023/05/25 18:53:11 by hobenaba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address
@@ -17,7 +18,9 @@ SRCS =	main.c ft_lst_lex.c utils.c parse.c ft_lst_parse.c \
 		env.c tokens.c init.c lexer.c words.c \
 		my_free.c execution/builtins/echo.c execution/builtins/pwd.c \
 		execution/builtins/env.c execution/builtins/exit.c \
-		execution/builtins/unset.c execution/start_session.c
+		execution/start_session.c execution/redirections/her.c \
+		execution/builtins/unset.c 
+		
 OBJS = $(SRCS:.c=.o)
 LIBFT= libft.a
 LIBFT_DIR= libft/

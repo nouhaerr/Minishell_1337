@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 06:15:22 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/25 11:56:26 by hobenaba         ###   ########.fr       */
+/*   Created: 2023/05/24 18:53:39 by hobenaba          #+#    #+#             */
+/*   Updated: 2023/05/25 16:32:59 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#ifndef EXECUTION_H
+#define EXECUTION_H
 
-void	sh_pwd(void)
-{
-	char	buf[4096]; //Mémoire tampon pour stocker le répertoire de travail actuel
-	char	*pwd; //Maximum number of bytes in a pathname, including the terminating null character.
+// those functions are related to heredoc execution.
+char *her(t_data2 *heredoc, t_env *my_env);
 
-	pwd = getcwd(buf, 4096);//the PATH_MAX = 4096bytes  that is supported by the operating system linux.
-	if (pwd == NULL)
-		printf("%s\n", buf);
-	else
-		printf("%s\n", pwd);
-}
+#endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:54:36 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/24 20:05:49 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:04:48 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 
 enum t_e
 {
+	expand,
+	not_expand,
 	clear, // >
-	finish_up, // >>
+	finish_up // >>
+	
 } t_e;
 
 typedef struct t_data
@@ -40,13 +43,13 @@ typedef struct t_parser
 	t_data			*args;
 	t_data2			*outfiles;
 	t_data			*infiles;
-	t_data			*heredoc;
+	t_data2			*heredoc;
 	struct t_parser	*next;
 } t_parser;
 
 // functions im gonna work with in the parsing part
 void parse(t_token **tokens, t_parser **parser, t_lexer *lexer);
-void create_node(t_parser *parser, char *next_value, int type, int i);
+void	create_node(t_parser *parser, t_lexer *lexer);
 t_token *my_next_word(t_token *tokens);
 int	ft_lstsize_parse(t_parser *parse);
 void check_struct(t_parser *parser);
