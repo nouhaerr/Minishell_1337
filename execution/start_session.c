@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_session.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/25 18:48:58 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/26 17:44:16 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	exec_cmd(t_parser *parser, t_lexer *lexer)
 			sh_env();
 		else if (!ft_strcmp(parser->cmd->value, "unset"))
 			sh_unset(parser->args);
+		else if (!ft_strcmp(parser->cmd->value, "cd"))
+			sh_cd(parser);
 		}
 		if (parser -> heredoc != NULL)
 		{

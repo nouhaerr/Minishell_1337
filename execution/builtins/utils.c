@@ -1,24 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 06:15:22 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/27 16:29:56 by nerrakeb         ###   ########.fr       */
+/*   Created: 2023/05/27 17:18:08 by nerrakeb          #+#    #+#             */
+/*   Updated: 2023/05/27 17:26:20 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "../../includes/minishell.h"
 
-void	sh_pwd(void)
+void	cd_home(t_env *pwd_home)
 {
-	char	buf[4096]; //Mémoire tampon pour stocker le répertoire de travail actuel
-	// char	*pwd; //Maximum number of bytes in a pathname, including the terminating null character.
+	char *path;
 
-	if (!getcwd(buf, 4096))//the PATH_MAX = 4096bytes  that is supported by the operating system linux.
-		perror("minishell");
+	path = NULL;
+	if (pwd_home)
+		path = pwd_home->value;
+	if (path)
+	{
+		if (chdir(path) == -1)
+		{
+			printf("minishell: cd: %s: %s\n", path, strerror(errno));
+			glb_var.exit_status = 1;
+			return ;
+		}
+		glb_var.exit_status = 0;
+	}
 	else
-		printf("%s\n", buf);
+	{
+		printf("minishell: cd: HOME not set\n");
+		glb_var.exit_status = 1;
+	}	
+}
+
+void	cd_oldpwd(char **oldpwd)
+{
+	char	*oldpath;
 }

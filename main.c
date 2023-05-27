@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/25 18:50:36 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/27 15:07:11 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int main(int ac, char **av, char **env)
 	t_token		*tokens;
 	t_lexer		*lexer;
 	t_parser	*parser;
-	// t_env		*my_envs;	
+	// t_env		*my_envs;
 	int			base;
 	
 	lexer = malloc(sizeof(t_lexer));

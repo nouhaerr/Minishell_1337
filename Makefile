@@ -3,31 +3,35 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+         #
+#    By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 02:49:56 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/05/25 18:53:11 by hobenaba         ###   ########.fr        #
+#    Updated: 2023/05/26 17:44:02 by nerrakeb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address
-# RDFLAGS = -L/Users/nerrakeb/goinfre/homebrew/opt/readline/include/readline -lreadline
+RDFLAGS +=  -lreadline -L/goinfre/nerrakeb/homebrew/opt/readline/lib
+INCLUDES += -I /goinfre/nerrakeb/homebrew/opt/readline/include
 SRCS =	main.c ft_lst_lex.c utils.c parse.c ft_lst_parse.c \
 		env.c tokens.c init.c lexer.c words.c \
 		my_free.c execution/builtins/echo.c execution/builtins/pwd.c \
 		execution/builtins/env.c execution/builtins/exit.c \
 		execution/start_session.c execution/redirections/her.c \
-		execution/builtins/unset.c 
+		execution/builtins/unset.c execution/builtins/cd.c
 		
 OBJS = $(SRCS:.c=.o)
 LIBFT= libft.a
 LIBFT_DIR= libft/
 NAME = minishell
 
+%.o: %.c
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@ 
+
 $(NAME) : $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) -lreadline $(OBJS) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(INCLUDES) $(RDFLAGS) -o $(NAME)
 	@echo "\033[0;93m- your minishell is getting ready ...\033[0m"
 
 $(LIBFT): $(LIBFT_DIR)libft.h
