@@ -6,12 +6,12 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:53:18 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/27 16:22:02 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:28:11 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
-#define MINISHELL_H
+# define MINISHELL_H
 
 # include "../libft/libft.h"
 # include "../includes/lexer.h"
@@ -31,9 +31,13 @@ typedef struct s_glb
 {
 	t_env	*list;
 	int		exit_status;
-} t_glb;
+}	t_glb;
 
-t_glb glb_var;
+t_glb	glb_var;
+
+// thsi one must stau hier since they dont know the prototype of this function
+
+void	rl_replace_line (const char *text, int clear_undo); 
 
 size_t	env_list_size(t_env *env);
 

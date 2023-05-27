@@ -6,13 +6,13 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 17:01:22 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/23 15:50:29 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/26 15:43:07 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 
-t_token *ft_lstnew(char *value, enum t_enum type, enum t_type arten)
+t_token	*ft_lstnew(char *value, enum t_enum type, enum t_type arten)
 {
 	t_token	*p;
 

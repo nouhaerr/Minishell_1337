@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_parse.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:45:51 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/24 14:55:39 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/26 15:42:42 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 
-t_data *ft_lstnew2(char *value)
+t_data	*ft_lstnew2(char *value)
 {
 	t_data	*p;
 
@@ -28,7 +28,6 @@ void	ft_lstaddback2(t_data **lst, t_data *new)
 {
 	t_data	*p;
 
-	
 	if (*lst == NULL)
 	{
 		*lst = new;
@@ -42,7 +41,7 @@ void	ft_lstaddback2(t_data **lst, t_data *new)
 	p -> next = new;
 }
 
-t_parser *ft_lstnew3(void) // for the main struct
+t_parser	*ft_lstnew3(void)
 {
 	t_parser	*p;
 
@@ -58,7 +57,7 @@ t_parser *ft_lstnew3(void) // for the main struct
 	return (p);
 }
 
-t_parser	*ft_lstaddback3(t_parser **lst, t_parser *new) // for the main struct.
+t_parser	*ft_lstaddback3(t_parser **lst, t_parser *new)
 {
 	t_parser	*p;
 
@@ -76,7 +75,7 @@ t_parser	*ft_lstaddback3(t_parser **lst, t_parser *new) // for the main struct.
 	return (new);
 }
 
-t_data2 *ft_lstnew4(char *value, enum t_e type)
+t_data2	*ft_lstnew4(char *value, enum t_e type)
 {
 	t_data2	*p;
 

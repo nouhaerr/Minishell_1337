@@ -6,18 +6,16 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/26 17:44:16 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:28:44 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../includes/minishell.h"
 
-void	exec_cmd(t_parser *parser, t_lexer *lexer)
+void	exec_cmd(t_parser *parser)
 {
-	char *str;
-
-	t_data *my_heredoc;
+	char	*str;
+	t_data	*my_heredoc; // this contains all input of heredoc 	
 
 	my_heredoc = NULL;
 	while (parser != NULL)
@@ -39,14 +37,16 @@ void	exec_cmd(t_parser *parser, t_lexer *lexer)
 		}
 		if (parser -> heredoc != NULL)
 		{
-			str = her(parser -> heredoc, lexer -> my_env);
+			str = her(parser -> heredoc, glb_var.list);
 			ft_lstaddback2(&my_heredoc, ft_lstnew2(str));
 		}
 		parser = parser->next;
-	}
-	while (my_heredoc)
-	{
-		printf("the value : [%s]", my_heredoc -> value);
-		my_heredoc = my_heredoc -> next;
-	}
+	}	
 }
+
+// this is just to check if my linked lst my_heredoc contains what it must contain.
+// while (my_heredoc)
+// 	{
+// 		printf("%s\n", my_heredoc -> value);
+// 		my_heredoc = my_heredoc -> next;
+// 	}
