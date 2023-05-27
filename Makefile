@@ -6,7 +6,7 @@
 #    By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 02:49:56 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/05/27 17:29:07 by nerrakeb         ###   ########.fr        #
+#    Updated: 2023/05/27 17:49:29 by nerrakeb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,13 +15,15 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 RDFLAGS +=  -lreadline -L/goinfre/nerrakeb/homebrew/opt/readline/lib
 INCLUDES += -I /goinfre/nerrakeb/homebrew/opt/readline/include
-SRCS =	main.c ft_lst_lex.c utils.c parse.c ft_lst_parse.c \
-		env.c tokens.c init.c lexer.c words.c \
-		my_free.c execution/builtins/echo.c execution/builtins/pwd.c \
+SRCS =	main.c parsing/my_free.c \
+		parsing/ft_lst_lex.c parsing/utils.c parsing/parse.c \
+		parsing/ft_lst_parse.c parsing/words.c parsing/init.c \
+		parsing/env.c parsing/tokens.c parsing/lexer.c \
+		execution/builtins/echo.c execution/builtins/pwd.c \
 		execution/builtins/env.c execution/builtins/exit.c \
 		execution/start_session.c execution/redirections/her.c \
-		execution/builtins/unset.c execution/builtins/cd.c
-		
+		execution/builtins/unset.c execution/builtins/cd.c \
+		execution/builtins/utils.c
 OBJS = $(SRCS:.c=.o)
 LIBFT= libft.a
 LIBFT_DIR= libft/

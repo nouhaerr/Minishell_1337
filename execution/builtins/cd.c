@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 11:16:58 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/27 17:23:49 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:40:21 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	sh_cd(t_parser *env_cmd)
 	// t_parser	*pwd;
 	t_env	*env_oldpwd;
 	t_env	*pwd_home;
-	char	**oldpwd
+	char	**oldpwd;
 	// int	i;
 
 	// i = 1;
@@ -48,13 +48,13 @@ void	sh_cd(t_parser *env_cmd)
 	if (!env_cmd->args || !ft_strcmp(env_cmd->args->value, "--")
 		|| !ft_strcmp(env_cmd->args->value, "~"))
 		cd_home(pwd_home);
-	else
-	{
-		if (ft_strcmp(env_cmd->args->value[0], "-"))
-			cd_oldpwd(oldpwd);
-		// else
-		// 	cd_newpwd();
-	}
+	// else
+	// {
+	// 	if (ft_strcmp(env_cmd->args->value[0], "-"))
+	// 		cd_oldpwd(oldpwd);
+	// 	// else
+	// 	// 	cd_newpwd();
+	// }
 	// cd / to root
 	// cd . or cd ..
 	// cd filename or cd foldername

@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 17:18:08 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/27 17:26:20 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:42:15 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	cd_home(t_env *pwd_home)
 	}	
 }
 
-void	cd_oldpwd(char **oldpwd)
-{
-	char	*oldpath;
-}
+// void	cd_oldpwd(char **oldpwd)
+// {
+// 	char	*oldpath;
+// }

@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/27 17:29:34 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:34:54 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,10 @@ int	main(int ac, char **av, char **env)
 	t_token		*tokens;
 	t_lexer		*lexer;
 	t_parser	*parser;
-	// t_env		*my_envs;
 	int			base;
-
 	(void)ac;
 	(void)av;
+
 	lexer = malloc(sizeof(t_lexer));
 	glb_var.list = save_my_env(env);
 	while (1)
