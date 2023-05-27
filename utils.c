@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:18:35 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/26 15:35:15 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/26 18:39:09 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void check_struct(t_parser *parser)
 		t_data2 *her = parser -> heredoc;
 		t_data *in = parser -> infiles;
 		t_data *args = parser -> args;
-		t_data *cmd = parser -> cmd;
+		char *cmd = parser -> cmd;
 		printf("struct number %d\n", ++i);
 		while(out)
 		{
@@ -71,11 +71,7 @@ void check_struct(t_parser *parser)
 			printf("input : [%s]\n ", (in) -> value);
 			(in) = (in) -> next;
 		}
-		while (cmd)
-		{
-			printf("cmd: [%s]\n", (cmd) -> value);
-			(cmd) = (cmd) -> next;
-		}
+		printf("cmd: [%s]\n", cmd);
 		while (args)
 		{
 			printf("args : [%s]\n", (args) -> value);

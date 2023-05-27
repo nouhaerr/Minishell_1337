@@ -6,7 +6,7 @@
 #    By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 02:49:56 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/05/26 14:50:10 by hobenaba         ###   ########.fr        #
+#    Updated: 2023/05/26 18:37:46 by hobenaba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ LIBFT_DIR= libft/
 NAME = minishell
 
 $(NAME) : $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) -lreadline $(OBJS) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) -I /Users/hobenaba/goinfre/homebrew/opt/readline/include/readline -L /Users/hobenaba/goinfre/homebrew/opt/readline/lib -lreadline $(OBJS) $(LIBFT) -o $(NAME)
 	@echo "\033[0;93m- your minishell is getting ready ...\033[0m"
 
 $(LIBFT): $(LIBFT_DIR)libft.h

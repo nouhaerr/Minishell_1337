@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:53:18 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/26 15:45:50 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/26 18:25:30 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ typedef struct s_glb
 }	t_glb;
 
 t_glb	glb_var;
+
+// thsi one must stau hier since they dont know the prototype of this function
+
+void	rl_replace_line (const char *text, int clear_undo); 
 
 size_t	env_list_size(t_env *env);
 

@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/26 15:20:40 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/26 18:49:32 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ char	*get_prompt(char *s)
 		cwd = ft_strdup("\e[1;95m!!->/minishell => \e[0m ");
 	return (cwd);
 }
-
 int	main(int ac, char **av, char **env)
 {
 	char		*input;
@@ -93,3 +92,6 @@ int	main(int ac, char **av, char **env)
 		free(input);
 	}
 }
+// i may use those functions later on 
+// rl_replace_line("Updated command", 0);
+// rl_redisplay();

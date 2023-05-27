@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/26 15:49:07 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/27 15:26:09 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ void	exec_cmd(t_parser *parser)
 	{
 		if (parser -> cmd != NULL)
 		{
-			if (!ft_strcmp(parser->cmd->value, "pwd"))
+			if (!ft_strcmp(parser->cmd, "pwd"))
 				sh_pwd();
-			else if (!ft_strcmp(parser->cmd->value, "echo"))
+			else if (!ft_strcmp(parser->cmd, "echo"))
 				sh_echo(&parser);
-			else if (!ft_strcmp(parser->cmd->value, "exit"))
+			else if (!ft_strcmp(parser->cmd, "exit"))
 				sh_exit(parser);
-			else if (!ft_strcmp(parser->cmd->value, "env"))
+			else if (!ft_strcmp(parser->cmd, "env"))
 				sh_env();
-			else if (!ft_strcmp(parser->cmd->value, "unset"))
+			else if (!ft_strcmp(parser->cmd, "unset"))
 				sh_unset(parser->args);
 		}
 		if (parser -> heredoc != NULL)
@@ -39,5 +39,12 @@ void	exec_cmd(t_parser *parser)
 			ft_lstaddback2(&my_heredoc, ft_lstnew2(str));
 		}
 		parser = parser->next;
-	}
+	}	
 }
+
+// this is just to check if my linked lst my_heredoc contains what it must contain.
+// while (my_heredoc)
+// 	{
+// 		printf("%s\n", my_heredoc -> value);
+// 		my_heredoc = my_heredoc -> next;
+// 	}

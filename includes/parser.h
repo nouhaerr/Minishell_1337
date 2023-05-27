@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:54:36 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/26 15:45:28 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/26 18:38:00 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct t_data2
 // this represent the main struct that i will send to my teammate
 typedef struct t_parser
 {
-	t_data			*cmd;
+	char			*cmd;
 	t_data			*args;
 	t_data2			*outfiles;
 	t_data			*infiles;

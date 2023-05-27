@@ -59,3 +59,6 @@ syntax errors to check:
 ->> FOR THE EXPANSION IN HEREDOC :
 	-> NONE -> expansion of the input.
 	-> "" oder '' -> no expansion.
+
+->> for signals in my heredoc :
+ .ctrl + d = go out of heredoc no less no more.
