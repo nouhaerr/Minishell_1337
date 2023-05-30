@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 21:15:28 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/27 17:46:57 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/30 16:40:56 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 int	other_tokens(t_lexer *lexer, int i, char *input)
 {
 	int	len;
-
+	
 	len = token_word(input, i, lexer->base);
 	if (lexer->base == 0 && input[i] == '#')
 		i += len;
 	else
+	{
 		lexer->str = ft_strjoin(lexer->str, ft_substr(input, i, len));
-	i += len;
+		i += len;
+	}
 	return (i);
 }
 

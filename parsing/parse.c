@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:14:51 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/27 17:46:53 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/30 16:49:27 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	parse(t_token **tokens, t_parser **parser, t_lexer *lexer)
 			lexer->i++;
 		}
 	}
-	// check_struct(*parser);
+	//check_struct(*parser);
 }
 // just to check on if my parsing is doing alright.
 

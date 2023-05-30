@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:53:34 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/27 17:46:44 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/30 16:41:21 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,42 @@ int	check_which_special_char(char c, char next_c, t_token **tokens)
 	return (0);
 }
 
+int ft_check_space(char *value)
+{
+	int i;
+
+	i = 0;
+	while (value[i])
+	{
+		if (value[i] == ' ')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 void	build_list(t_lexer *lexer, t_token **tokens)
 {
 	int	arten;
+	char **str;
+	int i;
 
 	if (lexer -> base2 != 0)
 		arten = quotes;
 	else
 		arten = general;
-	ft_lstaddback(tokens, ft_lstnew(lexer -> str, word, arten));
+	if (arten == general && ft_check_space(lexer -> str))
+	{
+		str = ft_split(lexer -> str, ' ');
+		i = 0;
+		while (str[i])
+		{
+			ft_lstaddback(tokens , ft_lstnew(str[i], word, arten));
+			i++;
+		}
+	}
+	else
+		ft_lstaddback(tokens, ft_lstnew(lexer -> str, word, arten));
 	lexer -> str = NULL;
 	lexer -> base2 = 0;
 }

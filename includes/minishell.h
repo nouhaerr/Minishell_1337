@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:53:18 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/27 17:28:11 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/30 16:41:29 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <sys/wait.h>
 # include <sys/errno.h>
 # include "../includes/execution.h"
+# include <signal.h>
 
 typedef struct s_glb
 {
@@ -37,8 +38,8 @@ t_glb	glb_var;
 
 // thsi one must stau hier since they dont know the prototype of this function
 
-void	rl_replace_line (const char *text, int clear_undo); 
-
+void	rl_replace_line (const char *text, int clear_undo);  // gotta add this cause in the library i downloaded they didnt have the prototype
+void signal_heredoc(int signal, siginfo_t *infos , void *contest);
 size_t	env_list_size(t_env *env);
 
 #endif
