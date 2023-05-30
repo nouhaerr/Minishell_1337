@@ -6,14 +6,23 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 17:18:08 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/30 19:20:59 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:53:26 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../../includes/minishell.h"
 
-void	cd_home(t_env *pwd_home)
+void	set_pwd(char **pwd)
+{
+	if (pwd)
+	{
+		free(*pwd);
+		*pwd = getcwd(NULL, 0);
+	}
+}
+
+void	cd_home(t_env *pwd_home, char **pwd)
 {
 	char *path;
 
@@ -28,6 +37,7 @@ void	cd_home(t_env *pwd_home)
 			glb_var.exit_status = 1;
 			return ;
 		}
+		set_pwd(pwd);
 		glb_var.exit_status = 0;
 	}
 	else
@@ -56,5 +66,7 @@ void	cd_oldpwd(char **oldpwd, char **pwd)
 			glb_var.exit_status = 1;
 			return ;
 		}
+		set_pwd(pwd);
+		glb_var.exit_status = 0;
 	}
 }
