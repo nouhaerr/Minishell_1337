@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 11:16:58 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/27 18:12:47 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:19:57 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	sh_cd(t_parser *env_cmd)
 		cd_home(pwd_home);
 	else
 	{
-		if (ft_strcmp(env_cmd->args->value[0], "-"))
+		if (ft_strcmp(env_cmd->args->value, "-"))
 			cd_oldpwd(oldpwd, pwd);
 		// else
 		// 	cd_newpwd();
