@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/30 16:41:40 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:33:11 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ int	main(int ac, char **av, char **env)
 		free((void *)prompt);
 		if (input == NULL)
 			break ;
-		add_history(input);
+		if (ft_strcmp(input, "") != 0)
+			add_history(input);
 		base = lex(input, &tokens, lexer);
 		if (!syntax_error(base, &tokens, input))
 		{

@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 09:14:11 by mac               #+#    #+#             */
-/*   Updated: 2023/05/24 14:49:23 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:29:50 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <stdio.h> 
 # include <limits.h>
 # include <fcntl.h>
-# include "get_next_line/get_next_line.h"
 
 typedef struct s_list
 {
