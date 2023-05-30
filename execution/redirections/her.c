@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:46:12 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/30 16:31:34 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/30 16:47:39 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ char	*her(t_data2 *heredoc, t_env *my_env)
 	int		i;
 	int		len;
 
-	printf("%d\n", getpid());
 	while (heredoc != NULL)
 	{
 		value = heredoc -> value;

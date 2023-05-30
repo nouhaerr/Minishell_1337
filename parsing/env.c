@@ -6,11 +6,11 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 13:38:39 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/30 14:51:04 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/30 16:41:24 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
+#include "../includes/minishell.h"
 
 t_env	*ft_lstnew_env(char *env, char *value)
 {

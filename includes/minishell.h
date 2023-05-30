@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:53:18 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/30 16:24:24 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/30 16:41:29 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@
 # include "../includes/env.h"
 # include "../execution/builtins/builtins.h"
 # include <stdio.h>
+# include <string.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <sys/errno.h>
 # include "../includes/execution.h"
 # include <signal.h>
 

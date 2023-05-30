@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 10:11:55 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/25 18:05:51 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/27 16:05:21 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,7 @@ void	sh_unset(t_data *arg)
 			return ;
 		}
 		if (env_find(glb_var.list, cur->value))
-		{
 			ft_list_remove_if(&glb_var.list, cur->value);
-		}
 		cur = cur->next;
 	}
 	glb_var.exit_status = 0;

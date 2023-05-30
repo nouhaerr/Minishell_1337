@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/30 16:08:34 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/30 16:41:40 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ int	main(int ac, char **av, char **env)
 	t_lexer		*lexer;
 	t_parser	*parser;
 	int			base;
-
 	(void)ac;
 	(void)av;
+
 	lexer = malloc(sizeof(t_lexer));
 	glb_var.list = save_my_env(env);
 	while (1)
@@ -97,13 +97,3 @@ int	main(int ac, char **av, char **env)
 // i may use those functions later on 
 // rl_replace_line("Updated command", 0);
 // rl_redisplay();
-
-// instructions of code that im testing with :
-
-// while (tokens)
-// 			{
-// 				printf("[%s=%d==%d]\n", tokens -> value, tokens-> type, tokens -> arten);
-// 				tokens = tokens -> next;
-// 			}
-
-// check getenv function

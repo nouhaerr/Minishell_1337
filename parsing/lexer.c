@@ -6,11 +6,11 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:53:34 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/30 15:27:00 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/30 16:41:21 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
+#include "../includes/minishell.h"
 
 int	check_which_special_char(char c, char next_c, t_token **tokens)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   my_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:56:47 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/26 18:40:18 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:46:48 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
+#include "../includes/minishell.h"
 
 void	free_data1(t_data *list)
 {

@@ -6,11 +6,11 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 21:15:28 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/30 15:26:43 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/30 16:40:56 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
+#include "../includes/minishell.h"
 
 int	other_tokens(t_lexer *lexer, int i, char *input)
 {

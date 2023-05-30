@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   words.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 21:20:05 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/26 15:34:29 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:47:18 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
+#include "../includes/minishell.h"
 
 int	normal_word(char *input, int start)
 {
