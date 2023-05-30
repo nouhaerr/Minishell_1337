@@ -6,13 +6,13 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/26 18:49:32 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/30 16:08:34 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 
-int	syntax_error(int base, t_token **tokens)
+int	syntax_error(int base, t_token **tokens, char *input)
 {
 	t_token	*tokens2;
 	t_token	*previous;
@@ -24,6 +24,8 @@ int	syntax_error(int base, t_token **tokens)
 		tokens2 = *tokens;
 	if (base != 0)
 		return (printf("Error : unclosed quotes\n"), 1);
+	if (tokens2 == NULL && input[0] != '\0' && input[0] != '#')
+		return (printf("command not found\n"), 1);
 	while (tokens2)
 	{
 		if (tokens2 -> type == the_pipe
@@ -80,7 +82,7 @@ int	main(int ac, char **av, char **env)
 			break ;
 		add_history(input);
 		base = lex(input, &tokens, lexer);
-		if (!syntax_error(base, &tokens))
+		if (!syntax_error(base, &tokens, input))
 		{
 			parse(&tokens, &parser, lexer);
 			exec_cmd(parser);
@@ -95,3 +97,13 @@ int	main(int ac, char **av, char **env)
 // i may use those functions later on 
 // rl_replace_line("Updated command", 0);
 // rl_redisplay();
+
+// instructions of code that im testing with :
+
+// while (tokens)
+// 			{
+// 				printf("[%s=%d==%d]\n", tokens -> value, tokens-> type, tokens -> arten);
+// 				tokens = tokens -> next;
+// 			}
+
+// check getenv function

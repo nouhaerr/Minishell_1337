@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 21:15:28 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/26 15:35:55 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/30 15:26:43 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 int	other_tokens(t_lexer *lexer, int i, char *input)
 {
 	int	len;
-
+	
 	len = token_word(input, i, lexer->base);
 	if (lexer->base == 0 && input[i] == '#')
 		i += len;
 	else
+	{
 		lexer->str = ft_strjoin(lexer->str, ft_substr(input, i, len));
-	i += len;
+		i += len;
+	}
 	return (i);
 }
 
