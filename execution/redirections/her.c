@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:46:12 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/30 16:47:39 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/31 17:36:12 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,13 @@ int	env_expansion_for_heredoc2(char *input, int i, t_env *my_env, char **str)
 	char	*env;
 	char	*str_env;
 
+	
 	len = token_word(input, i + 1, -1);
 	env = ft_substr(input, i + 1, len);
 	if (len != 0)
 	{
+		// printf("imhier\n");
+		// sleep (3);
 		env = ft_substr(input, i + 1, len);
 		str_env = check_env(env, my_env);
 		*str = ft_strjoin(*str, str_env);
@@ -68,7 +71,8 @@ char	*her(t_data2 *heredoc, t_env *my_env)
 	char	*str;
 	int		i;
 	int		len;
-
+	
+	(void)my_env;
 	while (heredoc != NULL)
 	{
 		value = heredoc -> value;
@@ -89,7 +93,7 @@ char	*her(t_data2 *heredoc, t_env *my_env)
 					i += len;
 				}
 			}
-			str = ft_strjoin(str, ft_strdup("\n"));
+		str = ft_strjoin(str, ft_strdup("\n"));
 		}
 		else
 			str = ft_strjoin(str, ft_strjoin(input, ft_strdup("\n")));

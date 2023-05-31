@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 21:15:28 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/30 16:40:56 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/31 19:44:28 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ int	token_env(char *input, int i, t_lexer *lexer)
 		free(itoa);
 		i += 2;
 	}
+	else if (ft_isdigit(input[i + 1]))
+		i += 2;
 	else
 		i = token_env2(input, i, lexer);
 	return (i);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 17:18:08 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/31 03:10:42 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/31 16:25:19 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	cd_home(t_env *pwd_home, char **pwd, char **oldpwd, char *cwd)
 void	cd_oldpwd(char **oldpwd, char **pwd)
 {
 	char	*cwd;
-
+	
 	cwd = getcwd(NULL, 0);
 	if (!oldpwd)
 	{

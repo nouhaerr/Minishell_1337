@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:54:28 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/26 15:47:19 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/31 19:24:50 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ enum t_enum
 enum t_type
 {
 	general, //0
-	quotes // 1
+	quotes, // 1
+	env_general,
+	env_quotes
 }	t_type;
 
 
