@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 17:18:08 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/31 02:29:21 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/31 03:10:42 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	cd_home(t_env *pwd_home, char **pwd, char **oldpwd, char *cwd)
 
 void	cd_oldpwd(char **oldpwd, char **pwd)
 {
-	(void)pwd;
 	char	*cwd;
 
 	cwd = getcwd(NULL, 0);
@@ -82,17 +81,4 @@ void	cd_oldpwd(char **oldpwd, char **pwd)
 		set_pwd(pwd);
 		glb_var.exit_status = 0;
 	}
-	// else
-	// {
-	// 	if (chdir(*oldpwd) == -1)
-	// 	{
-	// 		printf("kk\n");
-	// 		printf("minishell: cd: %s: %s\n",cwd, strerror(errno));
-	// 		glb_var.exit_status = 1;
-	// 		return ;
-	// 	}
-	// 	
-	// 	set_pwd(pwd);
-	// 	glb_var.exit_status = 0;
-	// }
 }
