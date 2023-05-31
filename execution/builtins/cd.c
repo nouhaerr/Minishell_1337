@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 11:16:58 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/31 02:23:35 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/31 05:40:59 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	sh_cd(t_parser *env_cmd)
 	}
 	// cd / to root
 	// cd . or cd ..
-	// cd filename or cd foldername
-	// cd path_name
+	// cd filename or cd foldername path_name
 	// cd name lsjd (erreur)
 }
