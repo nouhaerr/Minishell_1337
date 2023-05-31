@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 17:18:08 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/31 16:25:19 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/31 23:24:30 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,22 @@ void	cd_home(t_env *pwd_home, char **pwd, char **oldpwd, char *cwd)
 	{
 		if (chdir(path) == -1)
 		{
-			printf("minishell: cd: %s: %s\n", path, strerror(errno));
 			glb_var.exit_status = 1;
-			return ;
+			printf("minishell: cd: %s: %s\n", path, strerror(errno));
+			return (free(cwd));
 		}
-		else if (oldpwd != NULL)
+		else if (oldpwd == NULL)
+			ft_lstaddback_env(&glb_var.list, ft_lstnew_env(ft_strdup("OLDPWD"), cwd));
+		else
 			set_oldpwd(oldpwd, cwd);
 		set_pwd(pwd);
 		glb_var.exit_status = 0;
 	}
 	else
 	{
-		printf("minishell: cd: HOME not set\n");
 		glb_var.exit_status = 1;
+		printf("minishell: cd: HOME not set\n");
+		return (free(cwd));
 	}
 }
 
@@ -61,17 +64,17 @@ void	cd_oldpwd(char **oldpwd, char **pwd)
 	cwd = getcwd(NULL, 0);
 	if (!oldpwd)
 	{
-		printf("minishell: cd: OLDPWD not set\n");
 		glb_var.exit_status = 1;
-			return ;
+		printf("minishell: cd: OLDPWD not set\n");
+		return(free(cwd));
 	}
 	else
 	{
 		if (chdir(*oldpwd) == -1)
 		{
-			printf("minishell: cd: %s: %s\n",cwd, strerror(errno));
 			glb_var.exit_status = 1;
-			return ;
+			printf("minishell: cd: %s: %s\n",cwd, strerror(errno));
+			return(free(cwd));
 		}
 		else
 		{
@@ -81,4 +84,29 @@ void	cd_oldpwd(char **oldpwd, char **pwd)
 		set_pwd(pwd);
 		glb_var.exit_status = 0;
 	}
+}
+
+void	cd_newpwd(t_data *name, char **oldpwd, char **pwd)
+{
+	char	*cwd;
+
+	cwd = getcwd(NULL, 0);
+	if (chdir(name->value) == -1)
+	{
+		glb_var.exit_status = 1;
+		if (name->value[0] == '-' && name->value)
+		{
+			printf("minishell: cd: %s: invalid option\n", name->value);
+			printf("cd: usage: cd [-L|-P] [dir]\n");
+		}
+		else
+			printf("minishell: cd: %s: %s\n", name->value, strerror(errno));
+		return(free(cwd));
+	}
+	else if (oldpwd == NULL)
+		ft_lstaddback_env(&glb_var.list, ft_lstnew_env(ft_strdup("OLDPWD"), cwd));
+	else
+		set_oldpwd(oldpwd, cwd);
+	set_pwd(pwd);
+	glb_var.exit_status = 0;
 }
