@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/31 19:40:14 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/31 22:27:11 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	main(int ac, char **av, char **env)
 		if (!syntax_error(base, &tokens, input))
 		{
 			parse(&tokens, &parser, lexer);
-			exec_cmd(parser, my_heredoc);
+			start_exec(parser, my_heredoc);
 			free_mylist(parser, 1);
 		}
 		else
