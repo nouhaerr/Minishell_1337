@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:36:48 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/30 19:42:40 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/30 23:27:12 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,5 @@ void	exec_cmd(t_parser *parser)
 			sh_cd(parser);
 		}
 		parser = parser->next;
-	}	
+	}
 }

@@ -6,13 +6,13 @@
 #    By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 02:49:56 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/05/30 19:48:30 by nerrakeb         ###   ########.fr        #
+#    Updated: 2023/05/31 00:34:28 by nerrakeb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 RDFLAGS +=  -lreadline -L/goinfre/nerrakeb/homebrew/opt/readline/lib
 INCLUDES += -I /goinfre/nerrakeb/homebrew/opt/readline/include
 SRCS =	main.c parsing/my_free.c \
@@ -23,7 +23,7 @@ SRCS =	main.c parsing/my_free.c \
 		execution/builtins/env.c execution/builtins/exit.c \
 		execution/for_heredoc.c execution/redirections/her.c \
 		execution/builtins/unset.c execution/builtins/utils.c \
-		execution/builtins/cd.c execution/builtins/start_session.c \
+		execution/builtins/cd.c execution/start_session.c \
 		# execution/builtins/execution.c
 OBJS = $(SRCS:.c=.o)
 LIBFT= libft.a
