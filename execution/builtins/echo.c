@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 11:18:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/24 16:39:28 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/01 00:04:25 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	sh_echo(t_parser **echo)
 	
 	i = 0;
 	tmp = *echo;
+	glb_var.exit_status = 0;
 	if (!tmp->args) // check arg is null
 		printf("\n");
 	else if (tmp->args->value[0] == '-')
