@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 17:18:08 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/31 23:24:30 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/31 23:29:56 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,7 @@ void	cd_home(t_env *pwd_home, char **pwd, char **oldpwd, char *cwd)
 	else
 	{
 		glb_var.exit_status = 1;
-		printf("minishell: cd: HOME not set\n");
-		return (free(cwd));
+		return (printf("minishell: cd: HOME not set\n"), free(cwd));
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 10:11:55 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/31 23:26:50 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/05/31 23:49:44 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,13 @@ int	env_search(t_env *head, char *s)
 	return (0);
 }
 
+static void	unset_error(t_data *arg)
+{
+	glb_var.exit_status = 2;
+	printf("minishell: unset: %s: invalid option\n", arg->value);
+	printf("unset: usage: unset [-f] [-v] [name ...]\n");
+}
+
 void	sh_unset(t_data *arg)
 {
 	int		i;
@@ -72,9 +79,7 @@ void	sh_unset(t_data *arg)
 		return ;
 	if (cur->value[i] == '-' && cur->value[i + 1])
 	{
-		printf("minishell: unset: %s: invalid option\n", arg->value);
-		printf("unset: usage: unset [-f] [-v] [name ...]\n");
-		glb_var.exit_status = 2;
+		unset_error(arg);
 		return ;
 	}
 	while (cur)
