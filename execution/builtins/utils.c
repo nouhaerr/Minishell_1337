@@ -6,14 +6,28 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 17:18:08 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/30 17:02:06 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/31 16:25:19 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../../includes/minishell.h"
 
-void	cd_home(t_env *pwd_home)
+void	set_pwd(char **pwd)
+{
+	if (pwd)
+	{
+		free(*pwd);
+		*pwd = getcwd(NULL, 0);
+	}
+}
+
+void	set_oldpwd(char **oldpwd, char *cwd)
+{
+	free(*oldpwd);
+	*oldpwd = cwd;
+}
+
+void	cd_home(t_env *pwd_home, char **pwd, char **oldpwd, char *cwd)
 {
 	char *path;
 
@@ -28,13 +42,16 @@ void	cd_home(t_env *pwd_home)
 			glb_var.exit_status = 1;
 			return ;
 		}
+		else if (oldpwd != NULL)
+			set_oldpwd(oldpwd, cwd);
+		set_pwd(pwd);
 		glb_var.exit_status = 0;
 	}
 	else
 	{
 		printf("minishell: cd: HOME not set\n");
 		glb_var.exit_status = 1;
-	}	
+	}
 }
 
 void	cd_oldpwd(char **oldpwd, char **pwd)
@@ -46,6 +63,7 @@ void	cd_oldpwd(char **oldpwd, char **pwd)
 	{
 		printf("minishell: cd: OLDPWD not set\n");
 		glb_var.exit_status = 1;
+			return ;
 	}
 	else
 	{
@@ -55,5 +73,12 @@ void	cd_oldpwd(char **oldpwd, char **pwd)
 			glb_var.exit_status = 1;
 			return ;
 		}
+		else
+		{
+			printf("%s\n", *oldpwd);
+			set_oldpwd(oldpwd, cwd);
+		}
+		set_pwd(pwd);
+		glb_var.exit_status = 0;
 	}
 }

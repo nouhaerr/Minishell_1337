@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:14:51 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/30 16:49:27 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/31 19:25:56 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,15 @@ t_parser	*build_list_parser(t_parser **parser, t_lexer *lexer, t_parser *t)
 		lexer->tokens2 = (lexer->tokens2)->next;
 	}
 	lexer->tok = my_next_word(lexer->tokens2);
-	create_node(t, lexer);
+	if (lexer -> tok != NULL)
+		create_node(t, lexer);
 	return (t);
 }
-
+// if (lexer-> tokens2 -> arten == my_env && (lexer ->tokens2 ->next != NULL && lexer->tokens2-> next-> arten == my_env))
+		// {
+		// 	printf("abigiuos redirect\n");
+		// 	return;
+		// }
 void	parse(t_token **tokens, t_parser **parser, t_lexer *lexer)
 {
 	t_parser	*t;
@@ -58,6 +63,8 @@ void	parse(t_token **tokens, t_parser **parser, t_lexer *lexer)
 	while (lexer->tokens2)
 	{
 		t = build_list_parser(parser, lexer, t);
+		if (lexer -> tok == NULL)
+			return;
 		if ((lexer->tokens2)->type == l_rdr || (lexer->tokens2)->type == r_rdr \
 		|| (lexer->tokens2)->type == dr_rdr \
 		|| (lexer->tokens2)->type == heredoc)
@@ -68,7 +75,7 @@ void	parse(t_token **tokens, t_parser **parser, t_lexer *lexer)
 			lexer->i++;
 		}
 	}
-	//check_struct(*parser);
+	check_struct(*parser);
 }
 // just to check on if my parsing is doing alright.
 
@@ -79,6 +86,16 @@ t_token	*my_next_word(t_token *tokens)
 	t = tokens;
 	while (tokens)
 	{
+		if (tokens -> type != word && tokens -> type != the_pipe)
+		{
+			t_token *t2;
+			t2 = tokens -> next;
+			if ( t2 != NULL && t2 -> arten == env_general && (t2 ->next != NULL && t2-> next-> arten == env_general))
+			{
+				printf("abigiuos redirect\n");
+				return(NULL);
+			}
+		}
 		if (tokens->type == word)
 			return (tokens);
 		tokens = tokens->next;

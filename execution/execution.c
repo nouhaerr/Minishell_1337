@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/22 06:15:22 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/31 05:37:56 by nerrakeb         ###   ########.fr       */
+/*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
+/*   Updated: 2023/05/30 19:41:03 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../includes/minishell.h"
 
-void	sh_pwd(void)
+void	start_exec(t_parser *parser, t_token *tk)
 {
-	char	buf[4096]; //Mémoire tampon pour stocker le répertoire de travail actuel
-	// char	*pwd; //Maximum number of bytes in a pathname, including the terminating null character.
-
-	if (!getcwd(buf, 4096))//the PATH_MAX = 4096bytes  that is supported by the operating system linux.
-		perror("minishell");
-	else
-		printf("%s\n", buf);
+	if (!parser)
+		return ;
+	else if (tk->type == the_pipe)
+		pipe_line();
+	else if (tk->type == word)
+		exec_cmd(parser);
 }

@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/30 16:41:40 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/31 19:40:14 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	syntax_error(int base, t_token **tokens, char *input)
 		tokens2 = *tokens;
 	if (base != 0)
 		return (printf("Error : unclosed quotes\n"), 1);
-	if (tokens2 == NULL && input[0] != '\0' && input[0] != '#')
+	if (!ft_strcmp("\"\"", input) || !ft_strcmp("''", input))
 		return (printf("command not found\n"), 1);
 	while (tokens2)
 	{
@@ -65,12 +65,14 @@ int	main(int ac, char **av, char **env)
 	t_token		*tokens;
 	t_lexer		*lexer;
 	t_parser	*parser;
+	t_data 	*my_heredoc;
 	int			base;
 	(void)ac;
 	(void)av;
 
 	lexer = malloc(sizeof(t_lexer));
 	glb_var.list = save_my_env(env);
+	my_heredoc = NULL;
 	while (1)
 	{
 		tokens = NULL;
@@ -80,12 +82,14 @@ int	main(int ac, char **av, char **env)
 		free((void *)prompt);
 		if (input == NULL)
 			break ;
-		add_history(input);
+		if (ft_strcmp(input, "") != 0)
+			add_history(input);
 		base = lex(input, &tokens, lexer);
+		
 		if (!syntax_error(base, &tokens, input))
 		{
 			parse(&tokens, &parser, lexer);
-			exec_cmd(parser);
+			exec_cmd(parser, my_heredoc);
 			free_mylist(parser, 1);
 		}
 		else
@@ -97,3 +101,8 @@ int	main(int ac, char **av, char **env)
 // i may use those functions later on 
 // rl_replace_line("Updated command", 0);
 // rl_redisplay();
+// while (tokens)
+// {
+// 	printf("[[%s]]\n", tokens -> value);
+// 	tokens = tokens -> next;
+// }

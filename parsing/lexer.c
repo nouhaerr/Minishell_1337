@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:53:34 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/30 16:41:21 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/05/31 19:39:26 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,11 @@ void	build_list(t_lexer *lexer, t_token **tokens)
 		str = ft_split(lexer -> str, ' ');
 		i = 0;
 		while (str[i])
-		{
-			ft_lstaddback(tokens , ft_lstnew(str[i], word, arten));
+		{	
+			if (lexer -> base == 0)
+				ft_lstaddback(tokens , ft_lstnew(str[i], word, env_general));
+			else
+				ft_lstaddback(tokens , ft_lstnew(str[i], word, env_quotes));
 			i++;
 		}
 	}
@@ -84,7 +87,7 @@ int	lex(char *input, t_token **tokens, t_lexer *lexer)
 	lexer_init(lexer);
 	while (input[i])
 	{
-		if (input[i] == ' ')
+		if (input[i] == ' ' && lexer -> base == 0)
 			i = ft_ignore_spaces(input, i);
 		if (ft_strchr("$|><", input[i]) != NULL && lexer -> base == 0)
 		{
@@ -96,7 +99,7 @@ int	lex(char *input, t_token **tokens, t_lexer *lexer)
 			i = partition_tokens(lexer, input, i);
 		if (input[i] == '$')
 			i = token_env(input, i, lexer);
-		if (lexer -> str != NULL && (input [i] == '\0'
+		if (lexer -> base == 0 && lexer -> str != NULL && (input [i] == '\0'
 				|| ft_strchr(" |><", input[i]) != NULL))
 			build_list(lexer, tokens);
 	}
