@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 10:11:55 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/31 23:49:44 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/01 06:38:22 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,31 +68,33 @@ static void	unset_error(t_data *arg)
 	printf("unset: usage: unset [-f] [-v] [name ...]\n");
 }
 
-void	sh_unset(t_data *arg)
+void	sh_unset(t_parser *arg)
 {
 	int		i;
-	t_data	*cur;
+	t_parser	*cur;
 
 	i = 0;
-	cur = arg;
-	if (!cur)
+	cur = arg;	
+	if (!cur->args)
 		return ;
-	if (cur->value[i] == '-' && cur->value[i + 1])
+	if (cur->args->value[i] == '-' && cur->args->value[i + 1])
 	{
-		unset_error(arg);
+		unset_error(cur->args);
 		return ;
 	}
-	while (cur)
+	while (cur->args)
 	{
-		if (!unset_arg(cur->value) || ft_isdigit(cur->value[0]))
+		if (!unset_arg(cur->args->value) || ft_isdigit(cur->args->value[0]))
 		{
-			printf("minishell: unset: `%s': not a valid identifier\n", cur->value);
+			printf("minishell: unset: `%s': not a valid identifier\n", cur->args->value);
 			glb_var.exit_status = 1;
-			return ;
 		}
-		if (env_search(glb_var.list, cur->value))
-			ft_list_remove_if(&glb_var.list, cur->value);
-		cur = cur->next;
+		if (env_search(glb_var.list, cur->args->value))
+			ft_list_remove_if(&glb_var.list, cur->args->value);
+		cur->args = cur->args->next;
 	}
-	glb_var.exit_status = 0;
+	if (glb_var.exit_status == 1)
+		glb_var.exit_status = 1;
+	else
+		glb_var.exit_status = 0;
 }

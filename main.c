@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/01 05:16:00 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/01 05:34:55 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,10 @@ int	main(int ac, char **av, char **env)
 		if (ft_strcmp(input, "") != 0)
 			add_history(input);
 		base = lex(input, &tokens, lexer);
-		
 		if (!syntax_error(base, &tokens, input))
 		{
 			parse(&tokens, &parser, lexer);
-			start_exec(parser, my_heredoc);
+			execution(parser, my_heredoc);
 			free_mylist(parser, 1);
 		}
 		else
