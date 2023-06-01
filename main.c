@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/31 22:27:11 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/01 05:16:00 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ int	syntax_error(int base, t_token **tokens, char *input)
 	else
 		tokens2 = *tokens;
 	if (base != 0)
-		return (printf("Error : unclosed quotes\n"), 1);
+		return (printf("minishell : unclosed quotes\n"), 1);
 	if (!ft_strcmp("\"\"", input) || !ft_strcmp("''", input))
-		return (printf("command not found\n"), 1);
+		return (printf("minishell: : command not found\n"), 1);
 	while (tokens2)
 	{
 		if (tokens2 -> type == the_pipe
 			&& (previous == NULL || tokens2 -> next == NULL))
-			return (printf("Error : syntax error\n"), 1);
+			return (printf("minishell: syntax error near unexpected token `|'\n"), 1);
 		if ((tokens2 -> type != the_pipe && tokens2 -> type != word)
 			&& (tokens2 -> next == NULL || (tokens2 -> next)-> type != word))
-			return (printf("Error : syntax error\n"), 1);
+			return (printf("minishell: syntax error near unexpected token `newline'\n"), 1);
 		previous = tokens2;
 		tokens2 = tokens2 -> next;
 	}

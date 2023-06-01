@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 09:14:11 by mac               #+#    #+#             */
-/*   Updated: 2023/05/30 19:29:50 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/01 00:25:54 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ size_t	my_countnbr(int n);
 int		ft_strcmp(char *s1, char *s2);
 long	ft_atoi2(const char *str);
 char	*ft_strjoin2(char const *s1, char const *s2);
+void	ft_tolower2(char *str);
 
 #endif

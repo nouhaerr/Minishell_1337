@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/31 22:30:50 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/01 05:06:22 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,23 @@ void	exec_redir(t_parser *parser, t_data *my_heredoc)
 
 void	exec_cmd(t_parser *parser)
 {
-	while (parser != NULL)
-	{
-		if (!ft_strcmp(parser->cmd, "pwd"))
-			sh_pwd();
-		else if (!ft_strcmp(parser->cmd, "echo"))
-			sh_echo(&parser);
-		else if (!ft_strcmp(parser->cmd, "exit"))
-			sh_exit(parser);
-		else if (!ft_strcmp(parser->cmd, "env"))
-			sh_env();
-		else if (!ft_strcmp(parser->cmd, "unset"))
-			sh_unset(parser->args);
-		else if (!ft_strcmp(parser->cmd, "cd"))
-			sh_cd(parser);
-		parser = parser->next;
-	}
+	char	*cmd2;
+
+	cmd2 = ft_strdup(parser->cmd);
+	ft_tolower2(cmd2);
+	if (!ft_strcmp(cmd2, "pwd"))
+		sh_pwd();
+	else if (!ft_strcmp(cmd2, "echo"))
+		sh_echo(&parser);
+	else if (!ft_strcmp(cmd2, "exit"))
+		sh_exit(parser);
+	else if (!ft_strcmp(cmd2, "env"))
+		sh_env();
+	else if (!ft_strcmp(cmd2, "unset"))
+		sh_unset(parser->args);
+	else if (!ft_strcmp(cmd2, "cd"))
+		sh_cd(parser);
+	// else
+	// 	execution(parser, cmd2);
+	free(cmd2);
 }

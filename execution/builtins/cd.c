@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 11:16:58 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/31 23:18:34 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/01 03:40:19 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	sh_cd(t_parser *env_cmd)
 	t_env	*env_oldpwd;
 	t_env	*pwd_home;
 	t_env	*env_pwd;
-	char	**oldpwd;
+	char	**oldpwd; 
 	char	**pwd;
 
 	oldpwd = NULL;
