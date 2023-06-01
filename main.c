@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/01 05:34:55 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/01 13:54:54 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	syntax_error(int base, t_token **tokens, char *input)
 	else
 		tokens2 = *tokens;
 	if (base != 0)
-		return (printf("minishell : unclosed quotes\n"), 1);
+		return (printf("minishell : syntax error near unexpected token \n"), 1);
 	if (!ft_strcmp("\"\"", input) || !ft_strcmp("''", input))
 		return (printf("minishell: : command not found\n"), 1);
 	while (tokens2)
