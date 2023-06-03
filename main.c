@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/03 20:47:00 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/03 21:06:41 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	syntax_error(int base, t_token **tokens, char *input)
 	else
 		tokens2 = *tokens;
 	if (base != 0)
-		return (printf("minishell : syntax error near unexpected token \n"), 1);
+		return (printf("minishell: syntax error near unexpected token \n"), 1);
 	if (!ft_strcmp("\"\"", input) || !ft_strcmp("''", input))
 		return (printf("minishell: : command not found\n"), 1);
 	while (tokens2)
