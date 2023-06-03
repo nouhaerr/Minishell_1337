@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/03 20:58:27 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/03 22:21:55 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	exec_redir(t_parser *parser, t_data *my_heredoc)
 	}
 }
 
-void	exec_cmd(t_parser *parser)
+void	exec_builtin(t_parser *parser)
 {
 	char	*cmd2;
 
@@ -50,7 +50,5 @@ void	exec_cmd(t_parser *parser)
 		sh_unset(parser->args);
 	else if (!ft_strcmp(cmd2, "cd"))
 		sh_cd(parser);
-	// else
-	// 	begin_exec(parser, cmd2);
 	free(cmd2);
 }
