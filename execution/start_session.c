@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_session.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/01 13:45:36 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/03 20:58:27 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ void	exec_cmd(t_parser *parser)
 		sh_pwd();
 	else if (!ft_strcmp(cmd2, "echo"))
 		sh_echo(&parser);
-	else if (!ft_strcmp(cmd2, "exit"))
+	else if (!ft_strcmp(parser->cmd, "exit"))
 		sh_exit(parser);
 	else if (!ft_strcmp(cmd2, "env"))
 		sh_env();
-	else if (!ft_strcmp(cmd2, "unset"))
-		sh_unset(parser);
+	else if (!ft_strcmp(parser->cmd, "unset"))
+		sh_unset(parser->args);
 	else if (!ft_strcmp(cmd2, "cd"))
 		sh_cd(parser);
 	// else
