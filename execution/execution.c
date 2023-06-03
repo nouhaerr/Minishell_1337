@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/03 22:23:28 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/04 00:11:15 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,20 @@ int	isbuiltin(t_parser *parser)
 
 void	execution(t_parser *parser, t_data *my_heredoc)
 {
-	(void)my_heredoc;
+	int	pid;
+	int	fd[2];
+
 	if (!parser)
 		return ;
 	else if (parser->next == NULL && parser->cmd && !isbuiltin(parser))
 		exec_builtin(parser);
+	else if (parser->heredoc || parser->infiles || parser->outfiles)
+		exec_redir(parser, my_heredoc);
 	// else
 	// {
-	// 	if (parser->next == NULL && parser->cmd)
-	// 		exec_cmd(parser);
+	// else if (parser->next == NULL && parser->cmd)
+	// 		exec_cmd(parser, fd);
 	// 	else if (parser->next)
 	// 		pipe_line();	
-	// 	else if (parser->heredoc || parser->infiles || parser->outfiles)
-	// 		exec_redir(parser, my_heredoc);
 	// }
 }
