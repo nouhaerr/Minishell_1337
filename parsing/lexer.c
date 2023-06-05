@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:53:34 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/31 19:39:26 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/05 20:00:28 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,12 @@ int	lex(char *input, t_token **tokens, t_lexer *lexer)
 	lexer_init(lexer);
 	while (input[i])
 	{
+		if (input[i] == '\\')
+		{
+			if (input[i + 1] == '\0')
+				return (10);
+			i++;
+		}
 		if (input[i] == ' ' && lexer -> base == 0)
 			i = ft_ignore_spaces(input, i);
 		if (ft_strchr("$|><", input[i]) != NULL && lexer -> base == 0)
@@ -97,6 +103,8 @@ int	lex(char *input, t_token **tokens, t_lexer *lexer)
 		}
 		else
 			i = partition_tokens(lexer, input, i);
+		if (input[i] == lexer -> c && input[i - 1] == lexer -> c && (lexer -> str == NULL && (input[i + 1] == ' ' || input[i + 1] == '\0' )))
+			lexer -> str = ft_strjoin(lexer -> str, ft_substr(input, i - 1, 2));
 		if (input[i] == '$')
 			i = token_env(input, i, lexer);
 		if (lexer -> base == 0 && lexer -> str != NULL && (input [i] == '\0'

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/04 00:11:15 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/05 19:12:28 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int	isbuiltin(t_parser *parser)
 
 void	execution(t_parser *parser, t_data *my_heredoc)
 {
-	int	pid;
-	int	fd[2];
+	//int	pid;
+	//int	fd[2];
 
 	if (!parser)
 		return ;

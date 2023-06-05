@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   words.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 21:20:05 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/27 17:47:18 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/05 19:46:18 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	normal_word(char *input, int start)
 	int	j;
 
 	j = 0;
-	while (input[start] && ft_strchr(" $|><\'\"", input[start]) == NULL)
+	while (input[start] && ft_strchr(" $|><\'\"\\", input[start]) == NULL)
 	{
 		j++;
 		start++;

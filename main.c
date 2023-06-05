@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/03 21:06:41 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/05 20:03:31 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 
-int	syntax_error(int base, t_token **tokens, char *input)
+int	syntax_error(int base, t_token **tokens)
 {
 	t_token	*tokens2;
 	t_token	*previous;
@@ -24,8 +24,6 @@ int	syntax_error(int base, t_token **tokens, char *input)
 		tokens2 = *tokens;
 	if (base != 0)
 		return (printf("minishell: syntax error near unexpected token \n"), 1);
-	if (!ft_strcmp("\"\"", input) || !ft_strcmp("''", input))
-		return (printf("minishell: : command not found\n"), 1);
 	while (tokens2)
 	{
 		if (tokens2 -> type == the_pipe
@@ -85,7 +83,7 @@ int	main(int ac, char **av, char **env)
 		if (ft_strcmp(input, "") != 0)
 			add_history(input);
 		base = lex(input, &tokens, lexer);
-		if (!syntax_error(base, &tokens, input))
+		if (!syntax_error(base, &tokens))
 		{
 			parse(&tokens, &parser, lexer);
 			execution(parser, my_heredoc);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 21:15:28 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/31 19:44:28 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/05 19:49:33 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	other_tokens(t_lexer *lexer, int i, char *input)
 	else
 	{
 		lexer->str = ft_strjoin(lexer->str, ft_substr(input, i, len));
+		if (input[len] == '\\')
+			i++;
 		i += len;
 	}
 	return (i);
