@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/09 22:24:37 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/09 22:30:56 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ void	multiple_pipes(t_parser *node)
 	{
 		pipe(fd);
 		if (cur == node)
-			exec_cmd(node, "one");
+			exec_cmd(node, fd, "one");
 		else if (cur->next == NULL)
-			exec_cmd(node, "last");
+			exec_cmd(node, fd, "last");
 		else
-			exec_cmd(node, "between");
+			exec_cmd(node, fd, "between");
 		cur = cur->next;
 	}
 }

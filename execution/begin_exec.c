@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 05:37:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/09 22:18:16 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/09 22:31:46 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char	*get_path(char *cmd)
 	return (NULL);
 }
 
-void	exec_cmd(t_parser *parser, char *msg)
+void	exec_cmd(t_parser *parser, int fd[2], char *msg)
 {
 	pid_t	pid;
 	// char	*path;
@@ -93,5 +93,8 @@ void	exec_cmd(t_parser *parser, char *msg)
 	// ft_execve(path, cmd2, glb_var.list);
 	// free(cmd2);
 	if (pid == 0)
-	{}
+	{
+		if (!isbuiltin(parser))
+		{}
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:53:39 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/09 22:21:49 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/09 22:31:49 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ char    *her(t_data2 *heredoc, t_env *my_env);
 void	exec_builtin(t_parser *parser);
 void	exec_redir(t_parser *parser, t_data *my_heredoc);
 void	execution(t_parser *parser, t_data *my_heredoc);
-void	exec_cmd(t_parser *parser, char *msg);
+void	exec_cmd(t_parser *parser, int fd[2], char *msg);
+int	    isbuiltin(t_parser *parser);
 
 #endif

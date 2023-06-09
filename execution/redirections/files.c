@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:50:10 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/09 22:08:31 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/09 22:53:44 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,21 @@
 
 int	ft_open(t_parser *node)
 {
-    int	fd;
+    int			fd;
+	t_parser	*cur;
 
-	if (node->outfiles)
+	cur = node;
+	while(cur)
 	{
-		if (node->outfiles->type == finish_up)
-			fd = open(node->outfiles->value, O_CREAT | O_WRONLY | O_APPEND, 0644);
-		else if (node->outfiles->type == clear)
-			fd = open(node->outfiles->value, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		if (cur->outfiles)
+		{
+			if (cur->outfiles->type == finish_up)
+				fd = open(cur->outfiles->value, O_CREAT | O_WRONLY | O_APPEND, 0644);
+			else if (cur->outfiles->type == clear)
+				fd = open(cur->outfiles->value, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		}
+		else if (cur->infiles)
+			fd = open(cur->infiles->value, O_RDONLY, 0644);
+		cur = cur->next
 	}
-	else if (node->infiles)
-		fd = open(node->infiles->value, O_RDONLY, 0644);
 }
