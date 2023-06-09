@@ -22,8 +22,8 @@ int	isbuiltin(t_parser *parser)
 	|| ft_strcmp(cmd2, "env") || ft_strcmp(parser->cmd, "unset")
 	|| ft_strcmp(cmd2, "cd") || ft_strcmp(parser->cmd, "exit"))
 	{
+		free(cmd2);
 		return (0);
-		free (cmd2);
 	}
 	free(cmd2);
 	return (1);
