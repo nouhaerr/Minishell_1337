@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 10:11:55 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/03 21:05:07 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/09 17:04:38 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	sh_unset(t_data *arg)
 	}
 	while (cur)
 	{
-		if (!unset_arg(cur->value) || ft_isdigit(cur->value[0]))
+		if (!unset_arg(cur->value) || ft_isdigit(cur->value[0]) || cur->value[0] == '\0')
 		{
 			printf("minishell: unset: `%s': not a valid identifier\n", cur->value);
 			glb_var.exit_status = 1;
