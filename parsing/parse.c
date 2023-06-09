@@ -6,7 +6,7 @@
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:14:51 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/05 20:03:37 by mac              ###   ########.fr       */
+/*   Updated: 2023/06/09 15:30:33 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	parse(t_token **tokens, t_parser **parser, t_lexer *lexer)
 			lexer->i++;
 		}
 	}
-	//check_struct(*parser);
+	check_struct(*parser);
 }
 // just to check on if my parsing is doing alright.
 
@@ -96,7 +96,13 @@ t_token	*my_next_word(t_token *tokens)
 				return(NULL);
 			}
 		}
-		if (tokens->type == word)
+		if (!ft_strcmp(tokens -> value, "\"\"") || !ft_strcmp(tokens -> value, "\'\'"))
+		{
+			free(tokens -> value);
+			tokens -> value = ft_strdup("\0");
+			return (tokens);
+		}
+		else if (tokens->type == word)
 			return (tokens);
 		tokens = tokens->next;
 	}
