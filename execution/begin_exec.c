@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 05:37:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/04 00:14:46 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/09 22:18:16 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,19 +76,22 @@ char	*get_path(char *cmd)
 	return (NULL);
 }
 
-void	exec_cmd(t_parser *parser)
+void	exec_cmd(t_parser *parser, char *msg)
 {
-	(void)parser;
-	char	*path;
-	char	*cmd2;
+	pid_t	pid;
+	// char	*path;
+	// char	*cmd2;
 
-	cmd2 = ft_strdup(parser->cmd);
-	ft_tolower2(cmd2);
-	path = cmd2;
-	if (!cmd_slash(cmd2))
-		path = get_path(cmd2);
-	if (!path)
-		ft_err("minishell: command not found: ", cmd2);
-	ft_execve(path, cmd2, glb_var.list);
-	free(cmd2);
+	pid = fork();
+	// cmd2 = ft_strdup(parser->cmd);
+	// ft_tolower2(cmd2);
+	// path = cmd2;
+	// if (!cmd_slash(cmd2))
+	// 	path = get_path(cmd2);
+	// if (!path)
+	// 	ft_err("minishell: command not found: ", cmd2);
+	// ft_execve(path, cmd2, glb_var.list);
+	// free(cmd2);
+	if (pid == 0)
+	{}
 }

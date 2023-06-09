@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:54:36 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/26 18:38:00 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/09 22:09:51 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ enum	t_e
 {
 	expand,
 	not_expand,
-	clear, // >
-	finish_up // >>
+	clear, // (Trunc) outfile normal >
+	finish_up // append >>
 } t_e;
 
 typedef struct t_data

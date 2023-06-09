@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/05 19:12:28 by mac              ###   ########.fr       */
+/*   Updated: 2023/06/09 22:24:37 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,42 @@ int	isbuiltin(t_parser *parser)
 	return (1);
 }
 
+void	multiple_pipes(t_parser *node)
+{
+	int			fd[2];
+	t_parser	*cur;
+
+	cur = node;
+	while (cur)
+	{
+		pipe(fd);
+		if (cur == node)
+			exec_cmd(node, "one");
+		else if (cur->next == NULL)
+			exec_cmd(node, "last");
+		else
+			exec_cmd(node, "between");
+		cur = cur->next;
+	}
+}
+
 void	execution(t_parser *parser, t_data *my_heredoc)
 {
 	//int	pid;
-	//int	fd[2];
+	// int	*fd;
 
 	if (!parser)
 		return ;
 	else if (parser->next == NULL && parser->cmd && !isbuiltin(parser))
 		exec_builtin(parser);
-	else if (parser->heredoc || parser->infiles || parser->outfiles)
+	else if (parser->heredoc)
 		exec_redir(parser, my_heredoc);
 	// else
 	// {
-	// else if (parser->next == NULL && parser->cmd)
-	// 		exec_cmd(parser, fd);
-	// 	else if (parser->next)
-	// 		pipe_line();	
+	// 	if (parser->next == NULL && parser->cmd)
+	// 		exec_cmd(parser, fd, "one");
+	//	else if (parser->next)
+	// 		multiple_pipes(parser);
 	// }
+	// 
 }
