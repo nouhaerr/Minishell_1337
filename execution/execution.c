@@ -44,6 +44,8 @@ void	multiple_pipes(t_parser *node)
 			exec_cmd(node, fd, "last");
 		else
 			exec_cmd(node, fd, "between");
+		close(fd[0]);
+		close(fd[1]);
 		cur = cur->next;
 	}
 }
