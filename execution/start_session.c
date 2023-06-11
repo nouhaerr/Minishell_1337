@@ -12,7 +12,7 @@
 
 #include "../includes/minishell.h"
 
-void	exec_redir(t_parser *parser, t_data *my_heredoc)
+void	exec_heredoc(t_parser *parser, t_data *my_heredoc)
 {
 	char *str;
 	
