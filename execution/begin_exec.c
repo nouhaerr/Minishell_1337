@@ -95,6 +95,12 @@ void	exec_cmd(t_parser *parser, int fd[2], char *msg)
 	if (pid == 0)
 	{
 		if (!isbuiltin(parser))
-		{}
+		{
+			duplicate_fl(parser, fd, msg);
+			exec_builtin(parser);
+		}
+		close(fd[0]);
+		duplicate_fl(parser, fd, msg);
+		execve(*parser->cmd, parser->cmd, glb_var.list);
 	}
 }
