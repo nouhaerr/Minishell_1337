@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/09 22:30:56 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/11 21:26:31 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,28 +29,28 @@ int	isbuiltin(t_parser *parser)
 	return (1);
 }
 
-void	multiple_pipes(t_parser *node)
-{
-	int			fd[2];
-	int	pid;
-	t_parser	*cur;
+// int	multiple_pipes(t_parser *node)
+// {
+// 	int			fd[2];
+// 	int			pid;
+// 	t_parser	*cur;
 
-	cur = node;
-	while (cur)
-	{
-		pipe(fd);
-		if (cur == node)
-			pid = exec_cmd(node, fd, "one");
-		else if (cur->next == NULL)
-			pid = exec_cmd(node, fd, "last");
-		else
-			pid = exec_cmd(node, fd, "between");
-		close(fd[0]);
-		close(fd[1]);
-		cur = cur->next;
-	}
-	return (pid);
-}
+// 	cur = node;
+// 	while (cur)
+// 	{
+// 		pipe(fd);
+// 		if (cur == node)
+// 			pid = exec_cmd(node, fd, "one");
+// 		else if (cur->next == NULL)
+// 			pid = exec_cmd(node, fd, "last");
+// 		else
+// 			pid = exec_cmd(node, fd, "between");
+// 		close(fd[0]);
+// 		close(fd[1]);
+// 		cur = cur->next;
+// 	}
+// 	return (pid);
+// }
 
 void	execution(t_parser *parser, t_data *my_heredoc)
 {

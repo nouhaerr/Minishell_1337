@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/03 22:21:55 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/11 21:24:32 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,7 @@ void	exec_builtin(t_parser *parser)
 		sh_unset(parser->args);
 	else if (!ft_strcmp(cmd2, "cd"))
 		sh_cd(parser);
+	else if (!ft_strcmp(parser->cmd, "export"))
+		sh_export(parser);
 	free(cmd2);
 }

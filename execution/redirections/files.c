@@ -6,32 +6,32 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:50:10 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/09 22:53:44 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/11 22:17:17 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	ft_open(char *name, char *msg)
-{
-	int	fd;
+// int	ft_open(char *name, char *msg)
+// {
+// 	int	fd;
 
-	if (!ft_strcmp(msg, "saved_file"))
-		fd = open(name, O_CREAT | O_WRONLY | O_APPEND, 0644);
-	else if (!ft_strcmp(msg, "outfile"))
-		fd = open(name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	else
-		fd = open(name, O_CREAT | O_RDONLY, 0644);
-	if (fd == -1)
-	{
-		perror(name);
-		if (pid != 0) //ila kena fl parent
-			exit(1);
-		else
-			fd = -3;
-	}
-	return (fd);
-}
+// 	if (!ft_strcmp(msg, "saved_file"))
+// 		fd = open(name, O_CREAT | O_WRONLY | O_APPEND, 0644);
+// 	else if (!ft_strcmp(msg, "outfile"))
+// 		fd = open(name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+// 	else
+// 		fd = open(name, O_CREAT | O_RDONLY, 0644);
+// 	if (fd == -1)
+// 	{
+// 		perror(name);
+// 		if (pid != 0) //ila kena fl parent
+// 			exit(1);
+// 		else
+// 			fd = -3;
+// 	}
+// 	return (fd);
+// }
 
 int	fd_redirection(t_parser *node)
 {
