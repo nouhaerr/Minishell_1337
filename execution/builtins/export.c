@@ -38,16 +38,74 @@ void	sorted_env(void)
 	}	
 }
 
-void	export_args(t_data *arg)
+int	plus_sign(char *env, char *value)
 {
-	glb_var.exit_status = 0;
-	if (arg->value[0] == '#' || arg->value[0] == ';')
-		break ;
+	int	i;
+	int	count_plus;
+
+	i = 0;
+	count_plus = 0;
+	while (env[i])
+	{
+		if (env[i] == '+')
+			count_plus++;
+		i++;
+	}
+	if ((value[0] == '\0' && env[i - 1] == '+') || (env[i - 1] == '+' && count_plus > 1))
+		return (1);
+	return (0);
+}
+
+int	check_ident(char *env, char *value, len)
+{
+	int	i;
+
+	i = 0;
+	if (env[0] == '-' && env[i + 1])
+	{
+		printf("minishell: export: %s: invalid option\n", env);
+		printf("export: usage: export [-fn] [name[=value] ...] or export -p\n");
+		return (1);
+	}
+	if (plus_sign(env, value))
+		return (printf("minishell: export: `%s': not a valid identifier\n", env));
+	while (env[i])
+	{
+		if (!(ft_isalpha(env[i]) || ft_isdigit(env[i]) || env[i] == '_') && env[len - 1] != '+')
+		{
+			printf("minishell: export: `%s': not a valid identifier\n", env);
+			return (1);
+		}
+		i++;
+	}
+	if (i == 0 || !ft_isdigit(str[0]) || str[i] == ' ')
+	{
+			printf("minishell: export: `%s': not a valid identifier\n", str);
+			return (1);
+	}
+	return (0);
+}
+
+void	check_export_args(t_env *new_node)
+{
+	int	len;
+	int	check;
+
+	len = ft_strlen(new_node->env);
+	check = check_ident(new_node->env, new_node->value, len);
+	if (check)
+	{
+		glb_var.exit_status = 256;
+		return (1);
+	}
+	if (new_node->env[len - 1] == '+')
+		concat_value(new_node);
 }
 
 void	sh_export(t_parser *parser)
 {
 	t_data	*tmp;
+	t_env	*new_env_node;
 
 	tmp = parser->args;
 	if (!parser->args || (parser->args && (parser->args->value[0] == '#' || parser->args->value[0] == ';'))
@@ -59,7 +117,12 @@ void	sh_export(t_parser *parser)
 	{
 		while (tmp)
 		{
-			export_args(tmp);
+			if (arg->value[0] == '#' || arg->value[0] == ';')
+				break ;
+			new_env_node = add_env_node(tmp);
+			if (!new_env_node)
+				return ;
+			check_export_args(new_env_node);
 			tmp = tmp->next;
 		}
 }
