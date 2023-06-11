@@ -32,6 +32,7 @@ int	isbuiltin(t_parser *parser)
 void	multiple_pipes(t_parser *node)
 {
 	int			fd[2];
+	int	pid;
 	t_parser	*cur;
 
 	cur = node;
@@ -39,20 +40,22 @@ void	multiple_pipes(t_parser *node)
 	{
 		pipe(fd);
 		if (cur == node)
-			exec_cmd(node, fd, "one");
+			pid = exec_cmd(node, fd, "one");
 		else if (cur->next == NULL)
-			exec_cmd(node, fd, "last");
+			pid = exec_cmd(node, fd, "last");
 		else
-			exec_cmd(node, fd, "between");
+			pid = exec_cmd(node, fd, "between");
 		close(fd[0]);
 		close(fd[1]);
 		cur = cur->next;
 	}
+	return (pid);
 }
 
 void	execution(t_parser *parser, t_data *my_heredoc)
 {
 	//int	pid;
+	//int	status;
 	// int	*fd;
 
 	if (!parser)
@@ -60,13 +63,13 @@ void	execution(t_parser *parser, t_data *my_heredoc)
 	else if (parser->next == NULL && parser->cmd && !isbuiltin(parser))
 		exec_builtin(parser);
 	else if (parser->heredoc)
-		exec_redir(parser, my_heredoc);
+		exec_heredoc(parser, my_heredoc);
 	// else
 	// {
 	// 	if (parser->next == NULL && parser->cmd)
-	// 		exec_cmd(parser, fd, "one");
+	// 		pid = exec_cmd(parser, fd, "one");
 	//	else if (parser->next)
-	// 		multiple_pipes(parser);
+	// 		pid = multiple_pipes(parser);
 	// }
-	// 
+	// waitpid(pid, &status, 0);
 }
