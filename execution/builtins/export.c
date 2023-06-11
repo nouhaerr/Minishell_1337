@@ -51,7 +51,7 @@ int	plus_sign(char *env, char *value)
 			count_plus++;
 		i++;
 	}
-	if ((value[0] == '\0' && env[i - 1] == '+') || (env[i - 1] == '+' && count_plus > 1))
+	if ((value[0] == '\0' && env[i - 1] == '+') || (env[i - 1] == '+' && count_plus > 1)) //if we don't have the content of the variable env or if we have more than one plus in the end
 		return (1);
 	return (0);
 }
@@ -78,7 +78,7 @@ int	check_ident(char *env, char *value, len)
 		}
 		i++;
 	}
-	if (i == 0 || !ft_isdigit(str[0]) || str[i] == ' ')
+	if (i == 0 || !ft_isdigit(str[0])) //if there is an empty string or space or digit in the begining of the word
 	{
 			printf("minishell: export: `%s': not a valid identifier\n", str);
 			return (1);
