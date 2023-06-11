@@ -102,6 +102,30 @@ void	check_export_args(t_env *new_node)
 		concat_value(new_node);
 }
 
+t_env	*add_env_node(t_data *arg, int i)
+{
+	t_env	*new;
+	char	env_value;
+	int		len;
+	int		len1;
+
+	len = ft_strlen(arg->value);
+	len1 = len;
+	while (arg->value[i] != '=' && arg->value[i])
+		i++;
+	if (arg->value[i] == '\0')
+		env_value = ft_strdup("");
+	//else if (arg->value[i + 1] == '\0')
+	else
+	{
+		env_value = ft_strdup(&arg->value[i] + 1);
+		len1 =  len - ft_strlen(&arg->value[i]);
+	}
+	if (!env_value)
+		return (NULL);
+	new = new_node(env_value, ft_substr(arg->value, 0, len1), len1);
+	return (new);
+}
 void	sh_export(t_parser *parser)
 {
 	t_data	*tmp;
