@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 01:33:01 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/12 02:28:29 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/12 02:38:27 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ int	check_ident(char *env, char *value, int len)
 	int	i;
 
 	i = 0;
-	(void)len;
+	// (void)len;
 	// if (arg->value[0] == '=' || !ft_strcmp(arg->value, "=") || !arg->value[0])
 	// {
 	// 	printf("minishell: export: `%s': not a valid identifier\n", arg->value);
 	// 	glb_var.exit_status = 1;
 	// 	return NULL;
 	// }
-	if(!env && !value)
+	if(!env[0] && !value[0])
 		return (1);
 	if (env[0] == '-' && env[i + 1])
 	{

@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 03:26:24 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/12 02:30:26 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/12 03:12:37 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,23 +87,64 @@ t_env	*subargs_to_env_node(t_data *arg)
 		env_value = ft_strdup(&arg->value[i] + 1);
 		len1 =  len - ft_strlen(&arg->value[i]);
 	}
-	if (arg->value[0] == '=' || !ft_strcmp(arg->value, "=") || !arg->value[0])
-	{
-		printf("minishell: export: `%s': not a valid identifier\n", arg->value);
-		glb_var.exit_status = 1;
-	}
+	// if (arg->value[0] == '=' || !ft_strcmp(arg->value, "=") || !arg->value[0])
+	// {
+	// 	printf("minishell: export: `%s': not a valid identifier\n", arg->value);
+	// 	glb_var.exit_status = 1;
+	// }
 	if (!env_value)
 		return (NULL);
 	new = ft_lstnew_env(ft_substr(arg->value, 0, len1), env_value);
 	printf("env :%s: et le contenu :%s:\n", new->env, new->value);
 	return (new);
 }
-void	sh_export(t_parser *parser)
+
+void	loop_args(t_parser *parser)
 {
-	t_data	*tmp;
 	t_env	*new_env_node;
+	t_data	*tmp;
+	int		j;
 
 	tmp = parser->args;
+	while (tmp)
+	{
+		if (tmp->value[0] == '#' || tmp->value[0] == ';')
+		{
+			glb_var.exit_status = 0;
+			sorted_env();
+			if (tmp->value[0] == ';' && tmp->value[1])
+			{
+				printf("minishell: %s: command not found\n", &tmp->value[1]);
+				glb_var.exit_status = 127;
+			}
+			break ;
+		}
+		// if ((tmp->value[0] == '=' || !ft_strcmp(tmp->value, "=") || !tmp->value[0]) && tmp->next)
+		// {
+		// 	printf("minishell: export: `%s': not a valid identifier\n", tmp->value);
+		// 	glb_var.exit_status = 1;
+		// }
+		if (tmp->value[0] == '=' || !ft_strcmp(tmp->value, "=") || !tmp->value[0])
+		{
+			printf("minishell: export: `%s': not a valid identifier\n", tmp->value);
+			glb_var.exit_status = 1;
+			break ;
+		}	
+		new_env_node = subargs_to_env_node(tmp);
+		if (!new_env_node)
+			return ;
+		j = check_export_args(new_env_node);
+		if (j == 1)
+			break ;
+		else if (j == 2)
+			return ;
+		ft_lstaddback_env(&glb_var.list, new_env_node);
+		tmp = tmp->next;
+	}
+}
+
+void	sh_export(t_parser *parser)
+{
 	if (!parser->args || (parser->args && (parser->args->value[0] == '#' || parser->args->value[0] == ';')))
 	{
 		if (parser->args && parser->args->value[0] == ';' && parser->args->value[1])
@@ -119,36 +160,5 @@ void	sh_export(t_parser *parser)
 		}
 	}
 	else
-	{
-		while (tmp)
-		{
-			if (tmp->value[0] == '#' || tmp->value[0] == ';')
-			{
-				glb_var.exit_status = 0;
-				// sorted_env(parser->args);
-				if (tmp->value[0] == ';' && tmp->value[1])
-				{
-					printf("minishell: %s: command not found\n", &tmp->value[1]);
-					glb_var.exit_status = 127;
-				}
-				break ;
-			}
-			// if (tmp->value[0] == '=' || !ft_strcmp(tmp->value, "=") || !tmp->value[0])
-			// {
-			// 	printf("minishell: export: `%s': not a valid identifier\n", tmp->value);
-			// 	glb_var.exit_status = 1;
-			// 	return ;
-			// }
-			new_env_node = subargs_to_env_node(tmp);
-			if (!new_env_node)
-				return ;
-			int lk = check_export_args(new_env_node);
-			if (lk == 1)
-				break ;
-			else if (lk == 2)
-				return ;
-			ft_lstaddback_env(&glb_var.list, new_env_node);
-			tmp = tmp->next;
-		}
-	}
+		loop_args(parser);
 }
