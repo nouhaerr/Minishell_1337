@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_session.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/11 21:24:32 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/12 16:15:27 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,18 @@ void	exec_heredoc(t_parser *parser, t_data *my_heredoc)
 {
 	char *str;
 	
-	while (parser != NULL)
+	while (parser)
 	{
 		if (parser -> heredoc != NULL)
 		{
 			str = her(parser -> heredoc, glb_var.list);
 			ft_lstaddback2(&my_heredoc, ft_lstnew2(str));
 		}
-		parser = parser->next;
+		parser = parser -> next;
 	}
 	while(my_heredoc)
 	{
-		printf("[%s]]\n", my_heredoc -> value);
+		printf("->> [%s]]\n", my_heredoc -> value);
 		my_heredoc = my_heredoc -> next;
 	}
 }

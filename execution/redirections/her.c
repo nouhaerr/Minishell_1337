@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:46:12 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/01 13:52:29 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/12 16:24:44 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,31 +72,34 @@ char	*her(t_data2 *heredoc, t_env *my_env)
 	int		i;
 	int		len;
 	
-	(void)my_env;
+	str = NULL;
 	while (heredoc != NULL)
 	{
 		value = heredoc -> value;
 		input = readline("> ");
 		i = 0;
-		if (!ft_strcmp(input, value))
+		if (ft_strcmp(input, value) == 0)
 			heredoc = heredoc -> next;
-		else if (heredoc -> next == NULL && heredoc -> type == expand)
+		else if (heredoc != NULL && heredoc -> next == NULL)
 		{
-			while (input[i])
+			if (heredoc -> type == expand)
 			{
-				if (input[i] == '$')
-					i = env_expansion_for_heredoc(input, i, my_env, &str);
-				else
+				while (input[i])
 				{
-					len = my_word(input, i);
-					str = ft_strjoin(str, ft_substr(input, i, len));
-					i += len;
+					if (input[i] == '$')
+						i = env_expansion_for_heredoc(input, i, my_env, &str);
+					else
+					{
+						len = my_word(input, i);
+						str = ft_strjoin(str, ft_substr(input, i, len));
+						i += len;
+					}
 				}
+				str = ft_strjoin(str, ft_strdup("\n"));
 			}
-			str = ft_strjoin(str, ft_strdup("\n"));
+			else if (heredoc -> type == not_expand)
+				str = ft_strjoin(str, ft_strjoin(input, ft_strdup("\n")));
 		}
-		else if (heredoc -> next == NULL && heredoc -> type == not_expand)
-			str = ft_strjoin(str, ft_strjoin(input, ft_strdup("\n")));
 	}
 	return (str);
 }

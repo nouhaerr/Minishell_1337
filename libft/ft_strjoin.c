@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 17:19:44 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/19 11:42:38 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/12 16:13:41 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,5 @@ char	*ft_strjoin(char *s1, char *s2)
 		ft_mycopy(p + ft_strlen(s1), s2);
 		p[j + ft_strlen(s1) + ft_strlen(s2)] = '\0';
 	}
-	return (free(s1), free(s2), p);
+	return (free(s2), p);
 }
