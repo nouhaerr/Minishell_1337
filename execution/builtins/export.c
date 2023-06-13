@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 03:26:24 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/13 09:30:56 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/13 10:24:16 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,21 +72,27 @@ t_env	*subargs_to_env_node(t_data *arg)
 void	modifie_env_node(char *env, char *new_value)
 {
 	t_env	*cur;
-	(void)new_value;
 
 	cur = glb_var.list;
 	while (cur)
 	{
 		if (!ft_strcmp(cur->env, env))
 		{
-			free(cur->value);
-			if (new_value)
+			printf("value of env: %s\n", cur->value);
+			if (cur->value[0] != '\0' && (!new_value || new_value[0] == '\0' || !ft_strcmp(new_value, "\"\"")))
 			{
+				printf("ls\n");
+				return ;
+			}
+			else if (!cur->value && (!new_value || new_value[0] == '\0' || !ft_strcmp(new_value, "\"\"")))
+			{
+				cur->value = 0;
+			}
+			else
+			{	free(cur->value);
 				printf("ok\n");
 				cur->value = ft_strdup(new_value);
 			}
-			else
-				cur->value = 0;
 			return ;
 		}
 		cur = cur->next;
