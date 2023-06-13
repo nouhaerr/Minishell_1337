@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 03:26:24 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/12 03:12:37 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/13 02:08:19 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,27 +108,12 @@ void	loop_args(t_parser *parser)
 	tmp = parser->args;
 	while (tmp)
 	{
-		if (tmp->value[0] == '#' || tmp->value[0] == ';')
-		{
-			glb_var.exit_status = 0;
-			sorted_env();
-			if (tmp->value[0] == ';' && tmp->value[1])
-			{
-				printf("minishell: %s: command not found\n", &tmp->value[1]);
-				glb_var.exit_status = 127;
-			}
-			break ;
-		}
-		// if ((tmp->value[0] == '=' || !ft_strcmp(tmp->value, "=") || !tmp->value[0]) && tmp->next)
-		// {
-		// 	printf("minishell: export: `%s': not a valid identifier\n", tmp->value);
-		// 	glb_var.exit_status = 1;
-		// }
 		if (tmp->value[0] == '=' || !ft_strcmp(tmp->value, "=") || !tmp->value[0])
 		{
 			printf("minishell: export: `%s': not a valid identifier\n", tmp->value);
 			glb_var.exit_status = 1;
-			break ;
+			tmp = tmp->next;
+			continue ;
 		}	
 		new_env_node = subargs_to_env_node(tmp);
 		if (!new_env_node)
@@ -145,19 +130,10 @@ void	loop_args(t_parser *parser)
 
 void	sh_export(t_parser *parser)
 {
-	if (!parser->args || (parser->args && (parser->args->value[0] == '#' || parser->args->value[0] == ';')))
-	{
-		if (parser->args && parser->args->value[0] == ';' && parser->args->value[1])
-		{
-			sorted_env();
-			printf("minishell: %s: command not found\n", &parser->args->value[1]);
-			glb_var.exit_status = 127;
-		}
-		else
-		{
-			sorted_env();
-			glb_var.exit_status = 0;
-		}
+	if (!parser->args)
+	{		
+		glb_var.exit_status = 0;
+		sorted_env();
 	}
 	else
 		loop_args(parser);
