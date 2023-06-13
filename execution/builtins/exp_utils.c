@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 02:47:29 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/13 08:41:37 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/13 09:41:03 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,22 @@ void	concat_value(t_env *node)
 		return ;
 	free(node->env);
 	node->env = name;
-	cur = glb_var.list;
-	if (env_search(cur, node->env) && node->value[0] != '\0' && ft_strcmp(node->value, "\"\""))
+	cur = ft_getenv(glb_var.list, node->env);
+	if (cur && node->value[0] != '\0' && ft_strcmp(node->value, "\"\""))
 	{
+		if (!ft_strcmp(cur->value, "\"\""))
+		{
+			free(cur->value);
+			cur->value = 0;
+		}
 		str = ft_strjoin2(cur->value, node->value);
 		if (!str)
 			return ;
-		free(cur->value);
-		cur->value = ft_strdup(str);
+		free(node->value);
+		node->value = ft_strdup(str);
 	}
+	printf("%s=%s\n", node->env, node->value);
+
 }
 
 int	check_export_args(t_env *new_node)
@@ -51,7 +58,10 @@ int	check_export_args(t_env *new_node)
 		}
 		return (2);
 	}
-	if (new_node->env[len - 1] == '+')
+	if (new_node->env[len - 1] == '+' && ft_strlen(new_node->value) != 1)
+	{
 		concat_value(new_node);
+		printf("%s=%s\n", new_node->env, new_node->value);
+	}
 	return (0);
 }
