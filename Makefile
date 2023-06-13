@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+         #
+#    By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 02:49:56 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/06/12 16:26:25 by hobenaba         ###   ########.fr        #
+#    Updated: 2023/06/13 03:08:54 by nerrakeb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRCS =	main.c parsing/my_free.c \
 		execution/builtins/unset.c execution/builtins/utils.c \
 		execution/builtins/cd.c execution/builtins/export.c \
 		execution/builtins/utils2.c execution/start_session.c \
-		execution/execution.c \
+		execution/builtins/exp_utils.c execution/execution.c \
 		#execution/begin_exec.c
 OBJS = $(SRCS:.c=.o)
 LIBFT= libft.a
