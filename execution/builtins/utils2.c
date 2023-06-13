@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 01:33:01 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/12 02:38:27 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/13 02:23:11 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,28 +35,19 @@ int	check_ident(char *env, char *value, int len)
 	int	i;
 
 	i = 0;
-	// (void)len;
-	// if (arg->value[0] == '=' || !ft_strcmp(arg->value, "=") || !arg->value[0])
-	// {
-	// 	printf("minishell: export: `%s': not a valid identifier\n", arg->value);
-	// 	glb_var.exit_status = 1;
-	// 	return NULL;
-	// }
-	if(!env[0] && !value[0])
-		return (1);
 	if (env[0] == '-' && env[i + 1])
 	{
 		printf("minishell: export: %s: invalid option\n", env);
 		printf("export: usage: export [-fn] [name[=value] ...] or export -p\n");
 		return (3);
 	}
-	if (ft_isdigit(env[0])) //if there is an empty string or space or digit in the begining of the word
+	if (ft_isdigit(env[0])) //if there is a digit in the begining of the word
 	{
 			printf("minishell: export: `%s': not a valid identifier\n", env);
 			return (1);
 	}
 	if (plus_sign(env, value))
-		return (printf("minishell: export: `%s': not a valid identifier\n", env)); //&& env[len - 1] == '+'
+		return (printf("minishell: export: `%s': not a valid identifier\n", env));
 	while (env[i])
 	{
 		if (!(ft_isalpha(env[i]) || ft_isdigit(env[i]) || env[i] == '_') && env[len - 1] != '+')

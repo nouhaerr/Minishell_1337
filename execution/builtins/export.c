@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 03:26:24 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/13 02:08:19 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/13 02:42:15 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,13 @@ int	check_export_args(t_env *new_node)
 		}
 		return (2);
 	}
-	return (0);
 	// if (new_node->env[len - 1] == '+')
 	// 	concat_value(new_node);
+	return (0);
 }
 
 t_env	*subargs_to_env_node(t_data *arg)
 {
-	t_env	*new;
 	char	*env_value;
 	int		len;
 	int		len1;
@@ -87,16 +86,10 @@ t_env	*subargs_to_env_node(t_data *arg)
 		env_value = ft_strdup(&arg->value[i] + 1);
 		len1 =  len - ft_strlen(&arg->value[i]);
 	}
-	// if (arg->value[0] == '=' || !ft_strcmp(arg->value, "=") || !arg->value[0])
-	// {
-	// 	printf("minishell: export: `%s': not a valid identifier\n", arg->value);
-	// 	glb_var.exit_status = 1;
-	// }
 	if (!env_value)
 		return (NULL);
-	new = ft_lstnew_env(ft_substr(arg->value, 0, len1), env_value);
-	printf("env :%s: et le contenu :%s:\n", new->env, new->value);
-	return (new);
+	return (ft_lstnew_env(ft_substr(arg->value, 0, len1), env_value));
+	// printf("env :%s: et le contenu :%s:\n", new->env, new->value);
 }
 
 void	loop_args(t_parser *parser)
@@ -123,6 +116,7 @@ void	loop_args(t_parser *parser)
 			break ;
 		else if (j == 2)
 			return ;
+		if ()
 		ft_lstaddback_env(&glb_var.list, new_env_node);
 		tmp = tmp->next;
 	}
