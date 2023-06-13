@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 02:47:29 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/13 09:48:13 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/13 10:30:36 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	concat_value(t_env *node)
 			return ;
 		free(node->value);
 		node->value = ft_strdup(str);
-	printf("%s=%s\n", node->env, node->value);
 	}
 
 }
@@ -61,7 +60,6 @@ int	check_export_args(t_env *new_node)
 	if (new_node->env[len - 1] == '+' && ft_strlen(new_node->value) != 1)
 	{
 		concat_value(new_node);
-		printf("%s=%s\n", new_node->env, new_node->value);
 	}
 	return (0);
 }
