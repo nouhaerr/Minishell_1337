@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:14:51 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/09 16:38:53 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/13 14:41:02 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,7 @@ t_parser	*build_list_parser(t_parser **parser, t_lexer *lexer, t_parser *t)
 		create_node(t, lexer);
 	return (t);
 }
-// if (lexer-> tokens2 -> arten == my_env && (lexer ->tokens2 ->next != NULL && lexer->tokens2-> next-> arten == my_env))
-		// {
-		// 	printf("abigiuos redirect\n");
-		// 	return;
-		// }
+
 void	parse(t_token **tokens, t_parser **parser, t_lexer *lexer)
 {
 	t_parser	*t;
@@ -75,7 +71,7 @@ void	parse(t_token **tokens, t_parser **parser, t_lexer *lexer)
 			lexer->i++;
 		}
 	}
-	// check_struct(*parser);
+	//check_struct(*parser);
 }
 // just to check on if my parsing is doing alright.
 

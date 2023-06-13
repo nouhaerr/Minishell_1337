@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/12 16:52:37 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/13 14:56:36 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	main(int ac, char **av, char **env)
 		if (ft_strcmp(input, "") != 0)
 			add_history(input);
 		base = lex(input, &tokens, lexer);
-		if (!syntax_error(base, &tokens))
+		if (!syntax_error(base, &tokens) && tokens != NULL)
 		{
 			parse(&tokens, &parser, lexer);
 			execution(parser, my_heredoc);
@@ -96,11 +96,3 @@ int	main(int ac, char **av, char **env)
 		free(input);
 	}
 }
-// i may use those functions later on 
-// rl_replace_line("Updated command", 0);
-// rl_redisplay();
-// while (tokens)
-// {
-// 	printf("[[%s]]\n", tokens -> value);
-// 	tokens = tokens -> next;
-// }

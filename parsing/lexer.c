@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:53:34 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/05 20:00:28 by mac              ###   ########.fr       */
+/*   Updated: 2023/06/13 14:40:33 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,6 @@ int	lex(char *input, t_token **tokens, t_lexer *lexer)
 	lexer_init(lexer);
 	while (input[i])
 	{
-		if (input[i] == '\\')
-		{
-			if (input[i + 1] == '\0')
-				return (10);
-			i++;
-		}
 		if (input[i] == ' ' && lexer -> base == 0)
 			i = ft_ignore_spaces(input, i);
 		if (ft_strchr("$|><", input[i]) != NULL && lexer -> base == 0)
