@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/09 16:37:14 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/12 16:52:37 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,10 @@ int	main(int ac, char **av, char **env)
 	int			base;
 	(void)ac;
 	(void)av;
+	(void)env;
 
 	lexer = malloc(sizeof(t_lexer));
-	glb_var.list = save_my_env(env);
+	glb_var.list = save_my_env(env); //->> this one is where id o have leaks
 	my_heredoc = NULL;
 	while (1)
 	{

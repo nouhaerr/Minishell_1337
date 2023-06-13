@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:56:47 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/27 17:46:48 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/12 16:39:05 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ void	free_mylist(void *list, int type)
 {
 	if (type == 0)
 		free_lexer((t_token *)list);
-	else
-	{
+	else if (type == 1)
 		free_parser((t_parser *)list);
-	}
 }
