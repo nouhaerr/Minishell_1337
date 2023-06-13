@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 02:47:29 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/13 10:40:37 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/13 10:44:39 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	concat_value(t_env *node)
 		node->value = ft_strdup(str);
 		// printf("%s=%s\n", node->env, node->value);
 	}
-
 }
 
 int	check_export_args(t_env *new_node)
