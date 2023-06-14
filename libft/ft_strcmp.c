@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 14:19:21 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/12 16:00:30 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/14 12:15:51 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,19 @@
 int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
+	int j;
 
 	i = 0;
 	while (s1[i] || s2[i])
 	{
 		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
+		{
+			j = s1[i] - s2[i];
+			free(s1);
+			return (j);
+		}
 		i++;
 	}
+	free(s1);
 	return (0);
 }

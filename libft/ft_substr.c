@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 20:58:53 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/11 14:55:55 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/14 12:19:51 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,29 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char			*p;
-	unsigned int	i;
+	size_t	i;
+	char	*new;
 
+	i = 0;
 	if (!s)
 		return (NULL);
 	if (start >= ft_strlen(s))
-		return (ft_strdup(""));
-	else if (len > ft_strlen(s) - start)
-		len = ft_strlen(s) - start;
-	i = 0;
-	p = malloc((len + 1) * sizeof(char));
-	if (!p)
-		return (NULL);
-	while (s[start] && i < len)
 	{
-		p[i] = s[start];
-		i++;
-		start++;
+		new = (char *)malloc(1);
+		if (!new)
+			return (0);
+		new[0] = '\0';
+		return (new);
 	}
-	p[i] = '\0';
-	return (p);
+	if (len > ft_strlen(s) - start)
+		len = ft_strlen(s) - start;
+	new = (char *)malloc((len + 1) * sizeof(char));
+	if (!new)
+		return (0);
+	while (i < len)
+	{
+		new[i++] = s[start++];
+	}
+	new[i] = '\0';
+	return (new);
 }
