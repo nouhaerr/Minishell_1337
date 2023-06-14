@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 04:57:29 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/25 17:25:51 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/14 05:46:55 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	sh_env(void)
 	cur = glb_var.list;
 	while (cur)
 	{
-		if (cur->value[0] != 0)
+		if (cur->value)
 			printf("%s=%s\n", cur->env, cur->value);
 		cur = cur->next;
 	}

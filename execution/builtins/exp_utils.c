@@ -6,13 +6,13 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 02:47:29 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/13 10:44:39 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/14 07:33:22 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	concat_value(t_env *node)
+int	concat_value(t_env *node)
 {
 	t_env	*cur;
 	char	*str;
@@ -20,24 +20,21 @@ void	concat_value(t_env *node)
 
 	name = ft_strtrim(node->env, "+");
 	if (!name)
-		return ;
+		return (1);
 	free(node->env);
 	node->env = name;
 	cur = ft_getenv(glb_var.list, node->env);
+	if (cur && cur->value && (node->value[0] == '\0' || !node->value))
+		return (1);
 	if (cur && node->value[0] != '\0' && ft_strcmp(node->value, "\"\""))
 	{
-		if (!ft_strcmp(cur->value, "\"\""))
-		{
-			free(cur->value);
-			cur->value = 0;
-		}
 		str = ft_strjoin2(cur->value, node->value);
 		if (!str)
-			return ;
+			return 1;
 		free(node->value);
 		node->value = ft_strdup(str);
-		// printf("%s=%s\n", node->env, node->value);
 	}
+	return (0);
 }
 
 int	check_export_args(t_env *new_node)
@@ -59,8 +56,8 @@ int	check_export_args(t_env *new_node)
 	}
 	if (new_node->env[len - 1] == '+')
 	{
-		concat_value(new_node);
-	}
-	// && ft_strlen(new_node->value) != 1 to check after
+		if (concat_value(new_node))
+			return (3);
+	}	
 	return (0);
 }
