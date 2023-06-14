@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 13:38:39 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/14 12:19:33 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:58:05 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	ft_lstaddback_env(t_env **lst, t_env *new)
 t_env	*save_my_env(char **env)
 {
 	t_env	*my_env;
+	char	*str;
 	int		i;
 	int		start;
 	int		len;
@@ -64,8 +65,10 @@ t_env	*save_my_env(char **env)
 			}
 			len++;
 		}
-		if (ft_strcmp(ft_substr(env[i], 0, len), "OLDPWD"))
+		str = ft_substr(env[i], 0, len);
+		if (ft_strcmp(str, "OLDPWD"))
 			ft_lstaddback_env(&my_env, ft_lstnew_env(ft_substr(env[i], 0, len), ft_substr(env[i], start, ft_strlen(env[i]) - 1)));
+		free(str);
 		i++;
 	}
 	return (my_env);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/14 12:14:42 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:58:18 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,10 @@ int	main(int ac, char **av, char **env)
 	(void)env;
 
 	lexer = malloc(sizeof(t_lexer));
-	glb_var.list = save_my_env(env); //->> this one is where id o have leaks
-	system("leaks minishell");
+	glb_var.list = save_my_env(env);
 	my_heredoc = NULL;
 	while (1)
-	{
+	{	
 		tokens = NULL;
 		parser = NULL;
 		prompt = get_prompt(getcwd(NULL, 0));
@@ -84,6 +83,7 @@ int	main(int ac, char **av, char **env)
 			break ;
 		if (ft_strcmp(input, "") != 0)
 			add_history(input);
+		
 		base = lex(input, &tokens, lexer);
 		if (!syntax_error(base, &tokens) && tokens != NULL)
 		{
