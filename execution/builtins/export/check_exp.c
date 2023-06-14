@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 01:33:01 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/14 07:47:02 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/14 08:06:37 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,6 @@ int	check_ident(char *env, char *value, int len)
 	int	i;
 
 	i = 0;
-	if (env[0] == '-' && env[i + 1])
-	{
-		printf("minishell: export: %s: invalid option\n", env);
-		printf("export: usage: export [-fn] [name[=value] ...] or export -p\n");
-		return (3);
-	}
 	if (ft_isdigit(env[0])) //if there is a digit in the begining of the word
 		return (printf("minishell: export: `%s': not a valid identifier\n", env));
 	if (plus_sign(env, value))

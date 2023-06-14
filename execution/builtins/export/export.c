@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 03:26:24 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/14 07:48:00 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/14 08:08:18 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,7 @@ void	loop_args(t_data *tmp)
 		if (!new_env_node)
 			return ;
 		j = check_export_args(new_env_node);
-		if (j == 1)
-			break ;
-		else if (j == 2 || j == 3)
+		if (j == 2 || j == 3)
 		{
 			tmp = tmp->next;
 			continue ;
@@ -102,6 +100,12 @@ void	sh_export(t_parser *parser)
 	{		
 		glb_var.exit_status = 0;
 		sorted_env();
+	}
+	if (parser->args && parser->args->value[0] == '-' && parser->args->value[1])
+	{
+		glb_var.exit_status = 2;
+		printf("minishell: export: %c%c: invalid option\n", parser->args->value[0], parser->args->value[1]);
+		printf("export: usage: export [-fn] [name[=value] ...] or export -p\n");
 	}
 	else
 		loop_args(tmp);

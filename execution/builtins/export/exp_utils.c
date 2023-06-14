@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 02:47:29 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/14 07:40:15 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/14 08:07:03 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,6 @@ int	check_export_args(t_env *new_node)
 	if (check)
 	{
 		glb_var.exit_status = 1;
-		if (check == 3)
-		{
-			glb_var.exit_status = 2;
-			return (1);
-		}
 		return (2);
 	}
 	if (new_node->env[len - 1] == '+')
