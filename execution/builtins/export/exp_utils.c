@@ -6,11 +6,11 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 02:47:29 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/14 07:33:22 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/14 07:40:15 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
 int	concat_value(t_env *node)
 {

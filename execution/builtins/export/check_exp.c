@@ -1,16 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils2.c                                           :+:      :+:    :+:   */
+/*   check_exp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 01:33:01 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/14 06:09:55 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/14 07:47:02 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
+
+int	check_egal(t_data *tmp)
+{
+	if (tmp->value[0] == '=' || !ft_strcmp(tmp->value, "=")
+	|| !tmp->value[0] || tmp->value[0] == '+')
+	{
+		printf("minishell: export: `%s': not a valid identifier\n", tmp->value);
+		glb_var.exit_status = 1;
+		return (1);
+	}
+	return (0);
+}
 
 int	plus_sign(char *env, char *value)
 {

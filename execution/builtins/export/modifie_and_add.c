@@ -1,0 +1,48 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   modifie_and_add.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/14 07:44:40 by nerrakeb          #+#    #+#             */
+/*   Updated: 2023/06/14 07:48:13 by nerrakeb         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../../includes/minishell.h"
+
+void	modifie_env_node(char *env, char *new_value)
+{
+	t_env	*cur;
+
+	cur = glb_var.list;
+	while (cur)
+	{
+		if (!ft_strcmp(cur->env, env))
+		{
+			if (!new_value)
+				return ;
+			else if (!cur->value && (!new_value || new_value[0] == '\0'))
+				cur->value = ft_strdup("");
+			else
+			{
+				free(cur->value);
+				cur->value = ft_strdup(new_value);
+			}
+			return ;
+		}
+		cur = cur->next;
+	}
+}
+
+void	modifie_and_add(t_env *new_env_node)
+{
+	if (env_search(glb_var.list, new_env_node->env))
+	{
+		modifie_env_node(new_env_node->env, new_env_node->value);
+		free(new_env_node->env);
+		return (free(new_env_node->value));
+	}
+	ft_lstaddback_env(&glb_var.list, new_env_node);
+}

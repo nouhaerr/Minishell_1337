@@ -6,11 +6,9 @@
 #    By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 02:49:56 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/06/14 05:39:52 by nerrakeb         ###   ########.fr        #
+#    Updated: 2023/06/14 07:50:42 by nerrakeb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
@@ -24,9 +22,10 @@ SRCS =	main.c parsing/my_free.c \
 		execution/builtins/env.c execution/builtins/exit.c \
 		execution/for_heredoc.c execution/redirections/her.c \
 		execution/builtins/unset.c execution/builtins/utils.c \
-		execution/builtins/cd.c execution/builtins/export.c \
-		execution/builtins/utils2.c execution/start_session.c \
-		execution/builtins/exp_utils.c execution/execution.c \
+		execution/builtins/cd.c execution/builtins/export/export.c \
+		execution/builtins/export/modifie_and_add.c execution/builtins/export/check_exp.c \
+		execution/builtins/export/exp_utils.c execution/execution.c \
+		execution/start_session.c \
 		#execution/begin_exec.c
 OBJS = $(SRCS:.c=.o)
 LIBFT= libft.a
