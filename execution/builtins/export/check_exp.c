@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 01:33:01 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/15 07:47:17 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/15 08:12:45 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	check_egal(t_data *tmp)
 	}
 	return (0);
 }
-//if we don't have the content or if we have more than one plus in the end
 
 int	plus_sign(char *env, char *value)
 {
@@ -49,7 +48,7 @@ int	check_ident(char *env, char *value, int len)
 	int	i;
 
 	i = 0;
-	if (ft_isdigit(env[0])) //if there is a digit in the begining of the word
+	if (ft_isdigit(env[0]))
 		return (printf("minishell: export: `%s': not a valid identifier\n",
 				env));
 	if (plus_sign(env, value))

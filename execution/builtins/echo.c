@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 11:18:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/15 08:02:42 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/15 08:29:17 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,16 @@ void	check_n(t_data *arg)
 
 	i = 0;
 	tmp = arg;
-	/*av[i]+1 to skip '-' character and that means that all characters following
-	the hyphen in the current argument are not 'n'*/
 	if (non_n_carcacters(tmp->value + 1))
 	{
 		print_av(tmp, 1);
 		return ;
 	}
 	while (tmp && tmp->value[i] == '-' && !non_n_carcacters(tmp->value + 1))
-		tmp = tmp->next; //move to the next arg
-	if (!tmp) // akhir arg is NULL yaeni endna just -nn f gaa3 args w sf ankhrjo mn function or haja akhra a part duk -n
-		return ; //ending the execution of the function without doing anything cuz we have all args = -n.
-	print_av(tmp, 0); //kayna haja akhra a part duk -n we print it without newline
+		tmp = tmp->next;
+	if (!tmp)
+		return ;
+	print_av(tmp, 0);
 }
 
 void	sh_echo(t_parser **echo)
@@ -72,7 +70,7 @@ void	sh_echo(t_parser **echo)
 	i = 0;
 	tmp = *echo;
 	glb_var.exit_status = 0;
-	if (!tmp->args) // check arg is null
+	if (!tmp->args)
 		printf("\n");
 	else if (tmp->args->value[0] == '-')
 		check_n(tmp->args);

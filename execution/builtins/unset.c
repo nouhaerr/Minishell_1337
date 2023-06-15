@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 10:11:55 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/15 07:56:40 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/15 08:14:09 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void	sh_unset(t_data *arg)
 			ft_list_remove_if(&glb_var.list, cur->value);
 		cur = cur->next;
 	}
-	// ila kane khass n unsetiw bzaaf args w binathom erreur
 	if (glb_var.exit_status != 1)
 		glb_var.exit_status = 0;
 }

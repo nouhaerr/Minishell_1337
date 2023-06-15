@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 06:25:08 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/15 08:04:41 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/15 08:19:01 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	sh_exit(t_parser *tmp)
 			glb_var.exit_status = 1;
 			return ;
 		}
-		//we have one arg numeric we check if it's positive or negative
 		else if (!check_ex_av(ex->args->value))
 			ex_stat(ex->args->value);
 	}
