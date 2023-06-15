@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 03:26:24 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/15 05:02:22 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/15 07:43:16 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	sorted_env(void)
 {
 	t_env	*cur;
 	char	*str;
-	int	i;
+	int		i;
 
 	i = 0;
 	str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz";
@@ -60,7 +60,7 @@ t_env	*subargs_to_env_node(t_data *arg)
 	else
 	{
 		env_value = ft_strdup(&arg->value[i] + 1);
-		len1 =  len - ft_strlen(&arg->value[i]);
+		len1 = len - ft_strlen(&arg->value[i]);
 	}
 	return (ft_lstnew_env(ft_substr(arg->value, 0, len1), env_value));
 }
@@ -104,7 +104,8 @@ void	sh_export(t_parser *parser)
 	if (parser->args && parser->args->value[0] == '-' && parser->args->value[1])
 	{
 		glb_var.exit_status = 2;
-		printf("minishell: export: %c%c: invalid option\n", parser->args->value[0], parser->args->value[1]);
+		printf("minishell: export: %c%c: invalid option\n",
+			parser->args->value[0], parser->args->value[1]);
 		printf("export: usage: export [-fn] [name[=value] ...] or export -p\n");
 	}
 	else

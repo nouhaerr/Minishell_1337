@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 17:18:08 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/31 23:29:56 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/15 07:52:12 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	set_oldpwd(char **oldpwd, char *cwd)
 
 void	cd_home(t_env *pwd_home, char **pwd, char **oldpwd, char *cwd)
 {
-	char *path;
+	char	*path;
 
 	path = NULL;
 	if (pwd_home)
@@ -43,7 +43,8 @@ void	cd_home(t_env *pwd_home, char **pwd, char **oldpwd, char *cwd)
 			return (free(cwd));
 		}
 		else if (oldpwd == NULL)
-			ft_lstaddback_env(&glb_var.list, ft_lstnew_env(ft_strdup("OLDPWD"), cwd));
+			ft_lstaddback_env(&glb_var.list,
+				ft_lstnew_env(ft_strdup("OLDPWD"), cwd));
 		else
 			set_oldpwd(oldpwd, cwd);
 		set_pwd(pwd);
@@ -59,21 +60,21 @@ void	cd_home(t_env *pwd_home, char **pwd, char **oldpwd, char *cwd)
 void	cd_oldpwd(char **oldpwd, char **pwd)
 {
 	char	*cwd;
-	
+
 	cwd = getcwd(NULL, 0);
 	if (!oldpwd)
 	{
 		glb_var.exit_status = 1;
 		printf("minishell: cd: OLDPWD not set\n");
-		return(free(cwd));
+		return (free(cwd));
 	}
 	else
 	{
 		if (chdir(*oldpwd) == -1)
 		{
 			glb_var.exit_status = 1;
-			printf("minishell: cd: %s: %s\n",cwd, strerror(errno));
-			return(free(cwd));
+			printf("minishell: cd: %s: %s\n", cwd, strerror(errno));
+			return (free(cwd));
 		}
 		else
 		{
@@ -100,10 +101,11 @@ void	cd_newpwd(t_data *name, char **oldpwd, char **pwd)
 		}
 		else
 			printf("minishell: cd: %s: %s\n", name->value, strerror(errno));
-		return(free(cwd));
+		return (free(cwd));
 	}
 	else if (oldpwd == NULL)
-		ft_lstaddback_env(&glb_var.list, ft_lstnew_env(ft_strdup("OLDPWD"), cwd));
+		ft_lstaddback_env(&glb_var.list,
+			ft_lstnew_env(ft_strdup("OLDPWD"), cwd));
 	else
 		set_oldpwd(oldpwd, cwd);
 	set_pwd(pwd);

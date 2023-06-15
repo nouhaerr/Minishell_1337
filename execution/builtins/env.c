@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 04:57:29 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/14 05:46:55 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/15 08:05:03 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	path_not_found(void)
 
 void	sh_env(void)
 {
-	int	path_found;
+	int		path_found;
 	t_env	*cur;
 
 	cur = glb_var.list;

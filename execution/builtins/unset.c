@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 10:11:55 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/15 03:43:11 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/15 07:56:40 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_list_remove_if(t_env **head, void *data)
 int	env_search(t_env *head, char *s)
 {
 	int		l;
-	int 	len;
+	int		len;
 
 	len = ft_strlen(s);
 	while (head)
@@ -84,15 +84,18 @@ void	sh_unset(t_data *arg)
 	}
 	while (cur)
 	{
-		if (!unset_arg(cur->value) || ft_isdigit(cur->value[0]) || cur->value[0] == '\0')
+		if (!unset_arg(cur->value) || ft_isdigit(cur->value[0])
+			|| cur->value[0] == '\0')
 		{
-			printf("minishell: unset: `%s': not a valid identifier\n", cur->value);
+			printf("minishell: unset: `%s': not a valid identifier\n",
+				cur->value);
 			glb_var.exit_status = 1;
 		}
-		if (env_search(glb_var.list, cur->value)) // ila kane khass n unsetiw bzaaf args w binathom erreur
+		if (env_search(glb_var.list, cur->value))
 			ft_list_remove_if(&glb_var.list, cur->value);
 		cur = cur->next;
 	}
+	// ila kane khass n unsetiw bzaaf args w binathom erreur
 	if (glb_var.exit_status != 1)
 		glb_var.exit_status = 0;
 }

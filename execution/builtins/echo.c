@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 11:18:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/09 14:53:57 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/15 08:02:42 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_av(t_data *av, int newline)
 {
-	int	i;
+	int		i;
 	t_data	*tmp;
 
 	i = 0;
@@ -45,15 +45,17 @@ int	non_n_carcacters(char *ntr)
 
 void	check_n(t_data *arg)
 {
-	int	i;
-	t_data *tmp;
+	int		i;
+	t_data	*tmp;
 
 	i = 0;
 	tmp = arg;
-	if (non_n_carcacters(tmp->value + 1)) //av[i]+1 to skip '-' character and that means that all characters following the hyphen in the current argument are not 'n'
+	/*av[i]+1 to skip '-' character and that means that all characters following
+	the hyphen in the current argument are not 'n'*/
+	if (non_n_carcacters(tmp->value + 1))
 	{
 		print_av(tmp, 1);
-		return ;//ending the execution of the function.
+		return ;
 	}
 	while (tmp && tmp->value[i] == '-' && !non_n_carcacters(tmp->value + 1))
 		tmp = tmp->next; //move to the next arg
@@ -64,9 +66,9 @@ void	check_n(t_data *arg)
 
 void	sh_echo(t_parser **echo)
 {
-	int	i;
-	t_parser *tmp;
-	
+	int			i;
+	t_parser	*tmp;
+
 	i = 0;
 	tmp = *echo;
 	glb_var.exit_status = 0;

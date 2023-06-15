@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 06:25:08 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/15 07:36:26 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/15 08:04:41 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static int	check_ex_av(char *av)
 {
 	int	i;
 	int	s;
+
 	i = 0;
 	if (!(*av))
 		return (1);
@@ -53,7 +54,7 @@ static void	ex_stat(char *arg)
 
 void	sh_exit(t_parser *tmp)
 {
-	t_parser *ex;
+	t_parser	*ex;
 
 	ex = tmp;
 	printf("exit\n");
@@ -67,7 +68,8 @@ void	sh_exit(t_parser *tmp)
 			glb_var.exit_status = 1;
 			return ;
 		}
-		else if (!check_ex_av(ex->args->value)) //we have one arg numeric we check if it's positive or negative
+		//we have one arg numeric we check if it's positive or negative
+		else if (!check_ex_av(ex->args->value))
 			ex_stat(ex->args->value);
 	}
 	else
