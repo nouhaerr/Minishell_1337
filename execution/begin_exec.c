@@ -6,49 +6,28 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 05:37:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/14 08:18:03 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/15 10:24:18 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	cmd_slash(char *cmd)
-{
-	int	i;
-
-	i = 0;
-	if (!cmd)
-		return (0);
-	while (cmd[i])
-	{
-		if (cmd[i] == '/')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-void	ft_err(char *s, char *cmd)
-{
-	ft_putstr_fd(s, STDERR_FILENO);
-	ft_putendl_fd(cmd, STDERR_FILENO);
-	exit(127);
-}
-
 char	**real_path(char **env)
 {
 	char	**p;
+	t_env	*cur;
 	int		i;
 
 	i = 0;
-	while (glb_var.list->env)
+	cur = glb_var.list;
+	while (cur)
 	{
-		if (!ft_strncmp(glb_var.list->env, "PATH=", 5))
+		if (!ft_strncmp(cur->env, "PATH=", 5))
 		{
-			p = ft_split(glb_var.list->env + 5, ':');
+			p = ft_split(cur->env + 5, ':');
 			return (p);
 		}
-		i++;
+		cur = cur->next;
 	}
 	return (NULL);
 }

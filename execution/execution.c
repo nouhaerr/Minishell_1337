@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/15 02:41:48 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/15 11:53:07 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,22 +54,27 @@ int	isbuiltin(t_parser *parser)
 
 void	execution(t_parser *parser, t_data *my_heredoc)
 {
-	//int	pid;
-	//int	status;
-	// int	*fd;
+	int	pid;
+	int	status;
+	int	*fd;
 
+	pid = 0;
+	fd = NULL;
 	if (!parser)
 		return ;
 	else if (parser->next == NULL && parser->cmd && !isbuiltin(parser))
+	{
+		glb_var.parent_process = 1;
 		exec_builtin(parser);
+	}
 	else if (parser->heredoc)
 		exec_heredoc(parser, my_heredoc);
-	// else
-	// {
-	// 	if (parser->next == NULL && parser->cmd)
-	// 		pid = exec_cmd(parser, fd, "one");
+	else if (parser->next == NULL && parser->cmd)
+	{
+		glb_var.parent_process = 0;
+		pid = exec_cmd(parser, fd, "one");
 	//	else if (parser->next)
 	// 		pid = multiple_pipes(parser);
-	// }
-	// waitpid(pid, &status, 0);
+		waitpid(pid, &status, 0);
+	}
 }

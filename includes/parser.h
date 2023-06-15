@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:54:36 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/09 22:09:51 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/15 11:51:43 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,16 @@ enum	t_e
 typedef struct t_data
 {
 	char			*value;
+	int				fd;
+	char			*error;
 	struct t_data	*next;
 }	t_data;
 
 typedef struct t_data2
 {
 	char			*value;
+	int				fd;
+	char			*error;
 	enum t_e		type;
 	struct t_data2	*next;
 }	t_data2;
