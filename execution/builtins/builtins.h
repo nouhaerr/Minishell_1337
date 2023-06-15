@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 00:48:37 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/14 07:48:43 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/15 04:30:18 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ int	    check_egal(t_data *tmp);
 int 	check_export_args(t_env *new_node);
 int	    check_ident(char *env, char *value, int len);
 void	modifie_and_add(t_env *new_env_node);
+void	modifie_env_node(char *env, char *new_value);
 
 #endif

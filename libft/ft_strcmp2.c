@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_strcmp2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/08 16:17:26 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/15 03:36:41 by nerrakeb         ###   ########.fr       */
+/*   Created: 2023/06/15 02:44:45 by nerrakeb          #+#    #+#             */
+/*   Updated: 2023/06/15 02:45:01 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_strcmp2(char *s1, char *s2)
 {
-	size_t			i;
-	unsigned char	*str1;
-	unsigned char	*str2;
+	int	i;
+	int j;
 
 	i = 0;
-	str1 = (unsigned char *)s1;
-	str2 = (unsigned char *)s2;
-	while (i < n && (str1[i] || str2[i]))
+	while (s1[i] || s2[i])
 	{
-		if (str1[i] > str2[i])
-			return (1);
-		else if (str1[i] < str2[i])
-			return (-1);
+		if (s1[i] != s2[i])
+		{
+			j = s1[i] - s2[i];
+			free(s1);
+			return (j);
+		}
 		i++;
 	}
+	free(s1);
 	return (0);
 }

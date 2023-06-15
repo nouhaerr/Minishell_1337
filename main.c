@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/14 12:14:42 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/15 03:11:36 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ int	main(int ac, char **av, char **env)
 
 	lexer = malloc(sizeof(t_lexer));
 	glb_var.list = save_my_env(env); //->> this one is where id o have leaks
-	system("leaks minishell");
 	my_heredoc = NULL;
 	while (1)
 	{

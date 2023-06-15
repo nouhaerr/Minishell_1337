@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 13:38:39 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/14 12:19:33 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/15 03:52:46 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_env	*save_my_env(char **env)
 			}
 			len++;
 		}
-		if (ft_strcmp(ft_substr(env[i], 0, len), "OLDPWD"))
+		if (ft_strcmp2(ft_substr(env[i], 0, len), "OLDPWD"))
 			ft_lstaddback_env(&my_env, ft_lstnew_env(ft_substr(env[i], 0, len), ft_substr(env[i], start, ft_strlen(env[i]) - 1)));
 		i++;
 	}
