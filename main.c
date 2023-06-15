@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/15 05:09:54 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/15 07:31:19 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	syntax_error(int base, t_token **tokens)
 	else
 		tokens2 = *tokens;
 	if (base != 0)
-		return (printf("minishell: syntax error near unexpected token \n"), 1);
+		return (printf("minishell: syntax error near unexpected token\n"), 1);
 	while (tokens2)
 	{
 		if (tokens2 -> type == the_pipe
@@ -56,6 +56,7 @@ char	*get_prompt(char *s)
 		cwd = ft_strdup("\e[1;95m!!->/minishell => \e[0m ");
 	return (cwd);
 }
+
 int	main(int ac, char **av, char **env)
 {
 	char		*input;
@@ -63,7 +64,7 @@ int	main(int ac, char **av, char **env)
 	t_token		*tokens;
 	t_lexer		*lexer;
 	t_parser	*parser;
-	t_data 	*my_heredoc;
+	t_data		*my_heredoc;
 	int			base;
 	(void)ac;
 	(void)av;
