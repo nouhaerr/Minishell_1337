@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 21:15:28 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/13 14:39:08 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/16 18:04:54 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	other_tokens(t_lexer *lexer, int i, char *input)
 {
 	int	len;
-	
+
 	len = token_word(input, i, lexer->base);
 	if (lexer->base == 0 && input[i] == '#')
 		i = ft_strlen(input);
@@ -74,7 +74,7 @@ int	token_env2(char *input, int i, t_lexer *lexer)
 		if (len != 0)
 		{
 			env = ft_substr(input, i + 1, len);
-			str_env = check_env(env, glb_var.list);
+			str_env = check_env(env, g_var.list);
 			free(env);
 		}
 		if (len == 0)
@@ -98,7 +98,7 @@ int	token_env(char *input, int i, t_lexer *lexer)
 
 	if (input[i + 1] == '?')
 	{
-		itoa = ft_itoa(glb_var.exit_status);
+		itoa = ft_itoa(g_var.exit_status);
 		str_env = ft_strdup(itoa);
 		lexer->str = ft_strjoin(lexer->str, str_env);
 		free(itoa);

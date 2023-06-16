@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 13:38:39 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/15 05:10:48 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/16 16:43:10 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,17 @@ t_env	*save_my_env(char **env)
 	{
 		start = 0;
 		len = 0;
-		while (env[i][len])
+		while (env[i][++len])
 		{
 			if (env[i][len] == '=')
 			{
 				start = len + 1;
 				break ;
 			}
-			len++;
 		}
 		if (ft_strcmp2(ft_substr(env[i], 0, len), "OLDPWD"))
-			ft_lstaddback_env(&my_env, ft_lstnew_env(ft_substr(env[i], 0, len), ft_substr(env[i], start, ft_strlen(env[i]) - 1)));
+			ft_lstaddback_env(&my_env, ft_lstnew_env(ft_substr(env[i], 0, len),
+					ft_substr(env[i], start, ft_strlen(env[i]) - 1)));
 		i++;
 	}
 	return (my_env);

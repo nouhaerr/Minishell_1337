@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/15 11:41:51 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/16 18:04:05 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	duplicate_fl(t_parser *parse, int *fd, char *msg)
 
 	fd = fd_redirection(parse);
 	cmd2 = ft_strdup(parse->cmd);
-	ft_tolower2(cmd2);
+	ft_tolower(cmd2);
 	path = cmd2;
 	if (!cmd_slash(cmd2))
 		path = get_path(cmd2);
@@ -62,7 +62,7 @@ void	duplicate_fl(t_parser *parse, int *fd, char *msg)
 	// 	dup2(fd[1], STDOUT_FILENO);
 	// }
 	close(fd[1]);
-	if (execve(path, &cmd2, glb_var.list) < 0)
+	if (execve(path, &cmd2, g_var.list) < 0)
 	{
 		free(cmd2);
 		perror("execve");
@@ -87,6 +87,6 @@ int	exec_cmd(t_parser *parser, int fd[2], char *msg)
 		close(fd[0]);
 		duplicate_fl(parser, fd, msg);
 	}
-	// execve(*parser->cmd, parser->cmd, glb_var.list);
+	// execve(*parser->cmd, parser->cmd, g_var.list);
 	return (pid);
 }

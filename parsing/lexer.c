@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:53:34 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/13 14:40:33 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/16 16:53:33 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ int	check_which_special_char(char c, char next_c, t_token **tokens)
 	return (0);
 }
 
-int ft_check_space(char *value)
+int	ft_check_space(char *value)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (value[i])
@@ -52,9 +52,9 @@ int ft_check_space(char *value)
 
 void	build_list(t_lexer *lexer, t_token **tokens)
 {
-	int	arten;
-	char **str;
-	int i;
+	int		arten;
+	char	**str;
+	int		i;
 
 	if (lexer -> base2 != 0)
 		arten = quotes;
@@ -67,9 +67,9 @@ void	build_list(t_lexer *lexer, t_token **tokens)
 		while (str[i])
 		{	
 			if (lexer -> base == 0)
-				ft_lstaddback(tokens , ft_lstnew(str[i], word, env_general));
+				ft_lstaddback(tokens, ft_lstnew(str[i], word, env_general));
 			else
-				ft_lstaddback(tokens , ft_lstnew(str[i], word, env_quotes));
+				ft_lstaddback(tokens, ft_lstnew(str[i], word, env_quotes));
 			i++;
 		}
 	}
@@ -77,6 +77,15 @@ void	build_list(t_lexer *lexer, t_token **tokens)
 		ft_lstaddback(tokens, ft_lstnew(lexer -> str, word, arten));
 	lexer -> str = NULL;
 	lexer -> base2 = 0;
+}
+
+int	check_condition(t_lexer *lexer, char *input, int i)
+{
+	if (input[i] == lexer -> c && input[i - 1] == lexer -> c
+		&& (lexer -> str == NULL
+			&& (input[i + 1] == ' ' || input[i + 1] == '\0' )))
+		return (1);
+	return (0);
 }
 
 int	lex(char *input, t_token **tokens, t_lexer *lexer)
@@ -97,7 +106,7 @@ int	lex(char *input, t_token **tokens, t_lexer *lexer)
 		}
 		else
 			i = partition_tokens(lexer, input, i);
-		if (input[i] == lexer -> c && input[i - 1] == lexer -> c && (lexer -> str == NULL && (input[i + 1] == ' ' || input[i + 1] == '\0' )))
+		if (check_condition(lexer, input, i) == 1)
 			lexer -> str = ft_strjoin(lexer -> str, ft_substr(input, i - 1, 2));
 		if (input[i] == '$')
 			i = token_env(input, i, lexer);

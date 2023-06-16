@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_parse.c                                     :+:      :+:    :+:   */
+/*   ft_lst_second.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:45:51 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/27 17:46:34 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/16 16:45:11 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,34 +73,4 @@ t_parser	*ft_lstaddback3(t_parser **lst, t_parser *new)
 		p = p -> next;
 	p -> next = new;
 	return (new);
-}
-
-t_data2	*ft_lstnew4(char *value, enum t_e type)
-{
-	t_data2	*p;
-
-	p = malloc(sizeof (t_data2));
-	if (!p)
-		return (NULL);
-	p -> value = value;
-	p ->type = type;
-	p -> next = NULL;
-	return (p);
-}
-
-void	ft_lstaddback4(t_data2 **lst, t_data2 *new)
-{
-	t_data2	*p;
-
-	if (*lst == NULL)
-	{
-		*lst = new;
-		return ;
-	}
-	p = *lst;
-	if (!p)
-		return ;
-	while (p-> next)
-		p = p -> next;
-	p -> next = new;
 }

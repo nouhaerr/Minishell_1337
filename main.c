@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/15 07:31:19 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/16 18:04:19 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@ int	syntax_error(int base, t_token **tokens)
 	{
 		if (tokens2 -> type == the_pipe
 			&& (previous == NULL || tokens2 -> next == NULL))
-			return (printf("minishell: syntax error near unexpected token `|'\n"), 1);
+			return (printf("minishell: syntax error near unexpected token `|'\n")
+				, 1);
 		if ((tokens2 -> type != the_pipe && tokens2 -> type != word)
 			&& (tokens2 -> next == NULL || (tokens2 -> next)-> type != word))
-			return (printf("minishell: syntax error near unexpected token `newline'\n"), 1);
+			return (printf("minishell: syntax error near unexpected token\n"),
+				1);
 		previous = tokens2;
 		tokens2 = tokens2 -> next;
 	}
@@ -57,26 +59,41 @@ char	*get_prompt(char *s)
 	return (cwd);
 }
 
+void	main2(char *input, t_data *my_heredoc)
+{
+	t_lexer		*lexer;
+	t_token		*tokens;
+	t_parser	*parser;
+	int			base;
+
+	lexer = malloc (sizeof(t_lexer));
+	tokens = NULL;
+	parser = NULL;
+	base = lex(input, &tokens, lexer);
+	if (!syntax_error(base, &tokens) && tokens != NULL)
+	{
+		parse(&tokens, &parser, lexer);
+		execution(parser, my_heredoc);
+		free_mylist(parser, 1);
+	}
+	else
+		g_var.exit_status = 1;
+	free_mylist(tokens, 0);
+	free(input);
+}
+
 int	main(int ac, char **av, char **env)
 {
 	char		*input;
 	const char	*prompt;
-	t_token		*tokens;
-	t_lexer		*lexer;
-	t_parser	*parser;
 	t_data		*my_heredoc;
-	int			base;
+
 	(void)ac;
 	(void)av;
-	(void)env;
-
-	lexer = malloc(sizeof(t_lexer));
-	glb_var.list = save_my_env(env);
+	g_var.list = save_my_env(env);
 	my_heredoc = NULL;
 	while (1)
 	{	
-		tokens = NULL;
-		parser = NULL;
 		prompt = get_prompt(getcwd(NULL, 0));
 		input = readline(prompt);
 		free((void *)prompt);
@@ -84,17 +101,6 @@ int	main(int ac, char **av, char **env)
 			break ;
 		if (ft_strcmp(input, "") != 0)
 			add_history(input);
-		
-		base = lex(input, &tokens, lexer);
-		if (!syntax_error(base, &tokens) && tokens != NULL)
-		{
-			parse(&tokens, &parser, lexer);
-			execution(parser, my_heredoc);
-			free_mylist(parser, 1);
-		}
-		else
-			glb_var.exit_status = 1;
-		free_mylist(tokens, 0);
-		free(input);
+		main2(input, my_heredoc);
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:53:18 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/15 09:31:51 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/16 18:18:12 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ typedef struct s_glb
 	bool	parent_process;
 }	t_glb;
 
-t_glb	glb_var;
+t_glb	g_var;
 
 // thsi one must stau hier since they dont know the prototype of this function
-
-void	rl_replace_line (const char *text, int clear_undo);  // gotta add this cause in the library i downloaded they didnt have the prototype
-void	signal_heredoc(int signal, siginfo_t *infos , void *contest);
+//gotta add this cause in the library i downloaded they didnt have the prototype
+void	rl_replace_line(const char *text, int clear_undo);
+void	signal_heredoc(int signal, siginfo_t *infos, void *contest);
 size_t	env_list_size(t_env *env);
 
 #endif

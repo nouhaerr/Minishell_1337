@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 06:25:08 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/15 08:19:01 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/16 18:05:36 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,12 @@ void	sh_exit(t_parser *tmp)
 		else if (ex->args->next && !check_ex_av(ex->args->value))
 		{
 			printf("minishell: exit: too many arguments\n");
-			glb_var.exit_status = 1;
+			g_var.exit_status = 1;
 			return ;
 		}
 		else if (!check_ex_av(ex->args->value))
 			ex_stat(ex->args->value);
 	}
 	else
-		exit(glb_var.exit_status);
+		exit(g_var.exit_status);
 }

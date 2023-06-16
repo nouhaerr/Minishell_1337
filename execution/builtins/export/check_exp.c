@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_exp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 01:33:01 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/15 08:12:45 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/16 18:08:22 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	check_egal(t_data *tmp)
 		|| !tmp->value[0] || tmp->value[0] == '+')
 	{
 		printf("minishell: export: `%s': not a valid identifier\n", tmp->value);
-		glb_var.exit_status = 1;
+		g_var.exit_status = 1;
 		return (1);
 	}
 	return (0);

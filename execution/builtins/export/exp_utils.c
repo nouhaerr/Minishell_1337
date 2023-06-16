@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exp_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 02:47:29 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/15 05:04:07 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/16 18:08:22 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	concat_value(t_env *node)
 		return (1);
 	free(node->env);
 	node->env = name;
-	cur = ft_getenv(glb_var.list, node->env);
+	cur = ft_getenv(g_var.list, node->env);
 	if (cur && cur->value && (node->value[0] == '\0' || !node->value))
 		return (1);
 	if (cur && node->value[0] != '\0' && ft_strcmp(node->value, "\"\""))
@@ -47,7 +47,7 @@ int	check_export_args(t_env *new_node)
 	check = check_ident(new_node->env, new_node->value, len);
 	if (check)
 	{
-		glb_var.exit_status = 1;
+		g_var.exit_status = 1;
 		free(new_node->env);
 		free(new_node->value);
 		free(new_node);

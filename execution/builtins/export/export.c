@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 03:26:24 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/15 07:43:16 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/16 18:08:22 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	sorted_env(void)
 	str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz";
 	while (str[i])
 	{
-		cur = glb_var.list;
+		cur = g_var.list;
 		while (cur)
 		{
 			if (cur->env[0] == str[i])
@@ -98,12 +98,12 @@ void	sh_export(t_parser *parser)
 	tmp = parser->args;
 	if (!parser->args)
 	{		
-		glb_var.exit_status = 0;
+		g_var.exit_status = 0;
 		sorted_env();
 	}
 	if (parser->args && parser->args->value[0] == '-' && parser->args->value[1])
 	{
-		glb_var.exit_status = 2;
+		g_var.exit_status = 2;
 		printf("minishell: export: %c%c: invalid option\n",
 			parser->args->value[0], parser->args->value[1]);
 		printf("export: usage: export [-fn] [name[=value] ...] or export -p\n");

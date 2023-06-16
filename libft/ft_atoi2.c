@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 08:34:00 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/05/25 12:03:50 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/16 17:56:00 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ long	ft_atoi2(const char *str)
 	if (signe < 0 && nbr == 9223372036854775807)
 		return (3);
 	if ((signe > 0 && nbr > 9223372036854775807)
-	|| (signe < 0 && nbr > 9223372036854775807))
+		|| (signe < 0 && nbr > 9223372036854775807))
 	{
 		printf("minishell: exit: %s: numeric argument required\n", str);
 		exit(255);

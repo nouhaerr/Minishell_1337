@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 11:16:58 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/15 08:03:27 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/16 18:04:05 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ void	sh_cd(t_parser *env_cmd)
 
 	oldpwd = NULL;
 	pwd = NULL;
-	pwd_home = ft_getenv(glb_var.list, "HOME");
-	env_oldpwd = ft_getenv(glb_var.list, "OLDPWD");
+	pwd_home = ft_getenv(g_var.list, "HOME");
+	env_oldpwd = ft_getenv(g_var.list, "OLDPWD");
 	if (env_oldpwd)
 		oldpwd = &(env_oldpwd->value);
-	env_pwd = ft_getenv(glb_var.list, "PWD");
+	env_pwd = ft_getenv(g_var.list, "PWD");
 	if (env_pwd)
 		pwd = &(env_pwd->value);
 	if (!env_cmd->args || !ft_strcmp(env_cmd->args->value, "--")

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   modifie_and_add.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/14 07:44:40 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/15 05:07:06 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/16 18:04:05 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	modifie_env_node(char *env, char *new_value)
 {
 	t_env	*cur;
 
-	cur = glb_var.list;
+	cur = g_var.list;
 	while (cur)
 	{
 		if (!ft_strcmp(cur->env, env))
@@ -41,7 +41,7 @@ void	modifie_env_node(char *env, char *new_value)
 
 void	modifie_and_add(t_env *new_env_node)
 {
-	if (env_search(glb_var.list, new_env_node->env) != 0)
+	if (env_search(g_var.list, new_env_node->env) != 0)
 	{
 		modifie_env_node(new_env_node->env, new_env_node->value);
 		free(new_env_node->env);
@@ -49,5 +49,5 @@ void	modifie_and_add(t_env *new_env_node)
 		free(new_env_node);
 		return ;
 	}
-	ft_lstaddback_env(&glb_var.list, new_env_node);
+	ft_lstaddback_env(&g_var.list, new_env_node);
 }

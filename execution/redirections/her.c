@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:46:12 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/12 16:24:44 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/16 18:07:44 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,10 @@ int	env_expansion_for_heredoc2(char *input, int i, t_env *my_env, char **str)
 	char	*env;
 	char	*str_env;
 
-	
 	len = token_word(input, i + 1, -1);
 	env = ft_substr(input, i + 1, len);
 	if (len != 0)
 	{
-		// printf("imhier\n");
-		// sleep (3);
 		env = ft_substr(input, i + 1, len);
 		str_env = check_env(env, my_env);
 		*str = ft_strjoin(*str, str_env);
@@ -40,7 +37,7 @@ int	env_expansion_for_heredoc(char *input, int i, t_env *my_env, char **str)
 
 	if (input[i + 1] == '?')
 	{
-		itoa = ft_itoa(glb_var.exit_status);
+		itoa = ft_itoa(g_var.exit_status);
 		str_env = ft_strdup(itoa);
 		*str = ft_strjoin(*str, str_env);
 		free(itoa);
@@ -64,14 +61,32 @@ int	my_word(char *input, int start)
 	return (j);
 }
 
+void	expansion_heredoc(char *input, int i, char **str, t_env *my_env)
+{
+	int	len ;
+
+	len = 0;
+	while (input[i])
+	{
+		if (input[i] == '$')
+			i = env_expansion_for_heredoc(input, i, my_env, str);
+		else
+		{
+			len = my_word(input, i);
+			*str = ft_strjoin(*str, ft_substr(input, i, len));
+			i += len;
+		}
+	}
+	*str = ft_strjoin(*str, ft_strdup("\n"));
+}
+
 char	*her(t_data2 *heredoc, t_env *my_env)
 {
 	char	*value;
 	char	*input;
 	char	*str;
 	int		i;
-	int		len;
-	
+
 	str = NULL;
 	while (heredoc != NULL)
 	{
@@ -83,20 +98,7 @@ char	*her(t_data2 *heredoc, t_env *my_env)
 		else if (heredoc != NULL && heredoc -> next == NULL)
 		{
 			if (heredoc -> type == expand)
-			{
-				while (input[i])
-				{
-					if (input[i] == '$')
-						i = env_expansion_for_heredoc(input, i, my_env, &str);
-					else
-					{
-						len = my_word(input, i);
-						str = ft_strjoin(str, ft_substr(input, i, len));
-						i += len;
-					}
-				}
-				str = ft_strjoin(str, ft_strdup("\n"));
-			}
+				expansion_heredoc(input, i, &str, my_env);
 			else if (heredoc -> type == not_expand)
 				str = ft_strjoin(str, ft_strjoin(input, ft_strdup("\n")));
 		}

@@ -6,38 +6,37 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:54:28 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/31 19:24:50 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/16 18:19:42 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
-#define LEXER_H
-#include "../includes/env.h"
+# define LEXER_H
+# include "../includes/env.h"
 
-enum t_enum
+enum
 {
-	word, //0
-	the_pipe, // 1
-	r_rdr, //2
-	dr_rdr, //3
-	l_rdr, // 4
-	heredoc, //5
-} t_enum;
+	word,
+	the_pipe,
+	r_rdr,
+	dr_rdr,
+	l_rdr,
+	heredoc,
+};
 
-enum t_type
+enum
 {
-	general, //0
-	quotes, // 1
+	general,
+	quotes,
 	env_general,
-	env_quotes
-}	t_type;
-
+	env_quotes,
+};
 
 typedef struct t_token
 {
 	char			*value;
-	enum t_enum		type;
-	enum t_type		arten;
+	int				type;
+	int				arten;
 	struct t_token	*next;
 }	t_token;
 
@@ -57,7 +56,7 @@ typedef struct t_lexer
 
 // utils i would be in need for my linked list.
 
-t_token	*ft_lstnew(char *value, enum t_enum type, enum t_type arten);
+t_token	*ft_lstnew(char *value, int type, int arten);
 void	ft_lstaddback(t_token **lst, t_token *new);
 
 // funstions related to tokens

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   begin_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 05:37:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/15 10:24:18 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/16 18:04:05 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	**real_path(char **env)
 	int		i;
 
 	i = 0;
-	cur = glb_var.list;
+	cur = g_var.list;
 	while (cur)
 	{
 		if (!ft_strncmp(cur->env, "PATH=", 5))
@@ -39,7 +39,7 @@ char	*get_path(char *cmd)
 	char	**full_path;
 	int		i;
 
-	full_path = real_path(glb_var.list);
+	full_path = real_path(g_var.list);
 	if (!full_path)
 		ft_err("pipex: command not found: ", cmd);
 	cmd_file = ft_strjoin("/", cmd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:50:10 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/15 11:26:25 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/16 17:25:50 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_open(char *name, char *msg)
 
 int	*fd_redirection(t_parser *node)
 {
-    int			*fd;
+	int			*fd;
 	t_parser	*cur;
 	t_data2		*tmp1;
 	t_data		*tmp2;
@@ -44,7 +44,7 @@ int	*fd_redirection(t_parser *node)
 	cur = node;
 	tmp1 = node->outfiles;
 	tmp2 = node->infiles;
-	while(cur)
+	while (cur)
 	{
 		while (tmp1)
 		{

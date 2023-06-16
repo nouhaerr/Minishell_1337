@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/15 11:53:07 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/16 18:09:03 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	isbuiltin(t_parser *parser)
 	cmd2 = ft_strdup(parser->cmd);
 	ft_tolower2(cmd2);
 	if (ft_strcmp(cmd2, "echo") || ft_strcmp(cmd2, "pwd")
-	|| ft_strcmp(cmd2, "env") || ft_strcmp(parser->cmd, "unset")
-	|| ft_strcmp(cmd2, "cd") || ft_strcmp(parser->cmd, "exit"))
+		|| ft_strcmp(cmd2, "env") || ft_strcmp(parser->cmd, "unset")
+		|| ft_strcmp(cmd2, "cd") || ft_strcmp(parser->cmd, "exit"))
 	{
 		free(cmd2);
 		return (0);
@@ -64,15 +64,15 @@ void	execution(t_parser *parser, t_data *my_heredoc)
 		return ;
 	else if (parser->next == NULL && parser->cmd && !isbuiltin(parser))
 	{
-		glb_var.parent_process = 1;
+		g_var.parent_process = 1;
 		exec_builtin(parser);
 	}
 	else if (parser->heredoc)
 		exec_heredoc(parser, my_heredoc);
 	else if (parser->next == NULL && parser->cmd)
 	{
-		glb_var.parent_process = 0;
-		pid = exec_cmd(parser, fd, "one");
+		g_var.parent_process = 0;
+		//pid = exec_cmd(parser, fd, "one");
 	//	else if (parser->next)
 	// 		pid = multiple_pipes(parser);
 		waitpid(pid, &status, 0);

@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:14:51 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/14 15:49:58 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/16 17:58:14 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	create_node(t_parser *parser, t_lexer *lexer)
 		ft_lstaddback2(&(parser->infiles), ft_lstnew2(lexer -> tok -> value));
 	else if (lexer->tokens2->type == r_rdr)
 		ft_lstaddback4(&(parser->outfiles),
-			ft_lstnew4(lexer -> tok -> value, clear));
+			ft_lstnew4(lexer -> tok -> value, trunc));
 	else if (lexer->tokens2->type == dr_rdr)
 		ft_lstaddback4(&(parser->outfiles),
-			ft_lstnew4(lexer -> tok -> value, finish_up));
+			ft_lstnew4(lexer -> tok -> value, append));
 	else if (lexer->tokens2->type == heredoc && lexer->tok ->arten == general)
 		ft_lstaddback4(&(parser->heredoc),
 			ft_lstnew4(lexer -> tok -> value, expand));
@@ -60,7 +60,7 @@ void	parse(t_token **tokens, t_parser **parser, t_lexer *lexer)
 	{
 		t = build_list_parser(parser, lexer, t);
 		if (lexer -> tok == NULL)
-			return;
+			return ;
 		if ((lexer->tokens2)->type == l_rdr || (lexer->tokens2)->type == r_rdr \
 		|| (lexer->tokens2)->type == dr_rdr \
 		|| (lexer->tokens2)->type == heredoc)
@@ -71,28 +71,27 @@ void	parse(t_token **tokens, t_parser **parser, t_lexer *lexer)
 			lexer->i++;
 		}
 	}
-	//check_struct(*parser);
 }
 // just to check on if my parsing is doing alright.
+//check_struct(*parser);
 
 t_token	*my_next_word(t_token *tokens)
 {
 	t_token	*t;
+	t_token	*t2;
 
 	t = tokens;
 	while (tokens)
 	{
 		if (tokens -> type != word && tokens -> type != the_pipe)
 		{
-			t_token *t2;
 			t2 = tokens -> next;
-			if ( t2 != NULL && t2 -> arten == env_general && (t2 ->next != NULL && t2-> next-> arten == env_general))
-			{
-				printf("abigiuos redirect\n");
-				return(NULL);
-			}
+			if (t2 != NULL && t2 -> arten == env_general
+				&& (t2 ->next != NULL && t2-> next-> arten == env_general))
+				return (printf("abigiuos redirect\n"), NULL);
 		}
-		if (!ft_strcmp(tokens -> value, "\"\"") || !ft_strcmp(tokens -> value, "\'\'"))
+		if (!ft_strcmp(tokens -> value, "\"\"")
+			|| !ft_strcmp(tokens -> value, "\'\'"))
 		{
 			free(tokens -> value);
 			tokens -> value = ft_strdup("\0");
