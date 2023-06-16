@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:53:18 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/16 18:18:12 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/16 20:44:34 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,5 @@ t_glb	g_var;
 void	rl_replace_line(const char *text, int clear_undo);
 void	signal_heredoc(int signal, siginfo_t *infos, void *contest);
 size_t	env_list_size(t_env *env);
-
+void    signal_check();
 #endif

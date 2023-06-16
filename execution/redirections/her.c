@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:46:12 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/16 18:07:44 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/16 19:09:40 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	*her(t_data2 *heredoc, t_env *my_env)
 		value = heredoc -> value;
 		input = readline("> ");
 		i = 0;
-		if (ft_strcmp(input, value) == 0)
+		if (input == NULL || ft_strcmp(input, value) == 0)
 			heredoc = heredoc -> next;
 		else if (heredoc != NULL && heredoc -> next == NULL)
 		{

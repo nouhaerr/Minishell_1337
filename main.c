@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/16 18:04:19 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/16 21:22:37 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,10 @@ int	main(int ac, char **av, char **env)
 	my_heredoc = NULL;
 	while (1)
 	{	
+		signal_check();
 		prompt = get_prompt(getcwd(NULL, 0));
 		input = readline(prompt);
+		printf("%s\n", input);
 		free((void *)prompt);
 		if (input == NULL)
 			break ;

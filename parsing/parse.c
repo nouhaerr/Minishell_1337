@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:14:51 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/16 17:58:14 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/16 21:01:23 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ void	parse(t_token **tokens, t_parser **parser, t_lexer *lexer)
 			lexer->i++;
 		}
 	}
+	//check_struct(*parser);
 }
 // just to check on if my parsing is doing alright.
-//check_struct(*parser);
 
 t_token	*my_next_word(t_token *tokens)
 {
