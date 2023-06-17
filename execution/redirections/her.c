@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:46:12 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/17 14:18:07 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/17 19:22:52 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	env_expansion_for_heredoc2(char *input, int i, t_env *my_env, char **str)
 	char	*str_env;
 
 	len = token_word(input, i + 1, -1);
-	env = ft_substr(input, i + 1, len);
 	if (len != 0)
 	{
 		env = ft_substr(input, i + 1, len);
@@ -64,6 +63,7 @@ int	my_word(char *input, int start)
 void	expansion_heredoc(char *input, int i, char **str, t_env *my_env)
 {
 	int	len ;
+	char *s1;
 
 	len = 0;
 	while (input[i])
@@ -73,11 +73,13 @@ void	expansion_heredoc(char *input, int i, char **str, t_env *my_env)
 		else
 		{
 			len = my_word(input, i);
-			*str = ft_strjoin(*str, ft_substr(input, i, len));
+			s1 = ft_substr(input, i, len);
+			*str = ft_strjoin(*str, s1);
 			i += len;
 		}
 	}
 	*str = ft_strjoin(*str, ft_strdup("\n"));
+	free(input);
 }
 
 char	*her(t_data2 *heredoc, t_env *my_env)
@@ -88,22 +90,25 @@ char	*her(t_data2 *heredoc, t_env *my_env)
 	int		i;
 
 	str = NULL;
-	(void)my_env;
 	while (heredoc != NULL)
 	{
 		value = heredoc -> value;
 		input = readline("> ");
 		i = 0;
 		if (input == NULL || ft_strcmp(input, value) == 0)
+		{
+			free(input);
 			heredoc = heredoc -> next;
+		}
 		else if (heredoc != NULL && heredoc -> next == NULL)
 		{
 			if (heredoc -> type == expand)
-				expansion_heredoc(input, i, &str, my_env); // leaks on this function
-			if (heredoc -> type == not_expand)
+				expansion_heredoc(input, i, &str, my_env);
+			else if (heredoc -> type == not_expand)
 				str = ft_strjoin(str, ft_strjoin(input, ft_strdup("\n")));
 		}
-		free(input);
+		else
+			free(input);
 	}
 	return (str);
 }
