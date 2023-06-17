@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/17 15:21:41 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/17 19:07:03 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,27 +44,89 @@ void	ft_err(char *s, char *cmd)
 	exit(127);
 }
 
-void	dup_and_exec(t_parser *parse, int *pip, char *msg)
+void	dup_and_exec(t_parser *parse, t_pipe pip, char *msg)
 {
 	int		*fd;
 
 	fd = fd_redirection(parse);
 	if (!fd)
 		return ;
-	// parse->infiles->fd = fd[0];
-	parse->outfiles->fd = pip[1];
+	parse->fd[1] = pip.wr_end[1];
+	parse->fd[0] = 0;
+	if (!ft_strcmp(msg, "first"))
+	{
+		if (fd[0] != -1)
+			parse->fd[0] = fd[0];
+		if (fd[1] != -1)
+			parse->fd[1] = fd[1];
+	}
 	if (!ft_strcmp(msg, "one") || !ft_strcmp(msg, "last"))
 	{
-		parse->outfiles = 1;
-		if (fd[0] == -1)
-			parse->infiles->fd = 0;
-		if (fd[1] == -1)
-			parse->outfiles->fd = 1;
+		parse->fd[1] = 1;
+		if (!ft_strcmp(msg, "last"))
+			parse->fd[0] = pip.rd_end[0];
+		if (fd[0] != -1)
+			parse->fd[0] = fd[0];
+		if (fd[1] != -1)
+			parse->fd[1] = fd[1];
 	}
-	
+	if (!ft_strcmp(msg, "between"))
+	{
+		parse->fd[0] = pip.rd_end[0];
+		parse->fd[1] = pip.wr_end[1];
+		if (fd[0] != -1)
+			parse->fd[0] = fd[0];
+		if (fd[1] != -1)
+			parse->fd[1] = fd[1];
+	}
+	dup2(parse->fd[1], 1);
+	dup2(parse->fd[0], 0);
+	close(pip.rd_end[0]);
+	close(pip.rd_end[1]);
+	close(pip.wr_end[0]);
+	close(pip.wr_end[1]);
 }
 
-int	exec_cmd(t_parser *parser, int fd[2], char *msg)
+void	ft_free(char **str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+		free(str[i]);
+	free(str);
+	return (NULL);
+}
+
+char	**create_env_arr(int size)
+{
+	char	**arr;
+	char	*add;
+	t_env	*en;
+	int		i;
+
+	en = g_var.list;
+	i = 0;
+	arr = (char **)malloc((size + 1) * sizeof(char *));
+	if (!arr)
+		return (printf("minishell: Memory allocation failed\n"));
+	while (en)
+	{
+		add = ft_strjoin(en->env, "=");
+		if (!add)
+			return (printf("minishell: Memory allocation failed\n"), ft_free(arr), NULL);
+		arr[i]= ft_strjoin(add, en->value);
+		if (!arr[i])
+			return (printf("minishell: Memory allocation failed\n"), ft_free(arr), free(add), NULL);
+		free(add);
+		en = en->next;
+		i++;
+	}
+	arr[i] = NULL;
+	return (arr);
+}
+
+int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 {
 	pid_t	pid;
 	char	*path;
@@ -74,13 +136,12 @@ int	exec_cmd(t_parser *parser, int fd[2], char *msg)
 	ft_check(pid);
 	if (pid == 0)
 	{
-		// if (!isbuiltin(parser))
-		// {
-		// 	// duplicate_fl(parser, fd, msg);
-		// 	exec_builtin(parser);
-		// }
-		close(fd[0]);
-		dup_and_exec(parser, fd, msg);
+		dup_and_exec(parse, pip, msg);
+		if (!isbuiltin(parse))
+		{
+			exec_builtin(parse);
+			exit(g_var.exit_status);
+		}
 		cmd2 = ft_strdup(parse->cmd);
 		ft_tolower(cmd2);
 		path = cmd2;
@@ -88,8 +149,7 @@ int	exec_cmd(t_parser *parser, int fd[2], char *msg)
 			path = get_path(cmd2);
 		if (!path)
 			ft_err("minishell: command not found: ", parse->cmd);
-		close(fd[1]);
-		if (execve(path, &cmd2, g_var.list) < 0)
+		if (execve(path, &cmd2, create_env_arr(env_list_size(g_var.list))) < 0)
 		{
 			free(cmd2);
 			perror("execve");
@@ -97,6 +157,5 @@ int	exec_cmd(t_parser *parser, int fd[2], char *msg)
 		}
 		free(cmd2);
 	}
-	// execve(*parser->cmd, parser->cmd, g_var.list);
 	return (pid);
 }

@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:50:10 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/17 13:35:08 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/17 17:04:41 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	*fd_redirection(t_parser *node)
 	{
 		while (tmp1)
 		{
+			close(fd[1]);
 			if (tmp1->type == append)
 				fd[1] = ft_open(tmp1->value, "saved_file");
 			else if (tmp1->type == trunc)
@@ -60,6 +61,7 @@ int	*fd_redirection(t_parser *node)
 		}
 		while (tmp2)
 		{
+			close(fd[0]);
 			fd[0] = ft_open(tmp2->value, "infile");
 			if (fd[0] == -3)
 			{

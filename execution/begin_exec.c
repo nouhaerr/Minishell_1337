@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   begin_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 05:37:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/16 18:04:05 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/17 18:43:32 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*get_path(char *cmd)
 
 	full_path = real_path(g_var.list);
 	if (!full_path)
-		ft_err("pipex: command not found: ", cmd);
+		ft_err("minishell: command not found: ", cmd);
 	cmd_file = ft_strjoin("/", cmd);
 	i = -1;
 	while (full_path[++i])
