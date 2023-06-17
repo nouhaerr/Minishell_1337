@@ -6,7 +6,7 @@
 #    By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 02:49:56 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/06/17 19:36:37 by nerrakeb         ###   ########.fr        #
+#    Updated: 2023/06/17 19:38:50 by nerrakeb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,8 @@ SRCS =	main.c parsing/my_free.c parsing/ft_lst_one.c \
 		execution/builtins/cd.c execution/builtins/export/export.c \
 		execution/builtins/export/modifie_and_add.c execution/builtins/export/check_exp.c \
 		execution/builtins/export/exp_utils.c execution/execution.c \
-		execution/exec_bltn_hered.c signal.c execution/exec_cmd.c \
-		execution/redirections/files.c execution/begin_exec.c \
+		execution/exec_bltn_hered.c signal.c #execution/exec_cmd.c \
+		#execution/redirections/files.c execution/begin_exec.c \
 		execution/exec_pipes.c
 OBJS = $(SRCS:.c=.o)
 LIBFT= libft.a

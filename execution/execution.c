@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/17 19:37:09 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/17 19:39:26 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ int	isbuiltin(t_parser *parser)
 
 void	execution(t_parser *parser, t_data *my_heredoc)
 {
-	int		pid;
-	t_pipe	pip;
-	int		status;
+	// int		pid;
+	// t_pipe	pip;
+	// int		status;
 
-	pid = 0;
+	// pid = 0;
 	if (!parser)
 		return ;
 	else if (parser->next == NULL && parser->cmd && !isbuiltin(parser))
@@ -45,14 +45,14 @@ void	execution(t_parser *parser, t_data *my_heredoc)
 		exec_builtin(parser);
 	}
 	else if (parser->heredoc)
-		exec_heredoc(parser, my_heredoc);
-	else 
-	{
-		g_var.parent_process = 0;
-		if (parser->next == NULL && parser->cmd)
-			pid = exec_cmd(parser, pip, "one");
-		else
-			pid = multiple_pipes(parser);
-		waitpid(pid, &status, 0);
-	}
+		exec_heredoc(parser, &my_heredoc);
+	// else 
+	// {
+	// 	g_var.parent_process = 0;
+	// 	if (parser->next == NULL && parser->cmd)
+	// 		pid = exec_cmd(parser, pip, "one");
+	// 	else
+	// 		pid = multiple_pipes(parser);
+	// 	waitpid(pid, &status, 0);
+	// }
 }
