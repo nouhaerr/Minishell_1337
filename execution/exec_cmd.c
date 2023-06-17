@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/17 19:07:03 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/17 20:04:02 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 		dup_and_exec(parse, pip, msg);
 		if (!isbuiltin(parse))
 		{
-			exec_builtin(parse);
+			run_builtin(parse);
 			exit(g_var.exit_status);
 		}
 		cmd2 = ft_strdup(parse->cmd);
