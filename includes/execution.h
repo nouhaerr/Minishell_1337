@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:53:39 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/17 20:03:58 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/17 20:18:33 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,7 @@ int	    exec_cmd(t_parser *parser, t_pipe pip, char *msg);
 int		isbuiltin(t_parser *parser);
 int		*fd_redirection(t_parser *node);
 char	*get_path(char *cmd);
+void	ft_free(char **str);
+void	ft_err(char *s, char *cmd);
 
 #endif

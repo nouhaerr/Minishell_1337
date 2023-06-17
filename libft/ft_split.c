@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 16:05:02 by hobenaba          #+#    #+#             */
-/*   Updated: 2022/11/06 22:13:19 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/17 20:20:40 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	len_word(char const *s, int start, char c)
 	return (j);
 }
 
-void	ft_free(char **p, int i)
+void	ft_free2(char **p, int i)
 {
 	while (i >= 0)
 	{
@@ -73,7 +73,7 @@ char	**ft_split(char const *s, char c)
 		p[i] = ft_substr(s, j, len_word(s, j, c));
 		if (!p[i])
 		{
-			ft_free(p, i);
+			ft_free2(p, i);
 			return (NULL);
 		}
 		j += len_word(s, j, c);

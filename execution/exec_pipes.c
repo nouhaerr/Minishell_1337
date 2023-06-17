@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 19:19:54 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/17 19:56:13 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/17 20:12:00 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ int	multiple_pipes(t_parser *node)
 	cur = node;
 	while (cur)
 	{
-		switch_pipe(&pip, index, fd_pip);
-		open_pipes(pip, index);
+		switch_pipe(&pip, cur->index, fd_pip);
+		open_pipes(pip, cur->index);
 		if (cur == node)
 			pid = exec_cmd(node, pip, "first");
 		else if (cur->next == NULL)

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+         #
+#    By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 02:49:56 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/06/17 20:03:30 by hobenaba         ###   ########.fr        #
+#    Updated: 2023/06/17 20:24:51 by nerrakeb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,13 +22,14 @@ SRCS =	main.c parsing/my_free.c parsing/ft_lst_one.c \
 		parsing/env.c parsing/tokens.c parsing/lexer.c \
 		execution/builtins/echo.c execution/builtins/pwd.c \
 		execution/builtins/env.c execution/builtins/exit.c \
-		execution/redirections/her.c \
-		execution/builtins/unset.c execution/builtins/utils.c \
-		execution/builtins/cd.c execution/builtins/export/export.c \
+		execution/redirections/her.c execution/builtins/utils.c \
+		execution/builtins/unset.c execution/builtins/cd.c \
+		 execution/builtins/export/export.c \
 		execution/builtins/export/modifie_and_add.c execution/builtins/export/check_exp.c \
 		execution/builtins/export/exp_utils.c execution/execution.c \
-		execution/exec_bltn_hered.c signal.c #execution/exec_cmd.c \
-		execution/redirections/files.c execution/begin_exec.c
+		execution/exec_bltn_hered.c signal.c execution/exec_cmd.c \
+		execution/redirections/files.c execution/begin_exec.c \
+		execution/exec_pipes.c
 		
 OBJS = $(SRCS:.c=.o)
 LIBFT= libft.a
