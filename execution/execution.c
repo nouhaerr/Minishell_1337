@@ -6,10 +6,9 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/17 20:25:10 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/17 20:39:30 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../includes/minishell.h"
 
@@ -57,4 +56,5 @@ void	execution(t_parser *parser, t_data *my_heredoc)
 			pid = multiple_pipes(parser);
 		waitpid(pid, &status, 0);
 	}
+	free_mylist(my_heredoc, 2);
 }

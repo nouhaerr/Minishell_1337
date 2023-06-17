@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:46:12 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/17 19:22:52 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/17 20:22:58 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void	expansion_heredoc(char *input, int i, char **str, t_env *my_env)
 
 char	*her(t_data2 *heredoc, t_env *my_env)
 {
-	char	*value;
 	char	*input;
 	char	*str;
 	int		i;
@@ -92,10 +91,9 @@ char	*her(t_data2 *heredoc, t_env *my_env)
 	str = NULL;
 	while (heredoc != NULL)
 	{
-		value = heredoc -> value;
 		input = readline("> ");
 		i = 0;
-		if (input == NULL || ft_strcmp(input, value) == 0)
+		if (input == NULL || ft_strcmp(input, heredoc -> value) == 0)
 		{
 			free(input);
 			heredoc = heredoc -> next;

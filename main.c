@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/17 20:25:25 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/17 20:38:14 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	_session(t_token *tok, t_parser *par, t_data *her, t_lexer *le)
 	{	
 		tok = NULL;
 		par = NULL;
-		//signal_check();
+		signal_check();
 		prompt = get_prompt(getcwd(NULL, 0));
 		input = readline(prompt);
 		free((void *)prompt);
