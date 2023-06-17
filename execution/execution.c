@@ -6,9 +6,10 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/17 19:09:04 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/17 19:28:22 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../includes/minishell.h"
 
@@ -29,53 +30,72 @@ int	isbuiltin(t_parser *parser)
 	return (1);
 }
 
-// int	multiple_pipes(t_parser *node)
-// {
-// 	int			fd[2];
-// 	int			pid;
-// 	t_parser	*cur;
+void	switch_pipe(t_pipe *pip, int i, int fd_pip[2][2])
+{
+	if (i % 2 == 0)
+	{
+		
+	}
+	else
+	{
+		
+	}
+}
 
-// 	cur = node;
-// 	while (cur)
-// 	{
-// 		pipe(fd);
-// 		if (cur == node)
-// 			pid = exec_cmd(node, fd, "one");
-// 		else if (cur->next == NULL)
-// 			pid = exec_cmd(node, fd, "last");
-// 		else
-// 			pid = exec_cmd(node, fd, "between");
-// 		close(fd[0]);
-// 		close(fd[1]);
-// 		cur = cur->next;
-// 	}
-// 	return (pid);
-// }
+void	open_pipes(t_pipe pip, int index)
+{}
+
+int	multiple_pipes(t_parser *node)
+{
+	t_pipe		pip;
+	int			check;
+	t_parser	*cur;
+	pid_t		pid;
+	int			fd_pip[2][2];
+
+	cur = node;
+	while (cur)
+	{
+		switch_pipe(&pip, index, fd_pip);
+		open_pipes(pip, index);
+		if (cur == node)
+			pid = exec_cmd(node, pip, "first");
+		else if (cur->next == NULL)
+			pid = exec_cmd(node, pip, "last");
+		else
+			pid = exec_cmd(node, pip, "between");
+		close(pip.rd_end[0]);
+		close(pip.rd_end[1]);
+		cur = cur->next;
+	}
+	close(pip.wr_end[0]);
+	close(pip.wr_end[1]);
+	return (pid);
+}
 
 void	execution(t_parser *parser, t_data *my_heredoc)
 {
-	// int	pid;
-	// int	status;
-	// int	*fd;
+	int		pid;
+	t_pipe	pip;
+	int		status;
 
-	// pid = 0;
-	// fd = NULL;
+	pid = 0;
 	if (!parser)
 		return ;
 	else if (parser->next == NULL && parser->cmd && !isbuiltin(parser))
 	{
-		// g_var.parent_process = 1;
+		g_var.parent_process = 1;
 		exec_builtin(parser);
 	}
 	else if (parser->heredoc)
-		exec_heredoc(parser, &my_heredoc);
-	// else if (parser->next == NULL && parser->cmd)
-	// {
-	// 	g_var.parent_process = 0;
-	// 	//pid = exec_cmd(parser, fd, "one");
-	// //	else if (parser->next)
-	// // 		pid = multiple_pipes(parser);
-	// 	waitpid(pid, &status, 0);
-	// }
-	free_mylist(my_heredoc, 2);
+		exec_heredoc(parser, my_heredoc);
+	else 
+	{
+		g_var.parent_process = 0;
+		if (parser->next == NULL && parser->cmd)
+			pid = exec_cmd(parser, pip, "one");
+		else
+			pid = multiple_pipes(parser);
+		waitpid(pid, &status, 0);
+	}
 }

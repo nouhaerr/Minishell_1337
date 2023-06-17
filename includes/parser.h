@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:54:36 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/16 18:17:18 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/17 18:05:23 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,12 @@ enum
 typedef struct t_data
 {
 	char			*value;
-	int				fd;
-	char			*error;
 	struct t_data	*next;
 }	t_data;
 
 typedef struct t_data2
 {
 	char			*value;
-	int				fd;
-	char			*error;
 	int				type;
 	struct t_data2	*next;
 }	t_data2;
@@ -43,6 +39,7 @@ typedef struct t_parser
 	char			*cmd;
 	t_data			*args;
 	t_data2			*outfiles;
+	int				fd[2];
 	t_data			*infiles;
 	t_data2			*heredoc;
 	struct t_parser	*next;

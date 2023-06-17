@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:50:10 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/16 17:25:50 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/17 17:04:41 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_open(char *name, char *msg)
 	if (fd == -1)
 	{
 		perror(name);
-		if (glb_var.parent_process == 1) //ila kena fl parent
+		if (g_var.parent_process == 1) //ila kena fl parent
 			exit(1);
 		else
 			fd = -3;
@@ -41,6 +41,8 @@ int	*fd_redirection(t_parser *node)
 	t_data		*tmp2;
 
 	fd = malloc(sizeof(int) * 2);
+	fd[0] = -1;
+	fd[1] = -1;
 	cur = node;
 	tmp1 = node->outfiles;
 	tmp2 = node->infiles;
@@ -48,9 +50,10 @@ int	*fd_redirection(t_parser *node)
 	{
 		while (tmp1)
 		{
-			if (tmp1->type == finish_up)
+			close(fd[1]);
+			if (tmp1->type == append)
 				fd[1] = ft_open(tmp1->value, "saved_file");
-			else if (tmp1->type == clear)
+			else if (tmp1->type == trunc)
 				fd[1] = ft_open(tmp1->value, "outfile");
 			if (fd[1] == -3)
 				return (free(fd), NULL);
@@ -58,8 +61,9 @@ int	*fd_redirection(t_parser *node)
 		}
 		while (tmp2)
 		{
+			close(fd[0]);
 			fd[0] = ft_open(tmp2->value, "infile");
-			if (fd[0] == -1)
+			if (fd[0] == -3)
 			{
 				perror(tmp2->value);
 				free(fd);
