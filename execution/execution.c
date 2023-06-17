@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/17 11:47:54 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/17 19:09:04 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	execution(t_parser *parser, t_data *my_heredoc)
 		exec_builtin(parser);
 	}
 	else if (parser->heredoc)
-		exec_heredoc(parser, my_heredoc);
+		exec_heredoc(parser, &my_heredoc);
 	// else if (parser->next == NULL && parser->cmd)
 	// {
 	// 	g_var.parent_process = 0;
@@ -77,4 +77,5 @@ void	execution(t_parser *parser, t_data *my_heredoc)
 	// // 		pid = multiple_pipes(parser);
 	// 	waitpid(pid, &status, 0);
 	// }
+	free_mylist(my_heredoc, 2);
 }

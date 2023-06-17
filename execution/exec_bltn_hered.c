@@ -6,13 +6,13 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/17 14:17:01 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/17 19:06:24 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	exec_heredoc(t_parser *parser, t_data *my_heredoc)
+void	exec_heredoc(t_parser *parser, t_data **my_heredoc)
 {
 	char	*str;
 
@@ -21,10 +21,10 @@ void	exec_heredoc(t_parser *parser, t_data *my_heredoc)
 		if (parser -> heredoc != NULL)
 		{
 			str = her(parser -> heredoc, g_var.list);
-			ft_lstaddback2(&my_heredoc, ft_lstnew2(str));
+			ft_lstaddback2(my_heredoc, ft_lstnew2(str));
+			free (str);
 		}
 		parser = parser -> next;
-		//free -> heredoc list
 	}
 }
 

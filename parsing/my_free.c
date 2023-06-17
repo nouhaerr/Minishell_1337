@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:56:47 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/12 16:39:05 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/17 19:06:11 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,6 @@ void	free_mylist(void *list, int type)
 		free_lexer((t_token *)list);
 	else if (type == 1)
 		free_parser((t_parser *)list);
+	else if (type == 2)
+		free_data1((t_data *)list);
 }
