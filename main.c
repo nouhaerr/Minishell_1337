@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/17 14:15:49 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/17 19:17:17 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ int	_session(t_token *tok, t_parser *par, t_data *her, t_lexer *le)
 		else
 			g_var.exit_status = 1;
 		free_mylist(tok, 0);
-		free_mylist(her, 0);
 		free(input);
 	}
 	return (g_var.exit_status);
