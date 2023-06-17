@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/16 18:04:05 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/17 15:21:41 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,36 +44,31 @@ void	ft_err(char *s, char *cmd)
 	exit(127);
 }
 
-void	duplicate_fl(t_parser *parse, int *fd, char *msg)
+void	dup_and_exec(t_parser *parse, int *pip, char *msg)
 {
-	char	*path;
-	char	*cmd2;
+	int		*fd;
 
 	fd = fd_redirection(parse);
-	cmd2 = ft_strdup(parse->cmd);
-	ft_tolower(cmd2);
-	path = cmd2;
-	if (!cmd_slash(cmd2))
-		path = get_path(cmd2);
-	if (!path)
-		ft_err("pipex: command not found: ", parse->cmd);
-	// if (!ft_strcmp(msg, "one"))
-	// {
-	// 	dup2(fd[1], STDOUT_FILENO);
-	// }
-	close(fd[1]);
-	if (execve(path, &cmd2, g_var.list) < 0)
+	if (!fd)
+		return ;
+	// parse->infiles->fd = fd[0];
+	parse->outfiles->fd = pip[1];
+	if (!ft_strcmp(msg, "one") || !ft_strcmp(msg, "last"))
 	{
-		free(cmd2);
-		perror("execve");
-		exit(1);
+		parse->outfiles = 1;
+		if (fd[0] == -1)
+			parse->infiles->fd = 0;
+		if (fd[1] == -1)
+			parse->outfiles->fd = 1;
 	}
-	free(cmd2);
+	
 }
 
 int	exec_cmd(t_parser *parser, int fd[2], char *msg)
 {
 	pid_t	pid;
+	char	*path;
+	char	*cmd2;
 
 	pid = fork();
 	ft_check(pid);
@@ -85,7 +80,22 @@ int	exec_cmd(t_parser *parser, int fd[2], char *msg)
 		// 	exec_builtin(parser);
 		// }
 		close(fd[0]);
-		duplicate_fl(parser, fd, msg);
+		dup_and_exec(parser, fd, msg);
+		cmd2 = ft_strdup(parse->cmd);
+		ft_tolower(cmd2);
+		path = cmd2;
+		if (!cmd_slash(cmd2))
+			path = get_path(cmd2);
+		if (!path)
+			ft_err("minishell: command not found: ", parse->cmd);
+		close(fd[1]);
+		if (execve(path, &cmd2, g_var.list) < 0)
+		{
+			free(cmd2);
+			perror("execve");
+			exit(1);
+		}
+		free(cmd2);
 	}
 	// execve(*parser->cmd, parser->cmd, g_var.list);
 	return (pid);
