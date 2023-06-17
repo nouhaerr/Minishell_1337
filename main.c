@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/16 21:22:37 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/17 13:31:46 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ int	main(int ac, char **av, char **env)
 		signal_check();
 		prompt = get_prompt(getcwd(NULL, 0));
 		input = readline(prompt);
-		printf("%s\n", input);
 		free((void *)prompt);
 		if (input == NULL)
 			break ;
@@ -105,4 +104,5 @@ int	main(int ac, char **av, char **env)
 			add_history(input);
 		main2(input, my_heredoc);
 	}
+	return (g_var.exit_status);
 }
