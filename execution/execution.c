@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/16 18:09:03 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/17 11:47:54 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,27 +54,27 @@ int	isbuiltin(t_parser *parser)
 
 void	execution(t_parser *parser, t_data *my_heredoc)
 {
-	int	pid;
-	int	status;
-	int	*fd;
+	// int	pid;
+	// int	status;
+	// int	*fd;
 
-	pid = 0;
-	fd = NULL;
+	// pid = 0;
+	// fd = NULL;
 	if (!parser)
 		return ;
 	else if (parser->next == NULL && parser->cmd && !isbuiltin(parser))
 	{
-		g_var.parent_process = 1;
+		// g_var.parent_process = 1;
 		exec_builtin(parser);
 	}
 	else if (parser->heredoc)
 		exec_heredoc(parser, my_heredoc);
-	else if (parser->next == NULL && parser->cmd)
-	{
-		g_var.parent_process = 0;
-		//pid = exec_cmd(parser, fd, "one");
-	//	else if (parser->next)
-	// 		pid = multiple_pipes(parser);
-		waitpid(pid, &status, 0);
-	}
+	// else if (parser->next == NULL && parser->cmd)
+	// {
+	// 	g_var.parent_process = 0;
+	// 	//pid = exec_cmd(parser, fd, "one");
+	// //	else if (parser->next)
+	// // 		pid = multiple_pipes(parser);
+	// 	waitpid(pid, &status, 0);
+	// }
 }
