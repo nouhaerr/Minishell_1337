@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/17 12:24:00 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/17 12:44:27 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,14 @@ char	*get_prompt(char *s)
 	return (cwd);
 }
 
-void	parse_and_exec(t_token *tokens, t_lexer *lexer, t_parser *parser, t_data *heredoc)
+void	pa_ex(t_token *tok, t_lexer *lex, t_parser *par, t_data *here)
 {
-	parse(&tokens, &parser, lexer);
-	execution(parser, heredoc);
-	free_mylist(parser, 1);
+	parse(&tok, &par, lex);
+	execution(par, here);
+	free_mylist(par, 1);
 }
 
-void	begin_session(t_token *tokens, t_parser *parser, t_data *my_heredoc, t_lexer *lexer)
+void	_session(t_token *tok, t_parser *par, t_data *her, t_lexer *le)
 {
 	char		*input;
 	const char	*prompt;
@@ -74,8 +74,8 @@ void	begin_session(t_token *tokens, t_parser *parser, t_data *my_heredoc, t_lexe
 
 	while (1)
 	{	
-		tokens = NULL;
-		parser = NULL;
+		tok = NULL;
+		par = NULL;
 		// signal_check();
 		prompt = get_prompt(getcwd(NULL, 0));
 		input = readline(prompt);
@@ -84,12 +84,12 @@ void	begin_session(t_token *tokens, t_parser *parser, t_data *my_heredoc, t_lexe
 			break ;
 		if (ft_strcmp(input, "") != 0)
 			add_history(input);
-		base = lex(input, &tokens, lexer);
-		if (!syntax_error(base, &tokens) && tokens != NULL)
-			parse_and_exec(tokens, lexer, parser, my_heredoc);
+		base = lex(input, &tok, le);
+		if (!syntax_error(base, &tok) && tok != NULL)
+			pa_ex(tok, le, par, her);
 		else
 			g_var.exit_status = 1;
-		free_mylist(tokens, 0);
+		free_mylist(tok, 0);
 		free(input);
 	}
 }
@@ -100,13 +100,13 @@ int	main(int ac, char **av, char **env)
 	t_lexer		*lexer;
 	t_token		*tokens;
 	t_parser	*parser;
+
 	(void)ac;
 	(void)av;
-
 	lexer = malloc (sizeof(t_lexer));
 	tokens = NULL;
 	parser = NULL;
 	g_var.list = save_my_env(env);
 	my_heredoc = NULL;
-	begin_session(tokens, parser, my_heredoc, lexer);
+	_session(tokens, parser, my_heredoc, lexer);
 }
