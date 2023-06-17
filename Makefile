@@ -6,7 +6,7 @@
 #    By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 02:49:56 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/06/17 20:11:55 by hobenaba         ###   ########.fr        #
+#    Updated: 2023/06/17 20:23:15 by hobenaba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,10 +34,9 @@ OBJS = $(SRCS:.c=.o)
 LIBFT= libft.a
 LIBFT_DIR= libft/
 NAME = minishell
-#-I /Users/hobenaba/goinfre/homebrew/opt/readline/include/readline -L /Users/hobenaba/goinfre/homebrew/opt/readline/lib -lreadline
 
 $(NAME) : $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(INCLUDES) $(RDFLAGS) -lreadline 
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(INCLUDES) $(RDFLAGS) -lreadline -I /Users/hobenaba/goinfre/homebrew/opt/readline/include/readline -L /Users/hobenaba/goinfre/homebrew/opt/readline/lib -lreadline
 
 	@echo "\033[0;93m- your minishell is getting ready ...\033[0m"
 
