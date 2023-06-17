@@ -6,7 +6,7 @@
 #    By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 02:49:56 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/06/17 11:35:31 by nerrakeb         ###   ########.fr        #
+#    Updated: 2023/06/17 12:37:29 by nerrakeb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,8 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
 RDFLAGS +=  -lreadline -L/goinfre/nerrakeb/homebrew/opt/readline/lib
 INCLUDES += -I /goinfre/nerrakeb/homebrew/opt/readline/include
+#RDFLAGS +=  -lreadline -L /Users/hobenaba/goinfre/homebrew/opt/readline/lib -lreadline
+#INCLUDES += -I /Users/hobenaba/goinfre/homebrew/opt/readline/include/readline
 SRCS =	main.c parsing/my_free.c parsing/ft_lst_one.c \
 		parsing/utils.c parsing/parse.c parsing/init.c \
 		parsing/ft_lst_second.c parsing/words.c  \
@@ -32,9 +34,9 @@ OBJS = $(SRCS:.c=.o)
 LIBFT= libft.a
 LIBFT_DIR= libft/
 NAME = minishell
-
+#-I /Users/hobenaba/goinfre/homebrew/opt/readline/include/readline -L /Users/hobenaba/goinfre/homebrew/opt/readline/lib
 $(NAME) : $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) -lreadline
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) -lreadline 
 	@echo "\033[0;93m- your minishell is getting ready ...\033[0m"
 
 $(LIBFT): $(LIBFT_DIR)libft.h

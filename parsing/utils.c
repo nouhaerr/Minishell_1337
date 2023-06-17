@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:18:35 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/16 17:55:10 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/17 12:34:05 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,12 @@ int	ft_lstsize_parse(t_parser *parse)
 	}
 	return (i);
 }
+
 // this one to check the output of my main struct
 void	check_struct(t_parser *parser)
 {
 	int i;
-	
+
 	i = 0;
 	while (parser)
 	{
