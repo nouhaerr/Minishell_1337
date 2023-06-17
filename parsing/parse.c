@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:14:51 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/16 21:01:23 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/17 20:02:10 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ t_parser	*build_list_parser(t_parser **parser, t_lexer *lexer, t_parser *t)
 {
 	if (((lexer->tokens2)->type) == the_pipe)
 	{
+		lexer -> index++;
 		lexer->i = 0;
-		t = ft_lstaddback3(parser, ft_lstnew3());
+		t = ft_lstaddback3(parser, ft_lstnew3(lexer -> index));
 		lexer->tokens2 = (lexer->tokens2)->next;
 	}
 	lexer->tok = my_next_word(lexer->tokens2);
@@ -53,9 +54,10 @@ void	parse(t_token **tokens, t_parser **parser, t_lexer *lexer)
 	t_parser	*t;
 
 	lexer->tokens2 = *tokens;
-	if ((lexer->tokens2) != NULL)
-		t = ft_lstaddback3(parser, ft_lstnew3());
+	lexer -> index = 0;
 	lexer->i = 0;
+	if ((lexer->tokens2) != NULL)
+		t = ft_lstaddback3(parser, ft_lstnew3(lexer -> index));
 	while (lexer->tokens2)
 	{
 		t = build_list_parser(parser, lexer, t);
@@ -71,6 +73,11 @@ void	parse(t_token **tokens, t_parser **parser, t_lexer *lexer)
 			lexer->i++;
 		}
 	}
+	// while (parser)
+	// {
+	// 	printf("%d\n", (*parser) -> index);
+	// 	*parser = (*parser) -> next;
+	// }
 	//check_struct(*parser);
 }
 // just to check on if my parsing is doing alright.

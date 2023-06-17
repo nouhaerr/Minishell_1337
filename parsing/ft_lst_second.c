@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:45:51 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/16 16:45:11 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/17 19:55:35 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_lstaddback2(t_data **lst, t_data *new)
 	p -> next = new;
 }
 
-t_parser	*ft_lstnew3(void)
+t_parser	*ft_lstnew3(int index)
 {
 	t_parser	*p;
 
@@ -54,6 +54,7 @@ t_parser	*ft_lstnew3(void)
 	p -> outfiles = NULL;
 	p -> infiles = NULL;
 	p -> heredoc = NULL;
+	p -> index = index;
 	return (p);
 }
 
