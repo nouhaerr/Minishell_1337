@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:54:36 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/17 18:05:23 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/17 19:55:48 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct t_parser
 	char			*cmd;
 	t_data			*args;
 	t_data2			*outfiles;
+	int				index;
 	int				fd[2];
 	t_data			*infiles;
 	t_data2			*heredoc;
@@ -56,7 +57,7 @@ void		check_struct(t_parser *parser);
 
 t_data		*ft_lstnew2(char *value);
 void		ft_lstaddback2(t_data **lst, t_data *new);
-t_parser	*ft_lstnew3(void);
+t_parser	*ft_lstnew3(int index);
 t_parser	*ft_lstaddback3(t_parser **lst, t_parser *new);
 t_data2		*ft_lstnew4(char *value, int type);
 void		ft_lstaddback4(t_data2 **lst, t_data2 *new);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/17 19:36:49 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/17 20:03:50 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*get_prompt(char *s)
 void	pa_ex(t_token *tok, t_lexer *lex, t_parser *par, t_data *here)
 {
 	parse(&tok, &par, lex);
-	execution(par, here);
+	//execution(par, here);
 	free_mylist(par, 1);
 }
 
