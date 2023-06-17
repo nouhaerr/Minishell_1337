@@ -6,7 +6,7 @@
 #    By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 02:49:56 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/06/17 20:03:30 by hobenaba         ###   ########.fr        #
+#    Updated: 2023/06/17 20:11:55 by hobenaba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,17 +26,19 @@ SRCS =	main.c parsing/my_free.c parsing/ft_lst_one.c \
 		execution/builtins/unset.c execution/builtins/utils.c \
 		execution/builtins/cd.c execution/builtins/export/export.c \
 		execution/builtins/export/modifie_and_add.c execution/builtins/export/check_exp.c \
-		execution/builtins/export/exp_utils.c execution/execution.c \
-		execution/exec_bltn_hered.c signal.c #execution/exec_cmd.c \
+		execution/builtins/export/exp_utils.c signal.c execution/execution.c \
+		execution/exec_bltn_hered.c #execution/exec_cmd.c \
 		execution/redirections/files.c execution/begin_exec.c
 		
 OBJS = $(SRCS:.c=.o)
 LIBFT= libft.a
 LIBFT_DIR= libft/
 NAME = minishell
+#-I /Users/hobenaba/goinfre/homebrew/opt/readline/include/readline -L /Users/hobenaba/goinfre/homebrew/opt/readline/lib -lreadline
 
 $(NAME) : $(OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) $(INCLUDES) $(RDFLAGS) -lreadline 
+
 	@echo "\033[0;93m- your minishell is getting ready ...\033[0m"
 
 $(LIBFT): $(LIBFT_DIR)libft.h
