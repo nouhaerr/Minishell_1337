@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/17 13:31:46 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/17 14:15:49 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,41 +59,23 @@ char	*get_prompt(char *s)
 	return (cwd);
 }
 
-void	main2(char *input, t_data *my_heredoc)
+void	pa_ex(t_token *tok, t_lexer *lex, t_parser *par, t_data *here)
 {
-	t_lexer		*lexer;
-	t_token		*tokens;
-	t_parser	*parser;
-	int			base;
-
-	lexer = malloc (sizeof(t_lexer));
-	tokens = NULL;
-	parser = NULL;
-	base = lex(input, &tokens, lexer);
-	if (!syntax_error(base, &tokens) && tokens != NULL)
-	{
-		parse(&tokens, &parser, lexer);
-		execution(parser, my_heredoc);
-		free_mylist(parser, 1);
-	}
-	else
-		g_var.exit_status = 1;
-	free_mylist(tokens, 0);
-	free(input);
+	parse(&tok, &par, lex);
+	execution(par, here);
+	free_mylist(par, 1);
 }
 
-int	main(int ac, char **av, char **env)
+int	_session(t_token *tok, t_parser *par, t_data *her, t_lexer *le)
 {
 	char		*input;
 	const char	*prompt;
-	t_data		*my_heredoc;
+	int			base;
 
-	(void)ac;
-	(void)av;
-	g_var.list = save_my_env(env);
-	my_heredoc = NULL;
 	while (1)
 	{	
+		tok = NULL;
+		par = NULL;
 		signal_check();
 		prompt = get_prompt(getcwd(NULL, 0));
 		input = readline(prompt);
@@ -102,7 +84,33 @@ int	main(int ac, char **av, char **env)
 			break ;
 		if (ft_strcmp(input, "") != 0)
 			add_history(input);
-		main2(input, my_heredoc);
+		base = lex(input, &tok, le);
+		if (!syntax_error(base, &tok) && tok != NULL)
+			pa_ex(tok, le, par, her);
+		else
+			g_var.exit_status = 1;
+		free_mylist(tok, 0);
+		free_mylist(her, 0);
+		free(input);
 	}
 	return (g_var.exit_status);
+}
+
+int	main(int ac, char **av, char **env)
+{
+	t_data		*my_heredoc;
+	t_lexer		*lexer;
+	t_token		*tokens;
+	t_parser	*parser;
+	int			out;
+	
+	(void)ac;
+	(void)av;
+	lexer = malloc (sizeof(t_lexer));
+	tokens = NULL;
+	parser = NULL;
+	g_var.list = save_my_env(env);
+	my_heredoc = NULL;
+	out = _session(tokens, parser, my_heredoc, lexer);
+	return (out);
 }

@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/17 13:37:49 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/17 14:17:01 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,8 @@ void	exec_heredoc(t_parser *parser, t_data *my_heredoc)
 			ft_lstaddback2(&my_heredoc, ft_lstnew2(str));
 		}
 		parser = parser -> next;
+		//free -> heredoc list
 	}
-	// while (my_heredoc)
-	// {
-	// 	printf("->>[[%s]]\n", my_heredoc -> value);
-	// 	my_heredoc = my_heredoc -> next;
-	// }
 }
 
 void	exec_builtin(t_parser *parser)
