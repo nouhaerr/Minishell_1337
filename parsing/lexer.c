@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:53:34 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/16 16:53:33 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/17 14:00:09 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,5 @@ int	lex(char *input, t_token **tokens, t_lexer *lexer)
 				|| ft_strchr(" |><", input[i]) != NULL))
 			build_list(lexer, tokens);
 	}
-	return (lexer -> base);
+	return (free(lexer -> str), lexer -> base);
 }

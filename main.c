@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/17 12:44:27 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/17 14:15:49 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	pa_ex(t_token *tok, t_lexer *lex, t_parser *par, t_data *here)
 	free_mylist(par, 1);
 }
 
-void	_session(t_token *tok, t_parser *par, t_data *her, t_lexer *le)
+int	_session(t_token *tok, t_parser *par, t_data *her, t_lexer *le)
 {
 	char		*input;
 	const char	*prompt;
@@ -76,7 +76,7 @@ void	_session(t_token *tok, t_parser *par, t_data *her, t_lexer *le)
 	{	
 		tok = NULL;
 		par = NULL;
-		// signal_check();
+		signal_check();
 		prompt = get_prompt(getcwd(NULL, 0));
 		input = readline(prompt);
 		free((void *)prompt);
@@ -90,8 +90,10 @@ void	_session(t_token *tok, t_parser *par, t_data *her, t_lexer *le)
 		else
 			g_var.exit_status = 1;
 		free_mylist(tok, 0);
+		free_mylist(her, 0);
 		free(input);
 	}
+	return (g_var.exit_status);
 }
 
 int	main(int ac, char **av, char **env)
@@ -100,7 +102,8 @@ int	main(int ac, char **av, char **env)
 	t_lexer		*lexer;
 	t_token		*tokens;
 	t_parser	*parser;
-
+	int			out;
+	
 	(void)ac;
 	(void)av;
 	lexer = malloc (sizeof(t_lexer));
@@ -108,5 +111,6 @@ int	main(int ac, char **av, char **env)
 	parser = NULL;
 	g_var.list = save_my_env(env);
 	my_heredoc = NULL;
-	_session(tokens, parser, my_heredoc, lexer);
+	out = _session(tokens, parser, my_heredoc, lexer);
+	return (out);
 }

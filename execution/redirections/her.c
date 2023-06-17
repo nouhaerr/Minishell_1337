@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:46:12 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/16 19:09:40 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/17 14:18:07 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ char	*her(t_data2 *heredoc, t_env *my_env)
 	int		i;
 
 	str = NULL;
+	(void)my_env;
 	while (heredoc != NULL)
 	{
 		value = heredoc -> value;
@@ -98,10 +99,11 @@ char	*her(t_data2 *heredoc, t_env *my_env)
 		else if (heredoc != NULL && heredoc -> next == NULL)
 		{
 			if (heredoc -> type == expand)
-				expansion_heredoc(input, i, &str, my_env);
-			else if (heredoc -> type == not_expand)
+				expansion_heredoc(input, i, &str, my_env); // leaks on this function
+			if (heredoc -> type == not_expand)
 				str = ft_strjoin(str, ft_strjoin(input, ft_strdup("\n")));
 		}
+		free(input);
 	}
 	return (str);
 }
