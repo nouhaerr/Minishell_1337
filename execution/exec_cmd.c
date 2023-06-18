@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/18 21:07:03 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/18 21:57:44 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ void	ft_err(char *s, char *cmd, char *s2)
 	exit(127);
 }
 
-void	dup_and_exec(t_parser *parse, t_pipe pip, char *msg)
+int	*dup_and_exec(t_parser *parse, t_pipe pip, char *msg)
 {
 	int		*fl;
 
 	fl = fd_redirection(parse);
 	if (!fl)
-		return ;
+		return (0);
 	if (!ft_strcmp(msg, "one"))
 	{
 		parse->fd[1] = 1;
@@ -60,6 +60,15 @@ void	dup_and_exec(t_parser *parse, t_pipe pip, char *msg)
 		if (fl[1] != -1)
 			parse->fd[1] = fl[1];
 	}
+	// if (!ft_strcmp(msg, "builtin"))
+	// {
+	// 	parse->fd[1] = 1;
+	// 	parse->fd[0] = 0;
+	// 	if (fl[0] != -1)
+	// 		parse->fd[0] = fl[0];
+	// 	if (fl[1] != -1)
+	// 		parse->fd[1] = fl[1];
+	// }
 	else
 	{
 		parse->fd[1] = pip.wr_end[1];
@@ -93,16 +102,18 @@ void	dup_and_exec(t_parser *parse, t_pipe pip, char *msg)
 				parse->fd[1] = fl[1];
 		}
 	}
+	// printf("%d\n", parse->fd[0]);
 	// printf(" write:%d read:%d\n", parse->fd[1], parse->fd[0]);
 	dup2(parse->fd[1], 1);
 	dup2(parse->fd[0], 0);
-	if (ft_strcmp(msg, "one"))
+	if (ft_strcmp(msg, "one") && ft_strcmp(msg, "builtin"))
 	{
 		close(pip.rd_end[0]);
 		close(pip.rd_end[1]);
 		close(pip.wr_end[0]);
 		close(pip.wr_end[1]);
 	}
+	return (fl);
 }
 
 void	ft_free(char **str)
