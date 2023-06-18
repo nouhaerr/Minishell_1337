@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:14:51 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/17 20:02:10 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/18 15:11:29 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,14 @@ void	parse(t_token **tokens, t_parser **parser, t_lexer *lexer)
 			lexer->i++;
 		}
 	}
-	// while (parser)
+}
+// just to check on if my parsing is doing alright.
+// while (parser)
 	// {
 	// 	printf("%d\n", (*parser) -> index);
 	// 	*parser = (*parser) -> next;
 	// }
 	//check_struct(*parser);
-}
-// just to check on if my parsing is doing alright.
-
 t_token	*my_next_word(t_token *tokens)
 {
 	t_token	*t;
@@ -95,7 +94,7 @@ t_token	*my_next_word(t_token *tokens)
 			t2 = tokens -> next;
 			if (t2 != NULL && t2 -> arten == env_general
 				&& (t2 ->next != NULL && t2-> next-> arten == env_general))
-				return (printf("abigiuos redirect\n"), NULL);
+				return (printf("ambigiuos redirect\n"), NULL);
 		}
 		if (!ft_strcmp(tokens -> value, "\"\"")
 			|| !ft_strcmp(tokens -> value, "\'\'"))

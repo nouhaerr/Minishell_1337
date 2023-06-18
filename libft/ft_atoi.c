@@ -3,20 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 13:00:55 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/25 14:03:38 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/18 09:46:35 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// void	ff_atoi(const char *str, int signe, long res)
-// {
-	
-// }
-
+void ft_signe_res(const char *str, int *signe, unsigned long *res)
+{
+	while ((*str >= 9 && *str <= 13) || *str == 32)
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			*signe = -1;
+		str++;
+	}
+	while (*str >= '0' && *str <= '9')
+	{
+		*res = *res * 10 + *str - '0';
+		str++;
+	}
+}
 long	ft_atoi(const char *str)
 {
 	int				signe;
@@ -24,19 +35,7 @@ long	ft_atoi(const char *str)
 
 	signe = 1;
 	res = 0;
-	while ((*str >= 9 && *str <= 13) || *str == 32)
-		str++;
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			signe = -1;
-		str++;
-	}
-	while (*str >= '0' && *str <= '9')
-	{
-		res = res * 10 + *str - '0';
-		str++;
-	}
+	ft_signe_res(str, &signe, &res);
 	if (signe > 0 && res == 9223372036854775807)
 		return (2);
 	if (signe < 0 && res == 9223372036854775807)
