@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/18 19:12:26 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/18 21:07:03 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	dup_and_exec(t_parser *parse, t_pipe pip, char *msg)
 		parse->fd[0] = 0;
 		if (!ft_strcmp(msg, "first"))
 		{
-			printf("first %s", parse->cmd);
+			// printf("first %s", parse->cmd);
 			if (fl[0] != -1)
 				parse->fd[0] = fl[0];
 			if (fl[1] != -1)
@@ -76,7 +76,7 @@ void	dup_and_exec(t_parser *parse, t_pipe pip, char *msg)
 		{
 			// printf("last %s", parse->cmd);
 			parse->fd[1] = 1;
-			parse->fd[0] = pip.wr_end[0];
+			parse->fd[0] = pip.rd_end[0];
 			if (fl[0] != -1)
 				parse->fd[0] = fl[0];
 			if (fl[1] != -1)

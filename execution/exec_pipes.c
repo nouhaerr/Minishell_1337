@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 19:19:54 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/18 17:12:51 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/18 20:48:19 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	switch_pipe(t_pipe *pip, int i, int fd_pip[2][2])
 {
 	if (i % 2 == 0)
 	{
-		pip->rd_end = fd_pip[0];
+		pip->rd_end = fd_pip[0]; //fd_pip = index of pipes
 		pip->wr_end = fd_pip[1];
 	}
 	else
