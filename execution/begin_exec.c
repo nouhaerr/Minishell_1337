@@ -6,13 +6,13 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 05:37:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/17 18:43:32 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/17 20:17:31 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	**real_path(char **env)
+char	**real_path(void)
 {
 	char	**p;
 	t_env	*cur;
@@ -39,7 +39,7 @@ char	*get_path(char *cmd)
 	char	**full_path;
 	int		i;
 
-	full_path = real_path(g_var.list);
+	full_path = real_path();
 	if (!full_path)
 		ft_err("minishell: command not found: ", cmd);
 	cmd_file = ft_strjoin("/", cmd);

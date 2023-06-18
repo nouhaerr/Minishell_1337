@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/17 19:07:03 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/18 14:27:56 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void	ft_free(char **str)
 	while (str[++i])
 		free(str[i]);
 	free(str);
-	return (NULL);
 }
 
 char	**create_env_arr(int size)
@@ -109,7 +108,7 @@ char	**create_env_arr(int size)
 	i = 0;
 	arr = (char **)malloc((size + 1) * sizeof(char *));
 	if (!arr)
-		return (printf("minishell: Memory allocation failed\n"));
+		return (printf("minishell: Memory allocation failed\n"), NULL);
 	while (en)
 	{
 		add = ft_strjoin(en->env, "=");
@@ -137,13 +136,14 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 	if (pid == 0)
 	{
 		dup_and_exec(parse, pip, msg);
-		if (!isbuiltin(parse))
+		printf("hello\n");
+		if (isbuiltin(parse))
 		{
-			exec_builtin(parse);
+			run_builtin(parse);
 			exit(g_var.exit_status);
 		}
 		cmd2 = ft_strdup(parse->cmd);
-		ft_tolower(cmd2);
+		ft_tolower2(cmd2);
 		path = cmd2;
 		if (!cmd_slash(cmd2))
 			path = get_path(cmd2);

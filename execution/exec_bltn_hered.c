@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/18 15:32:58 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/18 15:34:29 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	exec_heredoc(t_parser *parser, t_data **my_heredoc)
 	}
 }
 
-void	exec_builtin(t_parser *parser)
+void	run_builtin(t_parser *parser)
 {
 	char	*cmd2;
 

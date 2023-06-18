@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 22:10:54 by hobenaba          #+#    #+#             */
-/*   Updated: 2022/11/06 19:33:24 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/17 20:21:14 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_check(char c, char const *set)
+int	ft_check2(char c, char const *set)
 {
 	int	i;
 
@@ -35,9 +35,9 @@ char	*ft_strtrim(char const *s1, char const *set)
 		return (NULL);
 	start = 0;
 	end = ft_strlen(s1) - 1;
-	while (s1[start] && ft_check(s1[start], set))
+	while (s1[start] && ft_check2(s1[start], set))
 		start++;
-	while (start < end && ft_check(s1[end], set))
+	while (start < end && ft_check2(s1[end], set))
 		end--;
 	return (ft_substr(s1, start, (end + 1) - start));
 }
