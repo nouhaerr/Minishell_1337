@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:14:51 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/18 15:11:29 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/18 19:14:04 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	parse(t_token **tokens, t_parser **parser, t_lexer *lexer)
 	// 	*parser = (*parser) -> next;
 	// }
 	//check_struct(*parser);
+
 t_token	*my_next_word(t_token *tokens)
 {
 	t_token	*t;

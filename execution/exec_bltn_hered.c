@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_bltn_hered.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/18 15:34:29 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/18 19:12:01 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	exec_heredoc(t_parser *parser, t_data **my_heredoc)
 	// int		fd;
 	// int		status;
 	//int		pipefd[2];
-	
+
 	(void)my_heredoc;
 	str = NULL;
 	//check_signal_heredoc();
@@ -29,10 +29,10 @@ void	exec_heredoc(t_parser *parser, t_data **my_heredoc)
 		{	
 			//fd =  fork();
 			// if (fd == 0)
-				her(parser -> heredoc, g_var.list);
+			her(parser -> heredoc, g_var.list);
 			//waitpid(fd, &status, 0);
-		ft_lstaddback2(my_heredoc, ft_lstnew2(str));
-		free (str);
+			ft_lstaddback2(my_heredoc, ft_lstnew2(str));
+			free (str);
 		}
 		parser = parser -> next;
 	}

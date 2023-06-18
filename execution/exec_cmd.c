@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/18 19:04:03 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/18 19:12:26 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ char	**create_env_arr(int size)
 		add = ft_strjoin2(en->env, "=");
 		if (!add)
 			return (printf("minishell: Memory allocation failed\n"), ft_free(arr), NULL);
-		arr[i]= ft_strjoin2(add, en->value);
+		arr[i] = ft_strjoin2(add, en->value);
 		if (!arr[i])
 			return (printf("minishell: Memory allocation failed\n"), ft_free(arr), free(add), NULL);
 		free(add);

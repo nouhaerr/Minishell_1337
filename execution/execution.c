@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/18 15:46:09 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/18 19:12:55 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	execution(t_parser *parser, t_data *my_heredoc)
 	}
 	// else if (parser->heredoc)
 	// 	exec_heredoc(parser, &my_heredoc);
-	else 
+	else
 	{
 		g_var.parent_process = 0;
 		if (parser->next == NULL && parser->cmd)

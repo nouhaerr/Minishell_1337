@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 15:55:05 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/18 11:51:59 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/18 19:17:05 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	signal_handler(int sig)
 	g_var.exit_status = 1;
 }
 
-void    signal_check()
+void    signal_check(void)
 {
 	//remove_ctrl();
 	signal(SIGINT, signal_handler);
@@ -36,7 +36,7 @@ void	signal_heredoc(int signal)
 	g_var.exit_status = 1;
 	g_var.her_ctrlc = 1;
 }
-void	check_signal_heredoc()
+void	check_signal_heredoc(void)
 {
 	signal(SIGINT, signal_heredoc);
 }
