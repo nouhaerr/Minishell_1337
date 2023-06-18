@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:46:12 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/17 20:22:58 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/18 12:55:25 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ char	*her(t_data2 *heredoc, t_env *my_env)
 	str = NULL;
 	while (heredoc != NULL)
 	{
+		if (g_var.her_ctrlc == 1)
+			exit (1);
 		input = readline("> ");
 		i = 0;
 		if (input == NULL || ft_strcmp(input, heredoc -> value) == 0)

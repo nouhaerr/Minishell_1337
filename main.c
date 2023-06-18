@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/17 20:08:24 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/18 15:29:53 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	_session(t_token *tok, t_parser *par, t_data *her, t_lexer *le)
 		if (!syntax_error(base, &tok) && tok != NULL)
 			pa_ex(tok, le, par, her);
 		else
-			g_var.exit_status = 1;
+			g_var.exit_status = 258; // for the exit_status for the synatx
 		free_mylist(tok, 0);
 		free(input);
 	}
