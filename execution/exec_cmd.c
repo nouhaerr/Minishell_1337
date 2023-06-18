@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/18 17:50:32 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/18 19:04:03 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	dup_and_exec(t_parser *parse, t_pipe pip, char *msg)
 		}
 		if (!ft_strcmp(msg, "last"))
 		{
-			printf("last %s", parse->cmd);
+			// printf("last %s", parse->cmd);
 			parse->fd[1] = 1;
 			parse->fd[0] = pip.wr_end[0];
 			if (fl[0] != -1)
@@ -84,7 +84,7 @@ void	dup_and_exec(t_parser *parse, t_pipe pip, char *msg)
 		}
 		if (!ft_strcmp(msg, "between"))
 		{
-			printf("between %s", parse->cmd);
+			// printf("between %s", parse->cmd);
 			parse->fd[0] = pip.rd_end[0];
 			parse->fd[1] = pip.wr_end[1];
 			if (fl[0] != -1)
@@ -165,8 +165,7 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 		if (!path)
 			ft_err("minishell: ", parse->cmd, ": command not found");
 		env = create_env_arr(env_list_size(g_var.list));
-		printf("ok\n");
-		if (execve(path, table_cmd(parse), env) < 0) //parse->args khass iraj3o **args
+		if (execve(path, table_cmd(parse), env) < 0)
 		{
 			perror("execve");
 			exit(1);
