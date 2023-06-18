@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 05:37:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/17 20:17:31 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/18 17:09:44 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ char	**real_path(void)
 	cur = g_var.list;
 	while (cur)
 	{
-		if (!ft_strncmp(cur->env, "PATH=", 5))
+		if (!ft_strncmp(cur->env, "PATH", 4))
 		{
-			p = ft_split(cur->env + 5, ':');
+			p = ft_split(cur->value, ':');
 			return (p);
 		}
 		cur = cur->next;
@@ -39,14 +39,14 @@ char	*get_path(char *cmd)
 	char	**full_path;
 	int		i;
 
-	full_path = real_path();
+	full_path = real_path(); //prob
 	if (!full_path)
-		ft_err("minishell: command not found: ", cmd);
-	cmd_file = ft_strjoin("/", cmd);
+		ft_err("minishell: ", cmd, ": command not found");
+	cmd_file = ft_strjoin2("/", cmd);
 	i = -1;
 	while (full_path[++i])
 	{
-		path = ft_strjoin(full_path[i], cmd_file);
+		path = ft_strjoin2(full_path[i], cmd_file);
 		if (!access(path, F_OK | X_OK))
 			return (ft_free(full_path), free(cmd_file), path);
 		free(path);

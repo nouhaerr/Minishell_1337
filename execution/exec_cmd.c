@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/18 14:27:56 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/18 17:09:20 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,54 +37,73 @@ int	cmd_slash(char *cmd)
 	return (0);
 }
 
-void	ft_err(char *s, char *cmd)
+void	ft_err(char *s, char *cmd, char *s2)
 {
 	ft_putstr_fd(s, STDERR_FILENO);
-	ft_putendl_fd(cmd, STDERR_FILENO);
+	ft_putstr_fd(cmd, STDERR_FILENO);
+	ft_putendl_fd(s2, STDERR_FILENO);
 	exit(127);
 }
 
 void	dup_and_exec(t_parser *parse, t_pipe pip, char *msg)
 {
-	int		*fd;
+	int		*fl;
 
-	fd = fd_redirection(parse);
-	if (!fd)
+	fl = fd_redirection(parse);
+	if (!fl)
 		return ;
-	parse->fd[1] = pip.wr_end[1];
-	parse->fd[0] = 0;
-	if (!ft_strcmp(msg, "first"))
-	{
-		if (fd[0] != -1)
-			parse->fd[0] = fd[0];
-		if (fd[1] != -1)
-			parse->fd[1] = fd[1];
-	}
-	if (!ft_strcmp(msg, "one") || !ft_strcmp(msg, "last"))
+	if (!ft_strcmp(msg, "one"))
 	{
 		parse->fd[1] = 1;
-		if (!ft_strcmp(msg, "last"))
-			parse->fd[0] = pip.rd_end[0];
-		if (fd[0] != -1)
-			parse->fd[0] = fd[0];
-		if (fd[1] != -1)
-			parse->fd[1] = fd[1];
+		if (fl[0] != -1)
+			parse->fd[0] = fl[0];
+		if (fl[1] != -1)
+			parse->fd[1] = fl[1];
 	}
-	if (!ft_strcmp(msg, "between"))
+	else
 	{
-		parse->fd[0] = pip.rd_end[0];
 		parse->fd[1] = pip.wr_end[1];
-		if (fd[0] != -1)
-			parse->fd[0] = fd[0];
-		if (fd[1] != -1)
-			parse->fd[1] = fd[1];
+		parse->fd[0] = 0;
+		if (!ft_strcmp(msg, "first"))
+		{
+			printf("first %s", parse->cmd);
+			if (fl[0] != -1)
+				parse->fd[0] = fl[0];
+			if (fl[1] != -1)
+				parse->fd[1] = fl[1];
+		}
+		if (!ft_strcmp(msg, "last"))
+		{
+			printf("last %s", parse->cmd);
+			parse->fd[1] = 1;
+			parse->fd[0] = pip.wr_end[0];
+			if (fl[0] != -1)
+				parse->fd[0] = fl[0];
+			if (fl[1] != -1)
+				parse->fd[1] = fl[1];
+		}
+		if (!ft_strcmp(msg, "between"))
+		{
+			printf("between %s", parse->cmd);
+			parse->fd[0] = pip.rd_end[0];
+			parse->fd[1] = pip.wr_end[1];
+			if (fl[0] != -1)
+				parse->fd[0] = fl[0];
+			if (fl[1] != -1)
+				parse->fd[1] = fl[1];
+		}
 	}
+	// printf("fd[1]: %d et fd[0]: %d\n", parse->fd[1], parse->fd[0]);
+	printf(" write:%d read:%d\n", parse->fd[1], parse->fd[0]);
 	dup2(parse->fd[1], 1);
 	dup2(parse->fd[0], 0);
-	close(pip.rd_end[0]);
-	close(pip.rd_end[1]);
-	close(pip.wr_end[0]);
-	close(pip.wr_end[1]);
+	if (ft_strcmp(msg, "one"))
+	{
+		close(pip.rd_end[0]);
+		close(pip.rd_end[1]);
+		close(pip.wr_end[0]);
+		close(pip.wr_end[1]);
+	}
 }
 
 void	ft_free(char **str)
@@ -111,10 +130,10 @@ char	**create_env_arr(int size)
 		return (printf("minishell: Memory allocation failed\n"), NULL);
 	while (en)
 	{
-		add = ft_strjoin(en->env, "=");
+		add = ft_strjoin2(en->env, "=");
 		if (!add)
 			return (printf("minishell: Memory allocation failed\n"), ft_free(arr), NULL);
-		arr[i]= ft_strjoin(add, en->value);
+		arr[i]= ft_strjoin2(add, en->value);
 		if (!arr[i])
 			return (printf("minishell: Memory allocation failed\n"), ft_free(arr), free(add), NULL);
 		free(add);
@@ -129,33 +148,29 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 {
 	pid_t	pid;
 	char	*path;
-	char	*cmd2;
+	char	**env;
 
 	pid = fork();
 	ft_check(pid);
 	if (pid == 0)
 	{
 		dup_and_exec(parse, pip, msg);
-		printf("hello\n");
 		if (isbuiltin(parse))
 		{
 			run_builtin(parse);
 			exit(g_var.exit_status);
 		}
-		cmd2 = ft_strdup(parse->cmd);
-		ft_tolower2(cmd2);
-		path = cmd2;
-		if (!cmd_slash(cmd2))
-			path = get_path(cmd2);
+		path = parse->cmd;
+		if (!cmd_slash(parse->cmd))
+			path = get_path(parse->cmd);
 		if (!path)
-			ft_err("minishell: command not found: ", parse->cmd);
-		if (execve(path, &cmd2, create_env_arr(env_list_size(g_var.list))) < 0)
+			ft_err("minishell: ", parse->cmd, ": command not found");
+		env = create_env_arr(env_list_size(g_var.list));
+		if (execve(path, &parse->cmd, env) < 0)
 		{
-			free(cmd2);
 			perror("execve");
 			exit(1);
 		}
-		free(cmd2);
 	}
 	return (pid);
 }
