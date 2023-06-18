@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/18 15:34:54 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/18 16:28:13 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int	_session(t_token *tok, t_parser *par, t_data *her, t_lexer *le)
 	{	
 		tok = NULL;
 		par = NULL;
+		g_var.signal_heredoc =  0;
 		signal_check();
 		prompt = get_prompt(getcwd(NULL, 0));
 		input = readline(prompt);

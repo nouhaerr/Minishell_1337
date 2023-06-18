@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:53:18 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/18 11:32:06 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/18 16:11:07 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_glb
 {
 	t_env	*list;
 	int		exit_status;
-	int		her_ctrlc;
+	int		signal_heredoc;
 	bool	parent_process;
 }	t_glb;
 

@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:46:12 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/18 12:55:25 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/18 17:13:44 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	expansion_heredoc(char *input, int i, char **str, t_env *my_env)
 	free(input);
 }
 
-char	*her(t_data2 *heredoc, t_env *my_env)
+void	her(t_data2 *heredoc, t_env *my_env, int *pipefd)
 {
 	char	*input;
 	char	*str;
@@ -91,8 +91,6 @@ char	*her(t_data2 *heredoc, t_env *my_env)
 	str = NULL;
 	while (heredoc != NULL)
 	{
-		if (g_var.her_ctrlc == 1)
-			exit (1);
 		input = readline("> ");
 		i = 0;
 		if (input == NULL || ft_strcmp(input, heredoc -> value) == 0)
@@ -110,5 +108,7 @@ char	*her(t_data2 *heredoc, t_env *my_env)
 		else
 			free(input);
 	}
-	return (str);
+	write (pipefd[1], str, ft_strlen(str) + 1);
+	close(pipefd[0]);
+	close (pipefd[1]);
 }
