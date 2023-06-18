@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/17 20:31:19 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/18 14:27:56 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 	{
 		dup_and_exec(parse, pip, msg);
 		printf("hello\n");
-		if (!isbuiltin(parse))
+		if (isbuiltin(parse))
 		{
 			run_builtin(parse);
 			exit(g_var.exit_status);

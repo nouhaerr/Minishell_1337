@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/17 20:39:30 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/18 14:27:54 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int	isbuiltin(t_parser *parser)
 		|| ft_strcmp(cmd2, "cd") || ft_strcmp(parser->cmd, "exit"))
 	{
 		free(cmd2);
-		return (0);
+		return (1);
 	}
 	free(cmd2);
-	return (1);
+	return (0);
 }
 
 void	execution(t_parser *parser, t_data *my_heredoc)
@@ -40,7 +40,7 @@ void	execution(t_parser *parser, t_data *my_heredoc)
 	pip.wr_end = 0;
 	if (!parser)
 		return ;
-	else if (parser->next == NULL && parser->cmd && !isbuiltin(parser))
+	else if (parser->next == NULL && parser->cmd && isbuiltin(parser))
 	{
 		g_var.parent_process = 1;
 		run_builtin(parser);
