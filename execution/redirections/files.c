@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:50:10 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/17 17:04:41 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/19 14:12:59 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_open(char *name, char *msg)
 	else if (!ft_strcmp(msg, "outfile"))
 		fd = open(name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	else
-		fd = open(name, O_CREAT | O_RDONLY, 0644);
+		fd = open(name, O_RDONLY, 0644);
 	if (fd == -1)
 	{
 		perror(name);
@@ -48,6 +48,17 @@ int	*fd_redirection(t_parser *node)
 	tmp2 = node->infiles;
 	while (cur)
 	{
+		while (tmp2)
+		{
+			close(fd[0]);
+			fd[0] = ft_open(tmp2->value, "infile");
+			if (fd[0] == -3)
+			{
+				free(fd);
+				exit(1);
+			}
+			tmp2 = tmp2->next;
+		}
 		while (tmp1)
 		{
 			close(fd[1]);
@@ -58,18 +69,6 @@ int	*fd_redirection(t_parser *node)
 			if (fd[1] == -3)
 				return (free(fd), NULL);
 			tmp1 = tmp1->next;
-		}
-		while (tmp2)
-		{
-			close(fd[0]);
-			fd[0] = ft_open(tmp2->value, "infile");
-			if (fd[0] == -3)
-			{
-				perror(tmp2->value);
-				free(fd);
-				exit(1);
-			}
-			tmp2 = tmp2->next;
 		}
 		cur = cur->next;
 	}
