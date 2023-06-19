@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/19 12:58:21 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/19 13:33:50 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	*dup_and_exec(t_parser *parse, t_pipe pip, char *msg)
 	fl = fd_redirection(parse);
 	if (!fl)
 		return (0);
+	parse->fd[0] = 0;
 	if (!ft_strcmp(msg, "one"))
 	{
 		parse->fd[1] = 1;
@@ -63,7 +64,7 @@ int	*dup_and_exec(t_parser *parse, t_pipe pip, char *msg)
 	else
 	{
 		parse->fd[1] = pip.wr_end[1];
-		parse->fd[0] = 0;
+		// parse->fd[0] = 0;
 		if (!ft_strcmp(msg, "first"))
 		{
 			// printf("first %s", parse->cmd);
@@ -93,7 +94,6 @@ int	*dup_and_exec(t_parser *parse, t_pipe pip, char *msg)
 				parse->fd[1] = fl[1];
 		}
 	}
-	// printf("%d\n", parse->fd[0]);
 	// printf(" write:%d read:%d\n", parse->fd[1], parse->fd[0]);
 	dup2(parse->fd[1], 1);
 	dup2(parse->fd[0], 0);
@@ -159,6 +159,7 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 		if (isbuiltin(parse))
 		{
 			run_builtin(parse);
+			// update_fd(g_var.fd_prog);
 			exit(g_var.exit_status);
 		}
 		path = parse->cmd;

@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/19 13:10:53 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/19 13:36:13 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	builtin_executor(t_parser *node, t_pipe pip, char *msg)
 		g_var.exit_status = 1;
 		return ;
 	}
-	update_fd(g_var.fd_prog);
 	run_builtin(node);
+	update_fd(g_var.fd_prog);
 	free(fl);
 }
 
@@ -58,7 +58,6 @@ void	execution(t_parser *parser, t_data *my_heredoc)
 	if (isbuiltin(parser) && parser->next == NULL && parser->cmd)
 	{
 		g_var.parent_process = 1;
-		// run_builtin(parser);
 		builtin_executor(parser, pip, "one");
 	}
 	// else if (parser->heredoc)
