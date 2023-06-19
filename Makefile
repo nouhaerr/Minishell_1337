@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+         #
+#    By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 02:49:56 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/06/19 15:50:19 by hobenaba         ###   ########.fr        #
+#    Updated: 2023/06/19 16:57:15 by nerrakeb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ INCLUDES += -I /Users/$(USER)/goinfre/homebrew/opt/readline/include/readline
 
 PARSING = my_free.c ft_lst_one.c utils.c parse.c init.c \
 		ft_lst_second.c words.c  env.c tokens.c lexer.c 
-EXECUTION = exec_bltn_hered.c  execution.c exec_pipes.c begin_exec.c exec_cmd.c
+EXECUTION = exec_bltn_hered.c  execution.c exec_pipes.c get_path.c exec_cmd.c
 EXECUTION_EXP = export.c modifie_and_add.c check_exp.c exp_utils.c
 EXECUTION_RDR = her.c files.c
 EXECUTION_BU =  echo.c pwd.c env.c exit.c unset.c utils.c cd.c 

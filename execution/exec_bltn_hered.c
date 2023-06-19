@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/19 16:50:05 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/19 16:55:15 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	exec_heredoc(t_parser *parser, t_data **my_heredoc)
 	}
 	while (*my_heredoc)
 	{
-		printf("->>>> %s\n", (*my_heredoc) -> value);
+		// printf("->>>> %s\n", (*my_heredoc) -> value);
 		*my_heredoc = (*my_heredoc) -> next;
 	}
 }
