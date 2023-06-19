@@ -6,19 +6,18 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/19 17:39:11 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/19 19:09:11 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void exec_heredoc(t_parser *parser, t_data **my_heredoc)
+void  exec_heredoc(t_parser *parser, t_data **my_heredoc)
 {
 	//char	str[BUFFER_SIZE];
-	int		fd;
+	int		pid;
 	int		status;
 	int		pipefd[2];
-	//int		fd[2];
 	
 	(void)my_heredoc;
 	while (parser)
@@ -26,21 +25,17 @@ void exec_heredoc(t_parser *parser, t_data **my_heredoc)
 		if (parser -> inf_her != NULL)
 		{
 			pipe(pipefd);
-			fd =  fork();
-			if (fd == 0)
+			pid =  fork();
+			if (pid == 0)
 			{
-				check_signal_heredoc();
+				// check_signal_heredoc();
 				her(parser -> inf_her, g_var.list, pipefd);
 				exit (0);
 			}
-			waitpid(fd, &status, 0);
+			waitpid(pid, &status, 0);
 			if (status == 256)
 				g_var.exit_status = 1;
-			else
-			{
-				parser -> fd[0] = pipefd[0];
-				return ;
-			}
+			parser->fd[0] = pipefd[0];
 		}
 		parser = parser -> next;
 	}
