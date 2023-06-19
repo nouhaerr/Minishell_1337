@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:46:12 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/19 18:07:31 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/19 19:27:45 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,5 +120,5 @@ void	her(t_data2 *inf_her, t_env *my_env, int *pipefd)
 	else if (str != NULL)
 		write (pipefd[1], str, ft_strlen(str) + 1);
 	close(pipefd[0]);
-	close (pipefd[1]);
+	close(pipefd[1]);
 }

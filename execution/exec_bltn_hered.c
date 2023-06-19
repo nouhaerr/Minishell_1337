@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/19 19:09:11 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/19 19:38:51 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void  exec_heredoc(t_parser *parser, t_data **my_heredoc)
 	(void)my_heredoc;
 	while (parser)
 	{
-		if (parser -> inf_her != NULL)
+		if (parser->inf_her != NULL)
 		{
 			pipe(pipefd);
 			pid =  fork();
@@ -37,8 +37,9 @@ void  exec_heredoc(t_parser *parser, t_data **my_heredoc)
 				g_var.exit_status = 1;
 			parser->fd[0] = pipefd[0];
 		}
-		parser = parser -> next;
+		parser = parser->next;
 	}
+	close(pipefd[1]);
 }
 
 void	run_builtin(t_parser *parser)
