@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:54:36 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/17 19:55:48 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/19 16:58:47 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 
 enum
 {
-	expand,
+	expand, 
 	not_expand,
 	trunc,
 	append,
+	infile,
 };
 typedef struct t_data
 {
@@ -41,8 +42,7 @@ typedef struct t_parser
 	t_data2			*outfiles;
 	int				index;
 	int				fd[2];
-	t_data			*infiles;
-	t_data2			*heredoc;
+	t_data2			*inf_her;
 	struct t_parser	*next;
 }	t_parser;
 

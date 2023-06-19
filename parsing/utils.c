@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:18:35 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/17 12:34:05 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/19 16:56:36 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ void	check_struct(t_parser *parser)
 	while (parser)
 	{
 		t_data2 *out = parser->outfiles;
-		t_data2 *her = parser->heredoc;
-		t_data *in = parser->infiles;
+		t_data2 *in = parser->inf_her;
 		t_data *args = parser->args;
 		char *cmd = parser->cmd;
 		printf("struct number %d\n", ++i);
@@ -55,14 +54,9 @@ void	check_struct(t_parser *parser)
 			printf("[out : %s, type : %d]\n", (out)->value, (out)->type);
 			(out) = (out)->next;
 		}
-		while (her)
-		{
-			printf("here : [%s]\n type : %d]\n", (her)->value, her->type);
-			(her) = (her)->next;
-		}
 		while (in)
 		{
-			printf("input : [%s]\n ", (in)->value);
+			printf("infher : [%s]\n  type %d\n", (in)->value, in -> type);
 			(in) = (in)->next;
 		}
 		printf("cmd: [%s]\n", cmd);
