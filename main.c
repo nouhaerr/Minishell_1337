@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/19 13:12:46 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/19 13:13:49 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	close_myfd_prog(int *my_fd)
 {
 	close(my_fd[0]);
 	close(my_fd[1]);
-	close(my_fd);
+	free(my_fd);
 }
 
 void	pa_ex(t_token *tok, t_lexer *lex, t_parser *par, t_data *here)
