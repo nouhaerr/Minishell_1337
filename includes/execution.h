@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:53:39 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/18 21:27:21 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/19 13:09:59 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ char	*get_path(char *cmd);
 char	**table_cmd(t_parser *node);
 void	ft_free(char **str);
 void	ft_err(char *s, char *cmd, char *s2);
+void	update_fd(int *my_fd);
 
 #endif

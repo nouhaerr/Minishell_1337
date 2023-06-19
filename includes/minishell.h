@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:53:18 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/18 19:17:23 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/19 13:04:18 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_glb
 	int		exit_status;
 	int		her_ctrlc;
 	bool	parent_process;
+	int		*fd_prog;
 }	t_glb;
 
 t_glb	g_var;
