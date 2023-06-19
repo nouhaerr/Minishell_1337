@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/19 15:50:08 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/19 15:52:11 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ void	close_myfd_prog(int *my_fd)
 void	pa_ex(t_token *tok, t_lexer *lex, t_parser *par, t_data *here)
 {
 	parse(&tok, &par, lex);
-	//execution(par, here);
-	//update_fd(g_var.fd_prog);
+	execution(par, here);
+	update_fd(g_var.fd_prog);
 	free_mylist(par, 1);
 }
 
