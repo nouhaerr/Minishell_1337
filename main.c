@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/19 13:09:02 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/19 13:12:46 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,11 @@ void	update_fd(int *my_fd)
 	dup2(my_fd[1], 1);
 }
 
-void	free_myfd_prog(int *my_fd)
+void	close_myfd_prog(int *my_fd)
 {
-	free(my_fd[0]);
-	free(my_fd[1]);
-	free(my_fd);
+	close(my_fd[0]);
+	close(my_fd[1]);
+	close(my_fd);
 }
 
 void	pa_ex(t_token *tok, t_lexer *lex, t_parser *par, t_data *here)
@@ -115,7 +115,7 @@ int	_session(t_token *tok, t_parser *par, t_data *her, t_lexer *le)
 			pa_ex(tok, le, par, her);
 		else
 			g_var.exit_status = 258; // for the exit_status for the synatx
-		free_myfd_prog(g_var.fd_prog);
+		close_myfd_prog(g_var.fd_prog);
 		free_mylist(tok, 0);
 		free(input);
 	}
