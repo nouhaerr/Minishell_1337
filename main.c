@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/19 14:22:44 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/19 15:01:13 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@ int	syntax_error(int base, t_token **tokens)
 		return (printf("minishell: syntax error near unexpected token\n"), 1);
 	while (tokens2)
 	{
+		if (tokens2 -> type != the_pipe && tokens2 -> type != word && tokens2 -> type != heredoc)
+		{
+			t_token *t2 = tokens2 -> next;
+			
+			if (t2 != NULL && t2 -> arten == env_general
+					&& (t2 ->next != NULL && t2-> next-> arten == env_general))
+					return (printf("ambigiuos redirect\n"), 1);
+			if (!ft_strcmp(tokens2 -> next -> value, "$$"))
+				return (printf("ambigiuos redirect\n"), 1);
+		}
 		if ((tokens2 -> type == the_pipe
 			&& (previous == NULL || tokens2 -> next == NULL)) || (tokens2 -> type == the_pipe && (tokens2 -> next) -> type == the_pipe))
 			return (printf("minishell: syntax error near unexpected token `|'\n")
@@ -86,8 +96,8 @@ void	pa_ex(t_token *tok, t_lexer *lex, t_parser *par, t_data *here)
 {
 	(void)here;
 	parse(&tok, &par, lex);
-	execution(par, here);
-	update_fd(g_var.fd_prog);
+	//execution(par, here);
+	//update_fd(g_var.fd_prog);
 	free_mylist(par, 1);
 }
 
