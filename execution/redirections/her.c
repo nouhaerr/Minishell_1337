@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:46:12 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/19 11:42:43 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/19 15:28:01 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ void	her(t_data2 *heredoc, t_env *my_env, int *pipefd)
 		{
 			free(input);
 			heredoc = heredoc -> next;
-			
 		}
 		else if (heredoc != NULL && heredoc -> next == NULL)
 		{
@@ -110,8 +109,9 @@ void	her(t_data2 *heredoc, t_env *my_env, int *pipefd)
 		else
 			free(input);
 	}
+	if (str == NULL)
+		exit (1);
 	if (str != NULL)
 		write (pipefd[1], str, ft_strlen(str) + 1);
 	close (pipefd[1]);
-	printf("imhier\n");
 }

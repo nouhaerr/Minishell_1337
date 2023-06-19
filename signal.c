@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 15:55:05 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/19 10:53:29 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/19 15:40:28 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,18 @@ void	signal_heredoc(int signal)
 	exit(1);
 }
 
+// check out the struct termios
+void    remove_ctrl(void)
+{
+    struct termios    term;
+
+    tcgetattr(STDIN_FILENO, &term);
+    term.c_lflag &= ~ECHOCTL;
+    tcsetattr(STDIN_FILENO, 0, &term);
+}
 void    signal_check(void)
 {
-	//remove_ctrl(); 
+	remove_ctrl(); 
 	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, SIG_IGN);
 }
