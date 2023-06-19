@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/19 13:48:07 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/19 14:01:07 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,19 @@ char	**create_env_arr(int size)
 	return (arr);
 }
 
+void	ft_execve(char *path, char **cmd, char **env)
+{
+	if (execve(path, cmd, env) < 0)
+	{
+		g_var.exit_status = 127;
+		if (cmd_slash(cmd[0]))
+			ft_err("minishell: ", cmd[0], ": No such file or directory");
+		else
+			ft_err("minishell: ", cmd[0], ": command not found");
+		exit(g_var.exit_status);
+	}
+}
+
 int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 {
 	pid_t	pid;
@@ -165,12 +178,7 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 		if (!path)
 			ft_err("minishell: ", parse->cmd, ": command not found");
 		env = create_env_arr(env_list_size(g_var.list));
-		if (execve(path, table_cmd(parse), env) < 0)
-		{
-			ft_err("minishell: ", parse->cmd, ": command not found");
-			g_var.exit_status = 127;
-			exit(g_var.exit_status);
-		}
+		ft_execve(path, table_cmd(parse), env);
 	}
 	return (pid);
 }
