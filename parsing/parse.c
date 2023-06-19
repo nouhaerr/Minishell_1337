@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:14:51 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/19 14:17:49 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/19 14:59:33 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	parse(t_token **tokens, t_parser **parser, t_lexer *lexer)
 			lexer->i++;
 		}
 	}
-	check_struct(*parser);
+	//check_struct(*parser);
 }
 // just to check on if my parsing is doing alright.
 // while (parser)
@@ -86,19 +86,11 @@ void	parse(t_token **tokens, t_parser **parser, t_lexer *lexer)
 t_token	*my_next_word(t_token *tokens)
 {
 	t_token	*t;
-	t_token	*t2;
+	//t_token	*t2;
 
 	t = tokens;
 	while (tokens)
 	{
-		if (tokens -> type != word && tokens -> type != the_pipe)
-		{
-			printf("arten : %d == value %s\n", t2 -> arten, t2 -> value);
-			t2 = tokens -> next;
-			if (t2 != NULL && t2 -> arten == env_general
-				&& (t2 ->next != NULL && t2-> next-> arten == env_general))
-				return (printf("ambigiuos redirect\n"), NULL);
-		}
 		if (!ft_strcmp(tokens -> value, "\"\"")
 			|| !ft_strcmp(tokens -> value, "\'\'"))
 		{
