@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_second.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:45:51 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/19 15:21:25 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/19 16:56:55 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,7 @@ t_parser	*ft_lstnew3(int index)
 	p -> args = NULL;
 	p -> cmd = NULL;
 	p -> outfiles = NULL;
-	p -> infiles = NULL;
-	p -> heredoc = NULL;
+	p -> inf_her = NULL;
 	p -> index = index;
 	return (p);
 }

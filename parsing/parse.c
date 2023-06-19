@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:14:51 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/19 14:59:33 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/19 16:57:46 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	create_node(t_parser *parser, t_lexer *lexer)
 	else if (lexer->tokens2->type == word)
 		ft_lstaddback2(&(parser->args), ft_lstnew2(lexer -> tok -> value));
 	else if (lexer->tokens2->type == l_rdr)
-		ft_lstaddback2(&(parser->infiles), ft_lstnew2(lexer -> tok -> value));
+		ft_lstaddback4(&(parser->inf_her), ft_lstnew4(lexer -> tok -> value, infile));
 	else if (lexer->tokens2->type == r_rdr)
 		ft_lstaddback4(&(parser->outfiles),
 			ft_lstnew4(lexer -> tok -> value, trunc));
@@ -27,10 +27,10 @@ void	create_node(t_parser *parser, t_lexer *lexer)
 		ft_lstaddback4(&(parser->outfiles),
 			ft_lstnew4(lexer -> tok -> value, append));
 	else if (lexer->tokens2->type == heredoc && lexer->tok ->arten == general)
-		ft_lstaddback4(&(parser->heredoc),
+		ft_lstaddback4(&(parser->inf_her),
 			ft_lstnew4(lexer -> tok -> value, expand));
 	else if (lexer->tokens2->type == heredoc && lexer->tok ->arten == quotes)
-		ft_lstaddback4(&(parser->heredoc),
+		ft_lstaddback4(&(parser->inf_her),
 			ft_lstnew4(lexer -> tok -> value, not_expand));
 }
 
@@ -74,7 +74,7 @@ void	parse(t_token **tokens, t_parser **parser, t_lexer *lexer)
 			lexer->i++;
 		}
 	}
-	//check_struct(*parser);
+	check_struct(*parser);
 }
 // just to check on if my parsing is doing alright.
 // while (parser)

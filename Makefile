@@ -6,7 +6,7 @@
 #    By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 02:49:56 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/06/19 15:50:19 by hobenaba         ###   ########.fr        #
+#    Updated: 2023/06/19 16:58:59 by hobenaba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,10 +22,10 @@ EXECUTION = exec_bltn_hered.c  execution.c exec_pipes.c begin_exec.c exec_cmd.c
 EXECUTION_EXP = export.c modifie_and_add.c check_exp.c exp_utils.c
 EXECUTION_RDR = her.c files.c
 EXECUTION_BU =  echo.c pwd.c env.c exit.c unset.c utils.c cd.c 
-SRCS =	main.c $(addprefix ./parsing/, $(PARSING)) $(addprefix ./execution/, $(EXECUTION)) \
+SRCS =	main.c $(addprefix ./parsing/, $(PARSING)) signal.c $(addprefix ./execution/, $(EXECUTION)) \
 		$(addprefix ./execution/builtins/export/, $(EXECUTION_EXP))  \
 		$(addprefix ./execution/redirections/, $(EXECUTION_RDR)) \
-		$(addprefix ./execution/builtins/, $(EXECUTION_BU)) signal.c
+		$(addprefix ./execution/builtins/, $(EXECUTION_BU)) 
 		
 OBJS = $(SRCS:.c=.o)
 
