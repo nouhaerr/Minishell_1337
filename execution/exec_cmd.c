@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/18 21:57:44 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/19 12:58:21 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,6 @@ int	*dup_and_exec(t_parser *parse, t_pipe pip, char *msg)
 		if (fl[1] != -1)
 			parse->fd[1] = fl[1];
 	}
-	// if (!ft_strcmp(msg, "builtin"))
-	// {
-	// 	parse->fd[1] = 1;
-	// 	parse->fd[0] = 0;
-	// 	if (fl[0] != -1)
-	// 		parse->fd[0] = fl[0];
-	// 	if (fl[1] != -1)
-	// 		parse->fd[1] = fl[1];
-	// }
 	else
 	{
 		parse->fd[1] = pip.wr_end[1];
@@ -106,7 +97,7 @@ int	*dup_and_exec(t_parser *parse, t_pipe pip, char *msg)
 	// printf(" write:%d read:%d\n", parse->fd[1], parse->fd[0]);
 	dup2(parse->fd[1], 1);
 	dup2(parse->fd[0], 0);
-	if (ft_strcmp(msg, "one") && ft_strcmp(msg, "builtin"))
+	if (ft_strcmp(msg, "one"))
 	{
 		close(pip.rd_end[0]);
 		close(pip.rd_end[1]);

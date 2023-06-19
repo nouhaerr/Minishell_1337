@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/18 21:58:06 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/19 12:58:33 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	isbuiltin(t_parser *parser)
 // 	if (!fl)
 // 	{
 // 		g_var.exit_status = 1;
-// 		exit(1);
+// 		return ;
 // 	}
 // 	run_builtin(node);
 // 	free(fl);
@@ -58,7 +58,7 @@ void	execution(t_parser *parser, t_data *my_heredoc)
 	{
 		g_var.parent_process = 1;
 		run_builtin(parser);
-		// builtin_executor(parser, pip, "builtin");
+		// builtin_executor(parser, pip, "one");
 	}
 	// else if (parser->heredoc)
 	// 	exec_heredoc(parser, &my_heredoc);
