@@ -6,46 +6,11 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 05:37:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/18 19:11:19 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/19 13:50:45 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-size_t	arg_list_size(t_data *arg)
-{
-	size_t	len;
-
-	len = 0;
-	if (!arg)
-		return (0);
-	while (arg)
-	{
-		len++;
-		arg = arg->next;
-	}
-	return (len);
-}
-
-char	*ft_strcat(char *dest, char *src)
-{
-	unsigned int	i;
-	unsigned int	c;
-
-	i = 0;
-	if (!dest || !src)
-		return (NULL);
-	while (dest[i] != '\0')
-		i++;
-	c = 0;
-	while (src[c] != '\0')
-	{
-		dest[i + c] = src[c];
-		c++;
-	}
-	dest[i + c] = '\0';
-	return (dest);
-}
 
 char	**table_cmd(t_parser *node)
 {

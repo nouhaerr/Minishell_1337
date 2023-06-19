@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/19 13:36:13 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/19 13:45:50 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,13 @@ int	isbuiltin(t_parser *parser)
 	return (0);
 }
 
-void	builtin_executor(t_parser *node, t_pipe pip, char *msg)
+int	exit_status(int status)
 {
-	int	*fl;
-
-	fl = dup_and_exec(node, pip, msg);
-	if (!fl)
-	{
-		g_var.exit_status = 1;
-		return ;
-	}
-	run_builtin(node);
-	update_fd(g_var.fd_prog);
-	free(fl);
+	if (WIFEXITED(status))
+		return(WEXITSTATUS(status));
+	else if (WIFSIGNALED(status))
+		return(WTERMSIG(status) + 128);
+	return (0);
 }
 
 void	execution(t_parser *parser, t_data *my_heredoc)
@@ -70,6 +64,7 @@ void	execution(t_parser *parser, t_data *my_heredoc)
 		else
 			pid = multiple_pipes(parser);
 		waitpid(pid, &status, 0);
+		g_var.exit_status = exit_status(status);
 	}
 	free_mylist(my_heredoc, 2);
 }
