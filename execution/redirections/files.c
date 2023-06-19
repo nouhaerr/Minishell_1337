@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:50:10 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/19 16:51:21 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/19 17:24:47 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,21 @@ int	*fd_redirection(t_parser *node)
 	int			*fd;
 	t_parser	*cur;
 	t_data2		*tmp1;
-	t_data		*tmp2;
+	t_data2		*tmp2;
 
 	fd = malloc(sizeof(int) * 2);
 	fd[0] = -1;
 	fd[1] = -1;
 	cur = node;
 	tmp1 = node->outfiles;
-	tmp2 = node->infiles;
+	tmp2 = node->inf_her;
 	while (tmp2)
 	{
 		close(fd[0]);
-		fd[0] = ft_open(tmp2->value, "infile");
+		if (tmp2->type == infile)
+			fd[0] = ft_open(tmp2->value, "infile");
+		else
+			fd[0] = node->fd[0];
 		if (fd[0] == -3)
 			(free(fd), exit(1));
 		tmp2 = tmp2->next;
