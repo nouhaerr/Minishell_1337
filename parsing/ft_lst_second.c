@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_second.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:45:51 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/19 11:27:38 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/19 15:21:25 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,14 @@ void	ft_lstaddback2(t_data **lst, t_data *new)
 {
 	t_data	*p;
 
-	//printf("address : %p\n", *lst);
 	if (*lst == NULL)
 	{
 		*lst = new;
-		//printf ("%s\n", new -> value);
 		return ;
 	}
 	p = *lst;
 	if (!p)
 		return ;
-	//rintf("->>>> %s\n", p -> value);
 	while (p-> next)
 		p = p -> next;
 	p -> next = new;

@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 11:50:42 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/24 14:41:25 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/19 15:15:22 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strdup(const char *s1)
 	char	*p;
 
 	i = 0;
+	if (s1 == NULL)
+		return (NULL);
 	p = malloc((ft_strlen(s1) + 1) * sizeof(char));
 	if (!p)
 		return (NULL);
