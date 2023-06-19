@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/19 13:45:50 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/19 15:10:14 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int	isbuiltin(t_parser *parser)
 	ft_tolower2(cmd2);
 	if (!ft_strcmp(cmd2, "echo") || !ft_strcmp(cmd2, "pwd")
 		|| !ft_strcmp(cmd2, "env") || !ft_strcmp(parser->cmd, "unset")
-		|| !ft_strcmp(cmd2, "cd") || !ft_strcmp(parser->cmd, "exit"))
+		|| !ft_strcmp(cmd2, "cd") || !ft_strcmp(parser->cmd, "exit")
+		|| !ft_strcmp(parser->cmd, "export"))
 	{
 		free(cmd2);
 		return (1);

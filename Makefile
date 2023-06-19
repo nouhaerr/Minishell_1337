@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+         #
+#    By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 02:49:56 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/06/19 13:50:09 by hobenaba         ###   ########.fr        #
+#    Updated: 2023/06/19 15:01:29 by nerrakeb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 
-RDFLAGS +=  -lreadline -L /Users/$(USER)/goinfre/homebrew/opt/readline/lib -lreadline
+RDFLAGS +=  -lreadline -L /Users/$(USER)/goinfre/homebrew/opt/readline/lib
 INCLUDES += -I /Users/$(USER)/goinfre/homebrew/opt/readline/include/readline
 
 PARSING = my_free.c ft_lst_one.c utils.c parse.c init.c \
