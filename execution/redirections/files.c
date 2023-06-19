@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:50:10 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/19 14:12:59 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/19 16:51:21 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,31 +46,24 @@ int	*fd_redirection(t_parser *node)
 	cur = node;
 	tmp1 = node->outfiles;
 	tmp2 = node->infiles;
-	while (cur)
+	while (tmp2)
 	{
-		while (tmp2)
-		{
-			close(fd[0]);
-			fd[0] = ft_open(tmp2->value, "infile");
-			if (fd[0] == -3)
-			{
-				free(fd);
-				exit(1);
-			}
-			tmp2 = tmp2->next;
-		}
-		while (tmp1)
-		{
-			close(fd[1]);
-			if (tmp1->type == append)
-				fd[1] = ft_open(tmp1->value, "saved_file");
-			else if (tmp1->type == trunc)
-				fd[1] = ft_open(tmp1->value, "outfile");
-			if (fd[1] == -3)
-				return (free(fd), NULL);
-			tmp1 = tmp1->next;
-		}
-		cur = cur->next;
+		close(fd[0]);
+		fd[0] = ft_open(tmp2->value, "infile");
+		if (fd[0] == -3)
+			(free(fd), exit(1));
+		tmp2 = tmp2->next;
+	}
+	while (tmp1)
+	{
+		close(fd[1]);
+		if (tmp1->type == append)
+			fd[1] = ft_open(tmp1->value, "saved_file");
+		else if (tmp1->type == trunc)
+			fd[1] = ft_open(tmp1->value, "outfile");
+		if (fd[1] == -3)
+			return (free(fd), NULL);
+		tmp1 = tmp1->next;
 	}
 	return (fd);
 }
