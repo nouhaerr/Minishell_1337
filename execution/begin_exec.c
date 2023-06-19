@@ -6,11 +6,66 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 05:37:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/17 20:17:31 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/18 18:52:44 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+size_t	arg_list_size(t_data *arg)
+{
+	size_t	len;
+
+	len = 0;
+	if (!arg)
+		return (0);
+	while (arg)
+	{
+		len++;
+		arg = arg->next;
+	}
+	return (len);
+}
+
+char	*ft_strcat(char *dest, char *src)
+{
+	unsigned int	i;
+	unsigned int	c;
+
+	i = 0;
+	if (!dest || !src)
+		return (NULL);
+	while (dest[i] != '\0')
+		i++;
+	c = 0;
+	while (src[c] != '\0')
+	{
+		dest[i + c] = src[c];
+		c++;
+	}
+	dest[i + c] = '\0';
+	return (dest);
+}
+
+char	**table_cmd(t_parser *node)
+{
+	char *str;
+	char **s1;
+	t_data *cur;
+
+	str = NULL;
+	cur = node -> args;
+	str = ft_strjoin2(node -> cmd, " ");
+	while (cur)
+	{
+		str = ft_strjoin2(str, cur -> value);
+		str = ft_strjoin2(str, " ");
+		cur = cur -> next;
+	}
+	s1 = ft_split(str, ' ');
+	free(str);
+	return (s1);
+}
 
 char	**real_path(void)
 {
@@ -22,9 +77,9 @@ char	**real_path(void)
 	cur = g_var.list;
 	while (cur)
 	{
-		if (!ft_strncmp(cur->env, "PATH=", 5))
+		if (!ft_strncmp(cur->env, "PATH", 4))
 		{
-			p = ft_split(cur->env + 5, ':');
+			p = ft_split(cur->value, ':');
 			return (p);
 		}
 		cur = cur->next;
@@ -39,14 +94,14 @@ char	*get_path(char *cmd)
 	char	**full_path;
 	int		i;
 
-	full_path = real_path();
+	full_path = real_path(); //prob
 	if (!full_path)
-		ft_err("minishell: command not found: ", cmd);
-	cmd_file = ft_strjoin("/", cmd);
+		ft_err("minishell: ", cmd, ": command not found");
+	cmd_file = ft_strjoin2("/", cmd);
 	i = -1;
 	while (full_path[++i])
 	{
-		path = ft_strjoin(full_path[i], cmd_file);
+		path = ft_strjoin2(full_path[i], cmd_file);
 		if (!access(path, F_OK | X_OK))
 			return (ft_free(full_path), free(cmd_file), path);
 		free(path);

@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/18 19:00:11 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/18 21:27:22 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 void	exec_heredoc(t_parser *parser, t_data **my_heredoc)
 {
-	void	*str;
+	char	str[BUFFER_SIZE];
 	int		fd;
 	int		status;
 	int		pipefd[2];
 	
 	(void)my_heredoc;
-	str = NULL;
 	pipe(pipefd);
 	while (parser)
 	{
@@ -37,15 +36,18 @@ void	exec_heredoc(t_parser *parser, t_data **my_heredoc)
 			waitpid(fd, &status, 0);
 			if (status == 256)
 				g_var.exit_status = 1;
-			printf("%d\n", pipefd[0]);
-			int a = read(0, str, 1);
-			printf("i have read %d\n", a);
-			printf("->>>> %s\n", str);
-			// ft_lstaddback2(my_heredoc, ft_lstnew2(str));
-			// free (str);
+			read(pipefd[0], str, BUFFER_SIZE);
+			// ft_lstaddback2(my_heredoc, ft_lstnew2(str)); //why does it stand here
+			//printf("hier : %s\n , address %p\n", str, *my_heredoc);
+			//sleep (1);
 		}
 		parser = parser -> next;
 	}
+	// while (*my_heredoc)
+	// {
+	// 	printf("->>>> %s\n", (*my_heredoc) -> value);
+	// 	*my_heredoc = (*my_heredoc) -> next;`
+	// }
 }
 
 void	run_builtin(t_parser *parser)

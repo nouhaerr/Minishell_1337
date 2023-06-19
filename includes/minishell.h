@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:53:18 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/18 16:11:07 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/18 21:02:46 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # include <signal.h>
 # include <termios.h>
 
+#define BUFFER_SIZE 1024
 typedef struct s_glb
 {
 	t_env	*list;
