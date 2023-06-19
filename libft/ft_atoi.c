@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 13:00:55 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/18 09:46:35 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/18 19:15:36 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_signe_res(const char *str, int *signe, unsigned long *res)
+void	ft_signe_res(const char *str, int *signe, unsigned long *res)
 {
 	while ((*str >= 9 && *str <= 13) || *str == 32)
 		str++;
@@ -28,6 +28,7 @@ void ft_signe_res(const char *str, int *signe, unsigned long *res)
 		str++;
 	}
 }
+
 long	ft_atoi(const char *str)
 {
 	int				signe;
@@ -41,7 +42,7 @@ long	ft_atoi(const char *str)
 	if (signe < 0 && res == 9223372036854775807)
 		return (3);
 	if ((signe > 0 && res > 9223372036854775807)
-	|| (signe < 0 && res > 9223372036854775807))
+		|| (signe < 0 && res > 9223372036854775807))
 	{
 		printf("minishell: exit: %s: numeric argument required\n", str);
 		exit(255);

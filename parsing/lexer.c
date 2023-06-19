@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:53:34 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/17 18:06:47 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/19 14:02:45 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,9 @@ void	build_list(t_lexer *lexer, t_token **tokens)
 		arten = quotes;
 	else
 		arten = general;
-	if (arten == general && ft_check_space(lexer -> str))
+	if (!ft_strcmp(lexer -> str, " "))
+		ft_lstaddback(tokens, ft_lstnew(lexer -> str, word, env_general));
+	else if (arten == general && ft_check_space(lexer -> str))
 	{
 		str = ft_split(lexer -> str, ' ');
 		i = 0;
@@ -98,15 +100,15 @@ int	lex(char *input, t_token **tokens, t_lexer *lexer)
 	{
 		if (input[i] == ' ' && lexer -> base == 0)
 			i = ft_ignore_spaces(input, i);
-		if (ft_strchr("$|><", input[i]) != NULL && lexer -> base == 0)
+		if (input[i] != '\0' && ft_strchr("$|><", input[i]) != NULL && lexer -> base == 0)
 		{
 			if (input[i] == '<' && input[i + 1] == '<')
 				lexer -> her = 1;
 			i += check_which_special_char(input[i], input[i + 1], tokens);
 		}
-		else
+		else if (input[i] != '\0')
 			i = partition_tokens(lexer, input, i);
-		if (check_condition(lexer, input, i) == 1)
+		if (input[i] != '\0' && check_condition(lexer, input, i) == 1)
 			lexer -> str = ft_strjoin(lexer -> str, ft_substr(input, i - 1, 2));
 		if (input[i] == '$')
 			i = token_env(input, i, lexer);

@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/18 21:27:22 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/19 13:50:29 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@ void	exec_heredoc(t_parser *parser, t_data **my_heredoc)
 	int		fd;
 	int		status;
 	int		pipefd[2];
-	
-	(void)my_heredoc;
-	pipe(pipefd);
+
+	*my_heredoc = NULL;
 	while (parser)
 	{
+		pipe(pipefd);
 		if (parser -> heredoc != NULL)
 		{	
 			g_var.signal_heredoc = 1;
 			fd =  fork();
 			if (fd == 0)
 			{
-				check_signal_heredoc();
+				//check_signal_heredoc();
 				her(parser -> heredoc, g_var.list, pipefd);
 				exit (0);
 			}
@@ -37,17 +37,18 @@ void	exec_heredoc(t_parser *parser, t_data **my_heredoc)
 			if (status == 256)
 				g_var.exit_status = 1;
 			read(pipefd[0], str, BUFFER_SIZE);
-			// ft_lstaddback2(my_heredoc, ft_lstnew2(str)); //why does it stand here
+			printf("%s\n", str);
+			ft_lstaddback2(my_heredoc, ft_lstnew2(str)); //why does it stand here
 			//printf("hier : %s\n , address %p\n", str, *my_heredoc);
 			//sleep (1);
 		}
 		parser = parser -> next;
 	}
-	// while (*my_heredoc)
-	// {
-	// 	printf("->>>> %s\n", (*my_heredoc) -> value);
-	// 	*my_heredoc = (*my_heredoc) -> next;`
-	// }
+	while (*my_heredoc)
+	{
+		printf("->>>> %s\n", (*my_heredoc) -> value);
+		*my_heredoc = (*my_heredoc) -> next;
+	}
 }
 
 void	run_builtin(t_parser *parser)

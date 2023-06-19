@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:53:18 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/18 21:02:46 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/19 10:49:20 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ t_glb	g_var;
 //gotta add this cause in the library i downloaded they didnt have the prototype
 void	rl_replace_line(const char *text, int clear_undo);
 size_t	env_list_size(t_env *env);
-void    signal_check();
-void	check_signal_heredoc();
+void	signal_check(void);
+void	check_signal_heredoc(void);
+
 #endif

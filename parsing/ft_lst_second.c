@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:45:51 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/18 21:20:54 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/19 11:27:38 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_data	*ft_lstnew2(char *value)
 	p = malloc(sizeof (t_data));
 	if (!p)
 		return (NULL);
-	p -> value = value;
+	p -> value = ft_strdup(value);
 	p -> next = NULL;
 	return (p);
 }
@@ -28,16 +28,17 @@ void	ft_lstaddback2(t_data **lst, t_data *new)
 {
 	t_data	*p;
 
+	//printf("address : %p\n", *lst);
 	if (*lst == NULL)
 	{
 		*lst = new;
+		//printf ("%s\n", new -> value);
 		return ;
 	}
-	printf("->>>>>>>>>%s\n", new -> value);
-	printf("->>>>>>>%s\n", (*lst) -> value);
 	p = *lst;
 	if (!p)
 		return ;
+	//rintf("->>>> %s\n", p -> value);
 	while (p-> next)
 		p = p -> next;
 	p -> next = new;

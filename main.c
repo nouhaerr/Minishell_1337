@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/19 10:40:23 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/19 13:54:50 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	syntax_error(int base, t_token **tokens)
 		return (printf("minishell: syntax error near unexpected token\n"), 1);
 	while (tokens2)
 	{
-		if (tokens2 -> type == the_pipe
-			&& (previous == NULL || tokens2 -> next == NULL))
+		if ((tokens2 -> type == the_pipe
+			&& (previous == NULL || tokens2 -> next == NULL)) || (tokens2 -> type == the_pipe && (tokens2 -> next) -> type == the_pipe))
 			return (printf("minishell: syntax error near unexpected token `|'\n")
 				, 1);
 		if ((tokens2 -> type != the_pipe && tokens2 -> type != word)
@@ -63,8 +63,8 @@ void	pa_ex(t_token *tok, t_lexer *lex, t_parser *par, t_data *here)
 {
 	(void)here;
 	parse(&tok, &par, lex);
-	execution(par, here);
-	free_mylist(par, 1);
+	//exec_heredoc(par, &here);
+	//free_mylist(par, 1);
 }
 
 int	_session(t_token *tok, t_parser *par, t_data *her, t_lexer *le)
@@ -78,7 +78,7 @@ int	_session(t_token *tok, t_parser *par, t_data *her, t_lexer *le)
 		tok = NULL;
 		par = NULL;
 		g_var.signal_heredoc =  0;
-		signal_check();
+		//signal_check();
 		prompt = get_prompt(getcwd(NULL, 0));
 		input = readline(prompt);
 		free((void *)prompt);
@@ -104,7 +104,7 @@ int	main(int ac, char **av, char **env)
 	t_token		*tokens;
 	t_parser	*parser;
 	int			out;
-	
+
 	(void)ac;
 	(void)av;
 	lexer = malloc (sizeof(t_lexer));

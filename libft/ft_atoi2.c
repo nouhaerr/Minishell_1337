@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 08:34:00 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/18 09:49:15 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/18 19:14:55 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_res_signe(const char *str, int *signe, unsigned long long *nbr)
+void	ft_res_signe(const char *str, int *signe, unsigned long long *nbr)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
@@ -31,6 +31,7 @@ void ft_res_signe(const char *str, int *signe, unsigned long long *nbr)
 		i++;
 	}
 }
+
 long	ft_atoi2(const char *str)
 {
 	unsigned long long	nbr;

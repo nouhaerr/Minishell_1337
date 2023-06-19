@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 15:55:05 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/18 16:27:27 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/19 10:53:29 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,14 @@ void	signal_heredoc(int signal)
 	exit(1);
 }
 
-void    signal_check()
+void    signal_check(void)
 {
 	//remove_ctrl(); 
 	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, SIG_IGN);
 }
-void check_signal_heredoc()
+
+void	check_signal_heredoc(void)
 {
 	signal(SIGINT, signal_heredoc);
 }

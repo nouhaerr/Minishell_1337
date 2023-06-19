@@ -6,12 +6,12 @@
 #    By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 02:49:56 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/06/18 21:32:08 by hobenaba         ###   ########.fr        #
+#    Updated: 2023/06/19 13:50:09 by hobenaba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 
 RDFLAGS +=  -lreadline -L /Users/$(USER)/goinfre/homebrew/opt/readline/lib -lreadline
 INCLUDES += -I /Users/$(USER)/goinfre/homebrew/opt/readline/include/readline
@@ -22,10 +22,10 @@ EXECUTION = exec_bltn_hered.c  execution.c exec_pipes.c begin_exec.c exec_cmd.c
 EXECUTION_EXP = export.c modifie_and_add.c check_exp.c exp_utils.c
 EXECUTION_RDR = her.c files.c
 EXECUTION_BU =  echo.c pwd.c env.c exit.c unset.c utils.c cd.c 
-SRCS =	main.c signal.c $(addprefix ./parsing/, $(PARSING)) $(addprefix ./execution/, $(EXECUTION)) \
+SRCS =	main.c $(addprefix ./parsing/, $(PARSING)) $(addprefix ./execution/, $(EXECUTION)) \
 		$(addprefix ./execution/builtins/export/, $(EXECUTION_EXP))  \
 		$(addprefix ./execution/redirections/, $(EXECUTION_RDR)) \
-		$(addprefix ./execution/builtins/, $(EXECUTION_BU))
+		$(addprefix ./execution/builtins/, $(EXECUTION_BU)) #signal.c
 		
 OBJS = $(SRCS:.c=.o)
 

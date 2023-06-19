@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 05:37:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/18 18:52:44 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/18 19:11:19 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ char	*ft_strcat(char *dest, char *src)
 
 char	**table_cmd(t_parser *node)
 {
-	char *str;
-	char **s1;
-	t_data *cur;
+	char	*str;
+	char	**s1;
+	t_data	*cur;
 
 	str = NULL;
 	cur = node -> args;
@@ -94,7 +94,7 @@ char	*get_path(char *cmd)
 	char	**full_path;
 	int		i;
 
-	full_path = real_path(); //prob
+	full_path = real_path();
 	if (!full_path)
 		ft_err("minishell: ", cmd, ": command not found");
 	cmd_file = ft_strjoin2("/", cmd);
