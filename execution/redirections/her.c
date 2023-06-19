@@ -6,13 +6,13 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:46:12 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/19 15:49:56 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/19 17:30:59 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	env_expansion_for_heredoc2(char *input, int i, t_env *my_env, char **str)
+int	env_expansion_for_inf_her2(char *input, int i, t_env *my_env, char **str)
 {
 	int		len;
 	char	*env;
@@ -29,7 +29,7 @@ int	env_expansion_for_heredoc2(char *input, int i, t_env *my_env, char **str)
 	return (i + len);
 }
 
-int	env_expansion_for_heredoc(char *input, int i, t_env *my_env, char **str)
+int	env_expansion_for_inf_her(char *input, int i, t_env *my_env, char **str)
 {
 	char	*itoa;
 	char	*str_env;
@@ -43,7 +43,7 @@ int	env_expansion_for_heredoc(char *input, int i, t_env *my_env, char **str)
 		i++;
 	}
 	else
-		i = env_expansion_for_heredoc2(input, i, my_env, str);
+		i = env_expansion_for_inf_her2(input, i, my_env, str);
 	return (i + 1);
 }
 
@@ -60,7 +60,7 @@ int	my_word(char *input, int start)
 	return (j);
 }
 
-void	expansion_heredoc(char *input, int i, char **str, t_env *my_env)
+void	expansion_inf_her(char *input, int i, char **str, t_env *my_env)
 {
 	int	len ;
 	char *s1;
@@ -69,7 +69,7 @@ void	expansion_heredoc(char *input, int i, char **str, t_env *my_env)
 	while (input[i])
 	{
 		if (input[i] == '$')
-			i = env_expansion_for_heredoc(input, i, my_env, str);
+			i = env_expansion_for_inf_her(input, i, my_env, str);
 		else
 		{
 			len = my_word(input, i);
@@ -82,7 +82,7 @@ void	expansion_heredoc(char *input, int i, char **str, t_env *my_env)
 	free(input);
 }
 
-void	her(t_data2 *heredoc, t_env *my_env, int *pipefd)
+void	her(t_data2 *inf_her, t_env *my_env, int *pipefd)
 {
 	char	*input;
 	char	*str;
@@ -90,28 +90,37 @@ void	her(t_data2 *heredoc, t_env *my_env, int *pipefd)
 
 	str = NULL;
 	close(pipefd[0]);
-	while (heredoc != NULL)
+	while (inf_her != NULL)
 	{
-		input = readline("> ");
-		i = 0;
-		if (input == NULL || ft_strcmp(input, heredoc -> value) == 0)
+		if (inf_her ->type != infile)
 		{
-			free(input);
-			heredoc = heredoc -> next;
+			input = readline("> ");
+			i = 0;
+			if (input == NULL || ft_strcmp(input, inf_her -> value) == 0)
+			{
+				free(input);
+				inf_her = inf_her -> next;
+			}
+			else if (inf_her != NULL && inf_her -> next == NULL)
+			{
+				if (inf_her -> type == expand)
+					expansion_inf_her(input, i, &str, my_env);
+				else if (inf_her -> type == not_expand)
+					str = ft_strjoin(str, ft_strjoin(input, ft_strdup("\n")));
+			}
+			else
+				free(input);
 		}
-		else if (heredoc != NULL && heredoc -> next == NULL)
-		{
-			if (heredoc -> type == expand)
-				expansion_heredoc(input, i, &str, my_env);
-			else if (heredoc -> type == not_expand)
-				str = ft_strjoin(str, ft_strjoin(input, ft_strdup("\n")));
-		}
-		else
-			free(input);
+		else 
+			inf_her = inf_her -> next;
 	}
+	
 	if (str == NULL)
+	{
+		printf("imhier\n");
 		exit (1);
-	if (str != NULL)
+	}
+	else if (str != NULL)
 		write (pipefd[1], str, ft_strlen(str) + 1);
 	close (pipefd[1]);
 }
