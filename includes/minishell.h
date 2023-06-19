@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:53:18 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/19 10:49:20 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/19 14:22:49 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_glb
 	int		exit_status;
 	int		signal_heredoc;
 	bool	parent_process;
+	int		*fd_prog;
 }	t_glb;
 
 t_glb	g_var;

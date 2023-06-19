@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/19 13:54:50 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/19 14:22:44 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,36 @@ char	*get_prompt(char *s)
 	return (cwd);
 }
 
+int	*my_fd(void)
+{
+	int	*myfd;
+
+	myfd = malloc(sizeof(int) * 2);
+	myfd[0] = dup(0);
+	myfd[1] = dup(1);
+	return(myfd);
+}
+
+void	update_fd(int *my_fd)
+{
+	dup2(my_fd[0], 0);
+	dup2(my_fd[1], 1);
+}
+
+void	close_myfd_prog(int *my_fd)
+{
+	close(my_fd[0]);
+	close(my_fd[1]);
+	free(my_fd);
+}
+
 void	pa_ex(t_token *tok, t_lexer *lex, t_parser *par, t_data *here)
 {
 	(void)here;
 	parse(&tok, &par, lex);
-	//exec_heredoc(par, &here);
-	//free_mylist(par, 1);
+	execution(par, here);
+	update_fd(g_var.fd_prog);
+	free_mylist(par, 1);
 }
 
 int	_session(t_token *tok, t_parser *par, t_data *her, t_lexer *le)
@@ -86,11 +110,13 @@ int	_session(t_token *tok, t_parser *par, t_data *her, t_lexer *le)
 			break ;
 		if (ft_strcmp(input, "") != 0)
 			add_history(input);
+		g_var.fd_prog = my_fd();
 		base = lex(input, &tok, le);
 		if (!syntax_error(base, &tok) && tok != NULL)
 			pa_ex(tok, le, par, her);
 		else
 			g_var.exit_status = 258; // for the exit_status for the synatx
+		close_myfd_prog(g_var.fd_prog);
 		free_mylist(tok, 0);
 		free(input);
 	}

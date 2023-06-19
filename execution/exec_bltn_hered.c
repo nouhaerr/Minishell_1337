@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/19 13:50:29 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/19 14:24:03 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,19 @@ void	run_builtin(t_parser *parser)
 	else if (!ft_strcmp(parser->cmd, "export"))
 		sh_export(parser);
 	free(cmd2);
+}
+
+void	builtin_executor(t_parser *node, t_pipe pip, char *msg)
+{
+	int	*fl;
+
+	fl = dup_and_exec(node, pip, msg);
+	if (!fl)
+	{
+		g_var.exit_status = 1;
+		return ;
+	}
+	run_builtin(node);
+	update_fd(g_var.fd_prog);
+	free(fl);
 }

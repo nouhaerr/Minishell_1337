@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/18 21:58:06 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/19 13:45:50 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,14 @@ int	isbuiltin(t_parser *parser)
 	return (0);
 }
 
-// void	builtin_executor(t_parser *node, t_pipe pip, char *msg)
-// {
-// 	int	*fl;
-
-// 	fl = dup_and_exec(node, pip, msg);
-// 	if (!fl)
-// 	{
-// 		g_var.exit_status = 1;
-// 		exit(1);
-// 	}
-// 	run_builtin(node);
-// 	free(fl);
-// }
+int	exit_status(int status)
+{
+	if (WIFEXITED(status))
+		return(WEXITSTATUS(status));
+	else if (WIFSIGNALED(status))
+		return(WTERMSIG(status) + 128);
+	return (0);
+}
 
 void	execution(t_parser *parser, t_data *my_heredoc)
 {
@@ -57,8 +52,7 @@ void	execution(t_parser *parser, t_data *my_heredoc)
 	if (isbuiltin(parser) && parser->next == NULL && parser->cmd)
 	{
 		g_var.parent_process = 1;
-		run_builtin(parser);
-		// builtin_executor(parser, pip, "builtin");
+		builtin_executor(parser, pip, "one");
 	}
 	// else if (parser->heredoc)
 	// 	exec_heredoc(parser, &my_heredoc);
@@ -70,6 +64,7 @@ void	execution(t_parser *parser, t_data *my_heredoc)
 		else
 			pid = multiple_pipes(parser);
 		waitpid(pid, &status, 0);
+		g_var.exit_status = exit_status(status);
 	}
 	free_mylist(my_heredoc, 2);
 }

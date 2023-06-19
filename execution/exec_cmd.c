@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/19 10:49:08 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/19 14:23:44 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	*dup_and_exec(t_parser *parse, t_pipe pip, char *msg)
 	fl = fd_redirection(parse);
 	if (!fl)
 		return (0);
+	parse->fd[0] = 0;
 	if (!ft_strcmp(msg, "one"))
 	{
 		parse->fd[1] = 1;
@@ -60,22 +61,12 @@ int	*dup_and_exec(t_parser *parse, t_pipe pip, char *msg)
 		if (fl[1] != -1)
 			parse->fd[1] = fl[1];
 	}
-	// if (!ft_strcmp(msg, "builtin"))
-	// {
-	// 	parse->fd[1] = 1;
-	// 	parse->fd[0] = 0;
-	// 	if (fl[0] != -1)
-	// 		parse->fd[0] = fl[0];
-	// 	if (fl[1] != -1)
-	// 		parse->fd[1] = fl[1];
-	// }
 	else
 	{
 		parse->fd[1] = pip.wr_end[1];
-		parse->fd[0] = 0;
+		// parse->fd[0] = 0;
 		if (!ft_strcmp(msg, "first"))
 		{
-			// printf("first %s", parse->cmd);
 			if (fl[0] != -1)
 				parse->fd[0] = fl[0];
 			if (fl[1] != -1)
@@ -83,7 +74,6 @@ int	*dup_and_exec(t_parser *parse, t_pipe pip, char *msg)
 		}
 		if (!ft_strcmp(msg, "last"))
 		{
-			// printf("last %s", parse->cmd);
 			parse->fd[1] = 1;
 			parse->fd[0] = pip.rd_end[0];
 			if (fl[0] != -1)
@@ -93,7 +83,6 @@ int	*dup_and_exec(t_parser *parse, t_pipe pip, char *msg)
 		}
 		if (!ft_strcmp(msg, "between"))
 		{
-			// printf("between %s", parse->cmd);
 			parse->fd[0] = pip.rd_end[0];
 			parse->fd[1] = pip.wr_end[1];
 			if (fl[0] != -1)
@@ -102,11 +91,10 @@ int	*dup_and_exec(t_parser *parse, t_pipe pip, char *msg)
 				parse->fd[1] = fl[1];
 		}
 	}
-	// printf("%d\n", parse->fd[0]);
 	// printf(" write:%d read:%d\n", parse->fd[1], parse->fd[0]);
 	dup2(parse->fd[1], 1);
 	dup2(parse->fd[0], 0);
-	if (ft_strcmp(msg, "one") && ft_strcmp(msg, "builtin"))
+	if (ft_strcmp(msg, "one"))
 	{
 		close(pip.rd_end[0]);
 		close(pip.rd_end[1]);
@@ -154,6 +142,19 @@ char	**create_env_arr(int size)
 	return (arr);
 }
 
+void	ft_execve(char *path, char **cmd, char **env)
+{
+	if (execve(path, cmd, env) < 0)
+	{
+		g_var.exit_status = 127;
+		if (cmd_slash(cmd[0]))
+			ft_err("minishell: ", cmd[0], ": No such file or directory");
+		else
+			ft_err("minishell: ", cmd[0], ": command not found");
+		exit(g_var.exit_status);
+	}
+}
+
 int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 {
 	pid_t	pid;
@@ -169,6 +170,7 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 		if (isbuiltin(parse))
 		{
 			run_builtin(parse);
+			// update_fd(g_var.fd_prog);
 			exit(g_var.exit_status);
 		}
 		path = parse->cmd;
@@ -177,11 +179,7 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 		if (!path)
 			ft_err("minishell: ", parse->cmd, ": command not found");
 		env = create_env_arr(env_list_size(g_var.list));
-		if (execve(path, table_cmd(parse), env) < 0)
-		{
-			perror("execve");
-			exit(1);
-		}
+		ft_execve(path, table_cmd(parse), env);
 	}
 	return (pid);
 }
