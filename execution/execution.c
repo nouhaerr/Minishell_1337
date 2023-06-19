@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/19 19:08:32 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/19 20:20:38 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	execution(t_parser *parser, t_data *my_heredoc)
 	pip.wr_end = 0;
 	if (!parser)
 		return ;
-	exec_heredoc(parser, &my_heredoc);
+	// exec_heredoc(parser, &my_heredoc);
 	if (parser->cmd && isbuiltin(parser) && parser->next == NULL)
 	{
 		g_var.parent_process = 1;

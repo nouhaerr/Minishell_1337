@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/19 19:38:51 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/19 20:20:26 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void  exec_heredoc(t_parser *parser, t_data **my_heredoc)
 				g_var.exit_status = 1;
 			parser->fd[0] = pipefd[0];
 		}
+		// parser->fd[0] = 0;
 		parser = parser->next;
 	}
 	close(pipefd[1]);

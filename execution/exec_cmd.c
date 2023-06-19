@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/19 18:08:57 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/19 19:58:42 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	*dup_and_exec(t_parser *parse, t_pipe pip, char *msg)
 	fl = fd_redirection(parse);
 	if (!fl)
 		return (0);
-	parse->fd[0] = 0;
+	// parse->fd[0] = 0;
 	if (!ft_strcmp(msg, "one"))
 	{
 		parse->fd[1] = 1;
@@ -64,7 +64,7 @@ int	*dup_and_exec(t_parser *parse, t_pipe pip, char *msg)
 	else
 	{
 		parse->fd[1] = pip.wr_end[1];
-		// parse->fd[0] = 0;
+		parse->fd[0] = 0;
 		if (!ft_strcmp(msg, "first"))
 		{
 			if (fl[0] != -1)
