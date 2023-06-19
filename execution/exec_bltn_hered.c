@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_bltn_hered.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/19 14:24:03 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/19 15:21:50 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,17 @@ void	exec_heredoc(t_parser *parser, t_data **my_heredoc)
 			if (status == 256)
 				g_var.exit_status = 1;
 			read(pipefd[0], str, BUFFER_SIZE);
-			printf("%s\n", str);
 			ft_lstaddback2(my_heredoc, ft_lstnew2(str)); //why does it stand here
 			//printf("hier : %s\n , address %p\n", str, *my_heredoc);
 			//sleep (1);
 		}
 		parser = parser -> next;
 	}
-	while (*my_heredoc)
-	{
-		printf("->>>> %s\n", (*my_heredoc) -> value);
-		*my_heredoc = (*my_heredoc) -> next;
-	}
+	// while (*my_heredoc)
+	// {
+	// 	printf("->>>> %s\n", (*my_heredoc) -> value);
+	// 	*my_heredoc = (*my_heredoc) -> next;
+	// }
 }
 
 void	run_builtin(t_parser *parser)
