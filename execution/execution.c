@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/19 15:50:49 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/19 16:16:18 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	execution(t_parser *parser, t_data *my_heredoc)
 		g_var.parent_process = 1;
 		builtin_executor(parser, pip, "one");
 	}
-	else if (parser->heredoc)
-		exec_heredoc(parser, &my_heredoc);
+	// else if (parser->heredoc)
+	// 	exec_heredoc(parser, );
 	else
 	{
 		g_var.parent_process = 0;
