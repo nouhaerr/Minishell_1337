@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/20 18:37:11 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/20 18:47:38 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ int	_session(t_token *tok, t_parser *par, t_data *her, t_lexer *le)
 	const char	*prompt;
 	int			base;
 
+	(void)her;
 	while (1)
 	{	
 		tok = NULL;
@@ -122,6 +123,14 @@ int	_session(t_token *tok, t_parser *par, t_data *her, t_lexer *le)
 			add_history(input);
 		g_var.fd_prog = my_fd();
 		base = lex(input, &tok, le);
+		t_token *t;
+
+		t = tok;
+		while (t)
+		{
+			printf("%s\n", t -> value);
+			t = t -> next;
+		}
 		if (!syntax_error(base, &tok) && tok != NULL)
 			pa_ex(tok, le, par, her);
 		else
