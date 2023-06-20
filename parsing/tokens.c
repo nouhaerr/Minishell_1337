@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 21:15:28 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/20 18:36:38 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/20 20:50:29 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,18 +93,7 @@ int	token_env2(char *input, int i, t_lexer *lexer)
 
 int	token_env(char *input, int i, t_lexer *lexer)
 {
-	char	*itoa;
-	char	*str_env;
-
-	if (input[i + 1] == '?')
-	{
-		itoa = ft_itoa(g_var.exit_status);
-		str_env = ft_strdup(itoa);
-		lexer->str = ft_strjoin(lexer->str, str_env);
-		free(itoa);
-		i += 2;
-	}
-	else if (ft_isdigit(input[i + 1]))
+	if (ft_isdigit(input[i + 1]))
 		i += 2;
 	else
 		i = token_env2(input, i, lexer);

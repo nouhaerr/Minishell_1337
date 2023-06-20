@@ -6,12 +6,35 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/20 19:29:00 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/20 21:26:02 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+void check_args(t_data *args, t_parser *parser)
+{
+	t_data *a;
+	int 	i;
+
+	a = args;
+	(void)parser;
+	
+	printf("%p\n", args);
+	while (a)
+	{
+		i = 0;
+		printf("%s\n", a -> value);
+		while (a -> value[i])
+		{
+			printf("imhier\n");
+			if (a -> value[i] == '$' && a -> value[i + 1] == '?')
+				printf("i == %d\n", i);
+			i++;
+		}
+		a = a -> next;
+	}
+}
 int	isbuiltin(t_parser *parser)
 {
 	char	*cmd2;
@@ -54,7 +77,10 @@ void	execution(t_parser *parser, t_data *my_heredoc)
 	pip.wr_end = 0;
 	if (!parser)
 		return ;
+	printf("addres %p\n", parser ->args);
 	exec_heredoc(parser);
+	check_args(parser -> args, parser);
+	printf("address 2 %p\n", parser->args);
 	if (parser->cmd && isbuiltin(parser) && parser->next == NULL)
 	{
 		g_var.parent_process = 1;

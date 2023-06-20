@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:45:51 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/19 16:56:55 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/20 20:54:35 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ t_parser	*ft_lstnew3(int index)
 	p -> cmd = NULL;
 	p -> outfiles = NULL;
 	p -> inf_her = NULL;
+	p-> args_exec = NULL;
 	p -> index = index;
 	return (p);
 }
