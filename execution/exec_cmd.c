@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/19 21:35:50 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/19 22:55:01 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ int	*dup_and_exec(t_parser *parse, t_pipe pip, char *msg)
 	fl = fd_redirection(parse);
 	if (!fl)
 		return (0);
-	// parse->fd[0] = 0;
 	if (!ft_strcmp(msg, "one"))
 	{
 		parse->fd[1] = 1;
+		// parse->fd[0] = 0;
 		if (fl[0] != -1)
 			parse->fd[0] = fl[0];
 		if (fl[1] != -1)
@@ -146,7 +146,7 @@ void	ft_execve(char *path, t_parser *node, char **env)
 {
 	if (execve(path, table_cmd(node), env) < 0)
 	{
-		g_var.exit_status = 127;
+		// g_var.exit_status = 127;
 		if (cmd_slash(node->cmd))
 			ft_err("minishell: ", node->cmd, ": No such file or directory");
 		else
@@ -169,7 +169,7 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 		if (isbuiltin(parse))
 		{
 			run_builtin(parse);
-			// update_fd(g_var.fd_prog);
+			update_fd(g_var.fd_prog);
 			exit(g_var.exit_status);
 		}
 		path = parse->cmd;

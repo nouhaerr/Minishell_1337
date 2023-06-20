@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 11:18:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/16 18:05:18 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/19 22:28:28 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ void	sh_echo(t_parser **echo)
 
 	i = 0;
 	tmp = *echo;
-	g_var.exit_status = 0;
 	if (!tmp->args)
 		printf("\n");
 	else if (tmp->args->value[0] == '-')
 		check_n(tmp->args);
 	else
 		print_av(tmp->args, 1);
+	g_var.exit_status = 0;
 }
