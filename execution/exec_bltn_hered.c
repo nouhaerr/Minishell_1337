@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_bltn_hered.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/20 19:47:41 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/20 20:56:13 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void  exec_heredoc(t_parser *parser)
 				pid =  fork();
 				if (pid == 0)
 				{
-					check_signal_heredoc();
+					// check_signal_heredoc();
 					her(my_heredoc, g_var.list, pipefd);
 					exit (0);
 				}
