@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/20 18:36:01 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/20 19:26:34 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	*dup_and_exec(t_parser *parse, t_pipe pip, char *msg)
 	if (!ft_strcmp(msg, "one"))
 	{
 		parse->fd[1] = 1;
-		// parse->fd[0] = 0;
+		parse->fd[0] = 0;
 		if (fl[0] != -1)
 			parse->fd[0] = fl[0];
 		if (fl[1] != -1)

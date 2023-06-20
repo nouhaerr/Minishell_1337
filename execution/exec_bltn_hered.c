@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_bltn_hered.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/20 18:39:12 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/20 19:47:41 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void  exec_heredoc(t_parser *parser)
 	{
 		while (inf_her)
 		{
+			printf("->>>>>DJHJDJKDDKJDim hierrrr\n");
 			my_heredoc = NULL;
 			check_my_heredoc(inf_her, &my_heredoc);
 			if (my_heredoc != NULL)
@@ -47,7 +48,7 @@ void  exec_heredoc(t_parser *parser)
 				pid =  fork();
 				if (pid == 0)
 				{
-					// check_signal_heredoc();
+					check_signal_heredoc();
 					her(my_heredoc, g_var.list, pipefd);
 					exit (0);
 				}
@@ -55,6 +56,7 @@ void  exec_heredoc(t_parser *parser)
 				if (status == 256)
 					g_var.exit_status = 1;
 				p->fd[0] = pipefd[0];
+				close(pipefd[1]);
 			}
 			if (my_heredoc != NULL)
 				inf_her = my_heredoc -> next;
@@ -63,7 +65,7 @@ void  exec_heredoc(t_parser *parser)
 		}
 		p = p->next;
 	}
-	close(pipefd[1]);
+	
 }
 
 void	run_builtin(t_parser *parser)
