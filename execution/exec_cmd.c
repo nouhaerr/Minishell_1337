@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/20 19:26:34 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/21 00:08:21 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,8 +144,12 @@ char	**create_env_arr(int size)
 
 void	ft_execve(char *path, t_parser *node, char **env)
 {
-	if (execve(path, table_cmd(node), env) < 0)
+	char	**arr;
+
+	arr = table_cmd(node);
+	if (execve(path, arr, env) < 0)
 	{
+		free(env);
 		// g_var.exit_status = 127;
 		if (cmd_slash(node->cmd))
 			ft_err("minishell: ", node->cmd, ": No such file or directory");
@@ -153,13 +157,13 @@ void	ft_execve(char *path, t_parser *node, char **env)
 			ft_err("minishell: ", node->cmd, ": command not found");
 		exit(g_var.exit_status);
 	}
+	free(env);
 }
 
 int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 {
 	pid_t	pid;
 	char	*path;
-	char	**env;
 
 	pid = fork();
 	ft_check(pid);
@@ -172,13 +176,15 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 			update_fd(g_var.fd_prog);
 			exit(g_var.exit_status);
 		}
+		if (!parse->cmd && g_var.redir == 1)
+			exit(0);
 		path = parse->cmd;
 		if (!cmd_slash(parse->cmd))
 			path = get_path(parse->cmd);
 		if (!path)
 			ft_err("minishell: ", parse->cmd, ": command not found");
-		env = create_env_arr(env_list_size(g_var.list));
-		ft_execve(path, parse, env);
+		// printf("\n\n");
+		ft_execve(path, parse, create_env_arr(env_list_size(g_var.list)));
 	}
 	return (pid);
 }

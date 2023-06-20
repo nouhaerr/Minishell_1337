@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/20 21:26:02 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/20 22:33:41 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ void check_args(t_data *args, t_parser *parser)
 	a = args;
 	(void)parser;
 	
-	printf("%p\n", args);
+	//printf("%p\n", args);
 	while (a)
 	{
 		i = 0;
-		printf("%s\n", a -> value);
+		// printf("%s\n", a -> value);
 		while (a -> value[i])
 		{
-			printf("imhier\n");
-			if (a -> value[i] == '$' && a -> value[i + 1] == '?')
-				printf("i == %d\n", i);
+			//printf("imhier\n");
+			// if (a -> value[i] == '$' && a -> value[i + 1] == '?')
+			// 	printf("i == %d\n", i);
 			i++;
 		}
 		a = a -> next;
@@ -77,10 +77,10 @@ void	execution(t_parser *parser, t_data *my_heredoc)
 	pip.wr_end = 0;
 	if (!parser)
 		return ;
-	printf("addres %p\n", parser ->args);
+	// printf("addres %p\n", parser ->args);
 	exec_heredoc(parser);
 	check_args(parser -> args, parser);
-	printf("address 2 %p\n", parser->args);
+	// printf("address 2 %p\n", parser->args);
 	if (parser->cmd && isbuiltin(parser) && parser->next == NULL)
 	{
 		g_var.parent_process = 1;
@@ -90,9 +90,7 @@ void	execution(t_parser *parser, t_data *my_heredoc)
 	{
 		g_var.parent_process = 0;
 		if (parser->cmd && parser->next == NULL)
-		{
 			pid = exec_cmd(parser, pip, "one");
-		}
 		else
 			pid = multiple_pipes(parser);
 		while (1)

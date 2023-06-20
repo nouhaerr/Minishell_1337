@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:53:18 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/19 19:08:12 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/20 22:41:47 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_glb
 	int		signal_heredoc;
 	bool	parent_process;
 	int		*fd_prog;
+	bool	redir;
 }	t_glb;
 
 t_glb	g_var;

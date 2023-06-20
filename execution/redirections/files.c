@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:50:10 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/20 19:22:41 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/20 22:42:45 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	*fd_redirection(t_parser *node)
 	tmp2 = node->inf_her;
 	while (tmp2)
 	{
+		g_var.redir = 1;
 		close(fd[0]);
 		if (tmp2->type == infile)
 			fd[0] = ft_open(tmp2->value, "infile");
@@ -59,6 +60,7 @@ int	*fd_redirection(t_parser *node)
 	}
 	while (tmp1)
 	{
+		g_var.redir = 1;
 		close(fd[1]);
 		if (tmp1->type == append)
 			fd[1] = ft_open(tmp1->value, "saved_file");
