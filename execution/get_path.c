@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 05:37:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/19 21:35:54 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/20 18:10:43 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,13 @@ char	**table_cmd(t_parser *node)
 	}
 	s1 = ft_split(str, ' ');
 	free(str);
+	int i;
+	i = 0;
+	while (s1[i])
+	{
+		printf("->>> %s\n", s1[i]);
+		i++;
+	}
 	return (s1);
 }
 

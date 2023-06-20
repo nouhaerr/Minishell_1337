@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/20 18:26:08 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/20 18:35:49 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	execution(t_parser *parser, t_data *my_heredoc)
 	pip.wr_end = 0;
 	if (!parser)
 		return ;
-	exec_heredoc(parser, &my_heredoc);
+	exec_heredoc(parser);
 	if (parser->cmd && isbuiltin(parser) && parser->next == NULL)
 	{
 		g_var.parent_process = 1;
@@ -68,8 +68,9 @@ void	execution(t_parser *parser, t_data *my_heredoc)
 		else
 			pid = multiple_pipes(parser);
 		while (1)
-		{	
+		{	printf("%d===IM THE ONEEEE\n", getpid());
 			wait_pid = waitpid(-1, &status, 0); // If pid is -1, the call waits for any child process.
+			printf("->>> imhier\n");
 			if (wait_pid == -1) // If there are no children not previously awaited, -1 is returned with errno set to [ECHILD].
 				break ;
 			if (wait_pid == pid) // last child pid

@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:53:39 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/19 14:23:37 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/20 17:53:06 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_pipe
 // those functions are related to execution.
 void	her(t_data2 *heredoc, t_env *my_env, int *pipefd);
 void	run_builtin(t_parser *parser);
-void	exec_heredoc(t_parser *parser, t_data **my_heredoc);
+void	exec_heredoc(t_parser *parser);
 void	execution(t_parser *parser, t_data *my_heredoc);
 int		multiple_pipes(t_parser *node);
 int		exec_cmd(t_parser *parser, t_pipe pip, char *msg);

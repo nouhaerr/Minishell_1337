@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 21:15:28 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/19 22:30:06 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/20 18:36:38 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ int	token_env2(char *input, int i, t_lexer *lexer)
 		{
 			env = ft_substr(input, i + 1, len);
 			str_env = check_env(env, g_var.list);
-			// if (str_env == NULL)
-			// 	printf("imhier\n");
 			free(env);
 		}
 		if (len == 0)
