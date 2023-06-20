@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:54:36 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/19 17:39:18 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/20 20:53:32 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct t_parser
 {
 	char			*cmd;
 	t_data			*args;
+	t_data			*args_exec;
 	t_data2			*outfiles;
 	int				index;
 	int				fd[2];

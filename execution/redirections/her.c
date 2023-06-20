@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:46:12 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/20 22:11:57 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/20 22:30:59 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	her(t_data2 *my_heredoc, t_env *my_env, int *pipefd)
 	int		i;
 
 	str = NULL;
-	(void)pipefd;
+	close(pipefd[0]);
 	input = readline("> ");
 	while (input != NULL && ft_strcmp(input, my_heredoc -> value))
 	{
@@ -105,6 +105,6 @@ void	her(t_data2 *my_heredoc, t_env *my_env, int *pipefd)
 			free(input);
 		input = readline("> ");
 	}
-	close(pipefd[0]);
 	write (pipefd[1], str, ft_strlen(str));
+	close(pipefd[1]);
 }
