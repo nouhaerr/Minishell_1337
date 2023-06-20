@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/20 18:43:00 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/20 19:29:00 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,9 @@ void	execution(t_parser *parser, t_data *my_heredoc)
 	{
 		g_var.parent_process = 0;
 		if (parser->cmd && parser->next == NULL)
+		{
 			pid = exec_cmd(parser, pip, "one");
+		}
 		else
 			pid = multiple_pipes(parser);
 		while (1)
