@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 21:15:28 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/20 20:50:29 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/21 21:35:41 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,16 @@ int	token_env2(char *input, int i, t_lexer *lexer)
 
 int	token_env(char *input, int i, t_lexer *lexer)
 {
-	if (ft_isdigit(input[i + 1]))
+	
+	if (input[i + 1] == '?')
+	{
+		if (lexer -> base != 0)
+			lexer->str = ft_strjoin(lexer->str, ft_strdup("$?"));
+		else
+			lexer->str = ft_strjoin(lexer->str, ft_strdup("$0"));
+		i += 2;
+	}
+	else if (ft_isdigit(input[i + 1]))
 		i += 2;
 	else
 		i = token_env2(input, i, lexer);

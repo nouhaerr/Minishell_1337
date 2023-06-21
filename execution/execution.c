@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/21 19:49:50 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/21 21:36:12 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void check_args(t_parser *parser)
 	t_parser *p;
 	char	*str;
 	int 	i;
+	int		c;
 	int		j;
 
 	p = parser;
@@ -59,23 +60,16 @@ void check_args(t_parser *parser)
 		{
 			i = 0;
 			j = i;
-			printf("->>> %s\n" ,a -> value);
+			c = 0;
 			while (a -> value[i])
 			{
-				if (a -> value[0] == '\0')
-					str = ft_strdup("\0");
-				if (a -> value[i] == '$' && a -> value[i + 1] == '?')
+				if (a -> value[i] == '$' && a -> value[i + 1] == '0')
 				{
 					str = ft_strjoin (str, ft_substr(a -> value, j, i));
-					if (parser -> index == 0)
+					if (p -> index == 0)
 						str = ft_strjoin (str, ft_itoa(g_var.exit_status));
-					else
+					else 
 						str = ft_strjoin (str, (ft_strdup("0")));
-					i += 2;
-					j = i;
-				}
-				else if (a -> value[i] == '$' && a -> value[i + 1] == '$')
-				{
 					i += 2;
 					j = i;
 				}
@@ -84,7 +78,7 @@ void check_args(t_parser *parser)
 			}
 			if (j != i)
 				str = ft_strjoin (str, ft_substr(a -> value, j, i));
-			if (a -> value[0] == '\0')
+			if (a -> value[0] == '\0' || a -> value[0] == ' ')
 				ft_lstaddback2(&(p->args_exec), ft_lstnew2(ft_strdup ("\0")));
 			else
 				ft_lstaddback2(&(p->args_exec), ft_lstnew2(str));
@@ -117,7 +111,6 @@ void	execution(t_parser *parser, t_data *my_heredoc)
 	pip.wr_end = 0;
 	if (!parser)
 		return ;
-	
 	check_args(parser);
 	exec_heredoc(parser);
 	if (parser->cmd && isbuiltin(parser) && parser->next == NULL)
