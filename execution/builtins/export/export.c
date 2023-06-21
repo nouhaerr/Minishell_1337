@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 03:26:24 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/21 21:43:24 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/21 22:11:39 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,34 @@ void	print_env(char **e)
 	int	i;
 	int	l;
 
-	i = 0;
-	while(e[i][l] != '=')
-		l++;
-	if (!e[i][l])
-		printf("declare -x %s\n", e[i]);
-	else
+	i = -1;
+	while (e[++i])
 	{
+		l = 0;
 		while(e[i][l] != '=')
-		{
-			printf("declare -x %c=", e[i][l]);
 			l++;
-		}	
-		print("\"%s\"", e[i][l]);
+		if (!e[i][l])
+			printf("declare -x %s\n", e[i]);
+		else
+		{
+			l = -1;
+			printf("declare -x ");
+			while(e[i][++l] != '=')
+				printf("%c", e[i][l]);
+			printf("=\"");
+			while (e[i][l + 1])
+			{
+				printf("%c", e[i][l + 1]);
+				l++;
+			}
+			printf("\"\n");
+		}
 	}
 }
 
 void	sorted_env(void)
 {
 	char	**env;
-	char	*en2;
 	char	*tmp;
 	int		j;
 	int		c;
@@ -44,8 +52,11 @@ void	sorted_env(void)
 	int		i;
 
 	i = 0;
+	c = 0;
 	k = 0;
 	env = create_env_arr(env_list_size(g_var.list));
+	if (!env)
+		return ;
 	while (env[i])
 	{
 		c++;
@@ -66,6 +77,7 @@ void	sorted_env(void)
 		}
 		k++;
 	}
+	printf("%s\n", env[0]);
 	print_env(env);
 }
 
