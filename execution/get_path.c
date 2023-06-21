@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 05:37:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/21 00:08:15 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/21 00:28:46 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ char	**table_cmd(t_parser *node)
 
 	str = NULL;
 	cur = node -> args;
+	printf("%s\n", node->cmd);
 	// if (node->args)
 	// 	printf("%s\n", node->args->value);
 	str = ft_strjoin2(node -> cmd, " ");
@@ -74,7 +75,7 @@ char	*get_path(char *cmd)
 	while (full_path[++i])
 	{
 		path = ft_strjoin2(full_path[i], cmd_file);
-		// printf("%s\n", path);
+		printf("%s\n", path);
 		if (!access(path, F_OK | X_OK))
 			return (ft_free(full_path), free(cmd_file), path);
 		free(path);
