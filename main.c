@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/21 21:02:30 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/21 21:45:26 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	syntax_error(int base, t_token **tokens)
 			if (t2 != NULL && t2 -> arten == env_general
 					&& (t2 ->next != NULL && t2-> next-> arten == env_general))
 					return (printf("ambigiuos redirect\n"), 1);
-			if (!ft_strcmp(t2 -> value, "$$"))
+			if (!ft_strcmp(t2 -> value, " "))
 				return (printf("ambigiuos redirect\n"), 1);
 		}
 		if ((tokens2 -> type == the_pipe

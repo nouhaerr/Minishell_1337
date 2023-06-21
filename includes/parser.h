@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:54:36 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/21 18:59:47 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/21 21:20:08 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ enum
 	trunc,
 	append,
 	infile,
+
 };
 typedef struct t_data
 {
