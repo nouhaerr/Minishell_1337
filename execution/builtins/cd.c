@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 11:16:58 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/16 18:04:05 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/21 19:15:47 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ void	sh_cd(t_parser *env_cmd)
 	env_pwd = ft_getenv(g_var.list, "PWD");
 	if (env_pwd)
 		pwd = &(env_pwd->value);
-	if (!env_cmd->args || !ft_strcmp(env_cmd->args->value, "--")
-		|| !ft_strcmp(env_cmd->args->value, "~"))
+	if (!env_cmd->args_exec || !ft_strcmp(env_cmd->args_exec->value, "--")
+		|| !ft_strcmp(env_cmd->args_exec->value, "~"))
 		cd_home(pwd_home, pwd, oldpwd, getcwd(NULL, 0));
-	else if (env_cmd->args)
+	else if (env_cmd->args_exec)
 	{
-		if (ft_strcmp(env_cmd->args->value, "-") == 0)
+		if (ft_strcmp(env_cmd->args_exec->value, "-") == 0)
 			cd_oldpwd(oldpwd, pwd);
 		else
-			cd_newpwd(env_cmd->args, oldpwd, pwd);
+			cd_newpwd(env_cmd->args_exec, oldpwd, pwd);
 	}
 }

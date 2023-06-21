@@ -6,36 +6,55 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 03:26:24 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/20 22:15:48 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/21 19:16:35 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-void	sorted_env(void)
+void	print_env()
 {
 	t_env	*cur;
-	char	*str;
-	int		i;
 
-	i = 0;
-	str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz";
-	while (str[i])
+	cur = g_var.list;
+	while (cur)
 	{
-		cur = g_var.list;
-		while (cur)
-		{
-			if (cur->env[0] == str[i])
-			{
-				if (!cur->value)
-					printf("declare -x %s\n", cur->env);
-				else
-					printf("declare -x %s=\"%s\"\n", cur->env, cur->value);
-			}
-			cur = cur->next;
-		}
-		i++;
-	}	
+		if (!cur->value)
+			printf("declare -x %s\n", cur->env);
+		else
+			printf("declare -x %s=\"%s\"\n", cur->env, cur->value);
+		cur = cur->next;
+	}
+}
+
+void	sorted_env(void)
+{
+	// char	**env;
+	// char	*en2;
+	// char	*tmp;
+	// int		j;
+	// int		l;
+	// int		k;
+	// int		i;
+
+	// i = 0;
+	// env = create_env_arr(env_list_size(g_var.list));
+	// // while (env[i])
+	// // {
+	// // 	j = i + 1;
+	// // 	while (env[i][l] != '=')
+	// // 		l++;
+	// // 	while (env[j])
+	// // 	{
+	// // 		k = 0;
+	// // 		while (env[j][k] != '=')
+	// // 			k++;
+	// // 		if (ft_strcmp(env[i]))
+	// // 		j++;
+	// // 	}
+	// // 	e = e->next;
+	// // }
+	print_env();
 }
 
 t_env	*subargs_to_env_node(t_data *arg)
@@ -95,17 +114,17 @@ void	sh_export(t_parser *parser)
 {
 	t_data	*tmp;
 
-	tmp = parser->args;
-	if (!parser->args)
+	tmp = parser->args_exec;
+	if (!parser->args_exec)
 	{		
 		g_var.exit_status = 0;
 		sorted_env();
 	}
-	if (parser->args && parser->args->value[0] == '-' && parser->args->value[1])
+	if (parser->args_exec && parser->args_exec->value[0] == '-' && parser->args_exec->value[1])
 	{
 		g_var.exit_status = 2;
 		printf("minishell: export: %c%c: invalid option\n",
-			parser->args->value[0], parser->args->value[1]);
+			parser->args_exec->value[0], parser->args_exec->value[1]);
 		printf("export: usage: export [-fn] [name[=value] ...] or export -p\n");
 	}
 	else

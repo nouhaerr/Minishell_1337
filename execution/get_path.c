@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 05:37:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/21 19:47:15 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/21 19:50:10 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	**table_cmd(t_parser *node)
 
 	str = NULL;
 	cur = node -> args;
+	// if (node->args)
+	// 	printf("%s\n", node->args->value);
 	str = ft_strjoin2(node -> cmd, " ");
 	while (cur)
 	{
@@ -82,7 +84,7 @@ char	*get_path(char *cmd)
 	while (full_path[++i])
 	{
 		path = ft_strjoin2(full_path[i], cmd_file);
-		// printf("%s\n", path);
+		// printf("%s\n", path);``
 		if (!access(path, F_OK | X_OK))
 			return (ft_free(full_path), free(cmd_file), path);
 		free(path);

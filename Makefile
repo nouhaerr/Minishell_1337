@@ -6,7 +6,7 @@
 #    By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 02:49:56 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/06/21 19:06:28 by hobenaba         ###   ########.fr        #
+#    Updated: 2023/06/21 19:48:18 by hobenaba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,6 @@ SRCS =	main.c $(addprefix ./parsing/, $(PARSING)) $(addprefix ./execution/, $(EX
 		$(addprefix ./execution/builtins/, $(EXECUTION_BU)) signal.c 
 		
 OBJS = $(SRCS:.c=.o)
-
 LIBFT= libft.a
 LIBFT_DIR= libft/
 NAME = minishell
