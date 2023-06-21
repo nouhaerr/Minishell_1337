@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/21 21:02:58 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/22 00:12:45 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ void check_my_heredoc(t_data2 *inf_her, t_data2 **my_heredoc)
 }
 void  exec_heredoc(t_parser *parser)
 {
-	int		pid;
-	int		status;
-	t_data2	*my_heredoc;
-	int		pipefd[2];
-	t_parser *p;
-	t_data2	*inf_her;
+	int			pid;
+	int			status;
+	t_data2		*my_heredoc;
+	int			pipefd[2];
+	t_parser	*p;
+	t_data2		*inf_her;
 	
 	p = parser;
 	inf_her = p -> inf_her;
@@ -44,7 +44,7 @@ void  exec_heredoc(t_parser *parser)
 			if (my_heredoc != NULL)
 			{
 				pipe(pipefd);
-				pid =  fork();
+				pid = fork();
 				if (pid == 0)
 				{
 					// check_signal_heredoc();

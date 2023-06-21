@@ -3,19 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/21 19:48:49 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/22 00:51:15 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_check_fork(int p)
+int	ft_check_fork(int p)
 {
 	if (p == -1)
-		perror(0);
+	{
+		perror("minishell");
+		return (1);
+	}
+	return (0);
 }
 
 void	ft_check(int p)
@@ -41,14 +45,6 @@ int	cmd_slash(char *cmd)
 		i++;
 	}
 	return (0);
-}
-
-void	ft_err(char *s, char *cmd, char *s2)
-{
-	ft_putstr_fd(s, STDERR_FILENO);
-	ft_putstr_fd(cmd, STDERR_FILENO);
-	ft_putendl_fd(s2, STDERR_FILENO);
-	exit(127);
 }
 
 int	*dup_and_exec(t_parser *parse, t_pipe pip, char *msg)
@@ -110,56 +106,16 @@ int	*dup_and_exec(t_parser *parse, t_pipe pip, char *msg)
 	return (fl);
 }
 
-void	ft_free(char **str)
-{
-	int	i;
-
-	i = -1;
-	while (str[++i])
-		free(str[i]);
-	free(str);
-}
-
-char	**create_env_arr(int size)
-{
-	char	**arr;
-	char	*add;
-	t_env	*en;
-	int		i;
-
-	en = g_var.list;
-	i = 0;
-	arr = (char **)malloc((size + 1) * sizeof(char *));
-	if (!arr)
-		return (printf("minishell: Memory allocation failed\n"), NULL);
-	while (en)
-	{
-		add = ft_strjoin2(en->env, "=");
-		if (!add)
-			return (printf("minishell: Memory allocation failed\n"), ft_free(arr), NULL);
-		arr[i] = ft_strjoin2(add, en->value);
-		if (!arr[i])
-			return (printf("minishell: Memory allocation failed\n"), ft_free(arr), free(add), NULL);
-		free(add);
-		en = en->next;
-		i++;
-	}
-	arr[i] = NULL;
-	return (arr);
-}
-
 void	ft_execve(char *path, t_parser *node, char **env)
 {
 	char	**arr;
 
 	arr = table_cmd(node);
-	*arr = path;
-	// printf("asdfadsfads %s\n", *arr);
-	if (execve(path, arr, env) < 0 && access(path, X_OK | F_OK))
+	//printf("HERE %s\n", *arr);// && access(path, X_OK | F_OK)
+	if (execve(path, arr, env) < 0)
 	{
 		free(env);
 		// printf("ok\n");
-		// g_var.exit_status = 127;
 		if (cmd_slash(node->cmd))
 			ft_err("minishell: ", node->cmd, ": No such file or directory");
 		else
@@ -167,7 +123,6 @@ void	ft_execve(char *path, t_parser *node, char **env)
 		exit(g_var.exit_status);
 	}
 	free(env);
-	exit(g_var.exit_status);
 }
 
 int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
@@ -176,7 +131,8 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 	char	*path;
 
 	pid = fork();
-	ft_check_fork(pid);
+	if (ft_check_fork(pid))
+		return (pid);
 	if (pid == 0)
 	{
 		dup_and_exec(parse, pip, msg);
