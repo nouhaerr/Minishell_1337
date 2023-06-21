@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:14:51 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/20 21:01:45 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/21 19:02:28 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,17 @@ void	create_node(t_parser *parser, t_lexer *lexer)
 		ft_lstaddback4(&(parser->outfiles),
 			ft_lstnew4(lexer -> tok -> value, append));
 	else if (lexer->tokens2->type == heredoc && lexer->tok ->arten == general)
+	{
+		parser ->nu_here++;
 		ft_lstaddback4(&(parser->inf_her),
 			ft_lstnew4(lexer -> tok -> value, expand));
+	}
 	else if (lexer->tokens2->type == heredoc && lexer->tok ->arten == quotes)
+	{
+		parser ->nu_here++;
 		ft_lstaddback4(&(parser->inf_her),
 			ft_lstnew4(lexer -> tok -> value, not_expand));
+	}
 }
 
 t_parser	*build_list_parser(t_parser **parser, t_lexer *lexer, t_parser *t)

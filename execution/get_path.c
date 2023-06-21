@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 05:37:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/21 19:19:16 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/21 19:50:10 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,27 @@ char	**table_cmd(t_parser *node)
 	t_data	*cur;
 
 	str = NULL;
-	cur = node -> args_exec;
-	// printf("%s\n", node->cmd);
+	cur = node -> args;
 	// if (node->args)
 	// 	printf("%s\n", node->args->value);
 	str = ft_strjoin2(node -> cmd, " ");
 	while (cur)
 	{
+		if (cur -> value[0] == '\0')
+			str = ft_strjoin2(str, "/"); // how should it behave in hier normally
 		str = ft_strjoin2(str, cur -> value);
 		str = ft_strjoin2(str, " ");
 		cur = cur -> next;
 	}
 	s1 = ft_split(str, ' ');
+	int i;
+	
+	i = 0;
+	while (s1[i])
+	{
+		printf("[%s]\n", s1[i]);
+		i++;
+	}
 	free(str);
 	return (s1);
 }
