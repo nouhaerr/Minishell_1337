@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:53:39 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/20 17:53:06 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/21 18:39:17 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct s_pipe
 }	t_pipe;
 
 // those functions are related to execution.
-void	her(t_data2 *heredoc, t_env *my_env, int *pipefd);
+void	her(t_data2 *my_heredoc, int index, int *pipefd);
 void	run_builtin(t_parser *parser);
 void	exec_heredoc(t_parser *parser);
 void	execution(t_parser *parser, t_data *my_heredoc);
@@ -36,5 +36,4 @@ char	**table_cmd(t_parser *node);
 void	ft_free(char **str);
 void	ft_err(char *s, char *cmd, char *s2);
 void	update_fd(int *my_fd);
-
 #endif
