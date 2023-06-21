@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   her.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:46:12 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/20 22:30:59 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/21 18:40:28 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	env_expansion_for_my_heredoc2(char *input, int i, t_env *my_env, char **str)
+int	env_expansion_for_my_heredoc2(char *input, int i, char **str)
 {
 	int		len;
 	char	*env;
@@ -22,14 +22,14 @@ int	env_expansion_for_my_heredoc2(char *input, int i, t_env *my_env, char **str)
 	if (len != 0)
 	{
 		env = ft_substr(input, i + 1, len);
-		str_env = check_env(env, my_env);
+		str_env = check_env(env, g_var.list);
 		*str = ft_strjoin(*str, str_env);
 		free(env);
 	}
 	return (i + len);
 }
 
-int	env_expansion_for_my_heredoc(char *input, int i, t_env *my_env, char **str)
+int	env_expansion_for_my_heredoc(char *input, int i, int index, char **str)
 {
 	char	*itoa;
 	char	*str_env;
@@ -37,13 +37,16 @@ int	env_expansion_for_my_heredoc(char *input, int i, t_env *my_env, char **str)
 	if (input[i + 1] == '?')
 	{
 		itoa = ft_itoa(g_var.exit_status);
-		str_env = ft_strdup(itoa);
+		if (index == 0)
+			str_env = ft_strdup(itoa);
+		else
+			str_env = ft_strdup ("0");
 		*str = ft_strjoin(*str, str_env);
 		free(itoa);
 		i++;
 	}
 	else
-		i = env_expansion_for_my_heredoc2(input, i, my_env, str);
+		i = env_expansion_for_my_heredoc2(input, i,  str);
 	return (i + 1);
 }
 
@@ -60,7 +63,7 @@ int	my_word(char *input, int start)
 	return (j);
 }
 
-void	expansion_my_heredoc(char *input, int i, char **str, t_env *my_env)
+void	expansion_my_heredoc(char *input, int i, char **str, int index)
 {
 	int	len ;
 	char *s1;
@@ -69,7 +72,7 @@ void	expansion_my_heredoc(char *input, int i, char **str, t_env *my_env)
 	while (input[i])
 	{
 		if (input[i] == '$')
-			i = env_expansion_for_my_heredoc(input, i, my_env, str);
+			i = env_expansion_for_my_heredoc(input, i, index, str);
 		else
 		{
 			len = my_word(input, i);
@@ -82,7 +85,7 @@ void	expansion_my_heredoc(char *input, int i, char **str, t_env *my_env)
 	free(input);
 }
 
-void	her(t_data2 *my_heredoc, t_env *my_env, int *pipefd)
+void	her(t_data2 *my_heredoc, int index, int *pipefd)
 {
 	char	*input;
 	char	*str;
@@ -97,7 +100,7 @@ void	her(t_data2 *my_heredoc, t_env *my_env, int *pipefd)
 		if (my_heredoc != NULL && my_heredoc -> next == NULL)
 		{
 			if (my_heredoc -> type == expand)
-				expansion_my_heredoc(input, i, &str, my_env);
+				expansion_my_heredoc(input, i, &str, index);
 			else if (my_heredoc -> type == not_expand)
 				str = ft_strjoin(str, ft_strjoin(input, ft_strdup("\n")));
 		}

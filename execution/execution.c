@@ -3,38 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/20 22:33:41 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/21 18:29:54 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void check_args(t_data *args, t_parser *parser)
-{
-	t_data *a;
-	int 	i;
-
-	a = args;
-	(void)parser;
-	
-	//printf("%p\n", args);
-	while (a)
-	{
-		i = 0;
-		// printf("%s\n", a -> value);
-		while (a -> value[i])
-		{
-			//printf("imhier\n");
-			// if (a -> value[i] == '$' && a -> value[i + 1] == '?')
-			// 	printf("i == %d\n", i);
-			i++;
-		}
-		a = a -> next;
-	}
-}
 int	isbuiltin(t_parser *parser)
 {
 	char	*cmd2;
@@ -65,6 +42,53 @@ int	exit_status(int status)
 	return (0);
 }
 
+void check_args(t_parser *parser)
+{
+	t_data *a;
+	t_parser *p;
+	char	*str;
+	int 	i;
+	int		j;
+
+	p = parser;
+	str = NULL;
+	while (p)
+	{
+		a = p -> args;
+		while (a)
+		{
+			i = 0;
+			j = i;
+			printf("->>> %s\n" ,a -> value);
+			while (a -> value[i])
+			{
+				if (a -> value[i] == '$' && a -> value[i + 1] == '?')
+				{
+					str = ft_strjoin (str, ft_substr(a -> value, j, i));
+					if (parser -> index == 0)
+						str = ft_strjoin (str, ft_itoa(g_var.exit_status));
+					else
+						str = ft_strjoin (str, (ft_strdup("0")));
+					i += 2;
+					j = i;
+				}
+				else if (a -> value[i] == '$' && a -> value[i + 1] == '$')
+				{
+					i += 2;
+					j = i;
+				}
+				i++;
+			}
+			if (j != i)
+				str = ft_strjoin (str, ft_substr(a -> value, j, i));
+			ft_lstaddback2(&(p->args_exec), ft_lstnew2(str));
+			a = a -> next;
+			str = NULL;
+		}
+		p = p -> next;
+	}
+}
+
 void	execution(t_parser *parser, t_data *my_heredoc)
 {
 	int		pid;
@@ -77,17 +101,16 @@ void	execution(t_parser *parser, t_data *my_heredoc)
 	pip.wr_end = 0;
 	if (!parser)
 		return ;
-	// printf("addres %p\n", parser ->args);
+	
+	check_args(parser);
 	exec_heredoc(parser);
-	check_args(parser -> args, parser);
-	// printf("address 2 %p\n", parser->args);
 	if (parser->cmd && isbuiltin(parser) && parser->next == NULL)
 	{
 		g_var.parent_process = 1;
 		builtin_executor(parser, pip, "one");
 	}
 	else
-	{
+	{   
 		g_var.parent_process = 0;
 		if (parser->cmd && parser->next == NULL)
 			pid = exec_cmd(parser, pip, "one");
