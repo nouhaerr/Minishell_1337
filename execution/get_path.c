@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 05:37:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/21 19:50:10 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/21 21:12:10 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	**table_cmd(t_parser *node)
 	while (cur)
 	{
 		if (cur -> value[0] == '\0')
-			str = ft_strjoin2(str, "/"); // how should it behave in hier normally
+			str = ft_strjoin2(str, "/"); // how should it behave in hier normally WA HERE mashi hier
 		str = ft_strjoin2(str, cur -> value);
 		str = ft_strjoin2(str, " ");
 		cur = cur -> next;
@@ -57,10 +57,7 @@ char	**real_path(void)
 		if (!ft_strncmp(cur->env, "PATH", 4))
 		{
 			if (cur->value[0] == ':')
-			{
 				cur->value = ft_strjoin2(".", cur->value);
-			}
-			// printf("%s\n", cur->value);
 			p = ft_split(cur->value, ':');
 			return (p);
 		}
@@ -84,7 +81,6 @@ char	*get_path(char *cmd)
 	while (full_path[++i])
 	{
 		path = ft_strjoin2(full_path[i], cmd_file);
-		// printf("%s\n", path);``
 		if (!access(path, F_OK | X_OK))
 			return (ft_free(full_path), free(cmd_file), path);
 		free(path);

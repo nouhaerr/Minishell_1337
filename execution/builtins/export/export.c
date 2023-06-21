@@ -6,55 +6,67 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 03:26:24 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/21 19:16:35 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/21 21:43:24 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-void	print_env()
+void	print_env(char **e)
 {
-	t_env	*cur;
+	int	i;
+	int	l;
 
-	cur = g_var.list;
-	while (cur)
+	i = 0;
+	while(e[i][l] != '=')
+		l++;
+	if (!e[i][l])
+		printf("declare -x %s\n", e[i]);
+	else
 	{
-		if (!cur->value)
-			printf("declare -x %s\n", cur->env);
-		else
-			printf("declare -x %s=\"%s\"\n", cur->env, cur->value);
-		cur = cur->next;
+		while(e[i][l] != '=')
+		{
+			printf("declare -x %c=", e[i][l]);
+			l++;
+		}	
+		print("\"%s\"", e[i][l]);
 	}
 }
 
 void	sorted_env(void)
 {
-	// char	**env;
-	// char	*en2;
-	// char	*tmp;
-	// int		j;
-	// int		l;
-	// int		k;
-	// int		i;
+	char	**env;
+	char	*en2;
+	char	*tmp;
+	int		j;
+	int		c;
+	int		k;
+	int		i;
 
-	// i = 0;
-	// env = create_env_arr(env_list_size(g_var.list));
-	// // while (env[i])
-	// // {
-	// // 	j = i + 1;
-	// // 	while (env[i][l] != '=')
-	// // 		l++;
-	// // 	while (env[j])
-	// // 	{
-	// // 		k = 0;
-	// // 		while (env[j][k] != '=')
-	// // 			k++;
-	// // 		if (ft_strcmp(env[i]))
-	// // 		j++;
-	// // 	}
-	// // 	e = e->next;
-	// // }
-	print_env();
+	i = 0;
+	k = 0;
+	env = create_env_arr(env_list_size(g_var.list));
+	while (env[i])
+	{
+		c++;
+		i++;
+	}
+	while (k < c - 1)
+	{
+		j = 0;
+		while (j < c - k -1)
+		{
+			if (ft_strcmp(env[j], env[j + 1]) > 0)
+			{
+				tmp = env[j];
+				env[j] = env[j + 1];
+				env[j + 1] = tmp;
+			}
+			j++;
+		}
+		k++;
+	}
+	print_env(env);
 }
 
 t_env	*subargs_to_env_node(t_data *arg)
