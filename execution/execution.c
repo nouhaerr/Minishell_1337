@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/20 21:26:02 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/21 17:39:03 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ void	execution(t_parser *parser, t_data *my_heredoc)
 	if (!parser)
 		return ;
 	printf("addres %p\n", parser ->args);
-	exec_heredoc(parser);
 	check_args(parser -> args, parser);
+	exec_heredoc(parser);
 	printf("address 2 %p\n", parser->args);
 	if (parser->cmd && isbuiltin(parser) && parser->next == NULL)
 	{
