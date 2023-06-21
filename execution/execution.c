@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/21 18:29:54 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/21 19:20:07 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void check_args(t_parser *parser)
 		{
 			i = 0;
 			j = i;
-			printf("->>> %s\n" ,a -> value);
+			// printf("->>> %s\n" ,a -> value);
 			while (a -> value[i])
 			{
 				if (a -> value[i] == '$' && a -> value[i + 1] == '?')
@@ -116,6 +116,7 @@ void	execution(t_parser *parser, t_data *my_heredoc)
 			pid = exec_cmd(parser, pip, "one");
 		else
 			pid = multiple_pipes(parser);
+		// check multiple pipes limits
 		while (1)
 		{
 			wait_pid = waitpid(-1, &status, 0); // If pid is -1, the call waits for any child process.

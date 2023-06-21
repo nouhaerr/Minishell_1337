@@ -6,11 +6,17 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/21 01:13:56 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/21 19:21:03 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	ft_check_fork(int p)
+{
+	if (p == -1)
+		perror(0);
+}
 
 void	ft_check(int p)
 {
@@ -148,12 +154,11 @@ void	ft_execve(char *path, t_parser *node, char **env)
 
 	arr = table_cmd(node);
 	*arr = path;
-	printf("asdfadsfads %s\n", *arr);
+	// printf("asdfadsfads %s\n", *arr);
 	if (execve(path, arr, env) < 0 && access(path, X_OK | F_OK))
 	{
 		free(env);
-		
-		printf("ok\n");
+		// printf("ok\n");
 		// g_var.exit_status = 127;
 		if (cmd_slash(node->cmd))
 			ft_err("minishell: ", node->cmd, ": No such file or directory");
@@ -171,7 +176,7 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 	char	*path;
 
 	pid = fork();
-	ft_check(pid);
+	ft_check_fork(pid);
 	if (pid == 0)
 	{
 		dup_and_exec(parse, pip, msg);
@@ -188,7 +193,7 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 			path = get_path(parse->cmd);
 		if (!path)
 			ft_err("minishell: ", parse->cmd, ": command not found");
-		printf("\n\n");
+		// printf("\n\n");
 		ft_execve(path, parse, create_env_arr(env_list_size(g_var.list)));
 	}
 	return (pid);

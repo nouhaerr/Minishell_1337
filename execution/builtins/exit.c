@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 06:25:08 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/16 18:05:36 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/21 19:14:45 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,18 @@ void	sh_exit(t_parser *tmp)
 
 	ex = tmp;
 	printf("exit\n");
-	if (ex->args)
+	if (ex->args_exec)
 	{
-		if (check_ex_av(ex->args->value))
-			av_not_num(ex->args->value);
-		else if (ex->args->next && !check_ex_av(ex->args->value))
+		if (check_ex_av(ex->args_exec->value))
+			av_not_num(ex->args_exec->value);
+		else if (ex->args_exec->next && !check_ex_av(ex->args_exec->value))
 		{
 			printf("minishell: exit: too many arguments\n");
 			g_var.exit_status = 1;
 			return ;
 		}
-		else if (!check_ex_av(ex->args->value))
-			ex_stat(ex->args->value);
+		else if (!check_ex_av(ex->args_exec->value))
+			ex_stat(ex->args_exec->value);
 	}
 	else
 		exit(g_var.exit_status);

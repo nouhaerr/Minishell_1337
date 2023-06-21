@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+         #
+#    By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 02:49:56 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/06/21 18:11:29 by hobenaba         ###   ########.fr        #
+#    Updated: 2023/06/21 19:04:45 by nerrakeb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 
 RDFLAGS +=  -lreadline -L /Users/$(USER)/goinfre/homebrew/opt/readline/lib
 INCLUDES += -I /Users/$(USER)/goinfre/homebrew/opt/readline/include/readline
@@ -28,7 +28,6 @@ SRCS =	main.c $(addprefix ./parsing/, $(PARSING)) $(addprefix ./execution/, $(EX
 		$(addprefix ./execution/builtins/, $(EXECUTION_BU)) #signal.c 
 		
 OBJS = $(SRCS:.c=.o)
-
 LIBFT= libft.a
 LIBFT_DIR= libft/
 NAME = minishell
