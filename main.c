@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/21 17:46:44 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/21 19:06:00 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,13 @@ int	syntax_error(int base, t_token **tokens)
 		return (printf("minishell: syntax error near unexpected token\n"), 1);
 	while (tokens2)
 	{
-		if (tokens2 -> type != the_pipe && tokens2 -> type != word && tokens2 -> type != heredoc)
+		t_token *t2 = tokens2 -> next;
+		if (t2 != NULL && tokens2 -> type != the_pipe && tokens2 -> type != word && tokens2 -> type != heredoc)
 		{
-			t_token *t2 = tokens2 -> next;
-			
 			if (t2 != NULL && t2 -> arten == env_general
 					&& (t2 ->next != NULL && t2-> next-> arten == env_general))
 					return (printf("ambigiuos redirect\n"), 1);
-			if (!ft_strcmp(tokens2 -> next -> value, "$$"))
+			if (!ft_strcmp(t2 -> value, "$$"))
 				return (printf("ambigiuos redirect\n"), 1);
 		}
 		if ((tokens2 -> type == the_pipe
@@ -96,6 +95,11 @@ void	pa_ex(t_token *tok, t_lexer *lex, t_parser *par, t_data *here)
 {
 	(void)here;
 	parse(&tok, &par, lex);
+	if (par -> nu_here >= 17)
+	{
+		printf("minishell: maximum here-document count exceeded\n");
+		exit (2);
+	}
 	execution(par, here);
 	update_fd(g_var.fd_prog);
 	free_mylist(par, 1);
@@ -113,7 +117,7 @@ int	_session(t_token *tok, t_parser *par, t_data *her, t_lexer *le)
 		tok = NULL;
 		par = NULL;
 		g_var.signal_heredoc =  0;
-		// signal_check();
+		signal_check();
 		prompt = get_prompt(getcwd(NULL, 0));
 		input = readline(prompt);
 		free((void *)prompt);

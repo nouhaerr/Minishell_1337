@@ -6,12 +6,12 @@
 #    By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 02:49:56 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/06/21 18:11:29 by hobenaba         ###   ########.fr        #
+#    Updated: 2023/06/21 19:06:28 by hobenaba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 
 RDFLAGS +=  -lreadline -L /Users/$(USER)/goinfre/homebrew/opt/readline/lib
 INCLUDES += -I /Users/$(USER)/goinfre/homebrew/opt/readline/include/readline
@@ -25,7 +25,7 @@ EXECUTION_BU =  echo.c pwd.c env.c exit.c unset.c utils.c cd.c
 SRCS =	main.c $(addprefix ./parsing/, $(PARSING)) $(addprefix ./execution/, $(EXECUTION)) \
 		$(addprefix ./execution/builtins/export/, $(EXECUTION_EXP))  \
 		$(addprefix ./execution/redirections/, $(EXECUTION_RDR)) \
-		$(addprefix ./execution/builtins/, $(EXECUTION_BU)) #signal.c 
+		$(addprefix ./execution/builtins/, $(EXECUTION_BU)) signal.c 
 		
 OBJS = $(SRCS:.c=.o)
 

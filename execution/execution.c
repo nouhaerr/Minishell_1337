@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/21 18:29:54 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/21 19:31:26 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,12 @@ void check_args(t_parser *parser)
 		{
 			i = 0;
 			j = i;
-			printf("->>> %s\n" ,a -> value);
+			
+			//printf("->>> my_value : [%s]\n", a -> value);
 			while (a -> value[i])
 			{
+				if (a -> value[0] == '\0')
+					str = ft_strdup("\0");
 				if (a -> value[i] == '$' && a -> value[i + 1] == '?')
 				{
 					str = ft_strjoin (str, ft_substr(a -> value, j, i));
@@ -77,16 +80,30 @@ void check_args(t_parser *parser)
 					i += 2;
 					j = i;
 				}
-				i++;
+				else
+					i++;
 			}
 			if (j != i)
 				str = ft_strjoin (str, ft_substr(a -> value, j, i));
-			ft_lstaddback2(&(p->args_exec), ft_lstnew2(str));
+			if (a -> value[0] == '\0')
+				ft_lstaddback2(&(p->args_exec), ft_lstnew2(ft_strdup ("\0")));
+			else
+				ft_lstaddback2(&(p->args_exec), ft_lstnew2(str));
 			a = a -> next;
 			str = NULL;
 		}
 		p = p -> next;
 	}
+	// while (parser)
+	// {
+	// 	while (parser -> args_exec)
+	// 	{
+	// 		printf("[->> value : [%s]\n", parser -> args_exec-> value);
+	// 		parser -> args_exec = parser -> args_exec -> next;
+	// 	}
+	// 	parser = parser -> next;
+	// }
+	// sleep (3);
 }
 
 void	execution(t_parser *parser, t_data *my_heredoc)

@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:54:36 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/20 20:53:32 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/21 18:59:47 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct t_parser
 	t_data			*args_exec;
 	t_data2			*outfiles;
 	int				index;
+	int				nu_here;
 	int				fd[2];
 	t_data2			*inf_her;
 	struct t_parser	*next;
