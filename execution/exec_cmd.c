@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/22 23:36:57 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/22 23:55:13 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,17 +112,18 @@ void	ft_execve(char *path, t_parser *node, char **env)
 	char	**arr;
 
 	arr = table_cmd(node);
-	if (access(path, X_OK | F_OK))
-		ft_err("minishell: ", node->cmd, ":is a directory");
+	// if (access(path, X_OK | F_OK))
+	// 	ft_err("minishell: ", node->cmd, ":is a directory");
 	//printf("HERE %s\n", *arr); // && access(path, X_OK | F_OK)
 	if (execve(path, arr, env) < 0)
 	{
 		free(env);
+		perror("minishell");
 		// printf("ok\n");
-		if (cmd_slash(node->cmd))
-			ft_err("minishell: ", node->cmd, ": No such file or directory");
-		else if (!cmd_slash(node -> cmd) && node -> my_cmd == 0)
-			ft_err("minishell: ", node->cmd, ": command not found");
+		// if (cmd_slash(node->cmd))
+		// 	ft_err("minishell: ", node->cmd, ": No such file or directory");
+		// else if (!cmd_slash(node -> cmd) && node -> my_cmd == 0)
+		// 	ft_err("minishell: ", node->cmd, ": command not found");
 		exit(g_var.exit_status);
 	}
 	free(env);
@@ -153,6 +154,7 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 		return (pid);
 	if (pid == 0)
 	{
+		//SIGNALS
 		dp_built(parse, pip, msg);
 		path = parse->cmd;
 		if (!cmd_slash(parse->cmd))
