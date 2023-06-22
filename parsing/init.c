@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 21:17:37 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/05/27 17:46:39 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/22 13:51:15 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	lexer_init(t_lexer *lexer)
 {
 	lexer -> base = 0;
 	lexer -> her = 0;
+	lexer -> index = 0;
 	lexer -> str = NULL;
 	lexer -> base2 = lexer -> base;
 	lexer -> c = 0;

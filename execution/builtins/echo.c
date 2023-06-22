@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 11:18:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/21 18:24:11 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/22 13:48:38 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ void	sh_echo(t_parser **echo)
 
 	i = 0;
 	tmp = *echo;
-	if (!tmp->args_exec)
+	if (!tmp->args)
 		printf("\n");
-	else if (tmp->args_exec->value[0] == '-')
-		check_n(tmp->args_exec);
+	else if (tmp->args->value[0] == '-')
+		check_n(tmp->args);
 	else
-		print_av(tmp->args_exec, 1);
+		print_av(tmp->args, 1);
 	g_var.exit_status = 0;
 }

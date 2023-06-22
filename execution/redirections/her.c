@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:46:12 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/21 18:40:28 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/22 12:39:45 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ void	her(t_data2 *my_heredoc, int index, int *pipefd)
 			free(input);
 		input = readline("> ");
 	}
-	write (pipefd[1], str, ft_strlen(str));
+	if (str != NULL)
+		write (pipefd[1], str, ft_strlen(str));
 	close(pipefd[1]);
 }

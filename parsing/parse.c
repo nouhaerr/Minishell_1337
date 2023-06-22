@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:14:51 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/21 21:20:25 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/22 16:34:17 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_parser	*build_list_parser(t_parser **parser, t_lexer *lexer, t_parser *t)
 		t = ft_lstaddback3(parser, ft_lstnew3(lexer -> index));
 		lexer->tokens2 = (lexer->tokens2)->next;
 	}
-	lexer->tok = my_next_word(lexer->tokens2);
+	lexer->tok = my_next_word(lexer->tokens2, parser);
 	if (lexer -> tok != NULL)
 		create_node(t, lexer);
 	return (t);
@@ -89,14 +89,23 @@ void	parse(t_token **tokens, t_parser **parser, t_lexer *lexer)
 	// 	*parser = (*parser) -> next;
 	// }
 
-t_token	*my_next_word(t_token *tokens)
+t_token	*my_next_word(t_token *tokens, t_parser **parser)
 {
 	t_token	*t;
-	//t_token	*t2;
+	t_token	*t2;
 
 	t = tokens;
 	while (tokens)
 	{
+		t2 = tokens -> next;
+		if (t2 != NULL && tokens -> type != the_pipe && tokens -> type != word && tokens -> type != heredoc)
+		{
+			if (t2 != NULL && t2 -> arten == env_general
+					&& (t2 ->next != NULL && t2-> next-> arten == env_general))
+					(*parser) -> amg = 1;
+			if (!ft_strcmp(t2 -> value, " "))
+				(*parser) -> amg = 1;
+		}
 		if (!ft_strcmp(tokens -> value, "\"\"")
 			|| !ft_strcmp(tokens -> value, "\'\'"))
 		{

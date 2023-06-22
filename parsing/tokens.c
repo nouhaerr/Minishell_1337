@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 21:15:28 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/21 21:35:41 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/22 16:24:17 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,24 @@ int	token_word(char *input, int start, int base)
 	return (0);
 }
 
-int	token_env2(char *input, int i, t_lexer *lexer)
+int	token_env2(char *input, int i, t_lexer *lexer, t_token **tokens)
 {
 	int		len;
 	char	*str_env;
 	char	*env;
 
 	len = token_word(input, i + 1, -1);
+	if (lexer -> str != NULL)
+	{
+		int arten;
+
+		if (lexer -> base2 != 0)
+			arten = quotes;
+		else
+			arten = general;
+		ft_lstaddback(tokens, ft_lstnew(lexer -> str, word, arten));
+		lexer -> str = NULL;
+	}
 	if (lexer->her == 0 && (lexer->base == 2 || lexer->base == 0))
 	{
 		if (len != 0)
@@ -91,20 +102,25 @@ int	token_env2(char *input, int i, t_lexer *lexer)
 	return (i);
 }
 
-int	token_env(char *input, int i, t_lexer *lexer)
+int	token_env(char *input, int i, t_lexer *lexer, t_token **tokens)
 {
-	
+	char	*itoa;
+	char	*str_env;
+
 	if (input[i + 1] == '?')
 	{
-		if (lexer -> base != 0)
-			lexer->str = ft_strjoin(lexer->str, ft_strdup("$?"));
+		if (lexer -> index == 0)
+			itoa = ft_itoa(g_var.exit_status);
 		else
-			lexer->str = ft_strjoin(lexer->str, ft_strdup("$0"));
+			itoa = ft_strdup("0");
+		str_env = ft_strdup(itoa);
+		lexer->str = ft_strjoin(lexer->str, str_env);
+		free(itoa);
 		i += 2;
 	}
 	else if (ft_isdigit(input[i + 1]))
 		i += 2;
 	else
-		i = token_env2(input, i, lexer);
+		i = token_env2(input, i, lexer, tokens);
 	return (i);
 }

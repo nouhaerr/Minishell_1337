@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/21 21:10:23 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/22 16:33:47 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,6 @@ int	syntax_error(int base, t_token **tokens)
 		return (printf("minishell: syntax error near unexpected token\n"), 1);
 	while (tokens2)
 	{
-		t_token *t2 = tokens2 -> next;
-		if (t2 != NULL && tokens2 -> type != the_pipe && tokens2 -> type != word && tokens2 -> type != heredoc)
-		{
-			if (t2 != NULL && t2 -> arten == env_general
-					&& (t2 ->next != NULL && t2-> next-> arten == env_general))
-					return (printf("ambigiuos redirect\n"), 1);
-			if (!ft_strcmp(t2 -> value, " "))
-				return (printf("ambigiuos redirect\n"), 1);
-		}
 		if ((tokens2 -> type == the_pipe
 			&& (previous == NULL || tokens2 -> next == NULL)) || (tokens2 -> type == the_pipe && (tokens2 -> next) -> type == the_pipe))
 			return (printf("minishell: syntax error near unexpected token `|'\n")
@@ -127,6 +118,11 @@ int	_session(t_token *tok, t_parser *par, t_data *her, t_lexer *le)
 			add_history(input);
 		g_var.fd_prog = my_fd();
 		base = lex(input, &tok, le);
+		// while (tok)
+		// {
+		// 	printf("->>[%s]\n", tok -> value);
+		// 	tok = tok -> next;
+		// }
 		if (!syntax_error(base, &tok) && tok != NULL)
 			pa_ex(tok, le, par, her);
 		else

@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 05:37:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/21 22:05:25 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/22 16:39:52 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,13 @@ char	**table_cmd(t_parser *node)
 	str = ft_strjoin2(node -> cmd, " ");
 	while (cur)
 	{
-		printf("[%s]\n", cur -> value);
-		// if (cur -> value[0] == '\0')
-		// 	str = ft_strjoin2(str, "	");
+		if (cur -> value[0] == '\0')
+			str = ft_strjoin2(str, "	");
 		str = ft_strjoin2(str, cur -> value);
 		str = ft_strjoin2(str, " ");
 		cur = cur -> next;
 	}
 	s1 = split2(str, ' ');
-	int i;
-	
-	i = 0;
-	while (s1[i])
-	{
-		printf("[%s]\n", s1[i]);
-		i++;
-	}
 	free(str);
 	return (s1);
 }
@@ -56,10 +47,7 @@ char	**real_path(void)
 		if (!ft_strncmp(cur->env, "PATH", 4))
 		{
 			if (cur->value[0] == ':')
-			{
 				cur->value = ft_strjoin2(".", cur->value);
-			}
-			// printf("%s\n", cur->value);
 			p = ft_split(cur->value, ':');
 			return (p);
 		}
@@ -83,7 +71,6 @@ char	*get_path(char *cmd)
 	while (full_path[++i])
 	{
 		path = ft_strjoin2(full_path[i], cmd_file);
-		// printf("%s\n", path);``
 		if (!access(path, F_OK | X_OK))
 			return (ft_free(full_path), free(cmd_file), path);
 		free(path);

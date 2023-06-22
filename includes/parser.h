@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:54:36 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/21 21:20:08 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/22 16:32:30 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ enum
 	infile,
 
 };
+enum
+{
+	env,
+	not_env
+};
+
 typedef struct t_data
 {
 	char			*value;
@@ -44,6 +50,7 @@ typedef struct t_parser
 	t_data2			*outfiles;
 	int				index;
 	int				nu_here;
+	int				amg;
 	int				fd[2];
 	t_data2			*inf_her;
 	struct t_parser	*next;
@@ -52,7 +59,7 @@ typedef struct t_parser
 // functions im gonna work with in the parsing part
 void		parse(t_token **tokens, t_parser **parser, t_lexer *lexer);
 void		create_node(t_parser *parser, t_lexer *lexer);
-t_token		*my_next_word(t_token *tokens);
+t_token	*my_next_word(t_token *tokens, t_parser **parser);
 int			ft_lstsize_parse(t_parser *parse);
 void		check_struct(t_parser *parser);
 

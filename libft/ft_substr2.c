@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 21:53:09 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/21 22:02:00 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/22 12:30:37 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,10 @@ char	*ft_substr2(char const *s, unsigned int start, size_t len)
 		return (0);
 	while (i < len)
 	{
-        printf ("->imhier\n");
 		new[i++] = s[start++];
         if (s[start] == 9)
         {
-            printf("imhier\n");
+           //printf("imhier\n");
             new[i++] = '\0';
         }
     }

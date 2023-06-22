@@ -6,16 +6,16 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:53:34 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/19 14:02:45 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/22 16:26:38 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	check_which_special_char(char c, char next_c, t_token **tokens)
+int	check_which_special_char(char c, char next_c, t_token **tokens, t_lexer *lexer)
 {
 	if (c == '|')
-		return (ft_lstaddback(tokens, ft_lstnew(ft_strdup("|"),
+		return (lexer -> index++, ft_lstaddback(tokens, ft_lstnew(ft_strdup("|"),
 					the_pipe, general)), 1);
 	else if (c == '>')
 	{
@@ -68,6 +68,8 @@ void	build_list(t_lexer *lexer, t_token **tokens)
 		i = 0;
 		while (str[i])
 		{	
+			// printf("imhier str : %s\n", str[i]);
+			// sleep (1);
 			if (lexer -> base == 0)
 				ft_lstaddback(tokens, ft_lstnew(str[i], word, env_general));
 			else
@@ -104,14 +106,16 @@ int	lex(char *input, t_token **tokens, t_lexer *lexer)
 		{
 			if (input[i] == '<' && input[i + 1] == '<')
 				lexer -> her = 1;
-			i += check_which_special_char(input[i], input[i + 1], tokens);
+			i += check_which_special_char(input[i], input[i + 1], tokens, lexer);
 		}
 		else if (input[i] != '\0')
 			i = partition_tokens(lexer, input, i);
 		if (input[i] != '\0' && check_condition(lexer, input, i) == 1)
 			lexer -> str = ft_strjoin(lexer -> str, ft_substr(input, i - 1, 2));
 		if (input[i] == '$')
-			i = token_env(input, i, lexer);
+			i = token_env(input, i, lexer, tokens);
+		// printf("hier : lexer -> str:%s\n", lexer -> str);
+		// sleep (1);
 		if (lexer -> base == 0 && lexer -> str != NULL && (input [i] == '\0'
 				|| ft_strchr(" |><", input[i]) != NULL))
 			build_list(lexer, tokens);

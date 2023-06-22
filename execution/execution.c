@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/21 21:36:12 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/22 16:42:46 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,63 +42,6 @@ int	exit_status(int status)
 	return (0);
 }
 
-void check_args(t_parser *parser)
-{
-	t_data *a;
-	t_parser *p;
-	char	*str;
-	int 	i;
-	int		c;
-	int		j;
-
-	p = parser;
-	str = NULL;
-	while (p)
-	{
-		a = p -> args;
-		while (a)
-		{
-			i = 0;
-			j = i;
-			c = 0;
-			while (a -> value[i])
-			{
-				if (a -> value[i] == '$' && a -> value[i + 1] == '0')
-				{
-					str = ft_strjoin (str, ft_substr(a -> value, j, i));
-					if (p -> index == 0)
-						str = ft_strjoin (str, ft_itoa(g_var.exit_status));
-					else 
-						str = ft_strjoin (str, (ft_strdup("0")));
-					i += 2;
-					j = i;
-				}
-				else
-					i++;
-			}
-			if (j != i)
-				str = ft_strjoin (str, ft_substr(a -> value, j, i));
-			if (a -> value[0] == '\0' || a -> value[0] == ' ')
-				ft_lstaddback2(&(p->args_exec), ft_lstnew2(ft_strdup ("\0")));
-			else
-				ft_lstaddback2(&(p->args_exec), ft_lstnew2(str));
-			a = a -> next;
-			str = NULL;
-		}
-		p = p -> next;
-	}
-	// while (parser)
-	// {
-	// 	while (parser -> args_exec)
-	// 	{
-	// 		printf("[->> value : [%s]\n", parser -> args_exec-> value);
-	// 		parser -> args_exec = parser -> args_exec -> next;
-	// 	}
-	// 	parser = parser -> next;
-	// }
-	// sleep (3);
-}
-
 void	execution(t_parser *parser, t_data *my_heredoc)
 {
 	int		pid;
@@ -111,29 +54,37 @@ void	execution(t_parser *parser, t_data *my_heredoc)
 	pip.wr_end = 0;
 	if (!parser)
 		return ;
-	check_args(parser);
 	exec_heredoc(parser);
-	if (parser->cmd && isbuiltin(parser) && parser->next == NULL)
+	while (parser)
 	{
-		g_var.parent_process = 1;
-		builtin_executor(parser, pip, "one");
-	}
-	else
-	{   
-		g_var.parent_process = 0;
-		if (parser->cmd && parser->next == NULL)
-			pid = exec_cmd(parser, pip, "one");
-		else
-			pid = multiple_pipes(parser);
-		// check multiple pipes limits
-		while (1)
+		if (parser -> amg == 1)
 		{
-			wait_pid = waitpid(-1, &status, 0); // If pid is -1, the call waits for any child process.
-			if (wait_pid == -1) // If there are no children not previously awaited, -1 is returned with errno set to [ECHILD].
-				break ;
-			if (wait_pid == pid) // last child pid
-				g_var.exit_status = exit_status(status);
+			g_var.exit_status = 1;
+			printf ("minishell : ambiguous redirect\n");
 		}
+		if (parser != NULL && parser->cmd && isbuiltin(parser) && parser->next == NULL)
+		{
+			g_var.parent_process = 1;
+			builtin_executor(parser, pip, "one");
+		}
+		else
+		{   
+			g_var.parent_process = 0;
+			if (parser->cmd && ft_lstsize_parse(parser) == 1)
+				pid = exec_cmd(parser, pip, "one");
+			else
+				pid = multiple_pipes(parser);
+			// check multiple pipes limits
+			while (1)
+			{
+				wait_pid = waitpid(-1, &status, 0); // If pid is -1, the call waits for any child process.
+				if (wait_pid == -1) // If there are no children not previously awaited, -1 is returned with errno set to [ECHILD].
+					break ;
+				if (wait_pid == pid) // last child pid
+					g_var.exit_status = exit_status(status);
+			}
+		}
+		parser = parser -> next;
 	}
 	free_mylist(my_heredoc, 2);
 }

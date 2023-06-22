@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:18:35 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/21 18:58:15 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/22 16:33:13 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ void	check_struct(t_parser *parser)
 		printf("struct number %d\n", ++i);
 		while (out)
 		{
-			printf("[out : %s, type : %d]\n", (out)->value, (out)->type);
+			printf("[out : %s, type : %d] \n", (out)->value, (out)->type);
 			(out) = (out)->next;
 		}
 		while (in)
 		{
-			printf("infher : [%s]\n  type %d\n", (in)->value, in -> type);
+			printf("infher : [%s]  type %d\n ", (in)->value, in -> type);
 			(in) = (in)->next;
 		}
 		printf("cmd: [%s]\n", cmd);
