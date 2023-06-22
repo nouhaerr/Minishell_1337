@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/22 16:50:47 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/22 19:24:51 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,7 @@ void check_my_heredoc(t_data2 *inf_her, t_data2 **my_heredoc)
 }
 void  exec_heredoc(t_parser *parser)
 {
-	int			pid;
-	int			status;
 	t_data2		*my_heredoc;
-	int			pipefd[2];
 	t_parser	*p;
 	t_data2		*inf_her;
 	
@@ -43,21 +40,7 @@ void  exec_heredoc(t_parser *parser)
 			my_heredoc = NULL;
 			check_my_heredoc(inf_her, &my_heredoc);
 			if (my_heredoc != NULL)
-			{
-				pipe(pipefd);
-				pid = fork();
-				if (pid == 0)
-				{
-					check_signal_heredoc();
-					her(my_heredoc, p -> index, pipefd);
-					exit (0);
-				}
-				waitpid(pid, &status, 0);
-				if (status == 256)
-					g_var.exit_status = 1;
-				close(pipefd[1]);
-				p->fd[0] = pipefd[0];
-			}
+				write_her(my_heredoc, p);
 			if (my_heredoc != NULL)
 				inf_her = my_heredoc -> next;
 			else
@@ -65,9 +48,30 @@ void  exec_heredoc(t_parser *parser)
 		}
 		p = p->next;
 	}
-	
 }
+void	write_her(t_data2 *my_heredoc, t_parser *p)
+{
+	int	pipefd[2];
+	int	pid;
+	int status;
 
+	pipe(pipefd);
+	pid = fork();
+	if (pid == 0)
+	{
+		check_signal_heredoc();
+		her(my_heredoc, p -> index, pipefd);
+		exit (0);
+	}
+	waitpid(pid, &status, 0);
+	g_var.exit_status = WEXITSTATUS(status);
+	close(pipefd[1]);
+	//if (my_heredoc -> next != NULL)
+	//	close(pipefd[0]);
+	p->fd[0] = pipefd[0];
+	printf("%d\t%d\n", p->fd[0], pipefd[1]);
+
+}
 void	run_builtin(t_parser *parser)
 {
 	char	*cmd2;

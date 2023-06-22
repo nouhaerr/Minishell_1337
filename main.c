@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/22 16:33:47 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/22 17:45:03 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	pa_ex(t_token *tok, t_lexer *lex, t_parser *par, t_data *here)
 		printf("minishell: maximum here-document count exceeded\n");
 		exit (2);
 	}
+	
 	execution(par, here);
 	update_fd(g_var.fd_prog);
 	free_mylist(par, 1);

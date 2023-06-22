@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/22 12:29:28 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/22 19:19:32 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,17 @@ int	*dup_and_exec(t_parser *parse, t_pipe pip, char *msg)
 	int		*fl;
 
 	fl = fd_redirection(parse);
+		parse->fd[1] = 1;
 	if (!fl)
 		return (0);
 	if (!ft_strcmp(msg, "one"))
 	{
-		parse->fd[1] = 1;
 		parse->fd[0] = 0;
 		if (fl[0] != -1)
 			parse->fd[0] = fl[0];
 		if (fl[1] != -1)
 			parse->fd[1] = fl[1];
+	printf("%d\t%d\n", parse->fd[0], parse->fd[1]);
 	}
 	else
 	{
@@ -118,7 +119,7 @@ void	ft_execve(char *path, t_parser *node, char **env)
 		// printf("ok\n");
 		if (cmd_slash(node->cmd))
 			ft_err("minishell: ", node->cmd, ": No such file or directory");
-		else
+		else if (!cmd_slash(node -> cmd) && node -> my_cmd == 0)
 			ft_err("minishell: ", node->cmd, ": command not found");
 		exit(g_var.exit_status);
 	}
@@ -146,7 +147,7 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 			exit(0);
 		path = parse->cmd;
 		if (!cmd_slash(parse->cmd))
-			path = get_path(parse->cmd);
+			path = get_path(parse->cmd, parse);
 		if (!path)
 			ft_err("minishell: ", parse->cmd, ": command not found");
 		// printf("\n\n");

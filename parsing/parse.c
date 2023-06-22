@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:14:51 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/22 16:34:17 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/22 18:33:56 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,14 @@ t_parser	*build_list_parser(t_parser **parser, t_lexer *lexer, t_parser *t)
 		t = ft_lstaddback3(parser, ft_lstnew3(lexer -> index));
 		lexer->tokens2 = (lexer->tokens2)->next;
 	}
-	lexer->tok = my_next_word(lexer->tokens2, parser);
+	lexer->tok = my_next_word(lexer->tokens2, parser, lexer);
+	// printf("imhier\n");
+	// sleep (3);
+	// if (lexer  -> tok != NULL)
+	// {
+	// 	printf("%s\n", lexer -> tok -> value);
+	// 	sleep (3);
+	// }
 	if (lexer -> tok != NULL)
 		create_node(t, lexer);
 	return (t);
@@ -80,7 +87,7 @@ void	parse(t_token **tokens, t_parser **parser, t_lexer *lexer)
 			lexer->i++;
 		}
 	}
-	//check_struct(*parser);
+	check_struct(*parser);
 }
 // just to check on if my parsing is doing alright.
 // while (parser)
@@ -89,7 +96,7 @@ void	parse(t_token **tokens, t_parser **parser, t_lexer *lexer)
 	// 	*parser = (*parser) -> next;
 	// }
 
-t_token	*my_next_word(t_token *tokens, t_parser **parser)
+t_token	*my_next_word(t_token *tokens, t_parser **parser, t_lexer *lexer)
 {
 	t_token	*t;
 	t_token	*t2;
@@ -97,6 +104,12 @@ t_token	*my_next_word(t_token *tokens, t_parser **parser)
 	t = tokens;
 	while (tokens)
 	{
+		if (!ft_strcmp(tokens -> value, " ") && tokens -> arten == env_general)
+		{
+			lexer -> tokens2 = lexer -> tokens2 -> next;
+			(*parser) -> my_cmd = 1;
+			return (tokens -> next);
+		}
 		t2 = tokens -> next;
 		if (t2 != NULL && tokens -> type != the_pipe && tokens -> type != word && tokens -> type != heredoc)
 		{
@@ -106,6 +119,7 @@ t_token	*my_next_word(t_token *tokens, t_parser **parser)
 			if (!ft_strcmp(t2 -> value, " "))
 				(*parser) -> amg = 1;
 		}
+	
 		if (!ft_strcmp(tokens -> value, "\"\"")
 			|| !ft_strcmp(tokens -> value, "\'\'"))
 		{
@@ -115,6 +129,7 @@ t_token	*my_next_word(t_token *tokens, t_parser **parser)
 		}
 		else if (tokens->type == word)
 			return (tokens);
+		
 		tokens = tokens->next;
 	}
 	return (t);

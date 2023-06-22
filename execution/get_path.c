@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 05:37:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/22 16:39:52 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/22 18:06:33 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,14 @@ char	**table_cmd(t_parser *node)
 		cur = cur -> next;
 	}
 	s1 = split2(str, ' ');
+	int i;
+
+	i = 0;
+	while (s1[i])
+	{
+		printf("s1[i] : %s\n",s1[i]);
+		i++;
+	}
 	free(str);
 	return (s1);
 }
@@ -56,7 +64,7 @@ char	**real_path(void)
 	return (NULL);
 }
 
-char	*get_path(char *cmd)
+char	*get_path(char *cmd, t_parser *parser)
 {
 	char	*path;
 	char	*cmd_file;
@@ -64,7 +72,7 @@ char	*get_path(char *cmd)
 	int		i;
 
 	full_path = real_path();
-	if (!full_path)
+	if (!full_path && parser -> my_cmd == 0)
 		ft_err("minishell: ", cmd, ": command not found");
 	cmd_file = ft_strjoin2("/", cmd);
 	i = -1;
