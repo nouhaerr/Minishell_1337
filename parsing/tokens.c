@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 21:15:28 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/22 16:24:17 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/22 20:03:52 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,19 +67,20 @@ int	token_env2(char *input, int i, t_lexer *lexer, t_token **tokens)
 	int		len;
 	char	*str_env;
 	char	*env;
+	(void)tokens;
 
 	len = token_word(input, i + 1, -1);
-	if (lexer -> str != NULL)
-	{
-		int arten;
+	// if (lexer -> str != NULL)
+	// {
+	// 	int arten;
 
-		if (lexer -> base2 != 0)
-			arten = quotes;
-		else
-			arten = general;
-		ft_lstaddback(tokens, ft_lstnew(lexer -> str, word, arten));
-		lexer -> str = NULL;
-	}
+	// 	if (lexer -> base2 != 0)
+	// 		arten = quotes;
+	// 	else
+	// 		arten = general;
+	// 	ft_lstaddback(tokens, ft_lstnew(lexer -> str, word, arten));
+	// 	lexer -> str = NULL;
+	// }
 	if (lexer->her == 0 && (lexer->base == 2 || lexer->base == 0))
 	{
 		if (len != 0)

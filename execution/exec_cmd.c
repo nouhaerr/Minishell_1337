@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/22 23:18:35 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/22 23:36:33 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,17 @@ int	*dup_fd(t_parser *parse, t_pipe pip, char *msg)
 	int		*fl;
 
 	fl = fd_redirection(parse);
+		parse->fd[1] = 1;
 	if (!fl)
 		return (0);
 	if (!ft_strcmp(msg, "one"))
 	{
-		parse->fd[1] = 1;
 		parse->fd[0] = 0;
 		if (fl[0] != -1)
 			parse->fd[0] = fl[0];
 		if (fl[1] != -1)
 			parse->fd[1] = fl[1];
+	printf("%d\t%d\n", parse->fd[0], parse->fd[1]);
 	}
 	else
 	{
@@ -120,7 +121,7 @@ void	ft_execve(char *path, t_parser *node, char **env)
 		// printf("ok\n");
 		if (cmd_slash(node->cmd))
 			ft_err("minishell: ", node->cmd, ": No such file or directory");
-		else
+		else if (!cmd_slash(node -> cmd) && node -> my_cmd == 0)
 			ft_err("minishell: ", node->cmd, ": command not found");
 		exit(g_var.exit_status);
 	}
@@ -157,7 +158,7 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 		dp_built(parse, pip, msg);
 		path = parse->cmd;
 		if (!cmd_slash(parse->cmd))
-			path = get_path(parse->cmd);
+			path = get_path(parse->cmd, parse);
 		if (!path)
 			ft_err("minishell: ", parse->cmd, ": command not found");
 		ft_execve(path, parse, create_env_arr(env_list_size(g_var.list)));
