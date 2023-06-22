@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/22 18:27:16 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/22 19:06:32 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,8 @@ void	ft_execve(char *path, t_parser *node, char **env)
 	char	**arr;
 
 	arr = table_cmd(node);
-	//printf("HERE %s\n", *arr);// && access(path, X_OK | F_OK)
-	if (execve(path, arr, env) < 0)
+	//printf("HERE %s\n", *arr);
+	if (execve(path, arr, env) < 0 && access(path, X_OK | F_OK))
 	{
 		free(env);
 		// printf("ok\n");
