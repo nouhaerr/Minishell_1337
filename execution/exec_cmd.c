@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/22 20:38:33 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/22 23:18:35 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,8 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 		return (pid);
 	if (pid == 0)
 	{
+		// if (ft_ambi(parse))
+		//  	exit(g_var.exit_status);
 		dp_built(parse, pip, msg);
 		path = parse->cmd;
 		if (!cmd_slash(parse->cmd))
