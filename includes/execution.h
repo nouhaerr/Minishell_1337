@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:53:39 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/22 19:30:40 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/22 21:16:19 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		exec_cmd(t_parser *parser, t_pipe pip, char *msg);
 int		isbuiltin(t_parser *parser);
 void	builtin_executor(t_parser *node, t_pipe pip, char *msg);
 void	run_builtin(t_parser *parser);
-int		*dup_and_exec(t_parser *parse, t_pipe pip, char *msg);
+int		*dup_fd(t_parser *parse, t_pipe pip, char *msg);
 int		*fd_redirection(t_parser *node);
 char	*get_path(char *cmd, t_parser *parser);
 char	**create_env_arr(int size);

@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/22 19:31:21 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/22 21:16:37 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,9 @@ void	builtin_executor(t_parser *node, t_pipe pip, char *msg)
 {
 	int	*fl;
 
-	fl = dup_and_exec(node, pip, msg);
+	if (ft_ambi(node))
+		return ;
+	fl = dup_fd(node, pip, msg);
 	if (!fl)
 	{
 		g_var.exit_status = 1;

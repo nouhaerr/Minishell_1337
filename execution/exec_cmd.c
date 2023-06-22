@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/22 19:29:44 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/22 21:16:50 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	cmd_slash(char *cmd)
 	return (0);
 }
 
-int	*dup_and_exec(t_parser *parse, t_pipe pip, char *msg)
+int	*dup_fd(t_parser *parse, t_pipe pip, char *msg)
 {
 	int		*fl;
 
@@ -112,8 +112,10 @@ void	ft_execve(char *path, t_parser *node, char **env)
 	char	**arr;
 
 	arr = table_cmd(node);
-	//printf("HERE %s\n", *arr);
-	if (execve(path, arr, env) < 0 && access(path, X_OK | F_OK))
+	if (access(path, X_OK | F_OK))
+		ft_err("minishell: ", node->cmd, ":is a directory");
+	//printf("HERE %s\n", *arr); // && access(path, X_OK | F_OK)
+	if (execve(path, arr, env) < 0)
 	{
 		free(env);
 		// printf("ok\n");
@@ -124,6 +126,19 @@ void	ft_execve(char *path, t_parser *node, char **env)
 		exit(g_var.exit_status);
 	}
 	free(env);
+}
+
+void	dp_built(t_parser *parse, t_pipe pip, char *msg)
+{
+	dup_fd(parse, pip, msg);
+	if (isbuiltin(parse))
+	{
+		run_builtin(parse);
+		update_fd(g_var.fd_prog);
+		exit(g_var.exit_status);
+	}
+	if (!parse->cmd && g_var.redir == 1)
+		exit(0);
 }
 
 int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
@@ -138,22 +153,12 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 		return (pid);
 	if (pid == 0)
 	{
-		
-		dup_and_exec(parse, pip, msg);
-		if (isbuiltin(parse))
-		{
-			run_builtin(parse);
-			update_fd(g_var.fd_prog);
-			exit(g_var.exit_status);
-		}
-		if (!parse->cmd && g_var.redir == 1)
-			exit(0);
+		dp_built(parse, pip, msg);
 		path = parse->cmd;
 		if (!cmd_slash(parse->cmd))
 			path = get_path(parse->cmd, parse);
 		if (!path)
 			ft_err("minishell: ", parse->cmd, ": command not found");
-		// printf("\n\n");
 		ft_execve(path, parse, create_env_arr(env_list_size(g_var.list)));
 	}
 	return (pid);
