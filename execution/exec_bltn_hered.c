@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/22 17:38:10 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/22 20:39:07 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	builtin_executor(t_parser *node, t_pipe pip, char *msg)
 
 	if (ft_ambi(node))
 		return ;
-	fl = dup_and_exec(node, pip, msg);
+	fl = dup_fd(node, pip, msg);
 	if (!fl)
 	{
 		g_var.exit_status = 1;
