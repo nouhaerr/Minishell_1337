@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:53:39 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/22 18:59:37 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/22 19:30:40 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@ void	ft_err(char *s, char *cmd, char *s2);
 void	update_fd(int *my_fd);
 void	ft_check(int p);
 void	write_her(t_data2 *my_heredoc, t_parser *p);
-
+int		ft_ambi(t_parser *parser);
 
 #endif

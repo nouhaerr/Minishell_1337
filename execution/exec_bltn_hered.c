@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/22 19:24:51 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/22 19:31:21 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	write_her(t_data2 *my_heredoc, t_parser *p)
 	//if (my_heredoc -> next != NULL)
 	//	close(pipefd[0]);
 	p->fd[0] = pipefd[0];
-	printf("%d\t%d\n", p->fd[0], pipefd[1]);
+	printf("%d\t%d\n", p->fd[0], p -> fd[1]);
 
 }
 void	run_builtin(t_parser *parser)

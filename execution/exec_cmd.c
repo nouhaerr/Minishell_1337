@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/22 19:19:32 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/22 19:29:44 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,8 @@ void	ft_execve(char *path, t_parser *node, char **env)
 	char	**arr;
 
 	arr = table_cmd(node);
-	//printf("HERE %s\n", *arr);// && access(path, X_OK | F_OK)
-	if (execve(path, arr, env) < 0)
+	//printf("HERE %s\n", *arr);
+	if (execve(path, arr, env) < 0 && access(path, X_OK | F_OK))
 	{
 		free(env);
 		// printf("ok\n");
@@ -131,11 +131,14 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 	pid_t	pid;
 	char	*path;
 
+	if (ft_ambi(parse))
+		return(0);
 	pid = fork();
 	if (ft_check_fork(pid))
 		return (pid);
 	if (pid == 0)
 	{
+		
 		dup_and_exec(parse, pip, msg);
 		if (isbuiltin(parse))
 		{
