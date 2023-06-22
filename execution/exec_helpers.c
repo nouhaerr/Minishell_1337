@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 00:25:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/22 00:33:56 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/22 23:58:53 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	**create_env_arr(int size)
 	{
 		add = ft_add_arr(en, en_lenght, val_lenght);
 		if (!add)
-			return (printf("minishell: Memory allocation failed\n"), ft_free(arr), NULL);
+			return (printf("minishell: Memory allocation failed\n"), ft_free(arr), free(add), NULL);
 		arr[i] = add;
 		en = en->next;
 		i++;

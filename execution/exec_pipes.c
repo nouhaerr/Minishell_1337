@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 19:19:54 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/22 18:25:45 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/22 23:59:21 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int	multiple_pipes(t_parser *node)
 			pid = exec_cmd(cur, pip, "last");
 		else
 			pid = exec_cmd(cur, pip, "between");
-		// printf("imhier value : %s\n", cur -> cmd);
 		close(pip.rd_end[0]);
 		close(pip.rd_end[1]);
 		cur = cur->next;
