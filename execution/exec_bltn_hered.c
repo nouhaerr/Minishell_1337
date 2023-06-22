@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_bltn_hered.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/22 16:50:47 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/22 17:38:10 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void  exec_heredoc(t_parser *parser)
 				pid = fork();
 				if (pid == 0)
 				{
-					check_signal_heredoc();
+					//check_signal_heredoc();
 					her(my_heredoc, p -> index, pipefd);
 					exit (0);
 				}
@@ -83,7 +83,7 @@ void	run_builtin(t_parser *parser)
 	else if (!ft_strcmp(cmd2, "env"))
 		sh_env();
 	else if (!ft_strcmp(parser->cmd, "unset"))
-		sh_unset(parser->args_exec);
+		sh_unset(parser->args);
 	else if (!ft_strcmp(cmd2, "cd"))
 		sh_cd(parser);
 	else if (!ft_strcmp(parser->cmd, "export"))
@@ -95,6 +95,8 @@ void	builtin_executor(t_parser *node, t_pipe pip, char *msg)
 {
 	int	*fl;
 
+	if (ft_ambi(node))
+		return ;
 	fl = dup_and_exec(node, pip, msg);
 	if (!fl)
 	{

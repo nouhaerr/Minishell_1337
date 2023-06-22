@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:53:39 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/22 00:41:31 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/22 17:33:07 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ void	ft_free(char **str);
 void	ft_err(char *s, char *cmd, char *s2);
 void	update_fd(int *my_fd);
 void	ft_check(int p);
+int		ft_ambi(t_parser *parser);
 
 #endif

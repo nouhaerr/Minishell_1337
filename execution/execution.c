@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/22 16:42:46 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/22 17:56:54 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,17 @@ int	exit_status(int status)
 	return (0);
 }
 
+int	ft_ambi(t_parser *parser)
+{
+	if (parser -> amg == 1)
+	{
+		g_var.exit_status = 1;
+		printf ("minishell: : ambiguous redirect\n");
+		return(1);
+	}
+	return (0);
+}
+
 void	execution(t_parser *parser, t_data *my_heredoc)
 {
 	int		pid;
@@ -55,36 +66,27 @@ void	execution(t_parser *parser, t_data *my_heredoc)
 	if (!parser)
 		return ;
 	exec_heredoc(parser);
-	while (parser)
+	if (parser != NULL && parser->cmd && isbuiltin(parser) && parser->next == NULL)
 	{
-		if (parser -> amg == 1)
-		{
-			g_var.exit_status = 1;
-			printf ("minishell : ambiguous redirect\n");
-		}
-		if (parser != NULL && parser->cmd && isbuiltin(parser) && parser->next == NULL)
-		{
-			g_var.parent_process = 1;
-			builtin_executor(parser, pip, "one");
-		}
+		g_var.parent_process = 1;
+		builtin_executor(parser, pip, "one");
+	}
+	else
+	{   
+		g_var.parent_process = 0;
+		if (parser->cmd && ft_lstsize_parse(parser) == 1)
+			pid = exec_cmd(parser, pip, "one");
 		else
-		{   
-			g_var.parent_process = 0;
-			if (parser->cmd && ft_lstsize_parse(parser) == 1)
-				pid = exec_cmd(parser, pip, "one");
-			else
-				pid = multiple_pipes(parser);
-			// check multiple pipes limits
-			while (1)
-			{
-				wait_pid = waitpid(-1, &status, 0); // If pid is -1, the call waits for any child process.
-				if (wait_pid == -1) // If there are no children not previously awaited, -1 is returned with errno set to [ECHILD].
-					break ;
-				if (wait_pid == pid) // last child pid
-					g_var.exit_status = exit_status(status);
-			}
-		}
-		parser = parser -> next;
+			pid = multiple_pipes(parser);
+	}
+		// check multiple pipes limits
+	while (1)
+	{
+		wait_pid = waitpid(-1, &status, 0); // If pid is -1, the call waits for any child process.
+		if (wait_pid == -1) // If there are no children not previously awaited, -1 is returned with errno set to [ECHILD].
+			break ;
+		if (wait_pid == pid) // last child pid
+			g_var.exit_status = exit_status(status);
 	}
 	free_mylist(my_heredoc, 2);
 }

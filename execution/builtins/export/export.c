@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 03:26:24 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/22 01:01:54 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/22 17:16:39 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,18 @@ void	sh_export(t_parser *parser)
 {
 	t_data	*tmp;
 
-	tmp = parser->args_exec;
-	if (!parser->args_exec)
+	tmp = parser->args;
+	if (!parser->args)
 	{		
 		g_var.exit_status = 0;
 		sorted_env(g_var.list);
 	}
-	if (parser->args_exec && parser->args_exec->value[0] == '-'
-		&& parser->args_exec->value[1])
+	if (parser->args && parser->args->value[0] == '-'
+		&& parser->args->value[1])
 	{
 		g_var.exit_status = 2;
 		printf("minishell: export: %c%c: invalid option\n",
-			parser->args_exec->value[0], parser->args_exec->value[1]);
+			parser->args->value[0], parser->args->value[1]);
 		printf("export: usage: export [-fn] [name[=value] ...] or export -p\n");
 	}
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/22 12:29:28 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/22 18:27:16 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,11 +130,14 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 	pid_t	pid;
 	char	*path;
 
+	if (ft_ambi(parse))
+		return(0);
 	pid = fork();
 	if (ft_check_fork(pid))
 		return (pid);
 	if (pid == 0)
 	{
+		
 		dup_and_exec(parse, pip, msg);
 		if (isbuiltin(parse))
 		{
