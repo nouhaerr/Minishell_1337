@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   split2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/03 16:05:02 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/21 21:48:18 by hobenaba         ###   ########.fr       */
+/*   Created: 2023/06/21 21:48:23 by hobenaba          #+#    #+#             */
+/*   Updated: 2023/06/21 22:00:24 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	my_counter(char const *s, char c)
+int	counter(char const *s, char c)
 {
 	int	i;
 	int	j;
@@ -30,7 +30,7 @@ int	my_counter(char const *s, char c)
 	return (j);
 }
 
-int	len_word(char const *s, int start, char c)
+int	word(char const *s, int start, char c)
 {
 	int	j;
 
@@ -43,7 +43,7 @@ int	len_word(char const *s, int start, char c)
 	return (j);
 }
 
-void	ft_free2(char **p, int i)
+void	free2(char **p, int i)
 {
 	while (i >= 0)
 	{
@@ -53,7 +53,7 @@ void	ft_free2(char **p, int i)
 	free(p);
 }
 
-char	**ft_split(char const *s, char c)
+char	**split2(char const *s, char c)
 {
 	int		i;
 	int		j;
@@ -61,22 +61,22 @@ char	**ft_split(char const *s, char c)
 
 	if (s == NULL)
 		return (NULL);
-	p = malloc(sizeof(char *) * (my_counter(s, c) + 1));
+	p = malloc(sizeof(char *) * (counter(s, c) + 1));
 	i = -1;
 	j = 0;
 	if (!p)
 		return (NULL);
-	while (++i < my_counter(s, c))
+	while (++i < counter(s, c))
 	{
 		while (s[j] == c)
 			j++;
-		p[i] = ft_substr(s, j, len_word(s, j, c));
+		p[i] = ft_substr2(s, j, word(s, j, c));
 		if (!p[i])
 		{
-			ft_free2(p, i);
+			free2(p, i);
 			return (NULL);
 		}
-		j += len_word(s, j, c);
+		j += word(s, j, c);
 	}
 	p[i] = 0;
 	return (p);

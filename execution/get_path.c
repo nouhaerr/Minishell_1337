@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 05:37:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/21 19:52:41 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/21 22:05:25 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,22 @@ char	**table_cmd(t_parser *node)
 	str = ft_strjoin2(node -> cmd, " ");
 	while (cur)
 	{
+		printf("[%s]\n", cur -> value);
 		// if (cur -> value[0] == '\0')
-		// 	str = ft_strjoin2(str, "/"); // how should it behave in hier normally
+		// 	str = ft_strjoin2(str, "	");
 		str = ft_strjoin2(str, cur -> value);
 		str = ft_strjoin2(str, " ");
 		cur = cur -> next;
 	}
-	s1 = ft_split(str, ' ');
-	// int i;
+	s1 = split2(str, ' ');
+	int i;
 	
-	// i = 0;
-	// while (s1[i])
-	// {
-	// 	printf("[%s]\n", s1[i]);
-	// 	i++;
-	// }
+	i = 0;
+	while (s1[i])
+	{
+		printf("[%s]\n", s1[i]);
+		i++;
+	}
 	free(str);
 	return (s1);
 }

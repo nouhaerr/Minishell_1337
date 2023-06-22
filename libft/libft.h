@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 09:14:11 by mac               #+#    #+#             */
-/*   Updated: 2023/06/16 17:22:39 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/21 21:58:20 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,7 @@ long	ft_atoi2(const char *str);
 char	*ft_strjoin2(char const *s1, char const *s2);
 void	ft_tolower2(char *str);
 int		ft_strcmp2(char *s1, char *s2);
+char	**split2(char const *s, char c);
+char	*ft_substr2(char const *s, unsigned int start, size_t len);
 
 #endif
