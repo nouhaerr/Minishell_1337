@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_bltn_hered.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/22 23:36:19 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/24 13:32:25 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void check_my_heredoc(t_data2 *inf_her, t_data2 **my_heredoc)
 {
-	
+	// printf("%s\n", inf_her -> value);
+	// sleep (3);
 	while (inf_her)
 	{
 		if (inf_her -> type != infile)
@@ -59,7 +60,7 @@ void	write_her(t_data2 *my_heredoc, t_parser *p)
 	pid = fork();
 	if (pid == 0)
 	{
-		check_signal_heredoc();
+		//check_signal_heredoc();
 		her(my_heredoc, p -> index, pipefd);
 		exit (0);
 	}
@@ -69,7 +70,7 @@ void	write_her(t_data2 *my_heredoc, t_parser *p)
 	//if (my_heredoc -> next != NULL)
 	//	close(pipefd[0]);
 	p->fd[0] = pipefd[0];
-	printf("%d\t%d\n", p->fd[0], p -> fd[1]);
+	//printf("%d\t%d\n", p->fd[0], p -> fd[1]);
 
 }
 void	run_builtin(t_parser *parser)
@@ -99,8 +100,6 @@ void	builtin_executor(t_parser *node, t_pipe pip, char *msg)
 {
 	int	*fl;
 
-	if (ft_ambi(node))
-		return ;
 	fl = dup_fd(node, pip, msg);
 	if (!fl)
 	{

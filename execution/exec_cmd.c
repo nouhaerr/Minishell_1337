@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/22 23:55:13 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/24 18:26:31 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,8 +147,6 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 	pid_t	pid;
 	char	*path;
 
-	if (ft_ambi(parse))
-		return(0);
 	pid = fork();
 	if (ft_check_fork(pid))
 		return (pid);
@@ -159,9 +157,13 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 		path = parse->cmd;
 		if (!cmd_slash(parse->cmd))
 			path = get_path(parse->cmd, parse);
-		if (!path)
+		if (!path && parse -> my_cmd == 0)
+		{
+			printf(" ->>> 11imhier\n");
 			ft_err("minishell: ", parse->cmd, ": command not found");
-		ft_execve(path, parse, create_env_arr(env_list_size(g_var.list)));
+		}
+		if (parse -> my_cmd == 0)
+			ft_execve(path, parse, create_env_arr(env_list_size(g_var.list)));
 	}
 	return (pid);
 }

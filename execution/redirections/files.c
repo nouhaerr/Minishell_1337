@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:50:10 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/22 23:04:05 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/24 10:28:10 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	*fd_redirection(t_parser *node)
 	{
 		g_var.redir = 1;
 		close(fd[0]);
-		if (tmp2->type == infile)
+		if (tmp2->type == infile && !ft_ambi(tmp2))
 			fd[0] = ft_open(tmp2->value, "infile");
 		else
 			fd[0] = node->fd[0];
@@ -64,9 +64,9 @@ int	*fd_redirection(t_parser *node)
 		close(fd[1]);
 		// if (tmp1->next == NULL && ft_ambi(cur))
 		// 	return(free(fd), NULL);
-		if (tmp1->type == append )
+		if (tmp1->type == append && !ft_ambi(tmp1))
 			fd[1] = ft_open(tmp1->value, "saved_file");
-		else if (tmp1->type == trunc)
+		else if (tmp1->type == trunc && !ft_ambi(tmp1))
 			fd[1] = ft_open(tmp1->value, "outfile");
 		if (fd[1] == -3)
 			return (free(fd), NULL);

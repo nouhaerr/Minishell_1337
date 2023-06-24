@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:54:28 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/22 16:23:21 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/24 13:53:25 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct t_lexer
 	int		a;
 	int		i;
 	int		index;
+	int		amg;
 	int		arten;
 	t_token	*tokens2;
 	t_token	*tok;
@@ -71,6 +72,8 @@ int		token_env(char *input, int i, t_lexer *lexer, t_token **tokens);
 int		normal_word(char *input, int start);
 int		quotes_word(char *input, int start, int base);
 int		env_word(char *input, int start);
+void	build_list(t_lexer *lexer, t_token **tokens);
+int		ft_check_space(char *value);
 
 // to initiaize 
 void	lexer_init(t_lexer *lexer);

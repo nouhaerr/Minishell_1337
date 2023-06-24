@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 21:15:28 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/22 20:03:52 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/24 18:44:54 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,30 +68,46 @@ int	token_env2(char *input, int i, t_lexer *lexer, t_token **tokens)
 	char	*str_env;
 	char	*env;
 	(void)tokens;
+	int i2;
+	char **str;
 
 	len = token_word(input, i + 1, -1);
-	// if (lexer -> str != NULL)
-	// {
-	// 	int arten;
-
-	// 	if (lexer -> base2 != 0)
-	// 		arten = quotes;
-	// 	else
-	// 		arten = general;
-	// 	ft_lstaddback(tokens, ft_lstnew(lexer -> str, word, arten));
-	// 	lexer -> str = NULL;
-	// }
+	str_env = NULL;
+	str = NULL;
+	//printf("imhier\n");
 	if (lexer->her == 0 && (lexer->base == 2 || lexer->base == 0))
 	{
 		if (len != 0)
 		{
+			i2 = 0;
 			env = ft_substr(input, i + 1, len);
 			str_env = check_env(env, g_var.list);
+			if (ft_strcmp(str_env, " ") != 0 && ft_check_space(str_env) > 0)
+			{
+				if (lexer -> str != NULL)
+					build_list(lexer, tokens);
+				str = ft_split(str_env, ' ');
+				while (str[i2 + 1])
+				{	
+					if (lexer -> base == 0)
+						ft_lstaddback(tokens, ft_lstnew(str[i2], word, env_general));
+					else
+						ft_lstaddback(tokens, ft_lstnew(str[i2], word, env_quotes));
+					i2++;
+				}
+				str_env = str[i2];
+			}
+			if(lexer -> str != NULL && !ft_strcmp(" ", str_env))
+				str_env = NULL;
+			lexer->str = ft_strjoin(lexer->str, str_env);
 			free(env);
+			
 		}
-		if (len == 0)
+		if (len == 0 && (input[i + 1] == ' ' || input[i + 1] == '\0'))
+		{
 			str_env = ft_strdup("$");
-		lexer->str = ft_strjoin(lexer->str, str_env);
+			lexer->str = ft_strjoin(lexer->str, str_env);
+		}
 	}
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:53:39 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/22 21:16:19 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/24 17:54:25 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_pipe
 void	her(t_data2 *my_heredoc, int index, int *pipefd);
 void	run_builtin(t_parser *parser);
 void	exec_heredoc(t_parser *parser);
-void	execution(t_parser *parser, t_data *my_heredoc);
+void	execution(t_parser *parser);
 int		multiple_pipes(t_parser *node);
 int		exec_cmd(t_parser *parser, t_pipe pip, char *msg);
 int		isbuiltin(t_parser *parser);
@@ -39,6 +39,6 @@ void	ft_err(char *s, char *cmd, char *s2);
 void	update_fd(int *my_fd);
 void	ft_check(int p);
 void	write_her(t_data2 *my_heredoc, t_parser *p);
-int		ft_ambi(t_parser *parser);
+int	ft_ambi(t_data2 *list);
 
 #endif

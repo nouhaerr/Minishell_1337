@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/22 17:56:54 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/24 17:56:00 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,17 @@ int	exit_status(int status)
 	return (0);
 }
 
-int	ft_ambi(t_parser *parser)
+int	ft_ambi(t_data2 *list)
 {
-	if (parser -> amg == 1)
+	if (list -> amg == 1)
 	{
 		g_var.exit_status = 1;
 		printf ("minishell: : ambiguous redirect\n");
-		return(1);
+		return (1);
 	}
-	return (0);
+	return(0);
 }
-
-void	execution(t_parser *parser, t_data *my_heredoc)
+void	execution(t_parser *parser)
 {
 	int		pid;
 	t_pipe	pip;
@@ -77,7 +76,9 @@ void	execution(t_parser *parser, t_data *my_heredoc)
 		if (parser->cmd && ft_lstsize_parse(parser) == 1)
 			pid = exec_cmd(parser, pip, "one");
 		else
+		{
 			pid = multiple_pipes(parser);
+		}
 	}
 		// check multiple pipes limits
 	while (1)
@@ -88,5 +89,4 @@ void	execution(t_parser *parser, t_data *my_heredoc)
 		if (wait_pid == pid) // last child pid
 			g_var.exit_status = exit_status(status);
 	}
-	free_mylist(my_heredoc, 2);
 }

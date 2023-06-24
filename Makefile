@@ -6,7 +6,7 @@
 #    By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 02:49:56 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/06/22 19:31:48 by hobenaba         ###   ########.fr        #
+#    Updated: 2023/06/24 17:55:28 by hobenaba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ EXECUTION_BU =  echo.c pwd.c env.c exit.c unset.c utils.c cd.c
 SRCS =	main.c $(addprefix ./parsing/, $(PARSING)) $(addprefix ./execution/, $(EXECUTION)) \
 		$(addprefix ./execution/builtins/export/, $(EXECUTION_EXP))  \
 		$(addprefix ./execution/redirections/, $(EXECUTION_RDR)) \
-		$(addprefix ./execution/builtins/, $(EXECUTION_BU)) signal.c 
+		$(addprefix ./execution/builtins/, $(EXECUTION_BU)) #signal.c 
 		
 OBJS = $(SRCS:.c=.o)
 LIBFT= libft.a

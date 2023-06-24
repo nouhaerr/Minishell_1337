@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/22 20:04:39 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/24 18:45:42 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,27 +82,26 @@ void	close_myfd_prog(int *my_fd)
 	free(my_fd);
 }
 
-void	pa_ex(t_token *tok, t_lexer *lex, t_parser *par, t_data *here)
+void	pa_ex(t_token *tok, t_lexer *lex, t_parser *par)
 {
-	(void)here;
 	parse(&tok, &par, lex);
 	if (par -> nu_here >= 17)
 	{
 		printf("minishell: maximum here-document count exceeded\n");
 		exit (2);
 	}
-	execution(par, here);
+	execution(par);
 	update_fd(g_var.fd_prog);
 	free_mylist(par, 1);
 }
 
-int	_session(t_token *tok, t_parser *par, t_data *her, t_lexer *le)
+int	_session(t_token *tok, t_parser *par, t_lexer *le)
 {
 	char		*input;
 	const char	*prompt;
 	int			base;
 
-	(void)her;
+	(void)le;
 	while (1)
 	{	
 		tok = NULL;
@@ -116,15 +115,15 @@ int	_session(t_token *tok, t_parser *par, t_data *her, t_lexer *le)
 			break ;
 		if (ft_strcmp(input, "") != 0)
 			add_history(input);
-		g_var.fd_prog = my_fd();
+		g_var.fd_prog = my_fd(); // hier we have a leak
 		base = lex(input, &tok, le);
 		// while (tok)
 		// {
-		// 	printf("->>[%s]\n", tok -> value);
+		// 	printf("->>[%s] == type %d arten %d\n", tok -> value, tok -> type, tok -> arten);
 		// 	tok = tok -> next;
 		// }
 		if (!syntax_error(base, &tok) && tok != NULL)
-			pa_ex(tok, le, par, her);
+			pa_ex(tok, le, par);
 		else
 			g_var.exit_status = 258; // for the exit_status for the synatx
 		close_myfd_prog(g_var.fd_prog);
@@ -136,7 +135,6 @@ int	_session(t_token *tok, t_parser *par, t_data *her, t_lexer *le)
 
 int	main(int ac, char **av, char **env)
 {
-	t_data		*my_heredoc;
 	t_lexer		*lexer;
 	t_token		*tokens;
 	t_parser	*parser;
@@ -148,7 +146,6 @@ int	main(int ac, char **av, char **env)
 	tokens = NULL;
 	parser = NULL;
 	g_var.list = save_my_env(env);
-	my_heredoc = NULL;
-	out = _session(tokens, parser, my_heredoc, lexer);
+	out = _session(tokens, parser, lexer);
 	return (out);
 }

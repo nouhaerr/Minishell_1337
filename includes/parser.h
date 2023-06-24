@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:54:36 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/22 18:03:44 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/24 11:19:09 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ enum
 typedef struct t_data
 {
 	char			*value;
+
 	struct t_data	*next;
 }	t_data;
 
@@ -38,6 +39,7 @@ typedef struct t_data2
 {
 	char			*value;
 	int				type;
+	int				amg;
 	struct t_data2	*next;
 }	t_data2;
 
@@ -50,7 +52,6 @@ typedef struct t_parser
 	t_data2			*outfiles;
 	int				index;
 	int				nu_here;
-	int				amg;
 	int				fd[2];
 	t_data2			*inf_her;
 	int				my_cmd;
@@ -70,7 +71,7 @@ t_data		*ft_lstnew2(char *value);
 void		ft_lstaddback2(t_data **lst, t_data *new);
 t_parser	*ft_lstnew3(int index);
 t_parser	*ft_lstaddback3(t_parser **lst, t_parser *new);
-t_data2		*ft_lstnew4(char *value, int type);
+t_data2	*ft_lstnew4(char *value, int type, int amg);
 void		ft_lstaddback4(t_data2 **lst, t_data2 *new);
 
 // functions that are responsible for freeing my list

@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:53:34 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/22 16:26:38 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/24 18:39:38 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,47 +36,50 @@ int	check_which_special_char(char c, char next_c, t_token **tokens, t_lexer *lex
 	return (0);
 }
 
-int	ft_check_space(char *value)
+int	ft_check_space(char *s)
 {
 	int	i;
+	int	j;
 
 	i = 0;
-	while (value[i])
+	j = 0;
+	while (s[i])
 	{
-		if (value[i] == ' ')
-			return (1);
+		if (s[i] != ' ' && s[i + 1] == ' ')
+			j++;
+		else if (s[i] != ' ' && s[i + 1] == '\0')
+			j++;
 		i++;
 	}
-	return (0);
+	return (j);
 }
 
 void	build_list(t_lexer *lexer, t_token **tokens)
 {
 	int		arten;
-	char	**str;
-	int		i;
+	// char	**str;
+	// int		i;
 
 	if (lexer -> base2 != 0)
 		arten = quotes;
 	else
 		arten = general;
-	if (!ft_strcmp(lexer -> str, " "))
+	
+	if (lexer -> str != NULL && !ft_strcmp(lexer -> str, " "))
 		ft_lstaddback(tokens, ft_lstnew(lexer -> str, word, env_general));
-	else if (arten == general && ft_check_space(lexer -> str))
-	{
-		str = ft_split(lexer -> str, ' ');
-		i = 0;
-		while (str[i])
-		{	
-			// printf("imhier str : %s\n", str[i]);
-			// sleep (1);
-			if (lexer -> base == 0)
-				ft_lstaddback(tokens, ft_lstnew(str[i], word, env_general));
-			else
-				ft_lstaddback(tokens, ft_lstnew(str[i], word, env_quotes));
-			i++;
-		}
-	}
+	// if (arten == general && ft_check_space(lexer -> str))
+	// {
+		// str = ft_split(lexer -> str, ' ');
+		// i = 0;
+		// while (str[i])
+		// {	
+		// 	if (lexer -> base == 0)
+		// 		ft_lstaddback(tokens, ft_lstnew(str[i], word, env_general));
+		// 	else
+		// 		ft_lstaddback(tokens, ft_lstnew(str[i], word, env_quotes));
+		// 	i++;
+	// 	}
+	// }
 	else
 		ft_lstaddback(tokens, ft_lstnew(lexer -> str, word, arten));
 	lexer -> str = NULL;
