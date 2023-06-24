@@ -110,10 +110,19 @@ int	*dup_fd(t_parser *parse, t_pipe pip, char *msg)
 void	ft_execve(char *path, t_parser *node, char **env)
 {
 	char	**arr;
+	int	dir;
 
+	dir = open(path, O_DIRECTORY);
+	if (dir != -1) //means that it's a directory
+	{
+		close(dir);
+		ft_err("minishell: ", path, ":is a directory");
+		g_var.exit_status = 126;
+		exit(g_var.exit_status);
+	}
 	arr = table_cmd(node);
-	// if (access(path, X_OK | F_OK))
-	// 	ft_err("minishell: ", node->cmd, ":is a directory");
+	// if (access(path, X_OK)) //not executable
+	//		exit(126);
 	//printf("HERE %s\n", *arr); // && access(path, X_OK | F_OK)
 	if (execve(path, arr, env) < 0)
 	{
@@ -152,7 +161,8 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 		return (pid);
 	if (pid == 0)
 	{
-		//SIGNALS
+		//signal(SIGINT, SIGDEL);//SIGNALS
+		//signal(SIGQUIT, SIGDEL);
 		dp_built(parse, pip, msg);
 		path = parse->cmd;
 		if (!cmd_slash(parse->cmd))
