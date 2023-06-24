@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 21:48:23 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/22 19:48:38 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/24 19:18:55 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ int	counter(char const *s, char c)
 	j = 0;
 	while (s[i])
 	{
-		if (s[i] != c && s[i + 1] == c)
+		if (s[i] == c && s[i + 1] == c)
+			j++;
+		else if (s[i] != c && s[i + 1] == c)
 			j++;
 		else if (s[i] != c && s[i + 1] == '\0')
 			j++;
@@ -68,7 +70,7 @@ char	**split2(char const *s, char c)
 		return (NULL);
 	while (++i < counter(s, c))
 	{
-		while (s[j] == c)
+		while (s[j] == c && s[j + 1] != c)
 			j++;
 		p[i] = ft_substr2(s, j, word(s, j, c));
 		if (!p[i])
