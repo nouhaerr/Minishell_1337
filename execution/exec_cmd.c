@@ -161,8 +161,8 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 		return (pid);
 	if (pid == 0)
 	{
-		//signal(SIGINT, SIGDEL);//SIGNALS
-		//signal(SIGQUIT, SIGDEL);
+		//signal(SIGINT, SIG_DFL);//SIGNALS
+		//signal(SIGQUIT, SIG_DFL);
 		dp_built(parse, pip, msg);
 		path = parse->cmd;
 		if (!cmd_slash(parse->cmd))
