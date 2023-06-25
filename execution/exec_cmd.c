@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/24 18:26:31 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 13:11:47 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	*dup_fd(t_parser *parse, t_pipe pip, char *msg)
 			parse->fd[0] = fl[0];
 		if (fl[1] != -1)
 			parse->fd[1] = fl[1];
-	printf("%d\t%d\n", parse->fd[0], parse->fd[1]);
 	}
 	else
 	{
@@ -110,37 +109,25 @@ int	*dup_fd(t_parser *parse, t_pipe pip, char *msg)
 void	ft_execve(char *path, t_parser *node, char **env)
 {
 	char	**arr;
-	int	dir;
 
-	dir = open(path, O_DIRECTORY);
-	if (dir != -1) //means that it's a directory
-	{
-		close(dir);
-		ft_err("minishell: ", path, ":is a directory");
-		g_var.exit_status = 126;
-		exit(g_var.exit_status);
-	}
+	check_dir_notexec(path);
 	arr = table_cmd(node);
-	// if (access(path, X_OK)) //not executable
-	//		exit(126);
 	//printf("HERE %s\n", *arr); // && access(path, X_OK | F_OK)
 	if (execve(path, arr, env) < 0)
 	{
 		free(env);
 		perror("minishell");
-		// printf("ok\n");
 		// if (cmd_slash(node->cmd))
 		// 	ft_err("minishell: ", node->cmd, ": No such file or directory");
-		// else if (!cmd_slash(node -> cmd) && node -> my_cmd == 0)
-		// 	ft_err("minishell: ", node->cmd, ": command not found");
-		exit(g_var.exit_status);
+		exit(127);
 	}
 	free(env);
 }
 
 void	dp_built(t_parser *parse, t_pipe pip, char *msg)
 {
-	dup_fd(parse, pip, msg);
+	if (!dup_fd(parse, pip, msg))
+		exit(1);
 	if (isbuiltin(parse))
 	{
 		run_builtin(parse);
@@ -169,7 +156,7 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 			path = get_path(parse->cmd, parse);
 		if (!path && parse -> my_cmd == 0)
 		{
-			printf(" ->>> 11imhier\n");
+			g_var.exit_status = 127;
 			ft_err("minishell: ", parse->cmd, ": command not found");
 		}
 		if (parse -> my_cmd == 0)

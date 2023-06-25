@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 00:25:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/22 23:58:53 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/25 12:47:07 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_err(char *s, char *cmd, char *s2)
 	ft_putstr_fd(s, STDERR_FILENO);
 	ft_putstr_fd(cmd, STDERR_FILENO);
 	ft_putendl_fd(s2, STDERR_FILENO);
-	exit(127);
+	exit(g_var.exit_status);
 }
 
 void	ft_free(char **str)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 05:37:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/24 19:15:36 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 13:00:20 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	**table_cmd(t_parser *node)
 		}
 		cur = cur -> next;
 	}
-	printf("the value of str : [%s]\n", str);
+	// printf("the value of str : [%s]\n", str);
 	s1 = split2(str, ' ');
 	// int i;
 
@@ -44,6 +44,24 @@ char	**table_cmd(t_parser *node)
 	// }
 	free(str);
 	return (s1);
+}
+
+void	check_dir_notexec(char *path)
+{
+	int	dir;
+
+	dir = open(path, O_DIRECTORY);
+	if (dir != -1) //means that it's a directory
+	{
+		close(dir);
+		g_var.exit_status = 126;
+		ft_err("minishell: ", path, ": is a directory");
+	}
+	if (open(path, O_RDONLY) != -1 && access(path, X_OK)) //not executable
+	{
+		perror("minishell");
+		exit(126);
+	}
 }
 
 char	**real_path(void)
@@ -79,6 +97,7 @@ char	*get_path(char *cmd, t_parser *parser)
 	full_path = real_path();
 	if (!full_path)
 	{
+		g_var.exit_status = 127;
 		ft_err("minishell: ", cmd, ": command not found");
 	}
 	cmd_file = ft_strjoin2("/", cmd);
