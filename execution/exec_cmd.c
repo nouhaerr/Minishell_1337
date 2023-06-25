@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/25 23:22:45 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/25 23:23:02 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_execve(char *path, t_parser *node, char **env, int slash)
 	if (execve(path, arr, env) < 0)
 	{
 		free(env);
-		perror("===minishell");
+		perror("minishell");
 		exit(1);
 	}
 	free(env);
