@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 05:37:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/25 14:56:29 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 15:04:38 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,24 @@ char	**table_cmd(t_parser *node)
 	s1 = split2(str, ' ');
 	free(str);
 	return (s1);
+}
+
+void	check_dir_notexec(char *path)
+{
+	int	dir;
+
+	dir = open(path, O_DIRECTORY);
+	if (dir != -1) //means that it's a directory
+	{
+		close(dir);
+		g_var.exit_status = 126;
+		ft_err("minishell: ", path, ": is a directory");
+	}
+	if (open(path, O_RDONLY) != -1 && access(path, X_OK)) //not executable
+	{
+		perror("minishell");
+		exit(126);
+	}
 }
 
 char	**real_path(void)
@@ -70,6 +88,7 @@ char	*get_path(char *cmd, t_parser *parser)
 	full_path = real_path();
 	if (!full_path)
 	{
+		g_var.exit_status = 127;
 		ft_err("minishell: ", cmd, ": command not found");
 	}
 	cmd_file = ft_strjoin2("/", cmd);

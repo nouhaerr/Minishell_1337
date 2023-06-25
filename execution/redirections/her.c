@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:46:12 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/22 19:12:13 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 15:50:13 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ int	my_word(char *input, int start)
 
 void	expansion_my_heredoc(char *input, int i, char **str, int index)
 {
-	int	len ;
-	char *s1;
+	int		len ;
+	char	*s1;
 
 	len = 0;
 	while (input[i])
@@ -89,15 +89,17 @@ void	her(t_data2 *my_heredoc, int index, int *pipefd)
 {
 	char	*input;
 	char	*str;
+	t_data2	*h_next;
 	int		i;
 
 	str = NULL;
 	close(pipefd[0]);
 	input = readline("> ");
+	check_my_heredoc(my_heredoc -> next, &h_next);
 	while (input != NULL && ft_strcmp(input, my_heredoc -> value))
 	{
 		i = 0;
-		if (my_heredoc != NULL && my_heredoc -> next == NULL)
+		if (my_heredoc != NULL && h_next == NULL)
 		{
 			if (my_heredoc -> type == expand)
 				expansion_my_heredoc(input, i, &str, index);
@@ -108,7 +110,6 @@ void	her(t_data2 *my_heredoc, int index, int *pipefd)
 			free(input);
 		input = readline("> ");
 	}
-	//if (str != NULL)
 	write (pipefd[1], str, ft_strlen(str));
 	close(pipefd[1]);
 }

@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:50:10 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/24 10:28:10 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 15:18:36 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int	*fd_redirection(t_parser *node)
 	{
 		g_var.redir = 1;
 		close(fd[0]);
+		if (ft_ambi(tmp2))
+			return (free(fd), NULL);
 		if (tmp2->type == infile && !ft_ambi(tmp2))
 			fd[0] = ft_open(tmp2->value, "infile");
 		else
@@ -62,8 +64,8 @@ int	*fd_redirection(t_parser *node)
 	{
 		g_var.redir = 1;
 		close(fd[1]);
-		// if (tmp1->next == NULL && ft_ambi(cur))
-		// 	return(free(fd), NULL);
+		if (ft_ambi(tmp1))
+			return (free(fd), NULL);
 		if (tmp1->type == append && !ft_ambi(tmp1))
 			fd[1] = ft_open(tmp1->value, "saved_file");
 		else if (tmp1->type == trunc && !ft_ambi(tmp1))

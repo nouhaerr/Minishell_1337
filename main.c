@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/25 14:56:48 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 15:14:42 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,17 +89,19 @@ int	_session(t_token *tok, t_parser *par, t_lexer *le)
 		free((void *)prompt);
 		if (input == NULL)
 			break ;
-		if (ft_strcmp(input, "") != 0)
+		if (ft_check_space(input))
+		{
 			add_history(input);
-		g_var.fd_prog = my_fd();
-		base = lex(input, &tok, le);
-		if (!syntax_error(base, &tok) && tok != NULL)
-			pa_ex(tok, le, par);
-		else
-			g_var.exit_status = 258;
-		close_myfd_prog(g_var.fd_prog);
-		free_mylist(tok, 0);
-		free(input);
+			g_var.fd_prog = my_fd();
+			base = lex(input, &tok, le);
+			if (!syntax_error(base, &tok) && tok != NULL)
+				pa_ex(tok, le, par);
+			else
+				g_var.exit_status = 258;
+			close_myfd_prog(g_var.fd_prog);
+			free_mylist(tok, 0);
+			free(input);
+		}
 	}
 	return (g_var.exit_status);
 }
