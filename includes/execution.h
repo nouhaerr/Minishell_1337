@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:53:39 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/25 16:15:32 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 20:13:31 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	builtin_executor(t_parser *node, t_pipe pip, char *msg);
 void	run_builtin(t_parser *parser);
 int		*dup_fd(t_parser *parse, t_pipe pip, char *msg);
 int		*fd_redirection(t_parser *node);
-char	*get_path(char *cmd, t_parser *parser);
-void	check_dir_notexec(char *path);
+char	*get_path(char *cmd);
+void	check_dir_notexec(char *path, t_parser *node);
 char	**create_env_arr(int size);
 char	**table_cmd(t_parser *node);
 void	ft_free(char **str);

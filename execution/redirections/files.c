@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:50:10 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/25 17:47:41 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 20:37:37 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,13 @@ int	ft_infiles(t_parser *node, t_data2 *tmp2, int *fd)
 	while (tmp2)
 	{
 		g_var.redir = 1;
-		//close(fd[0]);
 		if (ft_ambi(tmp2))
 			return (0);
 		if (tmp2->type == infile && !ft_ambi(tmp2))
+		{
+			close(fd[0]);
 			fd[0] = ft_open(tmp2->value, "infile");
+		}
 		else
 			fd[0] = node->fd[0];
 		if (fd[0] == -3)

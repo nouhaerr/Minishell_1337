@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/25 18:47:01 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 20:12:15 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ void	execution(t_parser *parser)
 		else
 			pid = multiple_pipes(parser);
 	}
-		// check multiple pipes limits
 	while (1)
 	{
 		wait_pid = waitpid(-1, &status, 0); // If pid is -1, the call waits for any child process.
