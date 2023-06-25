@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 05:37:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/25 20:12:06 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/25 21:49:02 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	check_dir_notexec(char *path, t_parser *node)
 		g_var.exit_status = 126;
 		ft_err("minishell: ", path, ": is a directory");
 	}
-	if (node->cmd[0] != '\0' && access(path, X_OK))
+	if (node->cmd[0] != '\0' && open(path, O_RDONLY) != -1 && access(path, X_OK))
 	{
 		perror("minishell");
 		exit(126);

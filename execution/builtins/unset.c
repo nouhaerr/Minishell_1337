@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 10:11:55 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/16 18:08:22 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 21:41:42 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	sh_unset(t_data *arg)
 
 	i = 0;
 	cur = arg;
-	if (!cur)
+	if (!cur || !cur->value)
 		return ;
 	if (cur->value[i] == '-' && cur->value[i + 1])
 		return (unset_error(cur));
