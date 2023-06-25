@@ -6,11 +6,11 @@
 #    By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 02:49:56 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/06/25 21:25:37 by nerrakeb         ###   ########.fr        #
+#    Updated: 2023/06/25 22:23:14 by nerrakeb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
 
 RDFLAGS +=  -lreadline -L/goinfre/nerrakeb/homebrew/opt/readline/lib
 INCLUDES += -I /goinfre/nerrakeb/homebrew/opt/readline/include
