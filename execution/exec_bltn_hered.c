@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_bltn_hered.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/25 13:44:07 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/25 15:59:45 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,23 @@
 
 void	check_my_heredoc(t_data2 *inf_her, t_data2 **my_heredoc)
 {
-	// printf("%s\n", inf_her -> value);
-	// sleep (3);
 	while (inf_her)
 	{
 		if (inf_her -> type != infile)
 		{
 			*my_heredoc = inf_her;
-			break;
+			break ;
 		}
 		inf_her = inf_her -> next;
 	}
 }
-void  exec_heredoc(t_parser *parser)
+
+void	exec_heredoc(t_parser *parser)
 {
 	t_data2		*my_heredoc;
 	t_parser	*p;
 	t_data2		*inf_her;
-	
+
 	p = parser;
 	inf_her = p -> inf_her;
 	while (p)
@@ -50,11 +49,12 @@ void  exec_heredoc(t_parser *parser)
 		p = p->next;
 	}
 }
+
 void	write_her(t_data2 *my_heredoc, t_parser *p)
 {
 	int	pipefd[2];
 	int	pid;
-	int status;
+	int	status;
 
 	pipe(pipefd);
 	pid = fork();
@@ -67,8 +67,6 @@ void	write_her(t_data2 *my_heredoc, t_parser *p)
 	waitpid(pid, &status, 0);
 	g_var.exit_status = WEXITSTATUS(status);
 	close(pipefd[1]);
-	//if (my_heredoc -> next != NULL)
-	//	close(pipefd[0]);
 	p->fd[0] = pipefd[0];
 	//printf("%d\t%d\n", p->fd[0], p -> fd[1]);
 }

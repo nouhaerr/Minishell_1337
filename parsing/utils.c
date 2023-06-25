@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:18:35 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/24 18:15:15 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 15:21:54 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,15 @@ int	ft_ignore_spaces(char *input, int i)
 	return (i);
 }
 
-// functions that helped me to check on my code and debugg it and nothing else
-// this function is just to guide me// no need of it in the code itself
+void	check_amg_parse(t_token *t2, t_lexer *l)
+{
+	if (t2 != NULL && t2->arten == env_general
+		&& (t2->next != NULL && t2->next->arten == env_general))
+			l -> amg = 1;
+	if (!ft_strcmp(t2 -> value, " "))
+		l -> amg = 1;
+}
+
 int	ft_lstsize_parse(t_parser *parse)
 {
 	int	i;
@@ -42,7 +49,6 @@ void	check_struct(t_parser *parser)
 	int i;
 
 	i = 0;
-	
 	while (parser)
 	{	
 		t_data2 *out = parser->outfiles;
@@ -52,12 +58,14 @@ void	check_struct(t_parser *parser)
 		printf("struct number %d\n\n", ++i);
 		while (out)
 		{
-			printf("[out : %s, type : %d == amg : %d] \n", (out)->value, (out)->type, out -> amg);
+			printf("[out : %s, type : %d == amg : %d] \n"
+			, (out)->value, (out)->type, out -> amg);
 			(out) = (out)->next;
 		}
 		while (in)
 		{
-			printf("infher : [%s]  type %d == amg %d\n ", (in)->value, in -> type, in -> amg);
+			printf("infher : [%s]  type %d == amg %d\n "
+		, (in)->value, in -> type, in -> amg);
 			(in) = (in)->next;
 		}
 		printf("cmd: [%s]\n", cmd);

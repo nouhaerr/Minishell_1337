@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/25 13:09:41 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/25 16:09:06 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ int	isbuiltin(t_parser *parser)
 int	exit_status(int status)
 {
 	if (WIFEXITED(status))
-		return(WEXITSTATUS(status));
+		return (WEXITSTATUS(status));
 	else if (WIFSIGNALED(status))
-		return(WTERMSIG(status) + 128);
+		return (WTERMSIG(status) + 128);
 	return (0);
 }
 
@@ -50,7 +50,7 @@ int	ft_ambi(t_data2 *list)
 		printf ("minishell: %s: ambiguous redirect\n", list->value);
 		return (1);
 	}
-	return(0);
+	return (0);
 }
 
 void	execution(t_parser *parser)
@@ -79,7 +79,6 @@ void	execution(t_parser *parser)
 		else
 			pid = multiple_pipes(parser);
 	}
-		// check multiple pipes limits
 	while (1)
 	{
 		wait_pid = waitpid(-1, &status, 0); // If pid is -1, the call waits for any child process.

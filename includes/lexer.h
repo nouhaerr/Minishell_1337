@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:54:28 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/24 13:53:25 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 12:50:57 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,15 @@ typedef struct t_lexer
 	char	c;
 	int		a;
 	int		i;
+	int		len;
+	int		i2;
 	int		index;
 	int		amg;
 	int		arten;
-	t_token	*tokens2;
+	char	*str_env;
+	char	**s2;
+	char	*env;
+	t_token	*tok2;
 	t_token	*tok;
 }	t_lexer;
 
@@ -63,7 +68,7 @@ void	ft_lstaddback(t_token **lst, t_token *new);
 
 // funstions related to tokens
 int		lex(char *input, t_token **tokens, t_lexer *lexer);
-int		check_which_special_char(char c, char next_c, t_token **tokens, t_lexer *lexer);
+int		check_which_special_char(char c, char next_c, t_token **t, t_lexer *l);
 int		ft_ignore_spaces(char *input, int i);
 int		other_tokens(t_lexer *lexer, int i, char *input);
 int		partition_tokens(t_lexer *lexer, char *input, int i);

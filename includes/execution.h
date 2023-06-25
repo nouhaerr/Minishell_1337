@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:53:39 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/25 13:48:45 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/25 17:36:49 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	builtin_executor(t_parser *node, t_pipe pip, char *msg);
 void	run_builtin(t_parser *parser);
 int		*dup_fd(t_parser *parse, t_pipe pip, char *msg);
 int		*fd_redirection(t_parser *node);
-char	*get_path(char *cmd, t_parser *parser);
-void	check_dir_notexec(char *path);
+char	*get_path(char *cmd);
+void	check_dir_notexec(char *path, t_parser *node);
 char	**create_env_arr(int size);
 char	**table_cmd(t_parser *node);
 void	ft_free(char **str);
@@ -42,5 +42,6 @@ int		ft_check_fork(int p);
 int		cmd_slash(char *cmd);;
 void	write_her(t_data2 *my_heredoc, t_parser *p);
 int		ft_ambi(t_data2 *list);
+void	check_my_heredoc(t_data2 *inf_her, t_data2 **my_heredoc);
 
 #endif
