@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/25 15:59:45 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 18:22:00 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,29 @@ void	check_my_heredoc(t_data2 *inf_her, t_data2 **my_heredoc)
 void	exec_heredoc(t_parser *parser)
 {
 	t_data2		*my_heredoc;
+	t_data2		*heredoc_next;
 	t_parser	*p;
+	t_data2		*v;
 	t_data2		*inf_her;
 
 	p = parser;
-	inf_her = p -> inf_her;
 	while (p)
 	{
+		inf_her = p -> inf_her;
 		while (inf_her)
 		{
 			my_heredoc = NULL;
+			heredoc_next = NULL;
 			check_my_heredoc(inf_her, &my_heredoc);
+			v = my_heredoc;
 			if (my_heredoc != NULL)
-				write_her(my_heredoc, p);
+				check_my_heredoc(v -> next, &heredoc_next);
+			if (heredoc_next != NULL)
+				v = heredoc_next;
 			if (my_heredoc != NULL)
-				inf_her = my_heredoc -> next;
+				write_her(my_heredoc, heredoc_next, p);
+			if (my_heredoc != NULL)
+				inf_her = heredoc_next;
 			else
 				inf_her = my_heredoc;
 		}
@@ -50,25 +58,30 @@ void	exec_heredoc(t_parser *parser)
 	}
 }
 
-void	write_her(t_data2 *my_heredoc, t_parser *p)
+void	write_her(t_data2 *my_heredoc, t_data2 *heredoc_next,  t_parser *p)
 {
 	int	pipefd[2];
 	int	pid;
 	int	status;
 
-	pipe(pipefd);
+	if (heredoc_next == NULL)
+		pipe(pipefd);
 	pid = fork();
 	if (pid == 0)
 	{
 		//check_signal_heredoc();
-		her(my_heredoc, p -> index, pipefd);
+		her(my_heredoc, heredoc_next, p -> index, pipefd);
 		exit (0);
 	}
 	waitpid(pid, &status, 0);
 	g_var.exit_status = WEXITSTATUS(status);
-	close(pipefd[1]);
-	p->fd[0] = pipefd[0];
-	//printf("%d\t%d\n", p->fd[0], p -> fd[1]);
+	if (heredoc_next == NULL)
+	{
+		close(pipefd[1]);
+		p->fd[0] = pipefd[0];
+		printf("in HEREDOC %d\t%d\n", p->fd[0], p -> fd[1]);
+	}
+	
 }
 
 void	run_builtin(t_parser *parser)

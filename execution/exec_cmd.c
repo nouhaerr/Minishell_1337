@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/25 15:59:29 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 18:49:26 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	*dup_fd(t_parser *parse, t_pipe pip, char *msg)
 			ft_fd(fl, parse);
 		}
 	}
+	// printf("->>> %d\t%d\n", parse->fd[0], parse -> fd[1]);
 	dup2(parse->fd[1], 1);
 	dup2(parse->fd[0], 0);
 	if (ft_strcmp(msg, "one"))
@@ -61,8 +62,6 @@ int	*dup_fd(t_parser *parse, t_pipe pip, char *msg)
 		close(pip.wr_end[0]);
 		close(pip.wr_end[1]);
 	}
-	printf("->>>>  write:%d read:%d\n", parse->fd[1], parse->fd[0]);
-	sleep (1);
 	return (fl);
 }
 
@@ -111,8 +110,6 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 		//signal(SIGINT, SIG_DFL);//SIGNALS
 		//signal(SIGQUIT, SIG_DFL);
 		dp_built(parse, pip, msg);
-		printf("imhier\n");
-		sleep (1);
 		path = parse->cmd;
 		if (!cmd_slash(parse->cmd))
 			path = get_path(parse->cmd, parse);

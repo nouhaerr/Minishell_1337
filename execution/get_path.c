@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 05:37:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/25 15:04:38 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 18:50:42 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ char	**table_cmd(t_parser *node)
 
 	str = NULL;
 	cur = node -> args;
+
 	str = ft_strjoin2(node -> cmd, " ");
 	while (cur)
 	{

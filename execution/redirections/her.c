@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:46:12 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/25 15:50:13 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 16:14:58 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,21 +85,18 @@ void	expansion_my_heredoc(char *input, int i, char **str, int index)
 	free(input);
 }
 
-void	her(t_data2 *my_heredoc, int index, int *pipefd)
+void	her(t_data2 *my_heredoc, t_data2 *heredoc_next, int index, int *pipefd)
 {
 	char	*input;
 	char	*str;
-	t_data2	*h_next;
 	int		i;
 
 	str = NULL;
-	close(pipefd[0]);
 	input = readline("> ");
-	check_my_heredoc(my_heredoc -> next, &h_next);
 	while (input != NULL && ft_strcmp(input, my_heredoc -> value))
 	{
 		i = 0;
-		if (my_heredoc != NULL && h_next == NULL)
+		if (my_heredoc != NULL && heredoc_next == NULL)
 		{
 			if (my_heredoc -> type == expand)
 				expansion_my_heredoc(input, i, &str, index);
@@ -110,6 +107,10 @@ void	her(t_data2 *my_heredoc, int index, int *pipefd)
 			free(input);
 		input = readline("> ");
 	}
-	write (pipefd[1], str, ft_strlen(str));
-	close(pipefd[1]);
+	if (heredoc_next == NULL)
+	{
+		close(pipefd[0]);
+		write (pipefd[1], str, ft_strlen(str));
+		close(pipefd[1]);
+	}
 }
