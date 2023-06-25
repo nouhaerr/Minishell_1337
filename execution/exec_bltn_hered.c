@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_bltn_hered.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/25 23:25:18 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/25 23:53:12 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	write_her(t_data2 *my_heredoc, t_data2 *heredoc_next,  t_parser *p)
 	}
 	waitpid(pid, &status, 0);
 	g_var.exit_status = WEXITSTATUS(status);
+	printf("->>>> %d\n", g_var.exit_status);
 	if (heredoc_next == NULL)
 	{
 		close(pipefd[1]);

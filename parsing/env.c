@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 13:38:39 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/24 15:28:04 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 23:36:36 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,10 @@ t_env	*save_my_env(char **env)
 				break ;
 			}
 		}
-		if (ft_strcmp2(ft_substr(env[i], 0, len), "OLDPWD"))
+		if (!ft_strcmp2(ft_substr(env[i], 0, len), "OLDPWD"))
+			ft_lstaddback_env(&my_env, ft_lstnew_env(ft_substr(env[i], 0, len),
+					NULL));
+		else
 			ft_lstaddback_env(&my_env, ft_lstnew_env(ft_substr(env[i], 0, len),
 					ft_substr(env[i], start, ft_strlen(env[i]) - 1)));
 		i++;

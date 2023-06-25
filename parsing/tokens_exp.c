@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 12:19:26 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/25 22:09:04 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 23:17:06 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	token_env3(t_token **t, t_lexer *l, char *input, int i)
 	l -> str_env = check_env(l -> env, g_var.list);
 	if (ft_strcmp(l -> str_env, " ") != 0 && ft_check_space(l -> str_env) > 0)
 	{
-		if (l -> str != NULL)
+		if (l -> str != NULL && l -> e == 0)
 			build_list(l, t);
 		loop_on_myenv(t, l);
 		free(l -> s2);
@@ -55,9 +55,11 @@ int	token_env2(char *input, int i, t_lexer *l, t_token **tokens)
 	l -> str_env = NULL;
 	if (l->her == 0 && (l->base == 2 || l->base == 0))
 	{
+			//printf("[%c] = %d\n", input[i + 1], l ->base);
 		if (l -> len != 0)
 			token_env3(tokens, l, input, i);
-		if (l -> len == 0 && (input[i + 1] == ' ' || input[i + 1] == '\0'))
+	
+		else if (l->len == 0 && ((input[i + 1] != '\0' && l->base == 2) || ((input[i + 1] == '\0' || input[i + 1] == ' ') && l->base == 0)))
 		{
 			l -> str_env = ft_strdup("$");
 			l->str = ft_strjoin(l->str, l -> str_env);
@@ -67,7 +69,6 @@ int	token_env2(char *input, int i, t_lexer *l, t_token **tokens)
 	{
 		l -> str_env = ft_substr(input, i, l -> len + 1);
 		l->str = ft_strjoin(l->str, l->str_env);
-		free(l -> str_env);
 		l->her = 0;
 	}
 	i += l -> len + 1;
@@ -91,6 +92,14 @@ int	token_env(char *input, int i, t_lexer *lexer, t_token **tokens)
 	}
 	else if (ft_isdigit(input[i + 1]))
 		i += 2;
+	else if (input[i + 1] == '$')
+	{
+		itoa = ft_strdup("$$");
+		lexer -> str_env = ft_strdup(itoa);
+		lexer->str = ft_strjoin(lexer->str, lexer -> str_env);
+		free(itoa);
+		i += 2;
+	}
 	else
 		i = token_env2(input, i, lexer, tokens);
 	return (i);
