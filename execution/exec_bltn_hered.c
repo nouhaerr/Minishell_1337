@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_bltn_hered.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/24 13:32:25 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 13:44:07 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void check_my_heredoc(t_data2 *inf_her, t_data2 **my_heredoc)
+void	check_my_heredoc(t_data2 *inf_her, t_data2 **my_heredoc)
 {
 	// printf("%s\n", inf_her -> value);
 	// sleep (3);
@@ -71,8 +71,8 @@ void	write_her(t_data2 *my_heredoc, t_parser *p)
 	//	close(pipefd[0]);
 	p->fd[0] = pipefd[0];
 	//printf("%d\t%d\n", p->fd[0], p -> fd[1]);
-
 }
+
 void	run_builtin(t_parser *parser)
 {
 	char	*cmd2;

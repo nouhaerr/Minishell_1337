@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/24 18:45:42 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 13:35:28 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int	_session(t_token *tok, t_parser *par, t_lexer *le)
 		tok = NULL;
 		par = NULL;
 		g_var.signal_heredoc =  0;
-		//signal_check();
+		signal_check();
 		prompt = get_prompt(getcwd(NULL, 0));
 		input = readline(prompt);
 		free((void *)prompt);
@@ -117,11 +117,6 @@ int	_session(t_token *tok, t_parser *par, t_lexer *le)
 			add_history(input);
 		g_var.fd_prog = my_fd(); // hier we have a leak
 		base = lex(input, &tok, le);
-		// while (tok)
-		// {
-		// 	printf("->>[%s] == type %d arten %d\n", tok -> value, tok -> type, tok -> arten);
-		// 	tok = tok -> next;
-		// }
 		if (!syntax_error(base, &tok) && tok != NULL)
 			pa_ex(tok, le, par);
 		else

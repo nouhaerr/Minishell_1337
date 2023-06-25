@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:50:10 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/25 13:17:03 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/25 13:50:07 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,24 @@ int	ft_open(char *name, char *msg)
 	return (fd);
 }
 
-int	*fd_redirection(t_parser *node)
+int	*init_fd(void)
 {
-	int			*fd;
-	t_parser	*cur;
-	t_data2		*tmp1;
-	t_data2		*tmp2;
+	int	*fd;
 
 	fd = malloc(sizeof(int) * 2);
 	fd[0] = -1;
 	fd[1] = -1;
-	cur = node;
-	tmp1 = node->outfiles;
-	tmp2 = node->inf_her;
+	return (fd);
+}
+
+int	ft_infiles(t_parser *node, t_data2 *tmp2, int *fd)
+{
 	while (tmp2)
 	{
 		g_var.redir = 1;
 		close(fd[0]);
 		if (ft_ambi(tmp2))
-			return(free(fd), NULL);
+			return (0);
 		if (tmp2->type == infile && !ft_ambi(tmp2))
 			fd[0] = ft_open(tmp2->value, "infile");
 		else
@@ -60,12 +59,27 @@ int	*fd_redirection(t_parser *node)
 			(free(fd), exit(1));
 		tmp2 = tmp2->next;
 	}
+	return (fd[0]);
+}
+
+int	*fd_redirection(t_parser *node)
+{
+	int			*fd;
+	t_data2		*tmp1;
+	t_data2		*tmp2;
+
+	fd = init_fd();
+	tmp1 = node->outfiles;
+	tmp2 = node->inf_her;
+	fd[0] = ft_infiles(node, tmp2, fd);
+	if (!fd[0])
+		return (free(fd), NULL);
 	while (tmp1)
 	{
 		g_var.redir = 1;
 		close(fd[1]);
 		if (ft_ambi(tmp1))
-			return(free(fd), NULL);
+			return (free(fd), NULL);
 		if (tmp1->type == append && !ft_ambi(tmp1))
 			fd[1] = ft_open(tmp1->value, "saved_file");
 		else if (tmp1->type == trunc && !ft_ambi(tmp1))
