@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 05:37:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/25 22:17:38 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 22:24:01 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ char	**table_cmd(t_parser *node)
 		cur = cur -> next;
 	}
 	s1 = split2(str, ' ');
-	int i = 0;
-	while (s1[i])
-	{
-		printf("->>>> [%s]\n", s1[i]);
-		i++;
-	}
-	sleep (3);
+	// int i = 0;
+	// while (s1[i])
+	// {
+	// 	printf("->>>> [%s]\n", s1[i]);
+	// 	i++;
+	// }
+	// sleep (3);
 	free(str);
 	return (s1);
 }

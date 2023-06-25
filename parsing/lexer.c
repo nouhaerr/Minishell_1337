@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:53:34 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/25 22:09:09 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 22:44:36 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	lex(char *s, t_token **tokens, t_lexer *lex)
 			lex -> str = ft_strjoin(lex -> str, ft_substr(s, i - 1, 2));
 		if (s[i] == '$')
 			i = token_env(s, i, lex, tokens);
-		if (lex -> base == 0 && lex -> str != NULL && (s [i] == '\0'
+		if (lex -> base == 0 && lex -> str != NULL && (s[i] == '\0'
 				|| ft_strchr(" |><", s[i]) != NULL))
 			build_list(lex, tokens);
 	}

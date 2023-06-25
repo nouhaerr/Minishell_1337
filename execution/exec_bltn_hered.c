@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/25 21:24:33 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 23:49:08 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,11 @@ void	write_her(t_data2 *my_heredoc, t_data2 *heredoc_next,  t_parser *p)
 	}
 	waitpid(pid, &status, 0);
 	g_var.exit_status = WEXITSTATUS(status);
+	printf("->>>> %d\n", g_var.exit_status);
 	if (heredoc_next == NULL)
 	{
 		close(pipefd[1]);
 		p->fd[0] = pipefd[0];
-		printf("in HEREDOC %d\t%d\n", p->fd[0], p -> fd[1]);
 	}
 	
 }

@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 21:20:05 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/24 12:14:39 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 22:32:30 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	quotes_word(char *input, int start, int base)
 		c = '\"';
 	while (input[start] && input[start] != c)
 	{
+		// if (base == 2 && ((input[start] == '$') && (input[start + 1] != '\0' && input[start + 1] != ' ')))
 		if (base == 2 && input[start] == '$')
 			break ;
 		j++;
