@@ -6,11 +6,11 @@
 #    By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 02:49:56 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/06/25 23:23:40 by nerrakeb         ###   ########.fr        #
+#    Updated: 2023/06/25 23:26:22 by nerrakeb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
 
 # RDFLAGS +=  -lreadline -L/goinfre//homebrew/opt/readline/lib
 # INCLUDES += -I /goinfre/nerrakeb/homebrew/opt/readline/include
@@ -27,7 +27,7 @@ EXECUTION_BU =  echo.c pwd.c env.c exit.c unset.c utils.c cd.c
 SRCS =	main.c my_fd.c $(addprefix ./parsing/, $(PARSING)) $(addprefix ./execution/, $(EXECUTION)) \
 		$(addprefix ./execution/builtins/export/, $(EXECUTION_EXP))  \
 		$(addprefix ./execution/redirections/, $(EXECUTION_RDR)) \
-		$(addprefix ./execution/builtins/, $(EXECUTION_BU)) signal.c 
+		$(addprefix ./execution/builtins/, $(EXECUTION_BU)) #signal.c 
 		
 OBJS = $(SRCS:.c=.o)
 LIBFT= libft.a
