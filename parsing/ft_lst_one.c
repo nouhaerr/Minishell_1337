@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 17:01:22 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/24 11:17:10 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 12:25:34 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_lstaddback(t_token **lst, t_token *new)
 	p -> next = new;
 }
 
-t_data2	*ft_lstnew4(char *value, int type, int amg)
+t_data2	*lstnew4(char *value, int type, int amg)
 {
 	t_data2	*p;
 
@@ -57,7 +57,7 @@ t_data2	*ft_lstnew4(char *value, int type, int amg)
 	return (p);
 }
 
-void	ft_lstaddback4(t_data2 **lst, t_data2 *new)
+void	addback4(t_data2 **lst, t_data2 *new)
 {
 	t_data2	*p;
 

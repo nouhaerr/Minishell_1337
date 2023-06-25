@@ -1,4 +1,4 @@
-make/* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
@@ -6,7 +6,7 @@ make/* *************************************************************************
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/24 17:56:00 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 14:59:00 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ int	isbuiltin(t_parser *parser)
 int	exit_status(int status)
 {
 	if (WIFEXITED(status))
-		return(WEXITSTATUS(status));
+		return (WEXITSTATUS(status));
 	else if (WIFSIGNALED(status))
-		return(WTERMSIG(status) + 128);
+		return (WTERMSIG(status) + 128);
 	return (0);
 }
 
@@ -50,8 +50,9 @@ int	ft_ambi(t_data2 *list)
 		printf ("minishell: : ambiguous redirect\n");
 		return (1);
 	}
-	return(0);
+	return (0);
 }
+
 void	execution(t_parser *parser)
 {
 	int		pid;

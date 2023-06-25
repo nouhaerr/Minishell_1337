@@ -6,20 +6,20 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:53:34 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/24 18:39:38 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 13:20:06 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	check_which_special_char(char c, char next_c, t_token **tokens, t_lexer *lexer)
+int	check_wsc(char c, char n_c, t_token **tokens, t_lexer *lex)
 {
 	if (c == '|')
-		return (lexer -> index++, ft_lstaddback(tokens, ft_lstnew(ft_strdup("|"),
-					the_pipe, general)), 1);
+		return (lex -> index++, ft_lstaddback(tokens,
+				ft_lstnew(ft_strdup("|"), the_pipe, general)), 1);
 	else if (c == '>')
 	{
-		if (next_c == '>')
+		if (n_c == '>')
 			return (ft_lstaddback(tokens,
 					ft_lstnew(ft_strdup(">>"), dr_rdr, general)), 2);
 		return (ft_lstaddback(tokens,
@@ -27,7 +27,7 @@ int	check_which_special_char(char c, char next_c, t_token **tokens, t_lexer *lex
 	}
 	else if (c == '<')
 	{
-		if (next_c == '<')
+		if (n_c == '<')
 			return (ft_lstaddback(tokens,
 					ft_lstnew(ft_strdup("<<"), heredoc, general)), 2);
 		return (ft_lstaddback(tokens,
@@ -54,74 +54,55 @@ int	ft_check_space(char *s)
 	return (j);
 }
 
-void	build_list(t_lexer *lexer, t_token **tokens)
+void	build_list(t_lexer *lex, t_token **tokens)
 {
 	int		arten;
-	// char	**str;
-	// int		i;
 
-	if (lexer -> base2 != 0)
+	if (lex -> base2 != 0)
 		arten = quotes;
 	else
 		arten = general;
-	
-	if (lexer -> str != NULL && !ft_strcmp(lexer -> str, " "))
-		ft_lstaddback(tokens, ft_lstnew(lexer -> str, word, env_general));
-	// if (arten == general && ft_check_space(lexer -> str))
-	// {
-		// str = ft_split(lexer -> str, ' ');
-		// i = 0;
-		// while (str[i])
-		// {	
-		// 	if (lexer -> base == 0)
-		// 		ft_lstaddback(tokens, ft_lstnew(str[i], word, env_general));
-		// 	else
-		// 		ft_lstaddback(tokens, ft_lstnew(str[i], word, env_quotes));
-		// 	i++;
-	// 	}
-	// }
+	if (lex -> str != NULL && !ft_strcmp(lex -> str, " "))
+		ft_lstaddback(tokens, ft_lstnew(lex -> str, word, env_general));
 	else
-		ft_lstaddback(tokens, ft_lstnew(lexer -> str, word, arten));
-	lexer -> str = NULL;
-	lexer -> base2 = 0;
+		ft_lstaddback(tokens, ft_lstnew(lex -> str, word, arten));
+	lex -> str = NULL;
+	lex -> base2 = 0;
 }
 
-int	check_condition(t_lexer *lexer, char *input, int i)
+int	check_condition(t_lexer *lex, char *s, int i)
 {
-	if (input[i] == lexer -> c && input[i - 1] == lexer -> c
-		&& (lexer -> str == NULL
-			&& (input[i + 1] == ' ' || input[i + 1] == '\0' )))
+	if (s[i] == lex -> c && s[i - 1] == lex -> c && (lex -> str == NULL
+			&& (s[i + 1] == ' ' || s[i + 1] == '\0' )))
 		return (1);
 	return (0);
 }
 
-int	lex(char *input, t_token **tokens, t_lexer *lexer)
+int	lex(char *s, t_token **tokens, t_lexer *lex)
 {
 	int	i;
 
 	i = 0;
-	lexer_init(lexer);
-	while (input[i])
+	lexer_init(lex);
+	while (s[i])
 	{
-		if (input[i] == ' ' && lexer -> base == 0)
-			i = ft_ignore_spaces(input, i);
-		if (input[i] != '\0' && ft_strchr("$|><", input[i]) != NULL && lexer -> base == 0)
+		if (s[i] == ' ' && lex -> base == 0)
+			i = ft_ignore_spaces(s, i);
+		if (s[i] != '\0' && ft_strchr("$|><", s[i]) != NULL && lex -> base == 0)
 		{
-			if (input[i] == '<' && input[i + 1] == '<')
-				lexer -> her = 1;
-			i += check_which_special_char(input[i], input[i + 1], tokens, lexer);
+			if (s[i] == '<' && s[i + 1] == '<')
+				lex -> her = 1;
+			i += check_wsc(s[i], s[i + 1], tokens, lex);
 		}
-		else if (input[i] != '\0')
-			i = partition_tokens(lexer, input, i);
-		if (input[i] != '\0' && check_condition(lexer, input, i) == 1)
-			lexer -> str = ft_strjoin(lexer -> str, ft_substr(input, i - 1, 2));
-		if (input[i] == '$')
-			i = token_env(input, i, lexer, tokens);
-		// printf("hier : lexer -> str:%s\n", lexer -> str);
-		// sleep (1);
-		if (lexer -> base == 0 && lexer -> str != NULL && (input [i] == '\0'
-				|| ft_strchr(" |><", input[i]) != NULL))
-			build_list(lexer, tokens);
+		else if (s[i] != '\0')
+			i = partition_tokens(lex, s, i);
+		if (s[i] != '\0' && check_condition(lex, s, i) == 1)
+			lex -> str = ft_strjoin(lex -> str, ft_substr(s, i - 1, 2));
+		if (s[i] == '$')
+			i = token_env(s, i, lex, tokens);
+		if (lex -> base == 0 && lex -> str != NULL && (s [i] == '\0'
+				|| ft_strchr(" |><", s[i]) != NULL))
+			build_list(lex, tokens);
 	}
-	return (free(lexer -> str), lexer -> base);
+	return (free(lex -> str), lex -> base);
 }

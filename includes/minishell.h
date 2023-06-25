@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:53:18 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/24 10:58:12 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 14:56:37 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 # include <signal.h>
 # include <termios.h>
 
-#define BUFFER_SIZE 1024
 typedef struct s_glb
 {
 	t_env	*list;
@@ -51,5 +50,8 @@ void	rl_replace_line(const char *text, int clear_undo);
 size_t	env_list_size(t_env *env);
 void	signal_check(void);
 void	check_signal_heredoc(void);
+int		*my_fd(void);
+void	update_fd(int *my_fd);
+void	close_myfd_prog(int *my_fd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/24 18:45:42 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 14:56:48 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,28 @@
 
 int	syntax_error(int base, t_token **tokens)
 {
-	t_token	*tokens2;
-	t_token	*previous;
+	t_token	*t;
+	t_token	*p;
 
-	previous = NULL;
+	p = NULL;
 	if (*tokens == NULL)
-		tokens2 = NULL;
+		t = NULL;
 	else
-		tokens2 = *tokens;
+		t = *tokens;
 	if (base != 0)
 		return (printf("minishell: syntax error near unexpected token\n"), 1);
-	while (tokens2)
+	while (t)
 	{
-		if ((tokens2 -> type == the_pipe
-			&& (previous == NULL || tokens2 -> next == NULL)) || (tokens2 -> type == the_pipe && (tokens2 -> next) -> type == the_pipe))
+		if ((t -> type == the_pipe && (p == NULL || t->next == NULL))
+			|| (t->type == the_pipe && (t->next)->type == the_pipe))
 			return (printf("minishell: syntax error near unexpected token `|'\n")
 				, 1);
-		if ((tokens2 -> type != the_pipe && tokens2 -> type != word)
-			&& (tokens2 -> next == NULL || (tokens2 -> next)-> type != word))
+		if ((t -> type != the_pipe && t -> type != word)
+			&& (t -> next == NULL || (t -> next)-> type != word))
 			return (printf("minishell: syntax error near unexpected token\n"),
 				1);
-		previous = tokens2;
-		tokens2 = tokens2 -> next;
+		p = t;
+		t = t -> next;
 	}
 	return (0);
 }
@@ -59,29 +59,6 @@ char	*get_prompt(char *s)
 	return (cwd);
 }
 
-int	*my_fd(void)
-{
-	int	*myfd;
-
-	myfd = malloc(sizeof(int) * 2);
-	myfd[0] = dup(0);
-	myfd[1] = dup(1);
-	return(myfd);
-}
-
-void	update_fd(int *my_fd)
-{
-	dup2(my_fd[0], 0);
-	dup2(my_fd[1], 1);
-}
-
-void	close_myfd_prog(int *my_fd)
-{
-	close(my_fd[0]);
-	close(my_fd[1]);
-	free(my_fd);
-}
-
 void	pa_ex(t_token *tok, t_lexer *lex, t_parser *par)
 {
 	parse(&tok, &par, lex);
@@ -101,12 +78,11 @@ int	_session(t_token *tok, t_parser *par, t_lexer *le)
 	const char	*prompt;
 	int			base;
 
-	(void)le;
 	while (1)
 	{	
 		tok = NULL;
 		par = NULL;
-		g_var.signal_heredoc =  0;
+		g_var.signal_heredoc = 0;
 		//signal_check();
 		prompt = get_prompt(getcwd(NULL, 0));
 		input = readline(prompt);
@@ -115,17 +91,12 @@ int	_session(t_token *tok, t_parser *par, t_lexer *le)
 			break ;
 		if (ft_strcmp(input, "") != 0)
 			add_history(input);
-		g_var.fd_prog = my_fd(); // hier we have a leak
+		g_var.fd_prog = my_fd();
 		base = lex(input, &tok, le);
-		// while (tok)
-		// {
-		// 	printf("->>[%s] == type %d arten %d\n", tok -> value, tok -> type, tok -> arten);
-		// 	tok = tok -> next;
-		// }
 		if (!syntax_error(base, &tok) && tok != NULL)
 			pa_ex(tok, le, par);
 		else
-			g_var.exit_status = 258; // for the exit_status for the synatx
+			g_var.exit_status = 258;
 		close_myfd_prog(g_var.fd_prog);
 		free_mylist(tok, 0);
 		free(input);

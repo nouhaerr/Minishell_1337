@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:56:47 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/21 21:21:06 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 13:55:18 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	free_data1(t_data *list)
 
 	while (list)
 	{
+		free(list -> value);
 		list2 = (list)-> next;
 		free(list);
 		list = list2;

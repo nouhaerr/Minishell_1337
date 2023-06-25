@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/24 18:26:31 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 14:58:34 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,10 +158,7 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 		if (!cmd_slash(parse->cmd))
 			path = get_path(parse->cmd, parse);
 		if (!path && parse -> my_cmd == 0)
-		{
-			printf(" ->>> 11imhier\n");
 			ft_err("minishell: ", parse->cmd, ": command not found");
-		}
 		if (parse -> my_cmd == 0)
 			ft_execve(path, parse, create_env_arr(env_list_size(g_var.list)));
 	}

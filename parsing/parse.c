@@ -6,160 +6,120 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:14:51 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/24 18:34:55 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 13:51:23 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	create_node(t_parser *parser, t_lexer *lexer)
+void	create_node(t_parser *p, t_lexer *l)
 {
-	if (lexer -> i == 0 && (lexer->tokens2->type == word))
+	if (l -> i == 0 && (l->tok2->type == word))
 	{
-		parser -> cmd = ft_strdup(lexer -> tok -> value);
-		parser -> my_cmd = 0;
+		p -> cmd = ft_strdup(l -> tok -> value);
+		p -> my_cmd = 0;
 	}
-	else if (lexer->tokens2->type == word)
-		ft_lstaddback2(&(parser->args), ft_lstnew2(lexer -> tok -> value));
-	else if (lexer->tokens2->type == l_rdr)
-		ft_lstaddback4(&(parser->inf_her), ft_lstnew4(lexer -> tok -> value, infile, lexer -> amg));
-	else if (lexer->tokens2->type == r_rdr)
-		ft_lstaddback4(&(parser->outfiles),
-			ft_lstnew4(lexer -> tok -> value, trunc, lexer -> amg));
-	else if (lexer->tokens2->type == dr_rdr)
-		ft_lstaddback4(&(parser->outfiles),
-			ft_lstnew4(lexer -> tok -> value, append, lexer -> amg));
-	else if (lexer->tokens2->type == heredoc && lexer->tok ->arten == general)
+	else if (l->tok2->type == word)
+		ft_lstaddback2(&(p->args), ft_lstnew2(l -> tok -> value));
+	else if (l->tok2->type == l_rdr)
+		addback4(&(p->inf_her), lstnew4(l->tok->value, infile, l->amg));
+	else if (l->tok2->type == r_rdr)
+		addback4(&(p->outfiles), lstnew4(l->tok->value, trunc, l->amg));
+	else if (l->tok2->type == dr_rdr)
+		addback4(&(p->outfiles), lstnew4(l->tok->value, append, l->amg));
+	else if (l->tok2->type == heredoc && l->tok ->arten == general)
 	{
-		parser ->nu_here++;
-		ft_lstaddback4(&(parser->inf_her),
-			ft_lstnew4(lexer -> tok -> value, expand, lexer -> amg));
+		p ->nu_here++;
+		addback4(&(p->inf_her), lstnew4(l -> tok -> value, expand, l -> amg));
 	}
-	else if (lexer->tokens2->type == heredoc && lexer->tok ->arten == quotes)
+	else if (l->tok2->type == heredoc && l->tok ->arten == quotes)
 	{
-		parser ->nu_here++;
-		ft_lstaddback4(&(parser->inf_her),
-			ft_lstnew4(lexer -> tok -> value, not_expand, lexer -> amg));
+		p ->nu_here++;
+		addback4(&(p->inf_her), lstnew4(l->tok->value, not_expand, l->amg));
 	}
 }
 
-t_parser	*build_list_parser(t_parser **parser, t_lexer *lexer, t_parser *t)
+t_parser	*build_list_parser(t_parser **p, t_lexer *l, t_parser *t)
 {
-	if (((lexer->tokens2)->type) == the_pipe)
+	if (((l->tok2)->type) == the_pipe)
 	{
-		lexer -> index++;
-		lexer->i = 0;
-		(t) -> my_cmd = 0;
-		t = ft_lstaddback3(parser, ft_lstnew3(lexer -> index));
-		lexer->tokens2 = (lexer->tokens2)->next;
+		l -> index++;
+		l->i = 0;
+		t -> my_cmd = 0;
+		t = ft_lstaddback3(p, ft_lstnew3(l -> index));
+		l->tok2 = (l->tok2)->next;
 	}
-	lexer->tok = my_next_word(lexer->tokens2, parser, lexer);
-	// printf("->>> [%s]]\n", lexer -> tok -> value);
-	// sleep (1);
-	if (!ft_strcmp(lexer -> tok -> value, " ") && lexer -> tokens2 -> arten == env_general)
+	l->tok = my_next_word(l->tok2, l);
+	if (!ft_strcmp(l-> tok->value, " ") && l -> tok2 -> arten == env_general)
 	{
-		//printf("diese imhier\n");
 		t -> my_cmd = 1;
 		return (t);
 	}
-	// printf("imhier\n");
-	// sleep (3);
-	// if (lexer  -> tok != NULL)
-	// {
-	// 	printf("%s\n", lexer -> tok -> value);
-	// 	sleep (3);
-	// }
-	if (lexer -> tok != NULL)
-		create_node(t, lexer);
+	if (l -> tok != NULL)
+		create_node(t, l);
 	return (t);
 }
 
-void	parse(t_token **tokens, t_parser **parser, t_lexer *lexer)
+void	check_wtok(t_lexer *l, t_parser *t)
+{
+	if ((l->tok2)->type == l_rdr || (l->tok2)->type == r_rdr
+		|| (l->tok2)->type == dr_rdr || (l->tok2)->type == heredoc)
+			l->tok2 = l->tok->next;
+	else if ((l->tok2)->type == word)
+	{
+		l->tok2 = (l->tok2)->next;
+		if (t -> my_cmd == 0)
+			l->i++;
+	}
+}
+
+void	parse(t_token **tokens, t_parser **p, t_lexer *l)
 {
 	t_parser	*t;
 
-	lexer->tokens2 = *tokens;
-	lexer -> index = 0;
-	lexer->i = 0;
-	
-	if ((lexer->tokens2) != NULL)
-		t = ft_lstaddback3(parser, ft_lstnew3(lexer -> index));
-	while (lexer->tokens2)
+	l->tok2 = *tokens;
+	l -> index = 0;
+	l->i = 0;
+	if ((l->tok2) != NULL)
+		t = ft_lstaddback3(p, ft_lstnew3(l -> index));
+	while (l->tok2)
 	{
-		lexer -> amg = 0;
-		if (!ft_strcmp(lexer -> tokens2 -> value, " ") && lexer -> tokens2 -> arten == env_general)
+		l -> amg = 0;
+		if (!ft_strcmp(l->tok2-> value, " ") && l->tok2->arten == env_general)
 		{
-			//printf("IMHIER\n");
-			lexer -> tokens2 = lexer -> tokens2 -> next;
-			(t) -> my_cmd = 1;
+			l -> tok2 = l -> tok2 -> next;
+			t -> my_cmd = 1;
 		}
-		if (lexer -> tokens2 == NULL)
-		{
-			//printf("->>>> imhier\n");
+		if (l -> tok2 == NULL)
 			return ;
-		}
-		t = build_list_parser(parser, lexer, t);
-		//printf("my_cmd : %d == adreess %p\n", (t) -> my_cmd, t);
-		if (lexer -> tok == NULL)
+		t = build_list_parser(p, l, t);
+		if (l -> tok == NULL)
 			return ;
-		if ((lexer->tokens2)->type == l_rdr || (lexer->tokens2)->type == r_rdr \
-		|| (lexer->tokens2)->type == dr_rdr \
-		|| (lexer->tokens2)->type == heredoc)
-			lexer->tokens2 = lexer->tok->next;
-		else if ((lexer->tokens2)->type == word)
-		{
-			lexer->tokens2 = (lexer->tokens2)->next;
-			if (t -> my_cmd == 0)
-				lexer->i++;
-		}
-		//printf("my_cmd2 : %d == address %p\n", (t) -> my_cmd, t);
+		check_wtok(l, t);
 	}
-	//check_struct(*parser);
 }
-// just to check on if my parsing is doing alright.
-// while (parser)
-	// {
-	// 	printf("%d\n", (*parser) -> index);
-	// 	*parser = (*parser) -> next;
-	// }
 
-t_token	*my_next_word(t_token *tokens, t_parser **parser, t_lexer *lexer)
+t_token	*my_next_word(t_token *to, t_lexer *l)
 {
 	t_token	*t;
 	t_token	*t2;
 
-	t = tokens;
-	(void)parser;
-	while (tokens)
+	t = to;
+	while (to)
 	{
-		// to see later on related to $hdkjdk
-		// if (!ft_strcmp(tokens -> value, " ") && tokens -> arten == env_general)
-		// {
-		// 	lexer -> tokens2 = lexer -> tokens2 -> next;
-		// 	(*parser) -> my_cmd = 1;
-		// 	return (tokens -> next);
-		// }
-		t2 = tokens -> next;
-		if (t2 != NULL && tokens -> type != the_pipe && tokens -> type != word && tokens -> type != heredoc)
+		t2 = to -> next;
+		if (t2 != NULL && to->type != the_pipe && to->type != word
+			&& to->type != heredoc)
+			check_amg_parse(t2, l);
+		if (!ft_strcmp(to -> value, "\"\"") || !ft_strcmp(to -> value, "\'\'"))
 		{
-			if (t2 != NULL && t2 -> arten == env_general
-					&& (t2 ->next != NULL && t2-> next-> arten == env_general))
-					lexer -> amg = 1;
-			if (!ft_strcmp(t2 -> value, " "))
-				lexer -> amg = 1;
+			free(to -> value);
+			to -> value = ft_strdup("\0");
+			return (to);
 		}
-	
-		if (!ft_strcmp(tokens -> value, "\"\"")
-			|| !ft_strcmp(tokens -> value, "\'\'"))
-		{
-			free(tokens -> value);
-			tokens -> value = ft_strdup("\0");
-			return (tokens);
-		}
-		else if (tokens->type == word)
-			return (tokens);
-		
-		tokens = tokens->next;
+		else if (to->type == word)
+			return (to);
+		to = to->next;
 	}
 	return (t);
 }
