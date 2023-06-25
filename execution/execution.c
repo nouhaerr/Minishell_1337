@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/25 23:49:30 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/26 00:18:24 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,13 @@ void	execution(t_parser *parser)
 	{
 		g_var.parent_process = 1;
 		builtin_executor(parser, pip, "one");
+		
 	}
 	else
 	{   
 		g_var.parent_process = 0;
 		if (parser->cmd && parser->next == NULL)
+		
 			pid = exec_cmd(parser, pip, "one");
 		else
 			pid = multiple_pipes(parser);
