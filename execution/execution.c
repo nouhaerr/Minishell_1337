@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/26 00:06:17 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/26 00:18:24 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void	execution(t_parser *parser)
 			pid = exec_cmd(parser, pip, "one");
 		else
 			pid = multiple_pipes(parser);
-		printf("->>>> %d\n", g_var.exit_status);
 	}
 	while (1)
 	{
