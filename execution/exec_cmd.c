@@ -6,45 +6,18 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/25 15:45:11 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 15:59:29 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_check_fork(int p)
+void	ft_fd(int *fl, t_parser *parse)
 {
-	if (p == -1)
-	{
-		perror("minishell");
-		return (1);
-	}
-	return (0);
-}
-
-void	ft_check(int p)
-{
-	if (p == -1)
-	{
-		perror(0);
-		exit(EXIT_FAILURE);
-	}
-}
-
-int	cmd_slash(char *cmd)
-{
-	int	i;
-
-	i = 0;
-	if (!cmd)
-		return (0);
-	while (cmd[i])
-	{
-		if (cmd[i] == '/')
-			return (1);
-		i++;
-	}
-	return (0);
+	if (fl[0] != -1)
+		parse->fd[0] = fl[0];
+	if (fl[1] != -1)
+		parse->fd[1] = fl[1];
 }
 
 int	*dup_fd(t_parser *parse, t_pipe pip, char *msg)
@@ -52,49 +25,33 @@ int	*dup_fd(t_parser *parse, t_pipe pip, char *msg)
 	int		*fl;
 
 	fl = fd_redirection(parse);
-		parse->fd[1] = 1;
 	if (!fl)
 		return (0);
+	parse->fd[1] = 1;
 	if (!ft_strcmp(msg, "one"))
 	{
 		parse->fd[0] = 0;
-		if (fl[0] != -1)
-			parse->fd[0] = fl[0];
-		if (fl[1] != -1)
-			parse->fd[1] = fl[1];
+		ft_fd(fl, parse);
 	}
 	else
 	{
 		parse->fd[1] = pip.wr_end[1];
 		parse->fd[0] = 0;
 		if (!ft_strcmp(msg, "first"))
-		{
-			if (fl[0] != -1)
-				parse->fd[0] = fl[0];
-			if (fl[1] != -1)
-				parse->fd[1] = fl[1];
-		}
+			ft_fd(fl, parse);
 		if (!ft_strcmp(msg, "last"))
 		{
 			parse->fd[1] = 1;
 			parse->fd[0] = pip.rd_end[0];
-			if (fl[0] != -1)
-				parse->fd[0] = fl[0];
-			if (fl[1] != -1)
-				parse->fd[1] = fl[1];
+			ft_fd(fl, parse);
 		}
 		if (!ft_strcmp(msg, "between"))
 		{
 			parse->fd[0] = pip.rd_end[0];
 			parse->fd[1] = pip.wr_end[1];
-			if (fl[0] != -1)
-				parse->fd[0] = fl[0];
-			if (fl[1] != -1)
-				parse->fd[1] = fl[1];
+			ft_fd(fl, parse);
 		}
 	}
-	printf("->>>>  write:%d read:%d\n", parse->fd[1], parse->fd[0]);
-	sleep (1);
 	dup2(parse->fd[1], 1);
 	dup2(parse->fd[0], 0);
 	if (ft_strcmp(msg, "one"))

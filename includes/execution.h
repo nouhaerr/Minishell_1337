@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:53:39 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/25 15:37:40 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 15:59:15 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ char	**table_cmd(t_parser *node);
 void	ft_free(char **str);
 void	ft_err(char *s, char *cmd, char *s2);
 void	update_fd(int *my_fd);
-void	ft_check(int p);
+int		ft_check_fork(int p);
+int		cmd_slash(char *cmd);;
 void	write_her(t_data2 *my_heredoc, t_parser *p);
 int		ft_ambi(t_data2 *list);
 void	check_my_heredoc(t_data2 *inf_her, t_data2 **my_heredoc);
