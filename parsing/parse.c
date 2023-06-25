@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:14:51 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/25 21:37:21 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/25 21:53:40 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	parse(t_token **tokens, t_parser **p, t_lexer *l)
 			return ;
 		check_wtok(l, t);
 	}
-	check_struct(*p);
+	//check_struct(*p);
 }
 
 t_token	*my_next_word(t_token *to, t_lexer *l)
