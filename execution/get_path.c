@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 05:37:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/25 22:24:01 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 23:53:28 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,24 @@ char	**table_cmd(t_parser *node)
 
 void	check_dir_notexec(char *path, t_parser *node)
 {
-	int	dir;
+	int		dir;
 
+	(void)node;
 	dir = open(path, O_DIRECTORY);
-	if (node->cmd[0] != '\0' && dir != -1)
+	if (dir != -1)
 	{
 		close(dir);
 		g_var.exit_status = 126;
 		ft_err("minishell: ", path, ": is a directory");
 	}
-	if (node->cmd[0] != '\0' && open(path, O_RDONLY) != -1 && access(path, X_OK))
+	if (access(path, X_OK))
 	{
+		g_var.exit_status = 127;
+		if (!access(path, F_OK))
+			g_var.exit_status = 126;
 		perror("minishell");
-		exit(126);
 	}
+	exit(g_var.exit_status);
 }
 
 char	**real_path(void)
