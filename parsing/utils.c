@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:18:35 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/25 15:21:54 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 18:54:02 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	check_struct(t_parser *parser)
 		}
 		while (in)
 		{
-			printf("infher : [%s]  type %d == amg %d\n "
+			printf("infher : [%s]  type %d == ->>>> amg %d\n "
 		, (in)->value, in -> type, in -> amg);
 			(in) = (in)->next;
 		}
