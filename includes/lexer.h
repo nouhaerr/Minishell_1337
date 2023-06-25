@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:54:28 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/25 12:50:57 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 21:59:21 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct t_lexer
 	char	*str_env;
 	char	**s2;
 	char	*env;
+	int		e;
 	t_token	*tok2;
 	t_token	*tok;
 }	t_lexer;

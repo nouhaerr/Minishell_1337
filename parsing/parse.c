@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:14:51 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/25 21:53:40 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/25 22:18:00 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	create_node(t_parser *p, t_lexer *l)
 		p -> cmd = ft_strdup(l -> tok -> value);
 		p -> my_cmd = 0;
 	}
-	else if (l->tok2->type == word)
+	else if (l -> amg == 0 && l->tok2->type == word)
 		ft_lstaddback2(&(p->args), ft_lstnew2(l -> tok -> value));
 	else if (l->tok2->type == l_rdr)
 		addback4(&(p->inf_her), lstnew4(l->tok->value, infile, l->amg));
@@ -80,6 +80,12 @@ void	parse(t_token **tokens, t_parser **p, t_lexer *l)
 	l->tok2 = *tokens;
 	l -> index = 0;
 	l->i = 0;
+	//t_token *t1 = *tokens;
+	// while (t1)
+	// {
+	// 	printf("[%s] === type : %d\n", t1 -> value, t1 -> arten);
+	// 	t1 = t1 -> next;
+	// }
 	if ((l->tok2) != NULL)
 		t = ft_lstaddback3(p, ft_lstnew3(l -> index));
 	while (l->tok2)

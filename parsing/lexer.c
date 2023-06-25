@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:53:34 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/25 18:31:38 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 22:09:09 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,13 @@ void	build_list(t_lexer *lex, t_token **tokens)
 		arten = quotes;
 	else
 		arten = general;
-	if (lex -> str != NULL && !ft_strcmp(lex -> str, " "))
+	if (lex -> str != NULL && (lex -> e == 1))
 		ft_lstaddback(tokens, ft_lstnew(lex -> str, word, env_general));
 	else
 		ft_lstaddback(tokens, ft_lstnew(lex -> str, word, arten));
 	lex -> str = NULL;
 	lex -> base2 = 0;
+	lex -> e = 0;
 }
 
 int	check_condition(t_lexer *lex, char *s, int i)

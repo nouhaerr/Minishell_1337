@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 12:19:26 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/25 18:31:31 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 22:09:04 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	loop_on_myenv(t_token **t, t_lexer *l)
 	l -> s2 = ft_split(l -> str_env, ' ');
 	free(l -> str_env);
 	while (l -> s2[l -> i2 + 1])
-	{	
+	{
 		if (l -> base == 0)
 			ft_lstaddback(t, ft_lstnew(l->s2[l -> i2], word, env_general));
 		else
@@ -30,6 +30,7 @@ void	loop_on_myenv(t_token **t, t_lexer *l)
 void	token_env3(t_token **t, t_lexer *l, char *input, int i)
 {
 	l -> i2 = 0;
+	l -> e = 1;
 	l -> env = ft_substr(input, i + 1, l -> len);
 	l -> str_env = check_env(l -> env, g_var.list);
 	if (ft_strcmp(l -> str_env, " ") != 0 && ft_check_space(l -> str_env) > 0)
