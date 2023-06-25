@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 21:17:37 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/24 13:33:53 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 21:59:41 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,5 @@ void	lexer_init(t_lexer *lexer)
 	lexer -> base2 = lexer -> base;
 	lexer -> c = 0;
 	lexer -> a = 0;
+	lexer -> e = 0;
 }

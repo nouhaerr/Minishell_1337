@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 15:55:05 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/19 15:40:28 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 21:38:03 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	signal_handler(int sig)
 void	signal_heredoc(int signal)
 {
 	(void)signal;
+	g_var.exit_status = 1;
 	exit(1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/25 18:22:00 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 21:24:33 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	write_her(t_data2 *my_heredoc, t_data2 *heredoc_next,  t_parser *p)
 	pid = fork();
 	if (pid == 0)
 	{
-		//check_signal_heredoc();
+		check_signal_heredoc();
 		her(my_heredoc, heredoc_next, p -> index, pipefd);
 		exit (0);
 	}

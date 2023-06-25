@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/25 18:49:26 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/25 21:28:51 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 		return (pid);
 	if (pid == 0)
 	{
-		//signal(SIGINT, SIG_DFL);//SIGNALS
-		//signal(SIGQUIT, SIG_DFL);
+		signal(SIGINT, SIG_DFL);//SIGNALS
+		signal(SIGQUIT, SIG_DFL);
 		dp_built(parse, pip, msg);
 		path = parse->cmd;
 		if (!cmd_slash(parse->cmd))
