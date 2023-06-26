@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/26 00:18:24 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/26 15:17:18 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,5 @@ void	execution(t_parser *parser)
 		if (wait_pid == pid) // last child pid
 			g_var.exit_status = exit_status(status);
 	}
-	printf("->>>> %d\n", g_var.exit_status);
+	//printf("->>>> %d\n", g_var.exit_status);
 }
