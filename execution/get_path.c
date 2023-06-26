@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 05:37:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/25 23:53:28 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/26 14:13:28 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,43 @@
 
 char	**table_cmd(t_parser *node)
 {
-	char	*str;
-	char	**s1;
-	t_data	*cur;
+	char **s1;
+	unsigned long i;
+	int j;
+	t_data *args;
 
-	str = NULL;
-	cur = node -> args;
-
-	str = ft_strjoin2(node -> cmd, " ");
-	while (cur)
+	j = 1;
+	s1 = NULL;
+	args = node -> args;
+	while (args)
 	{
-		if (cur -> value[0] == '\0')
-			str = ft_strjoin2(str, " ");
+		args = args -> next;
+		j++;
+	}
+	s1 = malloc (sizeof(char *) * (j + 1));
+	i = 0;
+	args = node -> args;
+	while (args)
+	{	
+		if (i == 0)
+		{
+			s1[i] = ft_strdup(node -> cmd);
+			i++;
+		}
 		else
 		{
-			str = ft_strjoin2(str, cur -> value);
-			str = ft_strjoin2(str, " ");
+			s1[i] = ft_strdup(args -> value);
+			i++;
+			args = args -> next;
 		}
-		cur = cur -> next;
 	}
-	s1 = split2(str, ' ');
-	// int i = 0;
-	// while (s1[i])
+	s1[i] = NULL;
+	// int b = 0;
+	// while (s1[b])
 	// {
-	// 	printf("->>>> [%s]\n", s1[i]);
-	// 	i++;
+	// 	printf("->>>> [%s]\n", s1[b]);
+	// 	b++;
 	// }
-	// sleep (3);
-	free(str);
 	return (s1);
 }
 
