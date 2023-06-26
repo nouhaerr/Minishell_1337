@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/26 18:25:02 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/26 18:58:38 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,28 +40,6 @@ int	syntax_error(int base, t_token **tokens)
 	return (0);
 }
 
-char	*get_prompt(char *s)
-{
-	char	*workingdirectory_path;
-	char	*cwd;
-
-	cwd = NULL;
-	if (s)
-	{
-		workingdirectory_path = ft_strrchr(s, '/');
-		workingdirectory_path = ft_strjoin2("\e[1;95m->", workingdirectory_path);
-		cwd = ft_strjoin2(workingdirectory_path, "\e[0m\e[1;95m=> \e[0m ");
-		free(workingdirectory_path);
-		free(s);
-	}
-	else
-	{
-		
-		cwd = ft_strdup("\e[1;95m!!->/minishell-3.2$ => \e[0m ");
-	}
-	return (cwd);
-}
-
 void	pa_ex(t_token *tok, t_lexer *lex, t_parser *par)
 {
 	parse(&tok, &par, lex);
@@ -78,7 +56,6 @@ void	pa_ex(t_token *tok, t_lexer *lex, t_parser *par)
 int	_session(t_token *tok, t_parser *par, t_lexer *le)
 {
 	char		*input;
-	//const char	*prompt;
 	int			base;
 
 	(void)le;
@@ -88,16 +65,14 @@ int	_session(t_token *tok, t_parser *par, t_lexer *le)
 		par = NULL;
 		g_var.signal_heredoc = 0;
 		signal_check();
-		//prompt = get_prompt(getcwd(NULL, 0));
 		input = readline("minishell-3.2$ ");
 		signal(SIGINT, SIG_IGN);
-		//free((void *)prompt);
 		if (input == NULL)
 			break ;
 		if (ft_check_space(input))
 		{
 			add_history(input);
-			g_var.fd_prog = my_fd(); // HERE THERE IS A LEAK
+			g_var.fd_prog = my_fd();
 			base = lex(input, &tok, le);
 			if (!syntax_error(base, &tok) && tok != NULL)
 				pa_ex(tok, le, par);

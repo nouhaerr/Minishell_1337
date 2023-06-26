@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 17:39:01 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/26 17:40:17 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/26 18:34:22 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,12 @@ void	exec_heredoc(t_parser *parser)
 	}
 }
 
+void	signal_heredoc(int signal)
+{
+	(void)signal;
+	exit(1);
+}
+
 void	write_her(t_data2 *my_heredoc, t_data2 *heredoc_next, t_parser *p)
 {
 	int	pipefd[2];
@@ -75,7 +81,7 @@ void	write_her(t_data2 *my_heredoc, t_data2 *heredoc_next, t_parser *p)
 	pid = fork();
 	if (pid == 0)
 	{
-		check_signal_heredoc();
+		signal(SIGINT, signal_heredoc);
 		her(my_heredoc, heredoc_next, p -> index, pipefd);
 		exit (0);
 	}
