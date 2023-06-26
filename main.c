@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/26 15:09:28 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/26 15:31:11 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	_session(t_token *tok, t_parser *par, t_lexer *le)
 	const char	*prompt;
 	int			base;
 
+	(void)le;
 	while (1)
 	{	
 		tok = NULL;
@@ -93,7 +94,7 @@ int	_session(t_token *tok, t_parser *par, t_lexer *le)
 		if (ft_check_space(input))
 		{
 			add_history(input);
-			g_var.fd_prog = my_fd();
+			g_var.fd_prog = my_fd(); // HIER THERE IS A LEAK
 			base = lex(input, &tok, le);
 			if (!syntax_error(base, &tok) && tok != NULL)
 				pa_ex(tok, le, par);
@@ -101,8 +102,8 @@ int	_session(t_token *tok, t_parser *par, t_lexer *le)
 				g_var.exit_status = 258;
 			close_myfd_prog(g_var.fd_prog);
 			free_mylist(tok, 0);
-			free(input);
 		}
+		free(input);
 	}
 	return (g_var.exit_status);
 }
