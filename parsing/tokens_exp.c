@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 12:19:26 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/25 23:17:06 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/26 17:54:08 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ int	token_env2(char *input, int i, t_lexer *l, t_token **tokens)
 	l -> str_env = NULL;
 	if (l->her == 0 && (l->base == 2 || l->base == 0))
 	{
-			//printf("[%c] = %d\n", input[i + 1], l ->base);
 		if (l -> len != 0)
 			token_env3(tokens, l, input, i);
-	
-		else if (l->len == 0 && ((input[i + 1] != '\0' && l->base == 2) || ((input[i + 1] == '\0' || input[i + 1] == ' ') && l->base == 0)))
+		else if (l->len == 0 && ((input[i + 1] != '\0' && l->base == 2)
+				|| ((input[i + 1] == '\0' || input[i + 1] == ' ')
+					&& l->base == 0)))
 		{
 			l -> str_env = ft_strdup("$");
 			l->str = ft_strjoin(l->str, l -> str_env);
@@ -94,10 +94,8 @@ int	token_env(char *input, int i, t_lexer *lexer, t_token **tokens)
 		i += 2;
 	else if (input[i + 1] == '$')
 	{
-		itoa = ft_strdup("$$");
-		lexer -> str_env = ft_strdup(itoa);
+		lexer -> str_env = ft_strdup("$$");
 		lexer->str = ft_strjoin(lexer->str, lexer -> str_env);
-		free(itoa);
 		i += 2;
 	}
 	else

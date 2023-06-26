@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 15:55:05 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/26 17:52:44 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/26 18:24:40 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	signal_handler(int sig)
 {
 	(void)sig;
-	
 	if (g_var.signal_heredoc != 1)
 	{
 		write(1, "\n", 1);
@@ -27,18 +26,18 @@ void	signal_handler(int sig)
 }
 
 // check out the struct termios
-void    remove_ctrl(void)
+void	remove_ctrl(void)
 {
-    struct termios    term;
+	struct termios	term;
 
-    tcgetattr(STDIN_FILENO, &term);
-    term.c_lflag &= ~ECHOCTL;
-    tcsetattr(STDIN_FILENO, 0, &term);
+	tcgetattr(STDIN_FILENO, &term);
+	term.c_lflag &= ~ECHOCTL;
+	tcsetattr(STDIN_FILENO, 0, &term);
 }
 
 void    signal_check(void)
 {
-	remove_ctrl(); 
+	remove_ctrl();
 	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, SIG_IGN);
 }
