@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 06:15:22 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/26 16:16:05 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/26 16:22:39 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	sh_pwd(void)
 			s = find_env(g_var.list, "PWD");
 			printf("%s\n", s->value);
 		}
+		else
+			perror("minishell");
 	}
 	else
 		printf("%s\n", buf);

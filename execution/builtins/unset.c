@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 10:11:55 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/26 15:38:13 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/26 16:26:16 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	sh_unset(t_data *arg)
 
 	i = 0;
 	cur = arg;
+	g_var.exit_status = 0;
 	if (!cur)
 		return ;
 	if (cur->value[i] == '-' && cur->value[i + 1])

@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/26 15:37:36 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/26 18:23:03 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,12 @@ void	exec_heredoc(t_parser *parser)
 	}
 }
 
+void	signal_heredoc(int signal)
+{
+	(void)signal;
+	exit(1);
+}
+
 void	write_her(t_data2 *my_heredoc, t_data2 *heredoc_next,  t_parser *p)
 {
 	int	pipefd[2];
@@ -69,13 +75,12 @@ void	write_her(t_data2 *my_heredoc, t_data2 *heredoc_next,  t_parser *p)
 	pid = fork();
 	if (pid == 0)
 	{
-		//check_signal_heredoc();
+		signal(SIGINT, signal_heredoc);
 		her(my_heredoc, heredoc_next, p -> index, pipefd);
 		exit (0);
 	}
 	waitpid(pid, &status, 0);
 	g_var.exit_status = WEXITSTATUS(status);
-	printf("->>>> %d\n", g_var.exit_status);
 	if (heredoc_next == NULL)
 	{
 		close(pipefd[1]);

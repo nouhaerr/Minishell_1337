@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/26 15:28:40 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/26 17:55:36 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,14 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 		return (pid);
 	if (pid == 0)
 	{
-		//signal(SIGINT, SIG_DFL);//SIGNALS
-		//signal(SIGQUIT, SIG_DFL);
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		dp_built(parse, pip, msg);
 		path = parse->cmd;
 		slash = cmd_slash(parse->cmd);
 		if (!slash)
 			path = get_path(parse->cmd);
-		if ((!path && parse->my_cmd == 0) || !ft_strcmp(parse->cmd, "\0"))//
+		if ((!path && parse->my_cmd == 0) || !ft_strcmp(parse->cmd, "\0"))
 		{
 			g_var.exit_status = 127;
 			ft_err("minishell: ", parse->cmd, ": command not found");
