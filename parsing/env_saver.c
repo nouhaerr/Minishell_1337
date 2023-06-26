@@ -6,13 +6,13 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 17:45:04 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/26 18:58:59 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/26 19:22:12 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	check_this_out(int i, int a, char **env, t_env **my_env)
+void	check_this_out(int i, int *a, char **env, t_env **my_env)
 {
 	int	len;
 	int	start;
@@ -31,7 +31,7 @@ void	check_this_out(int i, int a, char **env, t_env **my_env)
 	{
 		ft_lstaddback_env(my_env, ft_lstnew_env(ft_substr(env[i], 0,
 					len), NULL));
-		a = 1;
+		*a = 1;
 	}
 	else
 		ft_lstaddback_env(my_env, ft_lstnew_env(ft_substr(env[i], 0, len),
@@ -49,7 +49,7 @@ t_env	*save_my_env(char **env)
 	my_env = NULL;
 	while (env[i])
 	{
-		check_this_out(i, a, env, &my_env);
+		check_this_out(i, &a, env, &my_env);
 		i++;
 	}
 	if (a == 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 15:55:05 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/26 17:05:50 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/26 18:24:40 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,6 @@ void	signal_handler(int sig)
 	}
 }
 
-void	signal_heredoc(int signal)
-{
-	(void)signal;
-	exit(1);
-}
-
 // check out the struct termios
 void	remove_ctrl(void)
 {
@@ -41,14 +35,9 @@ void	remove_ctrl(void)
 	tcsetattr(STDIN_FILENO, 0, &term);
 }
 
-void	signal_check(void)
+void    signal_check(void)
 {
 	remove_ctrl();
 	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, SIG_IGN);
-}
-
-void	check_signal_heredoc(void)
-{
-	signal(SIGINT, signal_heredoc);
 }

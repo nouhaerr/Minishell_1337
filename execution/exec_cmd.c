@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/26 18:56:00 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/26 19:01:30 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,20 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 		return (pid);
 	if (pid == 0)
 	{
-		//signal(SIGINT, SIG_DFL);//SIGNALS
-		//signal(SIGQUIT, SIG_DFL);
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		dp_built(parse, pip, msg);
 		path = parse->cmd;
 		slash = cmd_slash(parse->cmd);
 		if (!slash)
 			path = get_path(parse->cmd);
-		if ((!path && parse->my_cmd == 0) || !ft_strcmp(parse->cmd, "\0"))//
+		if ((!path && parse->my_cmd == 0) || !ft_strcmp(parse->cmd, "\0"))
 		{
 			g_var.exit_status = 127;
 			ft_err("minishell: ", parse->cmd, ": command not found");
 		}
 		if (parse -> my_cmd == 0)
-			ft_execve(path, parse, create_env_arr(env_list_size(g_var.list)), slash);
+			ft_execve(path, parse, create_env_arr(envls(g_var.list)), slash);
 	}
 	return (pid);
 }
