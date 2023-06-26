@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:54:28 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/25 21:59:21 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/26 21:41:30 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct t_lexer
 	int		base;
 	int		base2;
 	int		her;
+	int		her2;
 	char	*str;
 	char	c;
 	int		a;

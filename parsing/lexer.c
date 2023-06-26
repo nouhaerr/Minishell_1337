@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:53:34 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/25 22:44:36 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/26 21:53:37 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,10 @@ int	lex(char *s, t_token **tokens, t_lexer *lex)
 		if (s[i] != '\0' && ft_strchr("$|><", s[i]) != NULL && lex -> base == 0)
 		{
 			if (s[i] == '<' && s[i + 1] == '<')
+			{
 				lex -> her = 1;
+				lex -> her2 += 1;
+			}
 			i += check_wsc(s[i], s[i + 1], tokens, lex);
 		}
 		else if (s[i] != '\0')

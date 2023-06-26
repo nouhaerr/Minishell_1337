@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/26 19:06:25 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/27 00:05:27 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,23 @@ int	syntax_error(int base, t_token **tokens)
 	return (0);
 }
 
-void	pa_ex(t_token *tok, t_lexer *lex, t_parser *par)
+void	pa_ex(t_token *tok, t_lexer *lex, t_parser *par, int base)
 {
-	parse(&tok, &par, lex);
+	if (tok != NULL)
+		parse(&tok, &par, lex);
 	if (par -> nu_here >= 17)
 	{
 		printf("minishell: maximum here-document count exceeded\n");
 		exit (2);
 	}
-	execution(par);
-	update_fd(g_var.fd_prog);
+	exec_heredoc(par);
+	if (syntax_error(base, &tok))
+		g_var.exit_status = 258;
+	else
+	{
+		execution(par);
+		update_fd(g_var.fd_prog);
+	}
 	free_mylist(par, 1);
 }
 
@@ -60,17 +67,14 @@ void	starting(char *input, t_token *tok, t_lexer *le, t_parser *par)
 	add_history(input);
 	g_var.fd_prog = my_fd();
 	base = lex(input, &tok, le);
-	if (!syntax_error(base, &tok) && tok != NULL)
-		pa_ex(tok, le, par);
-	else
-		g_var.exit_status = 258;
+	pa_ex(tok, le, par, base);
 	close_myfd_prog(g_var.fd_prog);
 	free_mylist(tok, 0);
 }
 
 int	_session(t_token *tok, t_parser *par, t_lexer *le)
 {
-	char		*input;
+	char	*input;
 
 	while (1)
 	{	

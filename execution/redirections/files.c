@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:50:10 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/25 20:37:37 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/26 21:12:54 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_open(char *name, char *msg)
 	if (fd == -1)
 	{
 		perror(name);
-		if (g_var.parent_process == 1) //ila kena fl parent
+		if (g_var.parent_process == 1)
 			exit(1);
 		else
 			fd = -3;

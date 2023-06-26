@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 15:55:05 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/26 18:24:40 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/26 21:18:53 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	remove_ctrl(void)
 	tcsetattr(STDIN_FILENO, 0, &term);
 }
 
-void    signal_check(void)
+void	signal_check(void)
 {
 	remove_ctrl();
 	signal(SIGINT, signal_handler);
