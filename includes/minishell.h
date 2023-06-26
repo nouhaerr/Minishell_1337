@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:53:18 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/26 19:02:02 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/26 23:14:52 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ int		*my_fd(void);
 void	update_fd(int *my_fd);
 void	close_myfd_prog(int *my_fd);
 t_env	*find_env(t_env *head, char *s);
+char	*ft_add_arr(t_env *en, int en_len, int val_len);
 
 #endif
