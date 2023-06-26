@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/26 15:08:25 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/26 15:37:36 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	run_builtin(t_parser *parser)
 	else if (!ft_strcmp(cmd2, "env"))
 		sh_env();
 	else if (!ft_strcmp(parser->cmd, "unset"))
-		sh_unset(parser->args_exec);
+		sh_unset(parser->args);
 	else if (!ft_strcmp(cmd2, "cd"))
 		sh_cd(parser);
 	else if (!ft_strcmp(parser->cmd, "export"))

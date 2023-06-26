@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/26 15:31:11 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/26 16:07:26 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,10 @@ char	*get_prompt(char *s)
 		free(s);
 	}
 	else
+	{
+		
 		cwd = ft_strdup("\e[1;95m!!->/minishell => \e[0m ");
+	}
 	return (cwd);
 }
 
@@ -84,17 +87,17 @@ int	_session(t_token *tok, t_parser *par, t_lexer *le)
 		tok = NULL;
 		par = NULL;
 		g_var.signal_heredoc =  0;
-		//signal_check();
+		signal_check();
 		prompt = get_prompt(getcwd(NULL, 0));
 		input = readline(prompt);
-		// signal(SIGINT, SIG_IGN);
+		signal(SIGINT, SIG_IGN);
 		free((void *)prompt);
 		if (input == NULL)
 			break ;
 		if (ft_check_space(input))
 		{
 			add_history(input);
-			g_var.fd_prog = my_fd(); // HIER THERE IS A LEAK
+			g_var.fd_prog = my_fd(); // HERE THERE IS A LEAK
 			base = lex(input, &tok, le);
 			if (!syntax_error(base, &tok) && tok != NULL)
 				pa_ex(tok, le, par);
