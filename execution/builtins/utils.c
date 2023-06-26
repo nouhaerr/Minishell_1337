@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 17:18:08 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/16 18:08:22 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/27 00:00:45 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	set_oldpwd(char **oldpwd, char *cwd)
 	*oldpwd = cwd;
 }
 
-void	cd_home(t_env *pwd_home, char **pwd, char **oldpwd, char *cwd)
+void	cd_home(t_env *pwd_home, char **pwd, char *cwd, t_env *env_old)
 {
 	char	*path;
 
@@ -42,11 +42,8 @@ void	cd_home(t_env *pwd_home, char **pwd, char **oldpwd, char *cwd)
 			printf("minishell: cd: %s: %s\n", path, strerror(errno));
 			return (free(cwd));
 		}
-		else if (oldpwd == NULL)
-			ft_lstaddback_env(&g_var.list,
-				ft_lstnew_env(ft_strdup("OLDPWD"), cwd));
-		else
-			set_oldpwd(oldpwd, cwd);
+		else if (env_old)
+			set_oldpwd(&(env_old->value), cwd);
 		set_pwd(pwd);
 		g_var.exit_status = 0;
 	}
@@ -60,7 +57,7 @@ void	cd_oldpwd(char **oldpwd, char **pwd)
 	char	*cwd;
 
 	cwd = getcwd(NULL, 0);
-	if (!oldpwd)
+	if (!oldpwd || !(*oldpwd))
 	{
 		g_var.exit_status = 1;
 		printf("minishell: cd: OLDPWD not set\n");
@@ -84,9 +81,10 @@ void	cd_oldpwd(char **oldpwd, char **pwd)
 	}
 }
 
-void	cd_newpwd(t_data *name, char **oldpwd, char **pwd)
+void	cd_newpwd(t_data *name, char **pwd, t_env *env_old)
 {
 	char	*cwd;
+	(void)pwd;
 
 	cwd = getcwd(NULL, 0);
 	if (chdir(name->value) == -1)
@@ -101,11 +99,8 @@ void	cd_newpwd(t_data *name, char **oldpwd, char **pwd)
 			printf("minishell: cd: %s: %s\n", name->value, strerror(errno));
 		return (free(cwd));
 	}
-	else if (oldpwd == NULL)
-		ft_lstaddback_env(&g_var.list,
-			ft_lstnew_env(ft_strdup("OLDPWD"), cwd));
-	else
-		set_oldpwd(oldpwd, cwd);
+	else if (env_old)
+		set_oldpwd(&(env_old->value), cwd);
 	set_pwd(pwd);
 	g_var.exit_status = 0;
 }

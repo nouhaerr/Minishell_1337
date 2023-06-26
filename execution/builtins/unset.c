@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 10:11:55 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/26 18:35:00 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/26 22:11:41 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	ft_list_remove_if(t_env **head, void *data)
 {
 	t_env	*tmp;
 
-	tmp = *head;
-	if (!(*head) || !head)
+	if (!head || !(*head))
 		return ;
+	tmp = *head;
 	if (ft_strcmp(tmp->env, data) == 0)
 	{
 		*head = tmp->next;
