@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 05:37:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/26 14:13:28 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/26 15:23:41 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,21 @@ char	**table_cmd(t_parser *node)
 		j++;
 	}
 	s1 = malloc (sizeof(char *) * (j + 1));
-	i = 0;
+	i = 1;
 	args = node -> args;
+	s1[0] = ft_strdup(node -> cmd);
 	while (args)
-	{	
-		if (i == 0)
-		{
-			s1[i] = ft_strdup(node -> cmd);
-			i++;
-		}
-		else
-		{
-			s1[i] = ft_strdup(args -> value);
-			i++;
-			args = args -> next;
-		}
+	{
+		s1[i] = ft_strdup(args -> value);
+		i++;
+		args = args -> next;
 	}
 	s1[i] = NULL;
-	// int b = 0;
+	// int b;
+	// b = 0;
 	// while (s1[b])
 	// {
-	// 	printf("->>>> [%s]\n", s1[b]);
+	// 	printf("s1[i] : %s\n",s1[b]);
 	// 	b++;
 	// }
 	return (s1);

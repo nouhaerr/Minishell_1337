@@ -6,51 +6,40 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 21:48:23 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/26 13:38:46 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/26 15:14:45 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// int	counter(char const *s, int a)
-// {
-// 	int	i;
-// 	int	j;
-// 	int	a;
+int	counter(char const *s, char c)
+{
+	int	i;
+	int	j;
 
-// 	i = 0;
-// 	j = 0;
-// 	while (s[i])
-// 	{
-		
-// 	}
-// 	return (j);
-// }
+	i = 0;
+	j = 0;
+	while (s[i])
+	{
+		if (s[i] != c && s[i + 1] == c)
+			j++;
+		else if (s[i] != c && s[i + 1] == '\0')
+			j++;
+		i++;
+	}
+	return (j);
+}
 
-int	word(char const *s, int start, int i, int a)
+int	word(char const *s, int start, char c)
 {
 	int	j;
 
 	j = 0;
-	(void)a;
-	(void)i;
-	while (s[start] != ' ' && s[start])
+	while (s[start] != c && s[start])
 	{
 		j++;
 		start++;
 	}
-	printf("->%d==", i);
-	if (i + 1 == a)
-	{
-		if (s[start] == ' ' && s[start + 1] == ' ')
-			start++;
-		while (s[start])
-		{
-			start++;
-			j++;
-		}
-	}
-	printf("[%c]== %d\n", s[start], start);
 	return (j);
 }
 
@@ -64,7 +53,7 @@ void	free2(char **p, int i)
 	free(p);
 }
 
-char	**split2(char const *s, char c, int a, int b)
+char	**split2(char const *s, char c)
 {
 	int		i;
 	int		j;
@@ -72,27 +61,22 @@ char	**split2(char const *s, char c, int a, int b)
 
 	if (s == NULL)
 		return (NULL);
-	printf("->>> [%s=====%d ==%d]\n", s, a, b);
-	sleep (1);
-	p = malloc(sizeof(char *) * (a + 1));
+	p = malloc(sizeof(char *) * (counter(s, c) + 1));
 	i = -1;
 	j = 0;
 	if (!p)
 		return (NULL);
-	while (++i < a)
+	while (++i < counter(s, c))
 	{
-		while (s[j] == c && s[j + 1] != c)
+		while (s[j] == c)
 			j++;
-		if (i == 0 || b != 1)
-			p[i] = ft_substr2(s, j, word(s, j, i, a));
-		else
-			p[i] = ft_strdup ("\0");
+		p[i] = ft_substr2(s, j, word(s, j, c));
 		if (!p[i])
 		{
 			free2(p, i);
 			return (NULL);
 		}
-		j += word(s, j, i, a);
+		j += word(s, j, c);
 	}
 	p[i] = 0;
 	return (p);

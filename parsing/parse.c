@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:14:51 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/26 14:17:30 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/26 15:17:35 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	parse(t_token **tokens, t_parser **p, t_lexer *l)
 			return ;
 		check_wtok(l, t);
 	}
-	check_struct(*p);
+	//check_struct(*p);
 }
 
 t_token	*my_next_word(t_token *to, t_lexer *l)
