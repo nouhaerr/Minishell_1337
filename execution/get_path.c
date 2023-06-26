@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 05:37:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/26 15:23:41 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/26 18:56:10 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 char	**table_cmd(t_parser *node)
 {
-	char **s1;
-	unsigned long i;
-	int j;
-	t_data *args;
+	char			**s1;
+	unsigned long	i;
+	int				j;
+	t_data			*args;
 
 	j = 1;
 	s1 = NULL;
@@ -38,13 +38,6 @@ char	**table_cmd(t_parser *node)
 		args = args -> next;
 	}
 	s1[i] = NULL;
-	// int b;
-	// b = 0;
-	// while (s1[b])
-	// {
-	// 	printf("s1[i] : %s\n",s1[b]);
-	// 	b++;
-	// }
 	return (s1);
 }
 

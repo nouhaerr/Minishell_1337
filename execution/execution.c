@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/26 18:00:38 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/26 19:18:43 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ int	isbuiltin(t_parser *parser)
 	return (0);
 }
 
-int	exit_status(int status)
+int	exit_status(int status, t_parser *p)
 {
+	if (p -> my_cmd == 1)
+		return (0);
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
 	else if (WIFSIGNALED(status))
@@ -84,9 +86,13 @@ void	execution(t_parser *parser)
 	while (1)
 	{
 		wait_pid = waitpid(-1, &status, 0);
+		if (parser -> my_cmd == 1)
+			g_var.exit_status = 0;
 		if (wait_pid == -1)
 			break ;
 		if (wait_pid == pid)
-			g_var.exit_status = exit_status(status);
+			g_var.exit_status = exit_status(status, parser);
+		if (parser -> my_cmd == 1)
+			g_var.exit_status = 0;
 	}
 }

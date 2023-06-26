@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:53:18 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/25 14:56:37 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/26 19:02:02 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,12 @@ t_glb	g_var;
 // thsi one must stau hier since they dont know the prototype of this function
 //gotta add this cause in the library i downloaded they didnt have the prototype
 void	rl_replace_line(const char *text, int clear_undo);
-size_t	env_list_size(t_env *env);
+size_t	envls(t_env *env);
 void	signal_check(void);
 void	check_signal_heredoc(void);
 int		*my_fd(void);
 void	update_fd(int *my_fd);
 void	close_myfd_prog(int *my_fd);
+t_env	*find_env(t_env *head, char *s);
 
 #endif

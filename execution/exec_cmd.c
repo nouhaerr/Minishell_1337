@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/26 17:55:36 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/26 19:01:30 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 			ft_err("minishell: ", parse->cmd, ": command not found");
 		}
 		if (parse -> my_cmd == 0)
-			ft_execve(path, parse, create_env_arr(env_list_size(g_var.list)), slash);
+			ft_execve(path, parse, create_env_arr(envls(g_var.list)), slash);
 	}
 	return (pid);
 }

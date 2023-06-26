@@ -6,13 +6,13 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 17:45:04 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/26 17:51:51 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/26 19:22:12 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	check_this_out(int i, int a, char **env, t_env **my_env)
+void	check_this_out(int i, int *a, char **env, t_env **my_env)
 {
 	int	len;
 	int	start;
@@ -30,12 +30,12 @@ void	check_this_out(int i, int a, char **env, t_env **my_env)
 	if (!ft_strcmp2(ft_substr(env[i], 0, len), "OLDPWD"))
 	{
 		ft_lstaddback_env(my_env, ft_lstnew_env(ft_substr(env[i], 0,
-                len), NULL));
-		a = 1;
+					len), NULL));
+		*a = 1;
 	}
 	else
 		ft_lstaddback_env(my_env, ft_lstnew_env(ft_substr(env[i], 0, len),
-                ft_substr(env[i], start, ft_strlen(env[i]) - 1)));
+				ft_substr(env[i], start, ft_strlen(env[i]) - 1)));
 }
 
 t_env	*save_my_env(char **env)
@@ -49,7 +49,7 @@ t_env	*save_my_env(char **env)
 	my_env = NULL;
 	while (env[i])
 	{
-		check_this_out(i, a, env, &my_env);
+		check_this_out(i, &a, env, &my_env);
 		i++;
 	}
 	if (a == 0)
