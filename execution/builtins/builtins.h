@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 00:48:37 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/22 01:03:04 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/26 23:09:21 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	sh_unset(t_data *arg);
 int		env_search(t_env *head, char *s);
 void	sh_cd(t_parser *env_cmd);
 t_env	*ft_getenv(t_env *head, char *s);
-void	cd_home(t_env *pwd_home, char **pwd, char **oldpwd, char *cwd);
+void	cd_home(t_env *pwd_home, char **pwd, char *cwd, t_env *env_old);
 void	cd_oldpwd(char **oldpwd, char **pwd);
-void	cd_newpwd(t_data *name, char **oldpwd, char **pwd);
+void	cd_newpwd(t_data *name, char **pwd, t_env *env_old);
 void	sh_export(t_parser *parser);
 void	sorted_env(t_env *head);
 int		check_egal(t_data *tmp);

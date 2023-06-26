@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/26 22:17:23 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/27 00:05:27 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,7 @@ int	syntax_error(int base, t_token **tokens)
 void	pa_ex(t_token *tok, t_lexer *lex, t_parser *par, int base)
 {
 	if (tok != NULL)
-	{
 		parse(&tok, &par, lex);
-	}
 	if (par -> nu_here >= 17)
 	{
 		printf("minishell: maximum here-document count exceeded\n");
@@ -76,7 +74,7 @@ void	starting(char *input, t_token *tok, t_lexer *le, t_parser *par)
 
 int	_session(t_token *tok, t_parser *par, t_lexer *le)
 {
-	char		*input;
+	char	*input;
 
 	while (1)
 	{	

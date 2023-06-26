@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/26 19:01:30 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/26 22:36:39 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	ft_execve(char *path, t_parser *node, char **env, int slash)
 	if (slash)
 		check_dir_notexec(path, node);
 	arr = table_cmd(node);
-	// && access(path, X_OK | F_OK)
 	if (execve(path, arr, env) < 0)
 	{
 		free(env);

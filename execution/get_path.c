@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 05:37:14 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/26 18:56:10 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/26 22:34:59 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ void	check_dir_notexec(char *path, t_parser *node)
 		if (!access(path, F_OK))
 			g_var.exit_status = 126;
 		perror("minishell");
+		exit(g_var.exit_status);
 	}
-	exit(g_var.exit_status);
 }
 
 char	**real_path(void)
