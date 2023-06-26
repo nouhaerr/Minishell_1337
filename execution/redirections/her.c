@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:46:12 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/26 17:32:25 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/26 21:30:58 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ int	env_expansion_for_my_heredoc2(char *input, int i, char **str)
 			str_env = ft_strdup("\0");
 		*str = ft_strjoin(*str, str_env);
 		free(env);
+	}
+	else if (len == 0)
+	{
+		str_env = ft_strdup ("$");
+		*str = ft_strjoin(*str, str_env);
 	}
 	return (i + len);
 }

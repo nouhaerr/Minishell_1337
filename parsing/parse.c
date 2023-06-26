@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:14:51 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/26 18:57:10 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/26 22:32:22 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,18 @@ void	create_node(t_parser *p, t_lexer *l)
 
 t_parser	*build_list_parser(t_parser **p, t_lexer *l, t_parser *t)
 {
-	if (((l->tok2)->type) == the_pipe)
+	if (((l->tok2)->type) == the_pipe && (l->tok2)->next != NULL)
 	{
 		l -> index++;
 		l->i = 0;
 		t -> my_cmd = 0;
 		t = ft_lstaddback3(p, ft_lstnew3(l -> index));
 		l->tok2 = (l->tok2)->next;
+	}
+	if (((l->tok2)->type) == the_pipe && l -> tok2 -> next == NULL)
+	{
+		l->tok2 = l -> tok2 -> next;
+		return (t);
 	}
 	l->tok = my_next_word(l->tok2, l);
 	if (!ft_strcmp(l-> tok->value, " ") && l -> tok2 -> arten == env_general)
@@ -93,9 +98,8 @@ void	parse(t_token **tokens, t_parser **p, t_lexer *l)
 		if (l -> tok2 == NULL)
 			return ;
 		t = build_list_parser(p, l, t);
-		if (l -> tok == NULL)
-			return ;
-		check_wtok(l, t);
+		if (l -> tok2 != NULL)
+			check_wtok(l, t);
 	}
 	//check_struct(*p);
 }

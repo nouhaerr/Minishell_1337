@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:53:39 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/25 20:13:31 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/26 21:58:34 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_err(char *s, char *cmd, char *s2);
 void	update_fd(int *my_fd);
 int		ft_check_fork(int p);
 int		cmd_slash(char *cmd);;
-void	write_her(t_data2 *my_heredoc, t_data2 *heredoc_next,  t_parser *p);
+void	write_her(t_data2 *my_heredoc, t_data2 *heredoc_next, t_parser *p);
 int		ft_ambi(t_data2 *list);
 void	check_my_heredoc(t_data2 *inf_her, t_data2 **my_heredoc);
 
