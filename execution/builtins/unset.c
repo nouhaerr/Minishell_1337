@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 10:11:55 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/26 15:38:13 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/26 18:21:43 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	unset_arg(char *av)
-{
-	int	i;
+// static int	unset_arg(char *av)
+// {
+// 	int	i;
 
-	i = 0;
-	while (av[i])
-	{
-		if (!(ft_isalpha(av[i]) || ft_isdigit(av[i]) || av[i] == '_'))
-			return (0);
-		i++;
-	}
-	return (1);
-}
+// 	i = 0;
+// 	while (av[i])
+// 	{
+// 		if (!(ft_isalpha(av[i]) || ft_isdigit(av[i]) || av[i] == '_'))
+// 			return (0);
+// 		i++;
+// 	}
+// 	return (1);
+// }
 
 void	ft_list_remove_if(t_env **head, void *data)
 {
@@ -81,13 +81,13 @@ void	sh_unset(t_data *arg)
 		return (unset_error(cur));
 	while (cur)
 	{
-		if (!unset_arg(cur->value) || ft_isdigit(cur->value[0])
-			|| cur->value[0] == '\0')
-		{
-			printf("minishell: unset: `%s': not a valid identifier\n",
-				cur->value);
-			g_var.exit_status = 1;
-		}
+		// if (!unset_arg(cur->value) || ft_isdigit(cur->value[0])
+		// 	|| cur->value[0] == '\0')
+		// {
+		// 	printf("minishell: unset: `%s': not a valid identifier\n",
+		// 		cur->value);
+		// 	g_var.exit_status = 1;
+		// }
 		if (env_search(g_var.list, cur->value))
 			ft_list_remove_if(&g_var.list, cur->value);
 		cur = cur->next;

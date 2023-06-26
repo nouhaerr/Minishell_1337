@@ -3,24 +3,21 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+         #
+#    By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 02:49:56 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/06/26 15:45:39 by nerrakeb         ###   ########.fr        #
+#    Updated: 2023/06/26 18:03:50 by hobenaba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 
-RDFLAGS +=  -lreadline -L/goinfre/nerrakeb/homebrew/opt/readline/lib
-INCLUDES += -I /goinfre/nerrakeb/homebrew/opt/readline/include
-
-#RDFLAGS +=  -lreadline -L /Users/$(USER)/goinfre/homebrew/opt/readline/lib
-#INCLUDES += -I /Users/$(USER)/goinfre/homebrew/opt/readline/include/readline
+RDFLAGS +=  -lreadline -L /Users/$(USER)/goinfre/homebrew/opt/readline/lib
+INCLUDES += -I /Users/$(USER)/goinfre/homebrew/opt/readline/include/readline
 
 PARSING = my_free.c ft_lst_one.c utils.c parse.c init.c \
-		ft_lst_second.c words.c env.c tokens.c lexer.c tokens_exp.c
-EXECUTION = exec_bltn_hered.c  execution.c exec_pipes.c get_path.c exec_cmd.c exec_helpers.c ft_dup.c
+		ft_lst_second.c words.c env.c tokens.c lexer.c tokens_exp.c env_saver.c
+EXECUTION = exec_bltn.c  exec_heredoc.c execution.c exec_pipes.c get_path.c exec_cmd.c exec_helpers.c ft_dup.c
 EXECUTION_EXP = export.c modifie_and_add.c check_exp.c exp_utils.c sort_and_print.c
 EXECUTION_RDR = her.c files.c
 EXECUTION_BU =  echo.c pwd.c env.c exit.c unset.c utils.c cd.c 

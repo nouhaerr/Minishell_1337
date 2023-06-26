@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/26 16:07:26 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/26 16:41:14 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,7 @@ char	*get_prompt(char *s)
 		free(s);
 	}
 	else
-	{
-		
 		cwd = ft_strdup("\e[1;95m!!->/minishell => \e[0m ");
-	}
 	return (cwd);
 }
 
@@ -86,7 +83,7 @@ int	_session(t_token *tok, t_parser *par, t_lexer *le)
 	{	
 		tok = NULL;
 		par = NULL;
-		g_var.signal_heredoc =  0;
+		g_var.signal_heredoc = 0;
 		signal_check();
 		prompt = get_prompt(getcwd(NULL, 0));
 		input = readline(prompt);

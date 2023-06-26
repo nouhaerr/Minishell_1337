@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 13:38:39 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/26 00:15:11 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/26 17:44:52 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,46 +40,6 @@ void	ft_lstaddback_env(t_env **lst, t_env *new)
 	while (p-> next)
 		p = p -> next;
 	p -> next = new;
-}
-
-t_env	*save_my_env(char **env)
-{
-	t_env	*my_env;
-	int		i;
-	int		start;
-	int		len;
-	int		a;
-
-	i = 0;
-	a = 0;
-	my_env = NULL;
-	while (env[i])
-	{
-		start = 0;
-		len = 0;
-		while (env[i][++len])
-		{
-			if (env[i][len] == '=')
-			{
-				start = len + 1;
-				break ;
-			}
-		}
-		if (!ft_strcmp2(ft_substr(env[i], 0, len), "OLDPWD"))
-		{
-			ft_lstaddback_env(&my_env, ft_lstnew_env(ft_substr(env[i], 0, len),
-					NULL));
-			a = 1;
-		}
-		else
-			ft_lstaddback_env(&my_env, ft_lstnew_env(ft_substr(env[i], 0, len),
-					ft_substr(env[i], start, ft_strlen(env[i]) - 1)));
-		i++;
-	}
-	if (a == 0)
-		ft_lstaddback_env(&my_env, ft_lstnew_env(ft_strdup("OLDPWD"),
-					NULL));
-	return (my_env);
 }
 
 char	*check_env(char *env, t_env *my_envs)
