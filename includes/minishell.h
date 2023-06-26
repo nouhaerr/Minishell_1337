@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:53:18 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/25 14:56:37 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/26 18:27:06 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ void	check_signal_heredoc(void);
 int		*my_fd(void);
 void	update_fd(int *my_fd);
 void	close_myfd_prog(int *my_fd);
+t_env	*find_env(t_env *head, char *s);
 
 #endif
