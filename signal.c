@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 15:55:05 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/26 21:18:53 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:23:02 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	signal_handler(int sig)
 	}
 }
 
-// check out the struct termios
 void	remove_ctrl(void)
 {
 	struct termios	term;
