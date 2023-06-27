@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:53:18 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/27 14:03:43 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/27 15:08:55 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,6 @@ void	update_fd(int *my_fd);
 void	close_myfd_prog(int *my_fd);
 t_env	*find_env(t_env *head, char *s);
 char	*ft_add_arr(t_env *en, int en_len, int val_len);
+void	add_to_under_score(t_parser *parser);
 
 #endif

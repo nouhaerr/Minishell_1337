@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 12:48:48 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/27 14:06:21 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/27 15:08:40 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,29 @@ char	*ft_add_arr(t_env *en, int en_len, int val_len)
 	}
 	add[j] = '\0';
 	return (add);
+}
+
+void	add_to_under_score(t_parser *parser)
+{
+	char	*str;
+	t_env	*node;
+
+	while (parser -> next)
+		parser = parser -> next;
+	if (parser -> args == NULL)
+		str = parser -> cmd;
+	else
+	{
+		while (parser -> args -> next)
+			parser -> args = parser -> args -> next;
+		str = parser -> args -> value;
+	}
+	node = ft_getenv(g_var.list, "_");
+	if (node != NULL)
+	{
+		free(node -> value);
+		node -> value = ft_strdup(str);
+	}
 }
 
 char	**create_env_arr(int size)

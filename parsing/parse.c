@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:14:51 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/27 14:37:43 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/27 14:54:10 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ t_parser	*build_list_parser(t_parser **p, t_lexer *l, t_parser *t)
 {
 	if (((l->tok2)->type) == the_pipe && (l->tok2)->next != NULL)
 	{
-		printf("%d == %p\n", (t)->my_cmd, t);
 		l -> index++;
 		l->i = 0;
 		t = ft_lstaddback3(p, ft_lstnew3(l -> index));
@@ -94,7 +93,6 @@ void	parse(t_token **tokens, t_parser **p, t_lexer *l)
 		{
 			l -> tok2 = l -> tok2 -> next;
 			t -> my_cmd = 1;
-			printf("%d == %p\n", (t)->my_cmd, t);
 		}
 		if (l -> tok2 == NULL)
 			return ;
