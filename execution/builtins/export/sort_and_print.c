@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:00:11 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/27 15:27:13 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/27 16:09:19 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,33 @@ void	print_env(t_env *e)
 	}
 }
 
+void	duplicate_env(t_env *head, t_env **tmp)
+{
+	t_env	*h;
+
+	h = head;
+	while (h)
+	{
+		ft_lstaddback_env(tmp, ft_lstnew_env(ft_strdup(h ->env), ft_strdup(h ->value)));
+		h = h -> next;
+	}
+}
+
 void	sorted_env(t_env *head)
 {
 	int		swp;
 	t_env	*cur;
+	t_env	*tmp;
 
-	swp = 1;
 	if (!head || !head->next)
 		return ;
+	swp = 1;
+	tmp = NULL;
+	duplicate_env(head, &tmp);
 	while (swp)
 	{
 		swp = 0;
-		cur = head;
+		cur = tmp;
 		while (cur->next)
 		{
 			if (ft_strcmp(cur->env, cur->next->env) > 0)
@@ -59,6 +74,6 @@ void	sorted_env(t_env *head)
 			cur = cur->next;
 		}
 	}
-	cur = head;
+	cur = tmp;
 	print_env(cur);
 }

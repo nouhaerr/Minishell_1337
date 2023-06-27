@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/27 15:28:48 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/27 15:43:19 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,21 +73,10 @@ int	execution_start(t_parser *parser, t_pipe pip, int pid)
 	return (pid);
 }
 
-void	execution(t_parser *parser)
+void	wait_exit(int status, t_parser *parser)
 {
-	int		pid;
-	t_pipe	pip;
-	int		status;
 	pid_t	wait_pid;
 
-	pid = 0;
-	pip.rd_end = 0;
-	pip.wr_end = 0;
-	if (!parser)
-		return ;
-	if (parser -> signal == 1)
-		return ;
-	pid = execution_start(parser, pip, pid);
 	while (1)
 	{
 		wait_pid = waitpid(-1, &status, 0);
@@ -104,4 +93,22 @@ void	execution(t_parser *parser)
 		printf("^\\Quit: %d\n", WTERMSIG(status));
 	else if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
 		printf("^C\n");
+}
+
+void	execution(t_parser *parser)
+{
+	int		pid;
+	t_pipe	pip;
+	int		status;
+	
+	pid = 0;
+	pip.rd_end = 0;
+	pip.wr_end = 0;
+	status = 0;
+	if (!parser)
+		return ;
+	if (parser -> signal == 1)
+		return ;
+	pid = execution_start(parser, pip, pid);
+	wait_exit(status, parser);
 }
