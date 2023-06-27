@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/27 14:38:08 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/27 15:28:48 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	execution(t_parser *parser)
 			g_var.exit_status = 0;
 		if (wait_pid == -1)
 			break ;
-		if (wait_pid == pid)
+		else
 			g_var.exit_status = exit_status(status, parser);
 		if (parser -> my_cmd == 1)
 			g_var.exit_status = 0;

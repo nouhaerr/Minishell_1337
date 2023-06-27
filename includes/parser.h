@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:54:36 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/26 16:54:10 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/27 14:13:49 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ t_token		*my_next_word(t_token *tokens, t_lexer *lexer);
 int			ft_lstsize_parse(t_parser *parse);
 void		check_struct(t_parser *parser);
 void		check_amg_parse(t_token *t2, t_lexer *l);
+int			check_wsc(char c, char n_c, t_token **tokens, t_lexer *lex);
 
 // those are relate to then creation of my lists that im gonna work with.
 
@@ -72,6 +73,8 @@ t_parser	*ft_lstnew3(int index);
 t_parser	*ft_lstaddback3(t_parser **lst, t_parser *new);
 t_data2		*lstnew4(char *value, int type, int amg);
 void		addback4(t_data2 **lst, t_data2 *new);
+int			check_condition(t_lexer *lex, char *s, int i);
+void		check_condition2(t_lexer *lex, t_token **tokens, char *s, int *i);
 
 // functions that are responsible for freeing my list
 

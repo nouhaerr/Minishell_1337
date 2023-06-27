@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:53:18 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/27 15:25:48 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/27 15:27:02 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,16 @@ typedef struct s_glb
 
 t_glb	g_var;
 
+typedef struct t_helper
+{
+	char	**arr;
+	char	*add;
+	t_env	*en;
+	int		en_lenght;
+	int		val_lenght;
+	int		i;
+}	t_helper;
+
 // thsi one must stau hier since they dont know the prototype of this function
 //gotta add this cause in the library i downloaded they didnt have the prototype
 void	rl_replace_line(const char *text, int clear_undo);
@@ -54,5 +64,6 @@ void	update_fd(int *my_fd);
 void	close_myfd_prog(int *my_fd);
 t_env	*find_env(t_env *head, char *s);
 char	*ft_add_arr(t_env *en, int en_len, int val_len);
+void	add_to_under_score(t_parser *parser);
 
 #endif
