@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 17:45:04 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/26 19:22:12 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/27 14:26:47 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ t_env	*save_my_env(char **env)
 	i = 0;
 	a = 0;
 	my_env = NULL;
+	if (ft_dostrlen (env) == 0)
+		ft_lstaddback_env(&my_env, ft_lstnew_env(ft_strdup("SHLVL"),
+				ft_strdup("1")));
 	while (env[i])
 	{
 		check_this_out(i, &a, env, &my_env);
