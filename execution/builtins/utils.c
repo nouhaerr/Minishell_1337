@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 17:18:08 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/27 00:00:45 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/27 13:01:04 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	cd_home(t_env *pwd_home, char **pwd, char *cwd, t_env *env_old)
 			set_oldpwd(&(env_old->value), cwd);
 		set_pwd(pwd);
 		g_var.exit_status = 0;
+		free(cwd);
 	}
 	else
 		return (g_var.exit_status = 1,
@@ -84,7 +85,6 @@ void	cd_oldpwd(char **oldpwd, char **pwd)
 void	cd_newpwd(t_data *name, char **pwd, t_env *env_old)
 {
 	char	*cwd;
-	(void)pwd;
 
 	cwd = getcwd(NULL, 0);
 	if (chdir(name->value) == -1)
@@ -102,5 +102,6 @@ void	cd_newpwd(t_data *name, char **pwd, t_env *env_old)
 	else if (env_old)
 		set_oldpwd(&(env_old->value), cwd);
 	set_pwd(pwd);
+	free(cwd);
 	g_var.exit_status = 0;
 }

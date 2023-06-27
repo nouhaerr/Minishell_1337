@@ -1,0 +1,20 @@
+total 272
+drwxr-xr-x  19 hobenaba  2019    646 Jun 27 14:14 .
+drwx------  15 hobenaba  2019    510 Jun 26 22:42 ..
+-rw-r--r--   1 hobenaba  2019   6148 Jun 26 16:40 .DS_Store
+drwxr-xr-x  15 hobenaba  2019    510 Jun 27 14:11 .git
+-rw-r--r--   1 hobenaba  2019   2432 Jun 27 13:07 Makefile
+-rw-r--r--   1 hobenaba  2019      0 Jun 27 14:14 a
+drwxr-xr-x  22 hobenaba  2019    748 Jun 27 14:11 execution
+-rw-r--r--   1 hobenaba  2019     12 Jun 27 14:07 hello
+drwxr-xr-x   7 hobenaba  2019    238 Jun 26 16:40 includes
+drwxr-xr-x  93 hobenaba  2019   3162 Jun 27 14:06 libft
+-rw-r--r--   1 hobenaba  2019  44120 Jun 27 14:06 libft.a
+-rwxr-xr-x   1 hobenaba  2019   3016 Jun 27 00:06 main.c
+-rw-r--r--   1 hobenaba  2019   3340 Jun 27 14:06 main.o
+-rwxr-xr-x   1 hobenaba  2019  49956 Jun 27 14:14 minishell
+-rw-r--r--   1 hobenaba  2019   1202 Jun 26 16:40 my_fd.c
+-rw-r--r--   1 hobenaba  2019   1212 Jun 27 14:06 my_fd.o
+drwxr-xr-x  26 hobenaba  2019    884 Jun 27 14:14 parsing
+-rw-r--r--   1 hobenaba  2019   1402 Jun 26 21:18 signal.c
+-rw-r--r--   1 hobenaba  2019   1620 Jun 27 14:06 signal.o

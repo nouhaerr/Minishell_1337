@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipes.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 19:19:54 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/25 13:47:13 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/27 14:07:44 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	switch_pipe(t_pipe *pip, int i, int fd_pip[2][2])
 {
 	if (i % 2 == 0)
 	{
-		pip->rd_end = fd_pip[0]; //fd_pip = index of pipes
+		pip->rd_end = fd_pip[0];
 		pip->wr_end = fd_pip[1];
 	}
 	else

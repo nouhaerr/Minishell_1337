@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:53:34 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/26 21:53:37 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/27 14:11:40 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,6 @@ void	build_list(t_lexer *lex, t_token **tokens)
 	lex -> e = 0;
 }
 
-int	check_condition(t_lexer *lex, char *s, int i)
-{
-	if (s[i] == lex -> c && s[i - 1] == lex -> c && (lex -> str == NULL
-			&& (s[i + 1] == ' ' || s[i + 1] == '\0' )))
-		return (1);
-	return (0);
-}
-
 int	lex(char *s, t_token **tokens, t_lexer *lex)
 {
 	int	i;
@@ -90,14 +82,7 @@ int	lex(char *s, t_token **tokens, t_lexer *lex)
 		if (s[i] == ' ' && lex -> base == 0)
 			i = ft_ignore_spaces(s, i);
 		if (s[i] != '\0' && ft_strchr("$|><", s[i]) != NULL && lex -> base == 0)
-		{
-			if (s[i] == '<' && s[i + 1] == '<')
-			{
-				lex -> her = 1;
-				lex -> her2 += 1;
-			}
-			i += check_wsc(s[i], s[i + 1], tokens, lex);
-		}
+			check_condition2(lex, tokens, s, &i);
 		else if (s[i] != '\0')
 			i = partition_tokens(lex, s, i);
 		if (s[i] != '\0' && check_condition(lex, s, i) == 1)

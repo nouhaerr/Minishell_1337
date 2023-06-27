@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:53:18 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/26 23:14:52 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/27 14:03:43 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,16 @@ typedef struct s_glb
 }	t_glb;
 
 t_glb	g_var;
+
+typedef struct t_helper
+{
+	char	**arr;
+	char	*add;
+	t_env	*en;
+	int		en_lenght;
+	int		val_lenght;
+	int		i;
+}	t_helper;
 
 // thsi one must stau hier since they dont know the prototype of this function
 //gotta add this cause in the library i downloaded they didnt have the prototype
