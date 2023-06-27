@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 14:50:10 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/26 21:12:54 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/27 21:45:01 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_open(char *name, char *msg)
 	if (fd == -1)
 	{
 		perror(name);
-		if (g_var.parent_process == 1)
+		if (g_var.parent_process == 0)
 			exit(1);
 		else
 			fd = -3;
@@ -58,7 +58,7 @@ int	ft_infiles(t_parser *node, t_data2 *tmp2, int *fd)
 		else
 			fd[0] = node->fd[0];
 		if (fd[0] == -3)
-			(free(fd), exit(1));
+			return (0);
 		tmp2 = tmp2->next;
 	}
 	return (fd[0]);

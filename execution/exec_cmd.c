@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/27 21:16:40 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/27 21:27:01 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,18 @@ void	dp_built(t_parser *parse, t_pipe pip, char *msg)
 		exit(0);
 }
 
+void	signal_child(void)
+{
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+}
+
+void	path_null(char *path)
+{
+	if (!path)
+		exit(g_var.exit_status);
+}
+
 int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 {
 	pid_t	pid;
@@ -53,12 +65,10 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 		return (pid);
 	if (pid == 0)
 	{
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
+		signal_child();
 		dp_built(parse, pip, msg);
 		path = parse->cmd;
-		if (!path)
-			exit(g_var.exit_status);
+		path_null(path);
 		slash = cmd_slash(parse->cmd);
 		if (!slash)
 			path = get_path(parse->cmd);
