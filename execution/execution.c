@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/27 15:43:19 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/27 16:35:39 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	execution(t_parser *parser)
 	int		pid;
 	t_pipe	pip;
 	int		status;
-	
+
 	pid = 0;
 	pip.rd_end = 0;
 	pip.wr_end = 0;

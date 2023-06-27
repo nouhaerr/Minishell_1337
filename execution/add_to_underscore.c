@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_env_arr.c                                   :+:      :+:    :+:   */
+/*   add_to_underscore.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 12:48:48 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/27 15:35:59 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/27 16:35:28 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,18 @@ void	add_to_under_score(t_parser *parser)
 {
 	char	*str;
 	t_env	*node;
+	t_data	*args;
 
+	args = parser -> args;
 	while (parser -> next)
 		parser = parser -> next;
-	if (parser -> args == NULL)
+	if (args == NULL)
 		str = parser -> cmd;
 	else
 	{
-		while (parser -> args -> next)
-			parser -> args = parser -> args -> next;
-		str = parser -> args -> value;
+		while (args -> next)
+			args = args -> next;
+		str = args -> value;
 	}
 	node = ft_getenv(g_var.list, "_");
 	if (node != NULL)
