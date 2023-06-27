@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 17:18:08 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/27 00:00:45 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/27 15:11:44 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void	cd_oldpwd(char **oldpwd, char **pwd)
 void	cd_newpwd(t_data *name, char **pwd, t_env *env_old)
 {
 	char	*cwd;
-	(void)pwd;
 
 	cwd = getcwd(NULL, 0);
 	if (chdir(name->value) == -1)

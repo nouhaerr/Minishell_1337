@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 18:53:39 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/26 21:58:34 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/27 15:23:31 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ typedef struct s_pipe
 	int	*wr_end;
 }	t_pipe;
 
-// those functions are related to execution.
 void	her(t_data2 *my_heredoc, t_data2 *heredoc_next, int index, int *pipefd);
 void	run_builtin(t_parser *parser);
 void	exec_heredoc(t_parser *parser);

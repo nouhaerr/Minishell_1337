@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/27 00:03:09 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/27 14:38:08 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,8 @@ int	ft_ambi(t_data2 *list)
 	return (0);
 }
 
-void	execution_start(t_parser *parser, t_pipe pip, int pid)
+int	execution_start(t_parser *parser, t_pipe pip, int pid)
 {
-	if (parser -> signal == 1)
-		return ;
 	if (parser->cmd && isbuiltin(parser) && parser->next == NULL)
 	{
 		g_var.parent_process = 1;
@@ -72,6 +70,7 @@ void	execution_start(t_parser *parser, t_pipe pip, int pid)
 		else
 			pid = multiple_pipes(parser);
 	}
+	return (pid);
 }
 
 void	execution(t_parser *parser)
@@ -86,7 +85,9 @@ void	execution(t_parser *parser)
 	pip.wr_end = 0;
 	if (!parser)
 		return ;
-	execution_start(parser, pip, pid);
+	if (parser -> signal == 1)
+		return ;
+	pid = execution_start(parser, pip, pid);
 	while (1)
 	{
 		wait_pid = waitpid(-1, &status, 0);
@@ -99,4 +100,8 @@ void	execution(t_parser *parser)
 		if (parser -> my_cmd == 1)
 			g_var.exit_status = 0;
 	}
+	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGQUIT)
+		printf("^\\Quit: %d\n", WTERMSIG(status));
+	else if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
+		printf("^C\n");
 }

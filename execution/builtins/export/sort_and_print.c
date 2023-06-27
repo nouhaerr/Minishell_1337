@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:00:11 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/22 01:00:33 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/27 15:09:45 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ void	sorted_env(t_env *head)
 		return ;
 	while (swp)
 	{
-		swp = 0; /* If swapped is still 0, it means no swaps were made during the inner loop,
-		indicating that the linked list is already sorted. In this case, the outer loop terminates, and the sorting process is complete.*/
+		swp = 0;
 		cur = head;
 		while (cur->next)
 		{
