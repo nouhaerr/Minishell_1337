@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:00:11 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/27 17:07:50 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:11:59 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,34 @@ void	swap(t_env *node1, t_env *node2)
 	node2->value = tmp_val;
 }
 
-void	print_env(t_env *e)
+void	free_env(t_env	*e)
 {
+	t_env	*e2	;
+
 	while (e)
 	{
-		if (!e->value)
-			printf("declare -x %s\n", e->env);
-		else
-			printf("declare -x %s=\"%s\"\n", e->env, e->value);
-		e = e->next;
+		free(e -> value);
+		free(e -> env);
+		e2 = e -> next;
+		free(e);
+		e = e2;
 	}
+}
+
+void	print_env(t_env *e)
+{
+	t_env	*e2;
+
+	e2 = e;
+	while (e2)
+	{
+		if (!e2->value)
+			printf("declare -x %s\n", e2->env);
+		else
+			printf("declare -x %s=\"%s\"\n", e2->env, e2->value);
+		e2 = e2->next;
+	}
+	free_env(e);
 }
 
 void	duplicate_env(t_env *head, t_env **tmp)
