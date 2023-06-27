@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:14:51 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/27 14:54:10 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/27 19:42:04 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void	parse(t_token **tokens, t_parser **p, t_lexer *l)
 		if (l -> tok2 != NULL)
 			check_wtok(l, t);
 	}
+	check_struct(*p);
 }
 
 t_token	*my_next_word(t_token *to, t_lexer *l)
