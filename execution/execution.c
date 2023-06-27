@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/27 18:35:46 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/27 18:50:25 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	execution_start(t_parser *parser, t_pipe pip, int pid)
 	return (pid);
 }
 
-void	wait_exit(int status, t_parser *parser)
+void	wait_exit(int status, t_parser *parser, int pid)
 {
 	pid_t	wait_pid;
 
@@ -52,7 +52,7 @@ void	wait_exit(int status, t_parser *parser)
 			g_var.exit_status = 0;
 		if (wait_pid == -1)
 			break ;
-		else
+		if (wait_pid == pid)
 			g_var.exit_status = exit_status(status, parser);
 		if (parser -> my_cmd == 1)
 			g_var.exit_status = 0;
@@ -78,5 +78,5 @@ void	execution(t_parser *parser)
 	if (parser -> signal == 1)
 		return ;
 	pid = execution_start(parser, pip, pid);
-	wait_exit(status, parser);
+	wait_exit(status, parser, pid);
 }
