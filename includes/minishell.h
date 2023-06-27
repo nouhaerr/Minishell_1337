@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:53:18 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/27 15:57:13 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/27 18:00:34 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct t_helper
 // thsi one must stau hier since they dont know the prototype of this function
 //gotta add this cause in the library i downloaded they didnt have the prototype
 void	rl_replace_line(const char *text, int clear_undo);
-size_t	envls(t_env *env);
+size_t	envsize(t_env *env);
 void	signal_check(void);
 void	check_signal_heredoc(void);
 int		*my_fd(void);

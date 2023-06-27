@@ -6,7 +6,7 @@
 #    By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 02:49:56 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/06/27 17:12:29 by nerrakeb         ###   ########.fr        #
+#    Updated: 2023/06/27 17:35:41 by nerrakeb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ EXECUTION = exec_bltn.c exec_heredoc.c execution.c exec_pipes.c get_path.c \
 
 EXECUTION_EXP = export.c modifie_and_add.c check_exp.c exp_utils.c sort_and_print.c
 EXECUTION_RDR = her.c files.c
-EXECUTION_BU =  echo.c pwd.c env.c exit.c unset.c utils.c cd.c 
+EXECUTION_BU =  echo.c pwd.c env.c exit.c unset.c utils.c cd.c unset_utils.c
 SRCS =	main.c my_fd.c $(addprefix ./parsing/, $(PARSING)) $(addprefix ./execution/, $(EXECUTION)) \
 		$(addprefix ./execution/builtins/export/, $(EXECUTION_EXP))  \
 		$(addprefix ./execution/redirections/, $(EXECUTION_RDR)) \

@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 00:48:37 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/27 16:44:53 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:36:15 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	sh_pwd(void);
 void	sh_env(t_data *args);
 void	sh_exit(t_parser *ex);
 void	sh_unset(t_data *arg);
+void	ft_remove_if(t_env **head, void *data);
 int		env_search(t_env *head, char *s);
 void	sh_cd(t_parser *env_cmd);
 t_env	*ft_getenv(t_env *head, char *s);

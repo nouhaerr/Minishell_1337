@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/27 15:21:24 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/27 18:01:04 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_execve(char *path, t_parser *node, char **env, int slash)
 {
 	char	**arr;
 
+	g_var.exit_status = 0;
 	if (slash)
 		check_dir_notexec(path, node);
 	arr = table_cmd(node);
@@ -66,7 +67,7 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 			ft_err("minishell: ", parse->cmd, ": command not found");
 		}
 		if (parse -> my_cmd == 0)
-			ft_execve(path, parse, create_env_arr(envls(g_var.list)), slash);
+			ft_execve(path, parse, create_env_arr(envsize(g_var.list)), slash);
 	}
 	return (pid);
 }
