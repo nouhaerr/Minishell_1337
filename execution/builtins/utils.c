@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 17:18:08 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/27 17:19:40 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/27 18:12:00 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	cd_home(t_env *pwd_home, char **pwd, char *cwd, t_env *env_old)
 	}
 	else
 	{
-		printf("dbjkdd\n");
 		return (g_var.exit_status = 1,
 			printf("minishell: cd: HOME not set\n"), free(cwd));
 	}
@@ -89,8 +88,6 @@ void	cd_newpwd(t_data *name, char **pwd, t_env *env_old)
 {
 	char	*cwd;
 
-	(void)pwd;
-	(void)env_old;
 	cwd = getcwd(NULL, 0);
 	if (chdir(name->value) == -1)
 	{
