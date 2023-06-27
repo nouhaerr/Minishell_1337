@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 10:11:55 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/27 13:10:15 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/27 16:21:10 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	ft_list_remove_if(t_env **head, void *data)
 		free(tmp->value);
 		free(tmp);
 		ft_list_remove_if(head, data);
+		return ;
 	}
 	tmp = *head;
 	ft_list_remove_if(&tmp->next, data);

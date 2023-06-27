@@ -6,32 +6,11 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/27 15:43:19 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:10:00 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-int	isbuiltin(t_parser *parser)
-{
-	char	*cmd2;
-
-	if (parser->cmd)
-	{
-		cmd2 = ft_strdup(parser->cmd);
-		ft_tolower2(cmd2);
-		if (!ft_strcmp(cmd2, "echo") || !ft_strcmp(cmd2, "pwd")
-			|| !ft_strcmp(cmd2, "env") || !ft_strcmp(parser->cmd, "unset")
-			|| !ft_strcmp(cmd2, "cd") || !ft_strcmp(parser->cmd, "exit")
-			|| !ft_strcmp(parser->cmd, "export"))
-		{
-			free(cmd2);
-			return (1);
-		}
-		free(cmd2);
-	}
-	return (0);
-}
 
 int	exit_status(int status, t_parser *p)
 {
@@ -100,7 +79,7 @@ void	execution(t_parser *parser)
 	int		pid;
 	t_pipe	pip;
 	int		status;
-	
+
 	pid = 0;
 	pip.rd_end = 0;
 	pip.wr_end = 0;

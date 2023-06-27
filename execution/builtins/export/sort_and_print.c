@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 01:00:11 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/27 16:09:19 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:07:50 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ void	duplicate_env(t_env *head, t_env **tmp)
 	h = head;
 	while (h)
 	{
-		ft_lstaddback_env(tmp, ft_lstnew_env(ft_strdup(h ->env), ft_strdup(h ->value)));
+		ft_lstaddback_env(tmp, ft_lstnew_env(ft_strdup(h ->env),
+				ft_strdup(h ->value)));
 		h = h -> next;
 	}
 }
