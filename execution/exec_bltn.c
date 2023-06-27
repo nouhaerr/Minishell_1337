@@ -6,11 +6,32 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:45:32 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/26 18:34:32 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:10:06 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int	isbuiltin(t_parser *parser)
+{
+	char	*cmd2;
+
+	if (parser->cmd)
+	{
+		cmd2 = ft_strdup(parser->cmd);
+		ft_tolower2(cmd2);
+		if (!ft_strcmp(cmd2, "echo") || !ft_strcmp(cmd2, "pwd")
+			|| !ft_strcmp(cmd2, "env") || !ft_strcmp(parser->cmd, "unset")
+			|| !ft_strcmp(cmd2, "cd") || !ft_strcmp(parser->cmd, "exit")
+			|| !ft_strcmp(parser->cmd, "export"))
+		{
+			free(cmd2);
+			return (1);
+		}
+		free(cmd2);
+	}
+	return (0);
+}
 
 void	run_builtin(t_parser *parser)
 {
@@ -25,7 +46,7 @@ void	run_builtin(t_parser *parser)
 	else if (!ft_strcmp(parser->cmd, "exit"))
 		sh_exit(parser);
 	else if (!ft_strcmp(cmd2, "env"))
-		sh_env();
+		sh_env(parser->args);
 	else if (!ft_strcmp(parser->cmd, "unset"))
 		sh_unset(parser->args);
 	else if (!ft_strcmp(cmd2, "cd"))

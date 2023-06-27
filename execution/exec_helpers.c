@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 00:25:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/27 15:29:40 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:14:24 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,15 @@ void	ft_free(char **str)
 	while (str[++i])
 		free(str[i]);
 	free(str);
+}
+
+int	ft_ambi(t_data2 *list)
+{
+	if (list -> amg == 1)
+	{
+		g_var.exit_status = 1;
+		printf ("minishell: %s: ambiguous redirect\n", list->value);
+		return (1);
+	}
+	return (0);
 }

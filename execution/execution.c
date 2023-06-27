@@ -3,35 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/27 16:35:39 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:14:16 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-int	isbuiltin(t_parser *parser)
-{
-	char	*cmd2;
-
-	if (parser->cmd)
-	{
-		cmd2 = ft_strdup(parser->cmd);
-		ft_tolower2(cmd2);
-		if (!ft_strcmp(cmd2, "echo") || !ft_strcmp(cmd2, "pwd")
-			|| !ft_strcmp(cmd2, "env") || !ft_strcmp(parser->cmd, "unset")
-			|| !ft_strcmp(cmd2, "cd") || !ft_strcmp(parser->cmd, "exit")
-			|| !ft_strcmp(parser->cmd, "export"))
-		{
-			free(cmd2);
-			return (1);
-		}
-		free(cmd2);
-	}
-	return (0);
-}
 
 int	exit_status(int status, t_parser *p)
 {
@@ -41,17 +20,6 @@ int	exit_status(int status, t_parser *p)
 		return (WEXITSTATUS(status));
 	else if (WIFSIGNALED(status))
 		return (WTERMSIG(status) + 128);
-	return (0);
-}
-
-int	ft_ambi(t_data2 *list)
-{
-	if (list -> amg == 1)
-	{
-		g_var.exit_status = 1;
-		printf ("minishell: %s: ambiguous redirect\n", list->value);
-		return (1);
-	}
 	return (0);
 }
 
