@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 19:37:27 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/27 17:11:17 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:14:16 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,6 @@ int	exit_status(int status, t_parser *p)
 		return (WEXITSTATUS(status));
 	else if (WIFSIGNALED(status))
 		return (WTERMSIG(status) + 128);
-	return (0);
-}
-
-int	ft_ambi(t_data2 *list)
-{
-	if (list -> amg == 1)
-	{
-		g_var.exit_status = 1;
-		printf ("minishell: %s: ambiguous redirect\n", list->value);
-		return (1);
-	}
 	return (0);
 }
 
