@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+         #
+#    By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 02:49:56 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/06/27 17:12:29 by nerrakeb         ###   ########.fr        #
+#    Updated: 2023/06/27 17:25:13 by hobenaba         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
 
-RDFLAGS +=  -lreadline -L/goinfre/nerrakeb/homebrew/opt/readline/lib
-INCLUDES += -I /goinfre/nerrakeb/homebrew/opt/readline/include
+RDFLAGS +=  -lreadline -L/goinfre/$(USER)/homebrew/opt/readline/lib
+INCLUDES += -I /goinfre/$(USER)/homebrew/opt/readline/include
 
 # RDFLAGS +=  -lreadline -L /$(USER)/goinfre/homebrew/opt/readline/lib
 # INCLUDES += -I /Users/$(USER)/goinfre/homebrew/opt/readline/include/readline
