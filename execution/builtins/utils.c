@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 17:18:08 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/27 15:48:23 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:19:40 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,22 @@ void	cd_home(t_env *pwd_home, char **pwd, char *cwd, t_env *env_old)
 	{
 		if (chdir(path) == -1)
 		{
-			g_var.exit_status = 1;
-			printf("minishell: cd: %s: %s\n", path, strerror(errno));
-			return (free(cwd));
+			return (g_var.exit_status = 1, printf("minishell: cd: %s: %s\n",
+					path, strerror(errno)), free(cwd));
 		}
 		else if (env_old)
 			set_oldpwd(&(env_old->value), cwd);
 		set_pwd(pwd);
 		g_var.exit_status = 0;
+		if (chdir(path) != -1 && !env_old)
+			free(cwd);
 	}
 	else
+	{
+		printf("dbjkdd\n");
 		return (g_var.exit_status = 1,
 			printf("minishell: cd: HOME not set\n"), free(cwd));
+	}
 }
 
 void	cd_oldpwd(char **oldpwd, char **pwd)
@@ -85,6 +89,8 @@ void	cd_newpwd(t_data *name, char **pwd, t_env *env_old)
 {
 	char	*cwd;
 
+	(void)pwd;
+	(void)env_old;
 	cwd = getcwd(NULL, 0);
 	if (chdir(name->value) == -1)
 	{
@@ -101,5 +107,7 @@ void	cd_newpwd(t_data *name, char **pwd, t_env *env_old)
 	else if (env_old)
 		set_oldpwd(&(env_old->value), cwd);
 	set_pwd(pwd);
+	if (!env_old)
+		free (cwd);
 	g_var.exit_status = 0;
 }
