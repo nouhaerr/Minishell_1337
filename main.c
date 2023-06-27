@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/27 15:06:58 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/27 15:29:06 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	pa_ex(t_token *tok, t_lexer *lex, t_parser *par, int base)
 	else
 	{
 		execution(par);
+		add_to_under_score(par);
 		update_fd(g_var.fd_prog);
 	}
 	free_mylist(par, 1);
