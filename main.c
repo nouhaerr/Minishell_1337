@@ -6,7 +6,7 @@
 /*   By: hobenaba <hobenaba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:52:25 by hobenaba          #+#    #+#             */
-/*   Updated: 2023/06/27 16:32:09 by hobenaba         ###   ########.fr       */
+/*   Updated: 2023/06/27 20:00:06 by hobenaba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,19 @@ int	syntax_error(int base, t_token **tokens)
 
 void	pa_ex(t_token *tok, t_lexer *lex, t_parser *par, int base)
 {
+	t_parser	*p;
+
 	if (tok != NULL)
 		parse(&tok, &par, lex);
-	if (par -> nu_here >= 17)
+	p = par;
+	while (p)
 	{
-		printf("minishell: maximum here-document count exceeded\n");
-		exit (2);
+		if (p -> nu_here >= 17)
+		{
+			printf("minishell: maximum here-document count exceeded\n");
+			exit (2);
+		}
+		p = p -> next;
 	}
 	exec_heredoc(par);
 	if (syntax_error(base, &tok))

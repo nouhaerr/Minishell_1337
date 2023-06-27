@@ -6,7 +6,7 @@
 /*   By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 19:43:02 by nerrakeb          #+#    #+#             */
-/*   Updated: 2023/06/27 18:01:04 by nerrakeb         ###   ########.fr       */
+/*   Updated: 2023/06/27 21:16:40 by nerrakeb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	ft_execve(char *path, t_parser *node, char **env, int slash)
 		perror("minishell");
 		exit(1);
 	}
-	free(env);
 }
 
 void	dp_built(t_parser *parse, t_pipe pip, char *msg)
@@ -58,6 +57,8 @@ int	exec_cmd(t_parser *parse, t_pipe pip, char *msg)
 		signal(SIGQUIT, SIG_DFL);
 		dp_built(parse, pip, msg);
 		path = parse->cmd;
+		if (!path)
+			exit(g_var.exit_status);
 		slash = cmd_slash(parse->cmd);
 		if (!slash)
 			path = get_path(parse->cmd);

@@ -6,7 +6,7 @@
 #    By: nerrakeb <nerrakeb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/23 02:49:56 by nerrakeb          #+#    #+#              #
-#    Updated: 2023/06/27 19:43:59 by nerrakeb         ###   ########.fr        #
+#    Updated: 2023/06/27 21:19:42 by nerrakeb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,6 @@ CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
 
 RDFLAGS +=  -lreadline -L/goinfre/$(USER)/homebrew/opt/readline/lib
 INCLUDES += -I /goinfre/$(USER)/homebrew/opt/readline/include
-
-# RDFLAGS +=  -lreadline -L /$(USER)/goinfre/homebrew/opt/readline/lib
-# INCLUDES += -I /Users/$(USER)/goinfre/homebrew/opt/readline/include/readline
 
 PARSING = my_free.c ft_lst_one.c utils.c parse.c init.c \
 		ft_lst_second.c words.c env.c tokens.c lexer.c tokens_exp.c env_saver.c
