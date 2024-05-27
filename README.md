@@ -1,6 +1,8 @@
-<h1 align="center"><font color="red">Building a shell was never easy</font></h1>
+<h1 align="center">Building a shell was never easy</h1>
 
-## PROJECT
+![Bash](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Bash_Logo_Colored.svg/2048px-Bash_Logo_Colored.svg.png)
+
+## Objectif
 This project goes beyond merely crafting a new shell from scratch; it endeavors to emulate the Bash source code and the GNU Bash POSIX manual while incorporating principles from compiler parsing.
 We don't need to create a new window/ tabs or vertical splits like our iTerm (this is what I imagined the assignment would be).
 Our assignment consists in creating a `./minishell` executable that when opened, will show a prompt (`>minishell`) and wait for user input.
