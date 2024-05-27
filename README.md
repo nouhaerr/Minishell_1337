@@ -1,6 +1,6 @@
 <h1 align="center">Building a shell was never easy</h1>
 
-![Bash](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Bash_Logo_Colored.svg/2048px-Bash_Logo_Colored.svg.png)
+![Bash](128px-Bash_Logo_Colored.svg)
 
 ## Objectif
 This project goes beyond merely crafting a new shell from scratch; it endeavors to emulate the Bash source code and the GNU Bash POSIX manual while incorporating principles from compiler parsing.
